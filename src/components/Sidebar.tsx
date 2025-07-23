@@ -1,194 +1,102 @@
 'use client';
 
-import { useState } from 'react';
+import React, { useState } from 'react';
+import { Nav } from 'react-bootstrap';
 import Image from 'next/image';
-import { Accordion } from 'react-bootstrap';
-import Badge from './Badge';
-
-
-interface SidebarItem {
-  id: string;
-  title: string;
-  icon: string;
-  href?: string;
-  children?: SidebarItem[];
-  isActive?: boolean;
-}
 
 interface SidebarProps {
   className?: string;
 }
 
-export default function Sidebar({ className = '' }: SidebarProps) {
-  const [activeItem, setActiveItem] = useState<string>('dashboard');
+const Sidebar: React.FC<SidebarProps> = ({ className = '' }) => {
+  const [activeItem, setActiveItem] = useState('dashboard');
 
-  const sidebarItems: SidebarItem[] = [
+  const menuItems = [
     {
       id: 'dashboard',
-      title: 'Dashboard',
+      label: 'Dashboard',
       icon: '/assets/images/dashboard-icon.svg',
-      href: '/admin/dashboard',
       isActive: true
     },
     {
       id: 'subscribers',
-      title: 'Subscribers',
-      icon: '/assets/images/layer-icon.svg',
-      href: '/admin/subscribers'
+      label: 'Subscribers',
+      icon: '/assets/images/user-icon.svg'
     },
     {
       id: 'logs',
-      title: 'Logs',
-      icon: '/assets/images/log-icon.svg',
-      href: '/admin/logs'
-    },
-    {
-      id: 'settings',
-      title: 'Settings',
-      icon: '/assets/images/filter-icon.svg',
-      children: [
-        {
-          id: 'general',
-          title: 'General',
-          icon: '/assets/images/check-icon.svg',
-          href: '/admin/settings/general'
-        },
-        {
-          id: 'security',
-          title: 'Security',
-          icon: '/assets/images/lock-icon.svg',
-          href: '/admin/settings/security'
-        }
-      ]
+      label: 'Logs',
+      icon: '/assets/images/log-icon.svg'
     }
   ];
 
   const handleItemClick = (itemId: string) => {
     setActiveItem(itemId);
-    // Here you can add navigation logic
-    console.log('Navigating to:', itemId);
-  };
-
-  const renderMenuItem = (item: SidebarItem) => {
-    if (item.children && item.children.length > 0) {
-      return (
-        <Accordion.Item 
-          key={item.id} 
-          eventKey={item.id}
-          className="sidebar-accordion-item"
-        >
-          <Accordion.Header 
-            className={`sidebar-accordion-header ${activeItem === item.id ? 'active' : ''}`}
-            onClick={() => handleItemClick(item.id)}
-          >
-            <div className="sidebar-item-content">
-              <div className="sidebar-item-icon">
-                <Image
-                  src={item.icon}
-                  alt={item.title}
-                  width={18}
-                  height={18}
-                />
-              </div>
-              <span className="sidebar-item-title">{item.title}</span>
-            </div>
-          </Accordion.Header>
-          
-          <Accordion.Body className="sidebar-accordion-body">
-            <div className="sidebar-subnav">
-              {item.children.map((child) => (
-                <div 
-                  key={child.id}
-                  className={`sidebar-subnav-item ${activeItem === child.id ? 'active' : ''}`}
-                  onClick={() => handleItemClick(child.id)}
-                >
-                  <div className="sidebar-item-content">
-                    <div className="sidebar-item-icon">
-                      <Image
-                        src={child.icon}
-                        alt={child.title}
-                        width={18}
-                        height={18}
-                      />
-                    </div>
-                    <span className="sidebar-item-title">{child.title}</span>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </Accordion.Body>
-        </Accordion.Item>
-      );
-    }
-
-    return (
-      <div 
-        key={item.id}
-        className={`sidebar-menu-item ${activeItem === item.id ? 'active' : ''}`}
-        onClick={() => handleItemClick(item.id)}
-      >
-        <div className="sidebar-item-content">
-          <div className="sidebar-item-icon">
-            <Image
-              src={item.icon}
-              alt={item.title}
-              width={18}
-              height={18}
-            />
-          </div>
-          <span className="sidebar-item-title">{item.title}</span>
-        </div>
-      </div>
-    );
+    // Here you would typically navigate to the corresponding page
+    console.log(`Navigating to ${itemId}`);
   };
 
   return (
     <div className={`sidebar ${className}`}>
-      {/* Sidebar Header */}
       <div className="sidebar-header">
-        <div className="sidebar-logo-container">
-          <div className="sidebar-logo">
+        <div className="sidebar-brand">
+          <div className="brand-logo">
             <Image
               src="/assets/images/project-logo.svg"
               alt="WeBill365"
               width={93}
               height={16}
-              className="img-fluid"
+              className="brand-image"
             />
           </div>
-          <Badge variant="primary" size="sm" showBorder={true} uppercase={true}>
-            Admin
-          </Badge>
+          <div className="admin-badge">
+            <span className="admin-text">Admin</span>
+          </div>
         </div>
       </div>
 
-      {/* Sidebar Navigation */}
-      <div className="sidebar-nav">
-        <Accordion 
-          activeKey={activeItem} 
-          onSelect={(key) => setActiveItem(key as string)}
-          className="sidebar-accordion"
-        >
-          <div className="sidebar-menu">
-            {sidebarItems.map(renderMenuItem)}
-          </div>
-        </Accordion>
+      <div className="sidebar-menu">
+        <Nav className="flex-column">
+          {menuItems.map((item) => (
+            <Nav.Item key={item.id}>
+              <Nav.Link
+                className={`sidebar-item ${item.isActive ? 'active' : ''}`}
+                onClick={() => handleItemClick(item.id)}
+              >
+                <div className="sidebar-item-content">
+                  <div className="sidebar-icon">
+                    <Image
+                      src={item.icon}
+                      alt={item.label}
+                      width={18}
+                      height={18}
+                      className="icon-image"
+                    />
+                  </div>
+                  <span className="sidebar-label">{item.label}</span>
+                </div>
+              </Nav.Link>
+            </Nav.Item>
+          ))}
+        </Nav>
       </div>
 
-      {/* Sidebar Footer */}
       <div className="sidebar-footer">
-        <div className="sidebar-footer-content">
-          <div className="sidebar-footer-icon">
+        <div className="footer-item">
+          <div className="footer-icon">
             <Image
-              src="/assets/images/sidebar-icon.svg"
-              alt=""
+              src="/assets/images/layer-icon.svg"
+              alt="Version"
               width={18}
               height={18}
+              className="icon-image"
             />
           </div>
-          <span className="sidebar-footer-text">WeBill365 3.1.0</span>
+          <span className="footer-text">WeBill365 3.1.0</span>
         </div>
       </div>
     </div>
   );
-} 
+};
+
+export default Sidebar; 
