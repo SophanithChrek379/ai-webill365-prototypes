@@ -27,7 +27,7 @@ alwaysApply: true
 - Use React-Bootstrap@latest for components
 - Convert Figma colors to SCSS variables in `styles/globals.scss`
 - Use CSS modules or styled-components for component-specific styles
-- Maintain responsive design principles
+- Maintain responsive mobile-first design principles
 
 ## Figma Design Integration
 

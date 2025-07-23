@@ -4,13 +4,8 @@ const nextConfig: NextConfig = {
   experimental: {
     optimizePackageImports: ['bootstrap', 'bootstrap-icons'],
   },
-  webpack: (config) => {
-    config.resolve.fallback = {
-      ...config.resolve.fallback,
-      fs: false,
-    };
-    return config;
-  },
+  // Ensure Bootstrap assets are properly handled
+  transpilePackages: ['bootstrap', 'bootstrap-icons'],
 };
 
 export default nextConfig;

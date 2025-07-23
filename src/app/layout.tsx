@@ -3,6 +3,7 @@ import { Geist, Geist_Mono, Inter, Noto_Sans_KR } from "next/font/google";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap-icons/font/bootstrap-icons.css";
 import "./globals.css";
+import BootstrapProvider from "../components/BootstrapProvider";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -44,7 +45,9 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${geistSans.variable} ${geistMono.variable} ${inter.variable} ${notoSansKR.variable}`}>
-        {children}
+        <BootstrapProvider>
+          {children}
+        </BootstrapProvider>
       </body>
     </html>
   );

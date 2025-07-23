@@ -1,9 +1,18 @@
 /* Bootstrap CSS will be imported in layout.tsx */
 /* Bootstrap Icons will be imported in layout.tsx */
 
+/* Base Font Size - 16px = 1rem */
+html {
+  font-size: 16px;
+}
+
 :root {
   --background: #ffffff;
   --foreground: #171717;
+  --font-inter: 'Inter', sans-serif;
+  --font-geist-sans: 'Geist Sans', sans-serif;
+  --font-geist-mono: 'Geist Mono', monospace;
+  --font-noto-sans-kr: 'Noto Sans KR', sans-serif;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -16,28 +25,9 @@
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-}
-
-/* Bootstrap CSS will be imported in layout.tsx */
-/* Bootstrap Icons will be imported in layout.tsx */
-
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-}
-
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-family: var(--font-inter), sans-serif;
+  font-size: 1rem; /* 16px */
+  line-height: 1.5;
 }
 
 /* Custom Bootstrap overrides - More specific selectors */
@@ -83,7 +73,7 @@ body {
 .tagline {
   font-family: var(--font-inter), sans-serif;
   font-weight: 500;
-  font-size: 1.25rem;
+  font-size: 1.125rem; /* 18px */
   line-height: 1.4;
   color: #000000;
   letter-spacing: -0.24px;
@@ -270,54 +260,54 @@ body {
 /* Mobile First Responsive Design */
 @media (min-width: 576px) {
   .login-page {
-    padding: 2rem;
+    padding: 1.5rem;
   }
   
   .tagline {
-    font-size: 1.5rem;
+    font-size: 1.25rem; /* 20px */
   }
   
   .form-control-custom {
-    font-size: 1.125rem;
+    font-size: 1rem; /* 16px */
   }
   
   .form-control-custom::placeholder {
-    font-size: 1.125rem;
+    font-size: 1rem; /* 16px */
   }
   
   .btn-login,
   .btn-create-account {
-    font-size: 1.125rem;
+    font-size: 1rem; /* 16px */
   }
   
   .divider-text {
-    font-size: 1.125rem;
+    font-size: 1rem; /* 16px */
   }
 }
 
 @media (min-width: 768px) {
   .login-page {
-    padding: 3rem;
+    padding: 2rem;
   }
   
   .tagline {
-    font-size: 1.75rem;
+    font-size: 1.5rem; /* 24px */
   }
 }
 
 @media (min-width: 992px) {
   .login-page {
-    padding: 4rem;
+    padding: 2.5rem;
   }
   
   .tagline {
-    font-size: 2rem;
+    font-size: 1.75rem; /* 28px */
   }
 }
 
 @media (min-width: 1200px) {
   .login-page {
-    padding: 5rem;
+    padding: 3rem;
   }
 }
 
@@ -554,65 +544,65 @@ body {
 /* Mobile First Responsive Design for Signup */
 @media (min-width: 576px) {
   .signup-page {
-    padding: 2rem;
+    padding: 1.5rem;
   }
   
   .signup-title {
-    font-size: 1.5rem;
+    font-size: 1.375rem; /* 22px */
   }
   
   .form-label {
-    font-size: 1.125rem;
+    font-size: 1rem; /* 16px */
   }
   
   .form-control-custom,
   .form-select-custom {
-    font-size: 1.125rem;
+    font-size: 1rem; /* 16px */
   }
   
   .form-control-custom::placeholder {
-    font-size: 1.125rem;
+    font-size: 1rem; /* 16px */
   }
   
   .send-otp-btn {
-    font-size: 1.125rem;
+    font-size: 1rem; /* 16px */
   }
   
   .btn-signin-instead,
   .btn-confirm-signup {
-    font-size: 1.125rem;
+    font-size: 1rem; /* 16px */
   }
   
   .otp-input {
     width: 3.5rem;
     height: 3.5rem;
-    font-size: 1.5rem;
+    font-size: 1.25rem; /* 20px */
   }
 }
 
 @media (min-width: 768px) {
   .signup-page {
-    padding: 3rem;
+    padding: 2rem;
   }
   
   .signup-title {
-    font-size: 1.75rem;
+    font-size: 1.5rem; /* 24px */
   }
 }
 
 @media (min-width: 992px) {
   .signup-page {
-    padding: 4rem;
+    padding: 2.5rem;
   }
   
   .signup-title {
-    font-size: 2rem;
+    font-size: 1.75rem; /* 28px */
   }
 }
 
 @media (min-width: 1200px) {
   .signup-page {
-    padding: 5rem;
+    padding: 3rem;
   }
 }
 
@@ -629,5 +619,274 @@ body {
 
 .signup-page .form-control:focus {
   border-color: transparent;
+  box-shadow: none;
+}
+
+/* Verify Page Styles - Mobile First */
+.verify-page {
+  min-height: 100vh;
+  background-color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+}
+
+.verify-card {
+  background: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+  max-width: 47rem; /* 752px / 16px = 47rem */
+  width: 100%;
+}
+
+.verify-title {
+  font-family: var(--font-inter), sans-serif;
+  font-weight: 600;
+  font-size: 1.25rem; /* 20px */
+  line-height: 1.4;
+  color: #1b1b1b;
+  letter-spacing: -0.46px;
+}
+
+.verify-content {
+  width: 100%;
+}
+
+/* Icon Container */
+.verify-icon-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.verify-icon-wrapper {
+  position: relative;
+  width: 80px;
+  height: 80px;
+  background-color: #e0eefe;
+  border-radius: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 6px solid #eaf3ff;
+}
+
+.verify-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 50px;
+  height: 50px;
+}
+
+/* Status Message */
+.verify-message {
+  width: 100%;
+}
+
+.verify-status {
+  font-family: var(--font-inter), sans-serif;
+  font-weight: 500;
+  font-size: 1.375rem; /* 22px */
+  line-height: 1.33;
+  color: #171717;
+  letter-spacing: -0.1px;
+  margin: 0;
+}
+
+.verify-description {
+  font-family: var(--font-inter), sans-serif;
+  font-weight: 500;
+  font-size: 1.125rem; /* 18px */
+  line-height: 1.4;
+  color: #404040;
+  letter-spacing: -0.1px;
+  margin: 0;
+}
+
+/* Action Buttons */
+.btn-back {
+  background-color: #ffffff;
+  border: 1px solid rgba(0, 0, 0, 0.17);
+  border-radius: 8px;
+  color: #171717;
+  font-family: var(--font-inter), sans-serif;
+  font-weight: 500;
+  font-size: 1rem;
+  line-height: 1.5;
+  height: 48px;
+  padding: 0.75rem 1rem;
+  box-shadow: 0px 0px 0px 1px rgba(0, 0, 0, 0.17), 0px 1px 1px 0px rgba(0, 0, 0, 0.15), 0px 2px 3px 0px rgba(0, 0, 0, 0.08);
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.btn-back:hover {
+  background-color: #f8f9fa;
+  transform: translateY(-1px);
+  color: #171717;
+  box-shadow: 0px 0px 0px 1px rgba(0, 0, 0, 0.17), 0px 2px 4px 0px rgba(0, 0, 0, 0.2), 0px 4px 6px 0px rgba(0, 0, 0, 0.12);
+}
+
+.btn-back:focus {
+  background-color: #ffffff;
+  border-color: rgba(0, 0, 0, 0.17);
+  color: #171717;
+  box-shadow: 0px 0px 0px 1px rgba(0, 0, 0, 0.17), 0px 1px 1px 0px rgba(0, 0, 0, 0.15), 0px 2px 3px 0px rgba(0, 0, 0, 0.08), 0 0 0 0.2rem rgba(0, 0, 0, 0.1);
+}
+
+.btn-go-to-login {
+  background-color: #0f1fea;
+  border: 1px solid #1221c1;
+  border-radius: 8px;
+  color: #ffffff;
+  font-family: var(--font-inter), sans-serif;
+  font-weight: 500;
+  font-size: 1rem;
+  line-height: 1.5;
+  height: 48px;
+  padding: 0.75rem 1.5rem;
+  box-shadow: 0px 0px 0px 1px #1221c1, 0px 1px 1px 0px rgba(18, 33, 193, 0.5), 0px 2px 3px 0px rgba(18, 33, 193, 0.1);
+  transition: all 0.2s ease;
+}
+
+.btn-go-to-login:hover {
+  background-color: #0e1bd8;
+  transform: translateY(-1px);
+  color: #ffffff;
+  box-shadow: 0px 0px 0px 1px #1221c1, 0px 2px 4px 0px rgba(18, 33, 193, 0.6), 0px 4px 6px 0px rgba(18, 33, 193, 0.15);
+}
+
+.btn-go-to-login:focus {
+  background-color: #0f1fea;
+  border-color: #1221c1;
+  color: #ffffff;
+  box-shadow: 0px 0px 0px 1px #1221c1, 0px 1px 1px 0px rgba(18, 33, 193, 0.5), 0px 2px 3px 0px rgba(18, 33, 193, 0.1), 0 0 0 0.2rem rgba(15, 31, 234, 0.25);
+}
+
+/* Help Links */
+.verify-help-links {
+  width: 100%;
+}
+
+.help-link {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.25rem;
+  font-family: var(--font-inter), sans-serif;
+  font-weight: 500;
+  font-size: 1.25rem;
+  line-height: 1.4;
+  letter-spacing: -0.1px;
+}
+
+.help-text {
+  color: #000000;
+}
+
+.help-link-btn {
+  background: none;
+  border: none;
+  color: #0f1fea;
+  font-family: var(--font-inter), sans-serif;
+  font-weight: 500;
+  font-size: 1.25rem;
+  line-height: 1.4;
+  letter-spacing: -0.1px;
+  text-decoration: none;
+  cursor: pointer;
+  padding: 0;
+  transition: color 0.2s ease;
+}
+
+.help-link-btn:hover {
+  color: #0e1bd8;
+  text-decoration: underline;
+}
+
+.help-link-btn:disabled {
+  color: #a3a3a3;
+  cursor: not-allowed;
+}
+
+/* Mobile First Responsive Design for Verify Page */
+@media (min-width: 576px) {
+  .verify-page {
+    padding: 1.5rem;
+  }
+  
+  .verify-title {
+    font-size: 1.375rem; /* 22px */
+  }
+  
+  .verify-status {
+    font-size: 1.5rem; /* 24px */
+  }
+  
+  .verify-description {
+    font-size: 1.25rem; /* 20px */
+  }
+  
+  .help-link {
+    font-size: 1.125rem; /* 18px */
+  }
+  
+  .help-link-btn {
+    font-size: 1.125rem; /* 18px */
+  }
+}
+
+@media (min-width: 768px) {
+  .verify-page {
+    padding: 2rem;
+  }
+  
+  .verify-title {
+    font-size: 1.5rem; /* 24px */
+  }
+  
+  .verify-status {
+    font-size: 1.75rem; /* 28px */
+  }
+  
+  .verify-description {
+    font-size: 1.375rem; /* 22px */
+  }
+}
+
+@media (min-width: 992px) {
+  .verify-page {
+    padding: 2.5rem;
+  }
+  
+  .verify-title {
+    font-size: 1.75rem; /* 28px */
+  }
+}
+
+@media (min-width: 1200px) {
+  .verify-page {
+    padding: 3rem;
+  }
+}
+
+@media (min-width: 1400px) {
+  .verify-page {
+    padding: 3.5rem;
+  }
+}
+
+/* Bootstrap Overrides for Verify Page */
+.verify-page .container-fluid {
+  padding-left: 0;
+  padding-right: 0;
+}
+
+.verify-page .card {
+  border: none;
   box-shadow: none;
 }
