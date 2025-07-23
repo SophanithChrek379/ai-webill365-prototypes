@@ -109,17 +109,6 @@ export default function VerifyPage() {
 
                 {/* Help Links */}
                 <div className="verify-help-links text-center">
-                  <div className="help-link mb-2">
-                    <span className="help-text">Wrong email? </span>
-                    <button
-                      type="button"
-                      className="help-link-btn"
-                      onClick={handleUpdateEmail}
-                      disabled={isLoading}
-                    >
-                      Update email
-                    </button>
-                  </div>
                   <div className="help-link">
                     <span className="help-text">Still not seeing it? </span>
                     <button

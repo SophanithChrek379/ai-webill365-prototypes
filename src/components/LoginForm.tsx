@@ -119,7 +119,7 @@ export default function LoginForm({ onSubmit, isLoading = false }: LoginFormProp
       </div>
 
       {/* Create Account Button */}
-      <Link href="/register" className="text-decoration-none">
+      <Link href="/signup" className="text-decoration-none">
         <Button
           variant="outline-secondary"
           className="btn-create-account w-100 mb-3"

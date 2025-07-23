@@ -335,7 +335,7 @@ export default function SignupForm({ onSubmit, isLoading = false }: SignupFormPr
           size="lg"
           disabled={isLoading || !isFormValid()}
         >
-          {isLoading ? 'Creating Account...' : 'Confirm and Sign up'}
+          {isLoading ? 'Creating Account...' : 'Create'}
         </Button>
       </div>
     </Form>
