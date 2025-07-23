@@ -1809,6 +1809,24 @@ body {
   gap: 1.5rem;
 }
 
+.app-bar-content {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.app-bar-spacer {
+  flex: 1;
+}
+
+.app-bar-actions {
+  margin-left: auto;
+  display: inline-flex;
+  align-items: center;
+  gap: 1.5rem;
+}
+
 /* Notification Container */
 .notification-container {
   position: relative;
@@ -1859,6 +1877,14 @@ body {
   width: 24px;
   height: 24px;
   cursor: pointer;
+
+  .dropdown {
+      .dropdown-toggle {
+        &::after {
+          display: none !important;
+        }
+      }
+    }
 }
 
 .avatar-image {

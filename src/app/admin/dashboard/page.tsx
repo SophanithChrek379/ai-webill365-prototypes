@@ -174,7 +174,7 @@ export default function DashboardPage() {
           {/* Statistics Cards */}
           <Row className="stats-container g-3 mb-4">
             <Col md={4}>
-              <Card className="stat-card">
+              <Card>
                 <Card.Body>
                   <div className="d-flex justify-content-between align-items-start">
                     <div>
@@ -187,7 +187,7 @@ export default function DashboardPage() {
               </Card>
             </Col>
             <Col md={4}>
-              <Card className="stat-card">
+              <Card>
                 <Card.Body>
                   <div className="d-flex justify-content-between align-items-start">
                     <div>
@@ -200,7 +200,7 @@ export default function DashboardPage() {
               </Card>
             </Col>
             <Col md={4}>
-              <Card className="stat-card">
+              <Card>
                 <Card.Body>
                   <div className="d-flex justify-content-between align-items-start">
                     <div>
@@ -231,7 +231,7 @@ export default function DashboardPage() {
                     onChange={(value) => console.log('Date changed:', value)}
                   />
                 </div>
-                <Button variant="primary" outline size="sm" className="status-filter-btn">
+                <Button variant="primary" outline size="sm">
                   <i className="bi bi-check2-square me-1"></i>
                   Status
                 </Button>

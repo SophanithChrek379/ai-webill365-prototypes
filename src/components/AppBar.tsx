@@ -42,7 +42,7 @@ const AppBar: React.FC<AppBarProps> = ({ className = '' }) => {
             <div className="notification-container">
               <div className="notification-icon" onClick={handleNotificationClick}>
                 <Image
-                  src="/assets/images/help-icon.svg"
+                  src="/assets/images/bell-icon.svg"
                   alt="Notifications"
                   width={24}
                   height={24}
@@ -57,13 +57,28 @@ const AppBar: React.FC<AppBarProps> = ({ className = '' }) => {
             </div>
             
             <div className="user-avatar">
-              <Image
-                src="/assets/images/avatar/avatar-01.svg"
-                alt="User Avatar"
-                width={24}
-                height={24}
-                className="avatar-image"
-              />
+              <Dropdown align="end">
+                <Dropdown.Toggle
+                  variant="link"
+                  id="dropdown-user-avatar"
+                  className="p-0 border-0 bg-transparent shadow-none"
+                  style={{ boxShadow: 'none' }}
+                >
+                  <Image
+                    src="/assets/images/avatar/avatar-01.svg"
+                    alt="User Avatar"
+                    width={24}
+                    height={24}
+                    className="avatar-image"
+                  />
+                </Dropdown.Toggle>
+                <Dropdown.Menu>
+                  <Dropdown.Item onClick={() => handleUserMenuClick('profile')}>Profile</Dropdown.Item>
+                  <Dropdown.Item onClick={() => handleUserMenuClick('settings')}>Settings</Dropdown.Item>
+                  <Dropdown.Divider />
+                  <Dropdown.Item onClick={() => handleUserMenuClick('logout')}>Logout</Dropdown.Item>
+                </Dropdown.Menu>
+              </Dropdown>
             </div>
           </div>
         </div>
