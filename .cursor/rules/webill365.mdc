@@ -23,7 +23,8 @@ alwaysApply: true
 
 ## Styling Guidelines
 
-- Use Tailwind CSS for utility classes
+- Use Bootstrap@5.3.3 for utility classes
+- Use React-Bootstrap@latest for components
 - Convert Figma colors to SCSS variables in `styles/globals.scss`
 - Use CSS modules or styled-components for component-specific styles
 - Maintain responsive design principles
@@ -32,7 +33,7 @@ alwaysApply: true
 
 - Export Figma images to `/public/assets/images/`
 - Convert Figma colors to SCSS variables with semantic naming
-- Extract typography styles from Figma and apply to Tailwind config
+- Extract typography styles from Figma and apply to Bootstrap@5.3.3 root config
 - Maintain design system consistency
 
 ## File Organization
