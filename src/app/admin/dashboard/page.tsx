@@ -4,6 +4,7 @@ import { Container, Row, Col, Card as BootstrapCard } from 'react-bootstrap';
 import Sidebar from '@/components/Sidebar';
 import AppBar from '@/components/AppBar';
 import Card from '@/components/Card';
+import Table, { StatusCell, ActionCell, DateCell, TimeAgoCell } from '@/components/Table';
 
 export default function AdminDashboard() {
   const handleNotificationClick = () => {
@@ -82,15 +83,81 @@ export default function AdminDashboard() {
                   </Col>
                 </Row>
 
-                {/* Welcome Card */}
-                <BootstrapCard>
-                  <BootstrapCard.Body>
-                    <BootstrapCard.Title>Welcome to WeBill365 Admin</BootstrapCard.Title>
-                    <BootstrapCard.Text>
-                      This is the admin dashboard page. The sidebar, AppBar, and Card components are working correctly with full functionality.
-                    </BootstrapCard.Text>
-                  </BootstrapCard.Body>
-                </BootstrapCard>
+                <Table
+                      columns={[
+                        {
+                          key: 'fullName',
+                          title: 'Full Name',
+                          width: '200px',
+                          sortable: true
+                        },
+                        {
+                          key: 'email',
+                          title: 'Email',
+                          width: '240px',
+                          sortable: true
+                        },
+                        {
+                          key: 'plan',
+                          title: 'Plan',
+                          width: '112px',
+                          sortable: true
+                        },
+                        {
+                          key: 'subscriptionDate',
+                          title: 'Subscription Date',
+                          sortable: true,
+                          render: (value: string) => <DateCell date={value} />
+                        },
+                        {
+                          key: 'status',
+                          title: 'Status',
+                          sortable: true,
+                          render: (value: string) => <StatusCell status={value} />
+                        },
+                        {
+                          key: 'actions',
+                          title: '',
+                          width: '80px',
+                          sortable: false,
+                          render: (value: any, row: any) => (
+                            <ActionCell
+                              actions={['view']}
+                              onActionClick={(action, row) => console.log(`${action} clicked for ${row.fullName}`)}
+                              row={row}
+                            />
+                          )
+                        }
+                      ]}
+                      data={[
+                        {
+                          id: '1',
+                          fullName: 'Krong Kampuchea',
+                          email: 'Krongkampuchea@gmail.com',
+                          plan: 'Standard',
+                          subscriptionDate: '2020-04-24T11:33:00',
+                          status: 'Approved'
+                        },
+                        {
+                          id: '2',
+                          fullName: 'Kampuchea Wonders',
+                          email: 'KampucheaExplorer@gmail.com',
+                          plan: 'Basic',
+                          subscriptionDate: '2020-04-24T11:33:00',
+                          status: 'Approved'
+                        },
+                        {
+                          id: '3',
+                          fullName: 'Kampuchea Discoveries',
+                          email: 'KampucheaJourney@gmail.com',
+                          plan: 'Standard',
+                          subscriptionDate: '2020-04-24T11:33:00',
+                          status: 'Rejected'
+                        }
+                      ]}
+                      onSort={(key, direction) => console.log(`Sorting by ${key} in ${direction} order`)}
+                      onRowClick={(row) => console.log('Row clicked:', row)}
+                    />
               </Col>
             </Row>
           </Container>
