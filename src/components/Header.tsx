@@ -61,11 +61,11 @@ export default function Header({
             ))}
           </Nav>
           <Nav>
-            <Nav.Link href="#login">
+            <Nav.Link href="/login">
               <i className="bi bi-box-arrow-in-right me-1"></i>
               Login
             </Nav.Link>
-            <Nav.Link href="#signup">
+            <Nav.Link href="/signup">
               <i className="bi bi-person-plus me-1"></i>
               Sign Up
             </Nav.Link>

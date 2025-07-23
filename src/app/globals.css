@@ -23,8 +23,8 @@ html {
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
+  /* background: var(--background);
+  color: var(--foreground); */
   font-family: var(--font-inter), sans-serif;
   font-size: 1rem; /* 16px */
   line-height: 1.5;
@@ -157,6 +157,41 @@ body {
   color: #0f1fea;
   background: none !important;
   border: none !important;
+}
+
+/* Remember Me Checkbox */
+.remember-me-checkbox {
+  margin: 0;
+}
+
+.remember-me-checkbox .form-check-input {
+  margin-top: 0.125rem;
+  width: 1.5rem;
+  height: 1.5rem;
+  border: 1px solid #d4d4d4;
+  border-radius: 4px;
+  background-color: #ffffff;
+  cursor: pointer;
+}
+
+.remember-me-checkbox .form-check-input:checked {
+  background-color: #0f1fea;
+  border-color: #0f1fea;
+}
+
+.remember-me-checkbox .form-check-input:focus {
+  border-color: #0f1fea;
+  box-shadow: 0 0 0 2px rgba(15, 31, 234, 0.1);
+}
+
+.remember-me-checkbox .form-check-label {
+  font-family: var(--font-inter), sans-serif;
+  font-weight: 500;
+  font-size: 1.05rem; /* 16.8px */
+  line-height: 1.14;
+  color: #171717;
+  margin-left: 0.5rem;
+  cursor: pointer;
 }
 
 /* Custom Buttons */
@@ -377,7 +412,7 @@ body {
 .form-select-custom {
   border: none !important;
   outline: none !important;
-  background: transparent !important;
+  background-color: transparent !important;
   font-family: var(--font-inter), sans-serif;
   font-weight: 500;
   font-size: 1rem;
@@ -889,4 +924,154 @@ body {
 .verify-page .card {
   border: none;
   box-shadow: none;
+}
+
+/* Admin Login Page Styles - Mobile First */
+.admin-login-page {
+  min-height: 100vh;
+  background-color: #ffffff;
+  display: flex;
+  flex-direction: column;
+  padding: 0;
+}
+
+.admin-login-container {
+  max-width: 400px;
+  width: 100%;
+  margin: 0 auto;
+}
+
+/* Language Dropdown */
+.language-dropdown {
+  background-color: #ffffff;
+  border: 1px solid rgba(0, 0, 0, 0.17) !important;
+  border-radius: 6px;
+  box-shadow: 0px 0px 0px 1px rgba(0, 0, 0, 0.17), 0px 1px 1px 0px rgba(0, 0, 0, 0.15), 0px 2px 3px 0px rgba(0, 0, 0, 0.08);
+  font-family: var(--font-inter), sans-serif;
+  font-weight: 500;
+  font-size: 0.875rem; /* 14px */
+  line-height: 1.14;
+  color: #171717;
+  padding: 0.5rem 0.75rem;
+  transition: all 0.2s ease;
+  min-width: 120px;
+}
+
+.language-dropdown:hover,
+.language-dropdown:focus {
+  background-color: #f8f9fa;
+  border-color: rgba(0, 0, 0, 0.17) !important;
+  box-shadow: 0px 0px 0px 1px rgba(0, 0, 0, 0.17), 0px 2px 4px 0px rgba(0, 0, 0, 0.2), 0px 4px 6px 0px rgba(0, 0, 0, 0.12);
+}
+
+.language-dropdown::after {
+  display: none;
+}
+
+.language-dropdown-menu {
+  border: 1px solid rgba(0, 0, 0, 0.17);
+  border-radius: 6px;
+  box-shadow: 0px 0px 0px 1px rgba(0, 0, 0, 0.17), 0px 1px 1px 0px rgba(0, 0, 0, 0.15), 0px 2px 3px 0px rgba(0, 0, 0, 0.08);
+  margin-top: 0.25rem;
+  min-width: 120px;
+}
+
+.language-dropdown-item {
+  font-family: var(--font-inter), sans-serif;
+  font-weight: 500;
+  font-size: 0.875rem; /* 14px */
+  line-height: 1.14;
+  color: #171717;
+  padding: 0.5rem 0.75rem;
+  transition: background-color 0.2s ease;
+}
+
+.language-dropdown-item:hover {
+  background-color: #f8f9fa;
+  color: #171717;
+}
+
+.language-dropdown-item:active {
+  background-color: #e9ecef;
+  color: #171717;
+}
+
+/* Admin Tagline */
+.admin-tagline {
+  font-family: var(--font-inter), sans-serif;
+  font-weight: 600;
+  font-size: 1.25rem; /* 20px */
+  line-height: 1.4;
+  color: #1b1b1b;
+  letter-spacing: -0.1px;
+}
+
+/* Admin Footer Links */
+.admin-footer-links {
+  display: flex;
+  gap: 1.5rem;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.footer-link {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+  font-family: var(--font-inter), sans-serif;
+  font-weight: 500;
+  font-size: 1rem; /* 16px */
+  line-height: 1.5;
+  color: #0f1fea !important;
+  text-decoration: none;
+  letter-spacing: -0.2px;
+  padding: 0;
+  background: none;
+  border: none;
+  transition: color 0.2s ease;
+}
+
+.footer-link:hover {
+  color: #0e1bd8 !important;
+  text-decoration: none;
+  background: none;
+  border: none;
+}
+
+.footer-link:focus {
+  color: #0f1fea !important;
+  text-decoration: none;
+  background: none;
+  border: none;
+  box-shadow: none;
+}
+
+/* Mobile First Responsive Design for Admin Login */
+@media (min-width: 576px) {
+  .admin-tagline {
+    font-size: 1.375rem; /* 22px */
+  }
+  
+  .footer-link {
+    font-size: 1rem; /* 16px */
+  }
+}
+
+@media (min-width: 768px) {
+  .admin-tagline {
+    font-size: 1.5rem; /* 24px */
+  }
+}
+
+@media (min-width: 992px) {
+  .admin-tagline {
+    font-size: 1.75rem; /* 28px */
+  }
+}
+
+/* Bootstrap Overrides for Admin Login Page */
+.admin-login-page .container-fluid {
+  padding-left: 0;
+  padding-right: 0;
 }

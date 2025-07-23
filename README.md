@@ -12,6 +12,9 @@ A modern Next.js application built with Bootstrap 5.3.3 and React Bootstrap comp
 - **Bootstrap Icons** for beautiful icons
 - **ESLint** for code quality
 - **Component-based architecture** for reusability
+- **Multi-language support** with language selector
+- **Admin and user authentication** with separate login interfaces
+- **Responsive design** with mobile-first approach
 
 ## 📦 Installation
 
@@ -44,16 +47,26 @@ src/
 ├── app/                    # Next.js App Router
 │   ├── layout.tsx         # Root layout component
 │   ├── page.tsx           # Home page
+│   ├── login/             # User login page
+│   ├── signup/            # User signup page
+│   ├── verify/            # Email verification page
+│   ├── admin/             # Admin pages
+│   │   └── login/         # Admin login page
 │   └── globals.css        # Global styles with Bootstrap
 ├── components/            # Reusable components
 │   ├── Header.tsx         # Navigation header
 │   ├── Footer.tsx         # Footer component
+│   ├── LoginForm.tsx      # Reusable login form
+│   ├── SignupForm.tsx     # Signup form component
 │   └── FeatureCard.tsx    # Feature card component
 └── types/                 # TypeScript type definitions (optional)
 
 public/                    # Static assets
-├── favicon.ico
-└── ...
+├── assets/
+│   ├── images/            # UI icons and images
+│   └── flag/              # Language flag icons
+├── fonts/                 # Custom fonts
+└── favicon.ico
 
 package.json               # Dependencies and scripts
 tsconfig.json             # TypeScript configuration
@@ -98,6 +111,8 @@ function MyComponent() {
 
 - **Header**: Configurable navigation with dropdown support
 - **Footer**: Responsive footer with social links and newsletter
+- **LoginForm**: Reusable login form with admin/user mode support
+- **SignupForm**: Complete signup form with OTP verification
 - **FeatureCard**: Reusable feature display component
 
 ### Component Props
@@ -144,6 +159,14 @@ interface FeatureCardProps {
 - Use Next.js Image component for images
 - Implement proper loading states
 - Optimize bundle size with tree shaking
+
+## 🛣️ Available Routes
+
+- **`/`** - Home page with features and navigation
+- **`/login`** - User login page with signup option
+- **`/signup`** - User registration page with OTP verification
+- **`/verify`** - Email verification page
+- **`/admin/login`** - Admin login page with language selector
 
 ## 🚀 Deployment
 

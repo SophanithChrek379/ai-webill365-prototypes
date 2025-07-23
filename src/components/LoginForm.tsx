@@ -8,20 +8,22 @@ import { Form, Button } from 'react-bootstrap';
 interface LoginFormProps {
   onSubmit?: (formData: { username: string; password: string }) => void;
   isLoading?: boolean;
+  isAdmin?: boolean;
 }
 
-export default function LoginForm({ onSubmit, isLoading = false }: LoginFormProps) {
+export default function LoginForm({ onSubmit, isLoading = false, isAdmin = false }: LoginFormProps) {
   const [showPassword, setShowPassword] = useState(false);
   const [formData, setFormData] = useState({
     username: '',
-    password: ''
+    password: '',
+    rememberMe: false
   });
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = e.target;
+    const { name, value, type, checked } = e.target;
     setFormData(prev => ({
       ...prev,
-      [name]: value
+      [name]: type === 'checkbox' ? checked : value
     }));
   };
 
@@ -63,7 +65,7 @@ export default function LoginForm({ onSubmit, isLoading = false }: LoginFormProp
       </Form.Group>
 
       {/* Password Field */}
-      <Form.Group className="mb-4">
+      <Form.Group className="mb-3">
         <div className="input-group-custom">
           <div className="input-icon-wrapper">
             <Image
@@ -101,6 +103,19 @@ export default function LoginForm({ onSubmit, isLoading = false }: LoginFormProp
         </div>
       </Form.Group>
 
+      {/* Remember Me Checkbox */}
+      <Form.Group className="mb-4">
+        <Form.Check
+          type="checkbox"
+          name="rememberMe"
+          checked={formData.rememberMe}
+          onChange={handleInputChange}
+          label="Remember Me"
+          className="remember-me-checkbox"
+          disabled={isLoading}
+        />
+      </Form.Group>
+
       {/* Login Button */}
       <Button
         type="submit"
@@ -111,31 +126,36 @@ export default function LoginForm({ onSubmit, isLoading = false }: LoginFormProp
         {isLoading ? 'Logging in...' : 'Log in'}
       </Button>
 
-      {/* Divider */}
-      <div className="divider-container mb-4">
-        <div className="divider-line"></div>
-        <span className="divider-text px-3">Don't have an account?</span>
-        <div className="divider-line"></div>
-      </div>
+      {/* Only show these sections for non-admin login */}
+      {!isAdmin && (
+        <>
+          {/* Divider */}
+          <div className="divider-container mb-4">
+            <div className="divider-line"></div>
+            <span className="divider-text px-3">Don't have an account?</span>
+            <div className="divider-line"></div>
+          </div>
 
-      {/* Create Account Button */}
-      <Link href="/signup" className="text-decoration-none">
-        <Button
-          variant="outline-secondary"
-          className="btn-create-account w-100 mb-3"
-          size="lg"
-          disabled={isLoading}
-        >
-          Create an account for free
-        </Button>
-      </Link>
+          {/* Create Account Button */}
+          <Link href="/signup" className="text-decoration-none">
+            <Button
+              variant="outline-secondary"
+              className="btn-create-account w-100 mb-3"
+              size="lg"
+              disabled={isLoading}
+            >
+              Create an account for free
+            </Button>
+          </Link>
 
-      {/* Reset Password */}
-      <div className="text-end">
-        <Link href="/reset-password" className="reset-link">
-          Reset Password
-        </Link>
-      </div>
+          {/* Reset Password */}
+          <div className="text-end">
+            <Link href="/reset-password" className="reset-link">
+              Reset Password
+            </Link>
+          </div>
+        </>
+      )}
     </Form>
   );
 } 
