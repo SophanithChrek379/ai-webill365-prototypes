@@ -160,7 +160,7 @@ export default function AdminLoginPage() {
             <div className="admin-footer-links">
               <Button variant="link" className="footer-link">
                 <Image
-                  src="/assets/images/arrow-left-icon.svg"
+                  src="/assets/images/lock-icon.svg"
                   alt=""
                   width={16}
                   height={16}
