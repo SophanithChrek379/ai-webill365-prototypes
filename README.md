@@ -1,93 +1,229 @@
-# ai-webill365-publishing
+# AI WeBill365 Publishing
 
+A modern Next.js application built with Bootstrap 5.3.3 and React Bootstrap components, following best practices for scalable web development.
 
+## 🚀 Features
 
-## Getting started
+- **Next.js 15** with App Router
+- **React 19** with latest features
+- **TypeScript** for type safety
+- **Bootstrap 5.3.3** for responsive design
+- **React Bootstrap** for React components
+- **Bootstrap Icons** for beautiful icons
+- **ESLint** for code quality
+- **Component-based architecture** for reusability
 
-To make it easy for you to get started with GitLab, here's a list of recommended next steps.
+## 📦 Installation
 
-Already a pro? Just edit this README.md and make it your own. Want to make it easy? [Use the template at the bottom](#editing-this-readme)!
+1. **Clone the repository**
 
-## Add your files
+   ```bash
+   git clone <repository-url>
+   cd ai-webill365-publishing
+   ```
 
-- [ ] [Create](https://docs.gitlab.com/ee/user/project/repository/web_editor.html#create-a-file) or [upload](https://docs.gitlab.com/ee/user/project/repository/web_editor.html#upload-a-file) files
-- [ ] [Add files using the command line](https://docs.gitlab.com/topics/git/add_files/#add-files-to-a-git-repository) or push an existing Git repository with the following command:
+2. **Install dependencies**
+
+   ```bash
+   npm install
+   ```
+
+3. **Run the development server**
+
+   ```bash
+   npm run dev
+   ```
+
+4. **Open your browser**
+   Navigate to [http://localhost:3000](http://localhost:3000)
+
+## 🏗️ Project Structure
 
 ```
-cd existing_repo
-git remote add origin https://gitlab.com/Sophanithchrek/ai-webill365-publishing.git
-git branch -M main
-git push -uf origin main
+src/
+├── app/                    # Next.js App Router
+│   ├── layout.tsx         # Root layout component
+│   ├── page.tsx           # Home page
+│   └── globals.css        # Global styles with Bootstrap
+├── components/            # Reusable components
+│   ├── Header.tsx         # Navigation header
+│   ├── Footer.tsx         # Footer component
+│   └── FeatureCard.tsx    # Feature card component
+└── types/                 # TypeScript type definitions (optional)
+
+public/                    # Static assets
+├── favicon.ico
+└── ...
+
+package.json               # Dependencies and scripts
+tsconfig.json             # TypeScript configuration
+next.config.ts            # Next.js configuration
+eslint.config.mjs         # ESLint configuration
 ```
 
-## Integrate with your tools
+## 🎨 Bootstrap Integration
 
-- [ ] [Set up project integrations](https://gitlab.com/Sophanithchrek/ai-webill365-publishing/-/settings/integrations)
+### CSS Import
 
-## Collaborate with your team
+Bootstrap is imported in `src/app/globals.css`:
 
-- [ ] [Invite team members and collaborators](https://docs.gitlab.com/ee/user/project/members/)
-- [ ] [Create a new merge request](https://docs.gitlab.com/ee/user/project/merge_requests/creating_merge_requests.html)
-- [ ] [Automatically close issues from merge requests](https://docs.gitlab.com/ee/user/project/issues/managing_issues.html#closing-issues-automatically)
-- [ ] [Enable merge request approvals](https://docs.gitlab.com/ee/user/project/merge_requests/approvals/)
-- [ ] [Set auto-merge](https://docs.gitlab.com/user/project/merge_requests/auto_merge/)
+```css
+@import "bootstrap/dist/css/bootstrap.min.css";
+@import "bootstrap-icons/font/bootstrap-icons.css";
+```
 
-## Test and Deploy
+### Component Usage
 
-Use the built-in continuous integration in GitLab.
+Use React Bootstrap components for better React integration:
 
-- [ ] [Get started with GitLab CI/CD](https://docs.gitlab.com/ee/ci/quick_start/)
-- [ ] [Analyze your code for known vulnerabilities with Static Application Security Testing (SAST)](https://docs.gitlab.com/ee/user/application_security/sast/)
-- [ ] [Deploy to Kubernetes, Amazon EC2, or Amazon ECS using Auto Deploy](https://docs.gitlab.com/ee/topics/autodevops/requirements.html)
-- [ ] [Use pull-based deployments for improved Kubernetes management](https://docs.gitlab.com/ee/user/clusters/agent/)
-- [ ] [Set up protected environments](https://docs.gitlab.com/ee/ci/environments/protected_environments.html)
+```tsx
+import { Button, Card, Container } from "react-bootstrap";
 
-***
+function MyComponent() {
+  return (
+    <Container>
+      <Card>
+        <Card.Body>
+          <Button variant="primary">Click me</Button>
+        </Card.Body>
+      </Card>
+    </Container>
+  );
+}
+```
 
-# Editing this README
+## 🧩 Component Architecture
 
-When you're ready to make this README your own, just edit this file and use the handy template below (or feel free to structure it however you want - this is just a starting point!). Thanks to [makeareadme.com](https://www.makeareadme.com/) for this template.
+### Reusable Components
 
-## Suggestions for a good README
+- **Header**: Configurable navigation with dropdown support
+- **Footer**: Responsive footer with social links and newsletter
+- **FeatureCard**: Reusable feature display component
 
-Every project is different, so consider which of these sections apply to yours. The sections used in the template are suggestions for most open source projects. Also keep in mind that while a README can be too long and detailed, too long is better than too short. If you think your README is too long, consider utilizing another form of documentation rather than cutting out information.
+### Component Props
 
-## Name
-Choose a self-explaining name for your project.
+All components use TypeScript interfaces for type safety:
 
-## Description
-Let people know what your project can do specifically. Provide context and add a link to any reference visitors might be unfamiliar with. A list of Features or a Background subsection can also be added here. If there are alternatives to your project, this is a good place to list differentiating factors.
+```tsx
+interface FeatureCardProps {
+  title: string;
+  description: string;
+  icon: string;
+  iconColor?: string;
+  buttonText?: string;
+  buttonVariant?: string;
+  onButtonClick?: () => void;
+  className?: string;
+}
+```
 
-## Badges
-On some READMEs, you may see small images that convey metadata, such as whether or not all the tests are passing for the project. You can use Shields to add some to your README. Many services also have instructions for adding a badge.
+## 🎯 Best Practices
 
-## Visuals
-Depending on what you are making, it can be a good idea to include screenshots or even a video (you'll frequently see GIFs rather than actual videos). Tools like ttygif can help, but check out Asciinema for a more sophisticated method.
+### 1. Component Organization
 
-## Installation
-Within a particular ecosystem, there may be a common way of installing things, such as using Yarn, NuGet, or Homebrew. However, consider the possibility that whoever is reading your README is a novice and would like more guidance. Listing specific steps helps remove ambiguity and gets people to using your project as quickly as possible. If it only runs in a specific context like a particular programming language version or operating system or has dependencies that have to be installed manually, also add a Requirements subsection.
+- Keep components in `src/components/`
+- Use descriptive file names
+- Export components as default exports
+- Use TypeScript interfaces for props
 
-## Usage
-Use examples liberally, and show the expected output if you can. It's helpful to have inline the smallest example of usage that you can demonstrate, while providing links to more sophisticated examples if they are too long to reasonably include in the README.
+### 2. Styling
 
-## Support
-Tell people where they can go to for help. It can be any combination of an issue tracker, a chat room, an email address, etc.
+- Use Bootstrap classes for layout and styling
+- Custom CSS in `globals.css` for overrides
+- Use Bootstrap utility classes for spacing and colors
+- Responsive design with Bootstrap grid system
 
-## Roadmap
-If you have ideas for releases in the future, it is a good idea to list them in the README.
+### 3. TypeScript
 
-## Contributing
-State if you are open to contributions and what your requirements are for accepting them.
+- Define interfaces for all component props
+- Use proper type annotations
+- Enable strict mode in `tsconfig.json`
 
-For people who want to make changes to your project, it's helpful to have some documentation on how to get started. Perhaps there is a script that they should run or some environment variables that they need to set. Make these steps explicit. These instructions could also be useful to your future self.
+### 4. Performance
 
-You can also document commands to lint the code or run tests. These steps help to ensure high code quality and reduce the likelihood that the changes inadvertently break something. Having instructions for running tests is especially helpful if it requires external setup, such as starting a Selenium server for testing in a browser.
+- Use Next.js Image component for images
+- Implement proper loading states
+- Optimize bundle size with tree shaking
 
-## Authors and acknowledgment
-Show your appreciation to those who have contributed to the project.
+## 🚀 Deployment
 
-## License
-For open source projects, say how it is licensed.
+### Vercel (Recommended)
 
-## Project status
-If you have run out of energy or time for your project, put a note at the top of the README saying that development has slowed down or stopped completely. Someone may choose to fork your project or volunteer to step in as a maintainer or owner, allowing your project to keep going. You can also make an explicit request for maintainers.
+1. Push your code to GitHub
+2. Connect your repository to Vercel
+3. Deploy automatically
+
+### Other Platforms
+
+```bash
+# Build the application
+npm run build
+
+# Start production server
+npm start
+```
+
+## 📱 Responsive Design
+
+The application is fully responsive using Bootstrap's grid system:
+
+- **Mobile-first** approach
+- **Breakpoints**: xs, sm, md, lg, xl, xxl
+- **Flexible containers** and responsive utilities
+
+## 🎨 Customization
+
+### Bootstrap Theme
+
+Customize Bootstrap variables in `globals.css`:
+
+```css
+:root {
+  --bs-primary: #007bff;
+  --bs-secondary: #6c757d;
+  /* Add more custom variables */
+}
+```
+
+### Component Styling
+
+Override Bootstrap classes or add custom CSS:
+
+```css
+.custom-card {
+  border-radius: 1rem;
+  box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+}
+```
+
+## 🔧 Development Scripts
+
+```bash
+npm run dev          # Start development server
+npm run build        # Build for production
+npm run start        # Start production server
+npm run lint         # Run ESLint
+```
+
+## 📚 Additional Resources
+
+- [Next.js Documentation](https://nextjs.org/docs)
+- [Bootstrap 5 Documentation](https://getbootstrap.com/docs/5.3/)
+- [React Bootstrap Documentation](https://react-bootstrap.github.io/)
+- [Bootstrap Icons](https://icons.getbootstrap.com/)
+
+## 🤝 Contributing
+
+1. Fork the repository
+2. Create a feature branch
+3. Make your changes
+4. Add tests if applicable
+5. Submit a pull request
+
+## 📄 License
+
+This project is licensed under the MIT License - see the LICENSE file for details.
+
+---
+
+Built with ❤️ using Next.js, Bootstrap, and modern web technologies.

@@ -1,0 +1,58 @@
+---
+description: Next.js App Router Project Rules for Figma Design Integration
+globs: ["**/*.{tsx,ts,jsx,js,scss,css}"]
+alwaysApply: true
+---
+
+# Next.js App Router Project Rules for Figma Design Integration
+
+## Project Structure
+
+- Use Next.js 14 App Router structure
+- Place pages in `app/` directory
+- Place reusable components in `components/` directory
+- Place styles in `styles/` directory
+- Place static assets in `public/assets/` directory
+
+## Component Development
+
+- Use React functional components with TypeScript
+- Create components in `components/` directory
+- Use proper TypeScript interfaces for props
+- Follow React best practices and hooks
+
+## Styling Guidelines
+
+- Use Tailwind CSS for utility classes
+- Convert Figma colors to SCSS variables in `styles/globals.scss`
+- Use CSS modules or styled-components for component-specific styles
+- Maintain responsive design principles
+
+## Figma Design Integration
+
+- Export Figma images to `/public/assets/images/`
+- Convert Figma colors to SCSS variables with semantic naming
+- Extract typography styles from Figma and apply to Tailwind config
+- Maintain design system consistency
+
+## File Organization
+
+- Components: `components/ComponentName.tsx`
+- Pages: `app/page.tsx`, `app/about/page.tsx`
+- Layouts: `app/layout.tsx`
+- Styles: `styles/globals.scss`, `app/globals.css`
+- Assets: `public/assets/images/`, `public/fonts/`
+
+## Code Quality
+
+- Use TypeScript for type safety
+- Follow ESLint rules and Next.js conventions
+- Use proper import/export statements
+- Maintain clean, readable code structure
+
+## Design System
+
+- Create reusable component library
+- Use consistent spacing and typography
+- Implement dark/light mode support
+- Follow accessibility guidelines
