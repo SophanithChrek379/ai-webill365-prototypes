@@ -52,7 +52,7 @@ src/
 │   ├── verify/            # Email verification page
 │   ├── admin/             # Admin pages
 │   │   └── login/         # Admin login page
-│   └── globals.css        # Global styles with Bootstrap
+│   └── globals.scss        # Global styles with Bootstrap
 ├── components/            # Reusable components
 │   ├── Header.tsx         # Navigation header
 │   ├── Footer.tsx         # Footer component
@@ -78,7 +78,7 @@ eslint.config.mjs         # ESLint configuration
 
 ### CSS Import
 
-Bootstrap is imported in `src/app/globals.css`:
+Bootstrap is imported in `src/app/globals.scss`:
 
 ```css
 @import "bootstrap/dist/css/bootstrap.min.css";
@@ -144,7 +144,7 @@ interface FeatureCardProps {
 ### 2. Styling
 
 - Use Bootstrap classes for layout and styling
-- Custom CSS in `globals.css` for overrides
+- Custom CSS in `globals.scss` for overrides
 - Use Bootstrap utility classes for spacing and colors
 - Responsive design with Bootstrap grid system
 
@@ -198,7 +198,7 @@ The application is fully responsive using Bootstrap's grid system:
 
 ### Bootstrap Theme
 
-Customize Bootstrap variables in `globals.css`:
+Customize Bootstrap variables in `globals.scss`:
 
 ```css
 :root {

@@ -1,10 +1,11 @@
 ---
 description: Next.js App Router Project Rules for Figma Design Integration
-globs: ["**/*.{tsx,ts,jsx,js,scss,css}"]
+globs: ["**/*.{tsx,ts,jsx,scss"]
 alwaysApply: true
 ---
 
-# Next.js App Router Project Rules for Figma Design Integration
+
+# Next.js App Router Project Rules for Figma Design Integration (Updated)
 
 ## Project Structure
 
@@ -20,13 +21,14 @@ alwaysApply: true
 - Create components in `components/` directory
 - Use proper TypeScript interfaces for props
 - Follow React best practices and hooks
+- **Use only React-Bootstrap components for all UI elements**
 
 ## Styling Guidelines
 
-- Use Bootstrap@5.3.3 for utility classes
-- Use React-Bootstrap@latest for components
-- Convert Figma colors to SCSS variables in `styles/globals.scss`
-- Use CSS modules or styled-components for component-specific styles
+- **Use Bootstrap@5.3.3 utility classes or custom Weloop utility/container classes for layout and spacing**
+- **All custom styles and overrides must be written in SCSS format**
+- **All design element styles must be defined in `src/styles/weloop/**` and referenced accordingly**
+- Use CSS modules or styled-components for component-specific styles if needed
 - Maintain responsive mobile-first design principles
 
 ## Figma Design Integration
@@ -41,8 +43,8 @@ alwaysApply: true
 - Components: `components/ComponentName.tsx`
 - Pages: `app/page.tsx`, `app/about/page.tsx`
 - Layouts: `app/layout.tsx`
-- Styles: `styles/globals.scss`, `app/globals.css`
-- Assets: `public/assets/images/`, `public/fonts/`
+- Styles: `app/globals.scss`
+- Assets: `public/assets/images/`, `public/assets/flag/`, `public/assets/fonts/`
 
 ## Code Quality
 
@@ -56,4 +58,75 @@ alwaysApply: true
 - Create reusable component library
 - Use consistent spacing and typography
 - Implement dark/light mode support
+- Follow accessibility guidelines
+
+## Asset Management
+
+- **All images and resources must be placed in `public/assets/**` and referenced using the Next.js static asset conventions**
+- **Never import images or resources from outside `public/assets/**`**
+
+- Create reusable component library
+- Use consistent spacing and typography
+- Implement dark/light mode support
+- Follow accessibility guidelines
+
+# Next.js App Router Project Rules for Figma Design Integration (Updated)
+
+## Project Structure
+
+- Use Next.js 14 App Router structure
+- Place pages in `app/` directory
+- Place reusable components in `components/` directory
+- Place styles in `styles/` directory
+- Place static assets in `public/assets/` directory
+
+## Component Development
+
+- Use React functional components with TypeScript
+- Create components in `components/` directory
+- Use proper TypeScript interfaces for props
+- Follow React best practices and hooks
+- **Use only React-Bootstrap components for all UI elements**
+
+## Styling Guidelines
+
+- **Use Bootstrap@5.3.3 utility classes for layout and spacing**
+- **All custom styles and overrides must be written in SCSS format and add it into globals.scss**
+- Maintain responsive mobile-first design principles mostly for authentication and response pages
+
+## Figma Design Integration
+
+- Export Figma images to `/public/assets/images/`
+- Convert Figma colors to SCSS variables with semantic naming
+- Extract typography styles from Figma and apply to Bootstrap@5.3.3 root config
+- Maintain design system consistency
+
+## File Organization
+
+- Components: `components/ComponentName.tsx`
+- Pages: `app/page.tsx`, `app/about/page.tsx`
+- Layouts: `app/layout.tsx`
+- Styles: `styles/globals.scss`
+- Assets: `public/assets/images/`, `public/assets/flag/`, `public/assets/fonts/`
+
+## Code Quality
+
+- Use TypeScript for type safety
+- Follow ESLint rules and Next.js conventions
+- Use proper import/export statements
+- Maintain clean, readable code structure
+
+## Design System
+
+- Create reusable component library
+- Use consistent spacing and typography
+- Follow accessibility guidelines
+
+## Asset Management
+
+- **All images and resources must be placed in `public/assets/**` and referenced using the Next.js static asset conventions**
+- **Never import images or resources from outside `public/assets/**`**
+
+- Create reusable component library
+- Use consistent spacing and typography
 - Follow accessibility guidelines
