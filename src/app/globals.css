@@ -19,15 +19,38 @@ body {
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
-/* Custom Bootstrap overrides */
-.container-fluid {
+/* Bootstrap CSS will be imported in layout.tsx */
+/* Bootstrap Icons will be imported in layout.tsx */
+
+:root {
+  --background: #ffffff;
+  --foreground: #171717;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #0a0a0a;
+    --foreground: #ededed;
+  }
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* Custom Bootstrap overrides - More specific selectors */
+.login-page .container-fluid,
+.signup-page .container-fluid {
   padding-left: 1rem;
   padding-right: 1rem;
 }
 
 /* Responsive utilities */
 @media (max-width: 768px) {
-  .container-fluid {
+  .login-page .container-fluid,
+  .signup-page .container-fluid {
     padding-left: 0.5rem;
     padding-right: 0.5rem;
   }
@@ -105,16 +128,16 @@ body {
 
 .form-control-custom {
   flex: 1;
-  border: none !important;
-  outline: none !important;
-  background: transparent !important;
+  border: none;
+  outline: none;
+  background: transparent;
   font-family: var(--font-noto-sans-kr), sans-serif;
   font-weight: 500;
   font-size: 1rem;
   line-height: 1.5;
   color: #171717;
-  padding: 0 !important;
-  box-shadow: none !important;
+  padding: 0;
+  box-shadow: none;
 }
 
 .form-control-custom::placeholder {
@@ -123,8 +146,8 @@ body {
 }
 
 .form-control-custom:focus {
-  box-shadow: none !important;
-  border: none !important;
+  box-shadow: none;
+  border: none;
 }
 
 .password-toggle-btn {
@@ -148,10 +171,10 @@ body {
 
 /* Custom Buttons */
 .btn-login {
-  background-color: #0f1fea !important;
-  border: 1px solid #1221c1 !important;
-  border-radius: 8px !important;
-  color: #ffffff !important;
+  background-color: #0f1fea;
+  border: 1px solid #1221c1;
+  border-radius: 8px;
+  color: #ffffff;
   font-family: var(--font-inter), sans-serif;
   font-weight: 500;
   font-size: 1rem;
@@ -162,15 +185,15 @@ body {
 }
 
 .btn-login:hover {
-  background-color: #0e1bd8 !important;
+  background-color: #0e1bd8;
   transform: translateY(-1px);
   box-shadow: 0px 0px 0px 1px #1221c1, 0px 2px 4px 0px rgba(18, 33, 193, 0.6), 0px 4px 6px 0px rgba(18, 33, 193, 0.15);
 }
 
 .btn-login:focus {
-  background-color: #0f1fea !important;
-  border-color: #1221c1 !important;
-  box-shadow: 0px 0px 0px 1px #1221c1, 0px 1px 1px 0px rgba(18, 33, 193, 0.5), 0px 2px 3px 0px rgba(18, 33, 193, 0.1), 0 0 0 0.2rem rgba(15, 31, 234, 0.25) !important;
+  background-color: #0f1fea;
+  border-color: #1221c1;
+  box-shadow: 0px 0px 0px 1px #1221c1, 0px 1px 1px 0px rgba(18, 33, 193, 0.5), 0px 2px 3px 0px rgba(18, 33, 193, 0.1), 0 0 0 0.2rem rgba(15, 31, 234, 0.25);
 }
 
 /* Divider */
@@ -198,10 +221,10 @@ body {
 
 /* Create Account Button */
 .btn-create-account {
-  background-color: #ffffff !important;
-  border: 1px solid rgba(0, 0, 0, 0.17) !important;
-  border-radius: 8px !important;
-  color: #171717 !important;
+  background-color: #ffffff;
+  border: 1px solid rgba(0, 0, 0, 0.17);
+  border-radius: 8px;
+  color: #171717;
   font-family: var(--font-inter), sans-serif;
   font-weight: 500;
   font-size: 1rem;
@@ -212,17 +235,17 @@ body {
 }
 
 .btn-create-account:hover {
-  background-color: #f8f9fa !important;
+  background-color: #f8f9fa;
   transform: translateY(-1px);
-  color: #171717 !important;
+  color: #171717;
   box-shadow: 0px 0px 0px 1px rgba(0, 0, 0, 0.17), 0px 2px 4px 0px rgba(0, 0, 0, 0.2), 0px 4px 6px 0px rgba(0, 0, 0, 0.12);
 }
 
 .btn-create-account:focus {
-  background-color: #ffffff !important;
-  border-color: rgba(0, 0, 0, 0.17) !important;
-  color: #171717 !important;
-  box-shadow: 0px 0px 0px 1px rgba(0, 0, 0, 0.17), 0px 1px 1px 0px rgba(0, 0, 0, 0.15), 0px 2px 3px 0px rgba(0, 0, 0, 0.08), 0 0 0 0.2rem rgba(0, 0, 0, 0.1) !important;
+  background-color: #ffffff;
+  border-color: rgba(0, 0, 0, 0.17);
+  color: #171717;
+  box-shadow: 0px 0px 0px 1px rgba(0, 0, 0, 0.17), 0px 1px 1px 0px rgba(0, 0, 0, 0.15), 0px 2px 3px 0px rgba(0, 0, 0, 0.08), 0 0 0 0.2rem rgba(0, 0, 0, 0.1);
 }
 
 /* Reset Password Link */
@@ -310,6 +333,301 @@ body {
 }
 
 .login-page .form-control:focus {
+  border-color: transparent;
+  box-shadow: none;
+}
+
+/* Signup Page Styles - Mobile First */
+.signup-page {
+  min-height: 100vh;
+  background-color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+}
+
+.signup-card {
+  background: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+  max-width: 800px;
+  width: 100%;
+}
+
+.signup-title {
+  font-family: var(--font-inter), sans-serif;
+  font-weight: 600;
+  font-size: 1.25rem;
+  line-height: 1.4;
+  color: #1b1b1b;
+  letter-spacing: -0.46px;
+}
+
+.signup-form {
+  width: 100%;
+}
+
+/* Form Labels */
+.form-label {
+  font-family: var(--font-inter), sans-serif;
+  font-weight: 500;
+  font-size: 1rem;
+  line-height: 1.5;
+  color: #171717;
+  margin-bottom: 0.5rem;
+}
+
+.required-asterisk {
+  color: #bd1822;
+  margin-left: 0.25rem;
+}
+
+/* Custom Select */
+.form-select-custom {
+  border: none !important;
+  outline: none !important;
+  background: transparent !important;
+  font-family: var(--font-inter), sans-serif;
+  font-weight: 500;
+  font-size: 1rem;
+  line-height: 1.5;
+  color: #171717;
+  padding: 0 !important;
+  box-shadow: none !important;
+  border-radius: 0 !important;
+}
+
+.form-select-custom:focus {
+  box-shadow: none !important;
+  border: none !important;
+}
+
+/* Send OTP Button */
+.send-otp-btn {
+  background: none;
+  border: none;
+  color: #0f1fea;
+  font-family: var(--font-inter), sans-serif;
+  font-weight: 500;
+  font-size: 1rem;
+  line-height: 1.5;
+  padding: 0;
+  margin-left: 0.75rem;
+  text-decoration: none;
+}
+
+.send-otp-btn:hover {
+  color: #0e1bd8;
+  background: none;
+  border: none;
+}
+
+.send-otp-btn:disabled {
+  color: #a3a3a3;
+}
+
+/* OTP Container */
+.otp-container {
+  display: flex;
+  gap: 0.5rem;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.otp-input {
+  width: 3rem;
+  height: 3rem;
+  text-align: center;
+  font-family: var(--font-inter), sans-serif;
+  font-weight: 500;
+  font-size: 1.25rem;
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  border-radius: 7px;
+  background-color: #f9f9f9;
+  padding: 0.5rem;
+}
+
+.otp-input:focus {
+  border-color: #0f1fea;
+  box-shadow: 0 0 0 2px rgba(15, 31, 234, 0.1);
+  background-color: #ffffff;
+}
+
+/* Password Toggle Container */
+.password-toggle-container {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: -0.5rem;
+}
+
+/* Password Requirements */
+.password-requirements {
+  margin-top: -0.5rem;
+}
+
+.password-requirements p {
+  font-family: var(--font-inter), sans-serif;
+  font-weight: 500;
+  font-size: 0.875rem;
+  line-height: 1.4;
+  color: #4e4e4e;
+  margin: 0;
+}
+
+/* Terms and Conditions */
+.terms-checkbox {
+  margin: 0;
+}
+
+.terms-checkbox .form-check-input {
+  margin-top: 0.125rem;
+}
+
+.terms-text {
+  font-family: var(--font-inter), sans-serif;
+  font-weight: 500;
+  font-size: 0.875rem;
+  line-height: 1.4;
+  color: #171717;
+}
+
+.terms-link {
+  color: #0f1fea;
+  text-decoration: none;
+}
+
+.terms-link:hover {
+  text-decoration: underline;
+  color: #0e1bd8;
+}
+
+/* Action Buttons */
+.btn-signin-instead {
+  color: #0f1fea;
+  font-family: var(--font-inter), sans-serif;
+  font-weight: 500;
+  font-size: 1rem;
+  line-height: 1.5;
+  text-decoration: none;
+  padding: 0;
+}
+
+.btn-signin-instead:hover {
+  color: #0e1bd8;
+  text-decoration: none;
+}
+
+.btn-signin-instead:disabled {
+  color: #a3a3a3;
+}
+
+.btn-confirm-signup {
+  background-color: #0f1fea;
+  border: 1px solid #1221c1;
+  border-radius: 8px;
+  color: #ffffff;
+  font-family: var(--font-inter), sans-serif;
+  font-weight: 500;
+  font-size: 1rem;
+  line-height: 1.5;
+  height: 48px;
+  padding: 0.75rem 1.5rem;
+  box-shadow: 0px 0px 0px 1px #1221c1, 0px 1px 1px 0px rgba(18, 33, 193, 0.5), 0px 2px 3px 0px rgba(18, 33, 193, 0.1);
+  transition: all 0.2s ease;
+}
+
+.btn-confirm-signup:hover:not(:disabled) {
+  background-color: #0e1bd8;
+  transform: translateY(-1px);
+  box-shadow: 0px 0px 0px 1px #1221c1, 0px 2px 4px 0px rgba(18, 33, 193, 0.6), 0px 4px 6px 0px rgba(18, 33, 193, 0.15);
+}
+
+.btn-confirm-signup:disabled {
+  background-color: #d4d4d4;
+  border-color: #d4d4d4;
+  color: #a3a3a3;
+  box-shadow: none;
+  transform: none;
+}
+
+/* Mobile First Responsive Design for Signup */
+@media (min-width: 576px) {
+  .signup-page {
+    padding: 2rem;
+  }
+  
+  .signup-title {
+    font-size: 1.5rem;
+  }
+  
+  .form-label {
+    font-size: 1.125rem;
+  }
+  
+  .form-control-custom,
+  .form-select-custom {
+    font-size: 1.125rem;
+  }
+  
+  .form-control-custom::placeholder {
+    font-size: 1.125rem;
+  }
+  
+  .send-otp-btn {
+    font-size: 1.125rem;
+  }
+  
+  .btn-signin-instead,
+  .btn-confirm-signup {
+    font-size: 1.125rem;
+  }
+  
+  .otp-input {
+    width: 3.5rem;
+    height: 3.5rem;
+    font-size: 1.5rem;
+  }
+}
+
+@media (min-width: 768px) {
+  .signup-page {
+    padding: 3rem;
+  }
+  
+  .signup-title {
+    font-size: 1.75rem;
+  }
+}
+
+@media (min-width: 992px) {
+  .signup-page {
+    padding: 4rem;
+  }
+  
+  .signup-title {
+    font-size: 2rem;
+  }
+}
+
+@media (min-width: 1200px) {
+  .signup-page {
+    padding: 5rem;
+  }
+}
+
+/* Bootstrap Overrides for Signup Page */
+.signup-page .container-fluid {
+  padding-left: 0;
+  padding-right: 0;
+}
+
+.signup-page .card {
+  border: none;
+  box-shadow: none;
+}
+
+.signup-page .form-control:focus {
   border-color: transparent;
   box-shadow: none;
 }
