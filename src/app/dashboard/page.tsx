@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
-import { Row, Col, Card, Badge, Table, Form, Modal } from "react-bootstrap";
+import { Row, Col, Card, Badge, Table } from "react-bootstrap";
 import Sidebar from "../../components/Sidebar";
 import AppBar from "../../components/AppBar";
 import Pagination from "../../components/Pagination";
@@ -554,17 +554,6 @@ export default function DashboardPage() {
               <Table responsive className="table-hover">
                 <thead>
                   <tr>
-                    <th className="table-checkbox-cell">
-                      <Form.Check
-                        type="checkbox"
-                        checked={
-                          selectedRows.size === currentSubscribers.length &&
-                          currentSubscribers.length > 0
-                        }
-                        onChange={handleSelectAll}
-                        className="table-checkbox"
-                      />
-                    </th>
                     {tableColumns
                       .filter((column) => column.visible)
                       .sort((a, b) => a.order - b.order)
@@ -583,14 +572,6 @@ export default function DashboardPage() {
                           : ""
                       }`}
                     >
-                      <td className="table-checkbox-cell">
-                        <Form.Check
-                          type="checkbox"
-                          checked={selectedRows.has(subscriber.id)}
-                          onChange={() => handleRowSelection(subscriber.id)}
-                          className="table-checkbox"
-                        />
-                      </td>
                       {tableColumns
                         .filter((column) => column.visible)
                         .sort((a, b) => a.order - b.order)
