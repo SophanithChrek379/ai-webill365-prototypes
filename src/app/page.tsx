@@ -71,7 +71,7 @@ export default function Home() {
   return (
     <div className="admin-login-page">
       <Container fluid className="h-100 d-flex flex-column">
-        <Row className="flex-grow-0 py-4">
+        <Row className="flex-grow-0 p-4">
           <Col className="d-flex justify-content-end">
             <Dropdown>
               <Dropdown.Toggle
