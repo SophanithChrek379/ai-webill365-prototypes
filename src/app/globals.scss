@@ -3018,31 +3018,32 @@ table {
   display: flex;
   align-items: center;
   gap: 8px;
-}
 
-.bulk-actions-dropdown {
-  padding: 6px 12px;
-  font-size: 13px;
-  min-height: 32px;
-  background-color: #0f1fea;
-  border: 1px solid #1221c1;
-  box-shadow: 0px 0px 0px 1px #1221c1, 0px 1px 1px 0px rgba(18, 33, 193, 0.5),
-    0px 2px 3px 0px rgba(18, 33, 193, 0.1);
-}
-
-.bulk-actions-dropdown:hover {
-  background-color: #0e1bd8;
-  box-shadow: 0px 0px 0px 1px #1221c1, 0px 2px 4px 0px rgba(18, 33, 193, 0.6),
-    0px 4px 6px 0px rgba(18, 33, 193, 0.15);
+  .dropdown-toggle {
+    padding: 0px 8px;
+    border: none;
+    font-size: var(--Typeface-Size-Button-Medium, 14px);
+    font-weight: var(--Typeface-Weight-Button-Medium, 500);
+    line-height: var(--Typeface-Line-height-Button-Medium, 16px);
+    letter-spacing: var(--Typeface-Letter-Spacing-Button-Medium, 0px);
+  }
 }
 
 .bulk-actions-menu {
-  border: 1px solid #e5e7eb;
-  border-radius: 8px;
-  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1),
-    0 2px 4px -1px rgba(0, 0, 0, 0.06);
   padding: 4px 0;
   min-width: 160px;
+  border: none;
+  border-radius: var(--WLDS-Radius-8, 0.5rem);
+  background-color: var(--Backgrounds-BG-NORMAL, #fff);
+  box-shadow: var(--Menu-First-X-0, 0px) var(--Menu-First-Y-0, 1px)
+      var(--Menu-First-B-0, 1px) var(--Menu-First-S-0, 0px)
+      var(--Menu-First-Color, rgba(0, 0, 0, 0.1)),
+    var(--Menu-Secord-X-0, 0px) var(--Menu-Secord-Y-0, 0px)
+      var(--Menu-Secord-B-0, 2px) var(--Menu-Secord-S-0, 0px)
+      var(--Menu-Secord-Color, rgba(0, 0, 0, 0.1)),
+    var(--Menu-Third-X-0, 0px) var(--Menu-Third-Y-0, 6px)
+      var(--Menu-Third-B-0, 20px) var(--Menu-Third-S-0, 0px)
+      var(--Menu-Third-Color, rgba(0, 0, 0, 0.1));
 }
 
 .bulk-action-item {

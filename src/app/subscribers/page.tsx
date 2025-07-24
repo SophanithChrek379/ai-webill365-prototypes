@@ -530,7 +530,7 @@ export default function SubscribersPage() {
 
             {/* Filters */}
             <div className="activities-filters">
-              <div className="d-flex gap-3 align-items-center">
+              <div className="d-flex gap-2 align-items-center">
                 <WLDateRangePicker />
                 <StatusDropdown
                   selectedStatuses={selectedStatuses}
@@ -541,7 +541,7 @@ export default function SubscribersPage() {
                 />
               </div>
 
-              <div className="d-flex gap-3 align-items-center">
+              <div className="d-flex gap-2 align-items-center">
                 <button
                   className="wl-btn-primary-outline"
                   onClick={() => setShowViewSettings(true)}
@@ -574,7 +574,7 @@ export default function SubscribersPage() {
             </div>
 
             {/* Bulk Actions */}
-            {/* {selectedRows.size > 0 && (
+            {selectedRows.size > 0 && (
               <BulkActions
                 selectedCount={selectedRows.size}
                 totalCount={currentSubscribers.length}
@@ -582,7 +582,7 @@ export default function SubscribersPage() {
                 onSelectAll={handleSelectAll}
                 onClearSelection={handleClearSelection}
               />
-            )} */}
+            )}
 
             {/* Activities Table */}
             <div className="activities-table">

@@ -33,37 +33,29 @@ const BulkActions: React.FC<BulkActionsProps> = ({
   return (
     <div className={`bulk-actions ${className}`}>
       <div className="bulk-actions-info">
-        <span className="bulk-selection-text">
+        <span className="wl-text-button-medium">
           {hasSelection
             ? `${selectedCount} of ${totalCount} selected`
             : `${totalCount} items`}
         </span>
         {hasSelection && (
-          <Button
-            variant="primary"
-            size="sm"
-            className="bulk-clear-btn"
-            onClick={onClearSelection}
-          >
+          <button className="wl-btn-primary-text" onClick={onClearSelection}>
             Clear
-          </Button>
+          </button>
         )}
       </div>
 
       {hasSelection && (
         <div className="bulk-actions-buttons">
-          <Dropdown>
+          <Dropdown align="end">
             <Dropdown.Toggle
-              as={Button}
-              variant="primary"
-              size="sm"
-              className="bulk-actions-dropdown"
+              variant="outline"
+              className="wl-btn-primary-outline"
             >
-              <i className="bi bi-three-dots me-1"></i>
               Actions ({selectedCount})
             </Dropdown.Toggle>
 
-            <Dropdown.Menu className="bulk-actions-menu">
+            <Dropdown.Menu className="bulk-actions-menu p-1 my-2">
               {actions.map((action) => (
                 <Dropdown.Item
                   key={action.id}
@@ -80,16 +72,10 @@ const BulkActions: React.FC<BulkActionsProps> = ({
       )}
 
       {!hasSelection && (
-        <Button
-          variant="primary"
-          outline
-          size="sm"
-          className="bulk-select-all-btn"
-          onClick={onSelectAll}
-        >
+        <button className="wl-btn-primary" onClick={onSelectAll}>
           <i className="bi bi-check-square me-1"></i>
           Select All
-        </Button>
+        </button>
       )}
     </div>
   );

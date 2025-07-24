@@ -564,7 +564,7 @@ export default function DashboardPage() {
 
             {/* Filters */}
             <div className="activities-filters">
-              <div className="d-flex gap-3 align-items-center">
+              <div className="d-flex gap-2 align-items-center">
                 <WLDateRangePicker />
                 <StatusDropdown
                   selectedStatuses={selectedStatuses}
@@ -575,7 +575,7 @@ export default function DashboardPage() {
                 />
               </div>
 
-              <div className="d-flex gap-3 align-items-center">
+              <div className="d-flex gap-2 align-items-center">
                 <button
                   className="wl-btn-primary-outline"
                   onClick={() => setShowViewSettings(true)}
