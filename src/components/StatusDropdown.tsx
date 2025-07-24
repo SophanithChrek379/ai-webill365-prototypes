@@ -108,48 +108,34 @@ const StatusDropdown: React.FC<StatusDropdownProps> = ({
           <div className="status-dropdown-header">
             <div className="status-dropdown-title">Status</div>
             <div className="status-dropdown-actions">
-              <Button
-                variant="primary"
-                size="sm"
-                className="status-action-btn status-cancel-btn"
-                onClick={handleCancel}
-              >
+              <button className="wl-btn-primary-text" onClick={handleCancel}>
                 Cancel
-              </Button>
-              <Button
-                variant="white"
-                size="sm"
-                className="status-action-btn status-reset-btn"
-                onClick={handleReset}
-              >
+              </button>
+              <button className="wl-btn-primary-outline" onClick={handleReset}>
                 Reset
-              </Button>
-              <Button
-                variant="primary"
-                size="sm"
-                className="status-action-btn status-save-btn"
-                onClick={handleSave}
-              >
+              </button>
+              <button className="wl-btn-primary" onClick={handleSave}>
                 Save
-              </Button>
+              </button>
             </div>
           </div>
 
           {/* Show All Option */}
-          <div className="status-show-all">
-            <Form.Check
-              type="checkbox"
-              id="show-all-status"
-              checked={allChecked}
-              onChange={handleShowAllToggle}
-              className="status-checkbox"
-            />
-            <Form.Check.Label
-              htmlFor="show-all-status"
-              className="status-checkbox-label"
-            >
-              Show All
-            </Form.Check.Label>
+          <div className="d-flex p-1 border-bottom">
+            <div className="status-show-all w-100">
+              <Form.Check
+                type="checkbox"
+                id="show-all-status"
+                checked={allChecked}
+                onChange={handleShowAllToggle}
+              />
+              <Form.Check.Label
+                htmlFor="show-all-status"
+                className="status-checkbox-label"
+              >
+                Show All
+              </Form.Check.Label>
+            </div>
           </div>
 
           {/* Status Options */}
@@ -161,7 +147,6 @@ const StatusDropdown: React.FC<StatusDropdownProps> = ({
                   id={`status-${status.id}`}
                   checked={status.checked}
                   onChange={() => handleStatusToggle(status.id)}
-                  className="status-checkbox"
                 />
                 <Form.Check.Label
                   htmlFor={`status-${status.id}`}

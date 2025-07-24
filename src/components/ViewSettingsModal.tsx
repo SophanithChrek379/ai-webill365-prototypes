@@ -63,11 +63,11 @@ const SortableColumnItem: React.FC<{
     >
       <div className="view-column-content">
         <Form.Check
+          className="d-flex"
           type="checkbox"
           id={`column-${column.id}`}
           checked={column.visible}
           onChange={() => onToggle(column.id)}
-          className="view-checkbox"
         />
         <Form.Check.Label
           htmlFor={`column-${column.id}`}
@@ -77,7 +77,20 @@ const SortableColumnItem: React.FC<{
         </Form.Check.Label>
       </div>
       <div className="view-column-drag-handle" {...attributes} {...listeners}>
-        <i className="bi bi-grip-vertical"></i>
+        <svg
+          width="18"
+          height="18"
+          viewBox="0 0 18 18"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <circle cx="6.5" cy="4.5" r="1.5" fill="#322F2F" />
+          <circle cx="11.5" cy="4.5" r="1.5" fill="#322F2F" />
+          <circle cx="6.5" cy="9.5" r="1.5" fill="#322F2F" />
+          <circle cx="11.5" cy="9.5" r="1.5" fill="#322F2F" />
+          <circle cx="6.5" cy="14.5" r="1.5" fill="#322F2F" />
+          <circle cx="11.5" cy="14.5" r="1.5" fill="#322F2F" />
+        </svg>
       </div>
     </div>
   );
@@ -180,48 +193,35 @@ const ViewSettingsModal: React.FC<ViewSettingsModalProps> = ({
         <div className="view-settings-header">
           <div className="view-settings-title">View Settings</div>
           <div className="view-settings-actions">
-            <Button
-              variant="primary"
-              size="sm"
-              className="view-action-btn view-cancel-btn"
-              onClick={handleCancel}
-            >
+            <button className="wl-btn-primary-text" onClick={handleCancel}>
               Cancel
-            </Button>
-            <Button
-              variant="white"
-              size="sm"
-              className="view-action-btn view-reset-btn"
-              onClick={handleReset}
-            >
+            </button>
+            <button className="wl-btn-primary-outline" onClick={handleReset}>
               Reset
-            </Button>
-            <Button
-              variant="primary"
-              size="sm"
-              className="view-action-btn view-save-btn"
-              onClick={handleSave}
-            >
+            </button>
+            <button className="wl-btn-primary" onClick={handleSave}>
               Save
-            </Button>
+            </button>
           </div>
         </div>
 
         {/* Show All Option */}
-        <div className="view-show-all">
-          <Form.Check
-            type="checkbox"
-            id="show-all-columns"
-            checked={allVisible}
-            onChange={handleShowAllToggle}
-            className="view-checkbox"
-          />
-          <Form.Check.Label
-            htmlFor="show-all-columns"
-            className="view-checkbox-label"
-          >
-            Show All
-          </Form.Check.Label>
+        <div className="d-flex border-bottom p-1">
+          <div className="view-show-all w-100">
+            <Form.Check
+              className="d-flex"
+              type="checkbox"
+              id="show-all-columns"
+              checked={allVisible}
+              onChange={handleShowAllToggle}
+            />
+            <Form.Check.Label
+              htmlFor="show-all-columns"
+              className="view-checkbox-label"
+            >
+              Show All
+            </Form.Check.Label>
+          </div>
         </div>
 
         {/* Column Options */}

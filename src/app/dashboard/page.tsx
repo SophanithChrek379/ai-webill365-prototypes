@@ -549,16 +549,24 @@ export default function DashboardPage() {
               </div>
 
               <div className="d-flex gap-3 align-items-center">
-                <Button
-                  variant="primary"
-                  outline
-                  size="sm"
-                  className="view-btn"
+                <button
+                  className="wl-btn-primary-outline"
                   onClick={() => setShowViewSettings(true)}
                 >
-                  <i className="bi bi-grid me-1"></i>
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="16"
+                    height="16"
+                    viewBox="0 0 16 16"
+                    fill="none"
+                  >
+                    <path
+                      d="M2.56055 14.3447C1.18945 14.3447 0.478516 13.6401 0.478516 12.2881V4.55664C0.478516 3.19824 1.18945 2.5 2.56055 2.5H13.4341C14.8052 2.5 15.5161 3.20459 15.5161 4.55664V12.2881C15.5161 13.6401 14.8052 14.3447 13.4341 14.3447H2.56055ZM2.63672 13.1006H5.09326V3.73779H2.63672C2.04639 3.73779 1.72266 4.04883 1.72266 4.66455V12.1802C1.72266 12.7959 2.04639 13.1006 2.63672 13.1006ZM6.31201 13.1006H9.68262V3.73779H6.31201V13.1006ZM13.3579 3.73779H10.9014V13.1006H13.3579C13.9419 13.1006 14.272 12.7959 14.272 12.1802V4.66455C14.272 4.04883 13.9419 3.73779 13.3579 3.73779Z"
+                      fill="currentColor"
+                    />
+                  </svg>
                   View
-                </Button>
+                </button>
                 <Input
                   type="search"
                   placeholder="Search name, tax id, email, user id"
@@ -571,17 +579,6 @@ export default function DashboardPage() {
                 />
               </div>
             </div>
-
-            {/* Bulk Actions */}
-            {selectedRows.size > 0 && (
-              <BulkActions
-                selectedCount={selectedRows.size}
-                totalCount={currentSubscribers.length}
-                actions={bulkActions}
-                onSelectAll={handleSelectAll}
-                onClearSelection={handleClearSelection}
-              />
-            )}
 
             {/* Activities Table */}
             <div className="activities-table">

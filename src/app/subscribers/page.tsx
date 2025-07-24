@@ -556,7 +556,7 @@ export default function SubscribersPage() {
             </div>
 
             {/* Bulk Actions */}
-            {selectedRows.size > 0 && (
+            {/* {selectedRows.size > 0 && (
               <BulkActions
                 selectedCount={selectedRows.size}
                 totalCount={currentSubscribers.length}
@@ -564,7 +564,7 @@ export default function SubscribersPage() {
                 onSelectAll={handleSelectAll}
                 onClearSelection={handleClearSelection}
               />
-            )}
+            )} */}
 
             {/* Activities Table */}
             <div className="activities-table">
