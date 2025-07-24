@@ -1,166 +1,199 @@
-'use client';
+"use client";
 
-import { Container, Row, Col, Button, Alert, Badge } from 'react-bootstrap';
-import { useState } from 'react';
-import Header from '@/components/Header';
-import Footer from '@/components/Footer';
-import FeatureCard from '@/components/FeatureCard';
+import { useState } from "react";
+import Image from "next/image";
+import { Container, Row, Col, Dropdown, Button } from "react-bootstrap";
+import LoginForm from "@/components/LoginForm";
+
+interface LanguageOption {
+  code: string;
+  name: string;
+  flag: string;
+  nativeName: string;
+}
 
 export default function Home() {
-  const [showAlert, setShowAlert] = useState(true);
+  const [isLoading, setIsLoading] = useState(false);
+  const [selectedLanguage, setSelectedLanguage] = useState<LanguageOption>({
+    code: "en",
+    name: "English",
+    flag: "/assets/flag/united-kingdom-flag-icon.svg",
+    nativeName: "English",
+  });
 
-  const features = [
+  const languages: LanguageOption[] = [
     {
-      title: "Fast Processing",
-      description: "Lightning-fast billing processing with real-time updates and instant notifications.",
-      icon: "bi-lightning-charge",
-      iconColor: "primary",
-      buttonVariant: "outline-primary"
+      code: "en",
+      name: "English",
+      flag: "/assets/flag/united-kingdom-flag-icon.svg",
+      nativeName: "English",
     },
     {
-      title: "Secure & Reliable",
-      description: "Enterprise-grade security with end-to-end encryption and compliance standards.",
-      icon: "bi-shield-check",
-      iconColor: "success",
-      buttonVariant: "outline-success"
+      code: "km",
+      name: "Khmer",
+      flag: "/assets/flag/cambodia-flag-icon.svg",
+      nativeName: "ខ្មែរ",
     },
     {
-      title: "Analytics & Insights",
-      description: "Powerful analytics dashboard with detailed reports and business insights.",
-      icon: "bi-graph-up",
-      iconColor: "info",
-      buttonVariant: "outline-info"
-    }
+      code: "ko",
+      name: "Korean",
+      flag: "/assets/flag/south-korean-flag-icon.svg",
+      nativeName: "한국어",
+    },
+    {
+      code: "zh",
+      name: "Chinese",
+      flag: "/assets/flag/china-flag-icon.svg",
+      nativeName: "中文",
+    },
   ];
 
-  const handleFeatureClick = (featureTitle: string) => {
-    console.log(`Feature clicked: ${featureTitle}`);
-    // Add your feature click logic here
+  const handleLanguageChange = (language: LanguageOption) => {
+    setSelectedLanguage(language);
+    // Here you can add logic to change the application language
+    console.log("Language changed to:", language);
+    // Example: You could dispatch a language change action here
+    // dispatch(changeLanguage(language.code));
+    // Example: You could update localStorage
+    // localStorage.setItem('preferredLanguage', language.code);
+  };
+
+  const handleLogin = async (formData: {
+    username: string;
+    password: string;
+  }) => {
+    setIsLoading(true);
+    try {
+      // Handle admin login logic here
+      console.log("Admin login attempt:", formData);
+      // Simulate API call
+      await new Promise((resolve) => setTimeout(resolve, 1000));
+    } catch (error) {
+      console.error("Admin login error:", error);
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   return (
-    <>
-      <Header />
-      
-      <Container>
-        {/* Welcome Alert */}
-        {showAlert && (
-          <Alert variant="info" dismissible onClose={() => setShowAlert(false)}>
-            <Alert.Heading>
-              <i className="bi bi-info-circle me-2"></i>
-              Welcome to AI WeBill365!
-            </Alert.Heading>
-            <p>
-              This is a Next.js application built with Bootstrap 5.3.3 and React Bootstrap components.
-              The setup follows best practices for modern web development.
-            </p>
-          </Alert>
-        )}
-
-        {/* Hero Section */}
-        <Row className="mb-5">
-          <Col lg={8} md={12}>
-            <h1 className="display-4 fw-bold">
-              AI-Powered Billing Solution
-              <Badge bg="primary" className="ms-2">v2.0</Badge>
-            </h1>
-            <p className="lead">
-              Streamline your billing process with our intelligent automation platform.
-              Built with Next.js, Bootstrap, and modern web technologies.
-            </p>
-            <div className="d-grid gap-2 d-md-flex justify-content-md-start">
-              <Button variant="primary" size="lg" className="me-md-2">
-                <i className="bi bi-rocket-takeoff me-2"></i>
-                Get Started
-              </Button>
-              <Button variant="outline-secondary" size="lg">
-                <i className="bi bi-play-circle me-2"></i>
-                Watch Demo
-              </Button>
-            </div>
-          </Col>
-          <Col lg={4} md={12} className="d-flex align-items-center justify-content-center">
-            <div className="text-center">
-              <div className="bg-light rounded p-4 shadow-sm">
-                <i className="bi bi-speedometer2 text-primary fs-1 mb-3"></i>
-                <h3>Quick Stats</h3>
-                <p className="h2 text-primary">99.9%</p>
-                <p className="text-muted">Uptime</p>
-                <div className="row text-center">
-                  <div className="col-6">
-                    <p className="h5 text-success">10K+</p>
-                    <small className="text-muted">Users</small>
-                  </div>
-                  <div className="col-6">
-                    <p className="h5 text-info">50M+</p>
-                    <small className="text-muted">Transactions</small>
-                  </div>
+    <div className="admin-login-page">
+      <Container fluid className="h-100 d-flex flex-column">
+        {/* Header with Language Selector */}
+        <Row className="flex-grow-0 py-4">
+          <Col className="d-flex justify-content-end">
+            <Dropdown>
+              <Dropdown.Toggle
+                variant="light"
+                className="language-dropdown border rounded"
+                id="language-dropdown"
+              >
+                <div className="d-flex align-items-center gap-2">
+                  <Image
+                    src={selectedLanguage.flag}
+                    alt={selectedLanguage.name}
+                    width={16}
+                    height={16}
+                  />
+                  <span>{selectedLanguage.nativeName}</span>
+                  <Image
+                    src="/assets/images/arrow-down.svg"
+                    alt=""
+                    width={14}
+                    height={14}
+                    className="ms-1"
+                  />
                 </div>
+              </Dropdown.Toggle>
+
+              <Dropdown.Menu className="language-dropdown-menu">
+                {languages.map((language) => (
+                  <Dropdown.Item
+                    key={language.code}
+                    onClick={() => handleLanguageChange(language)}
+                    className="language-dropdown-item"
+                  >
+                    <div className="d-flex align-items-center gap-2">
+                      <Image
+                        src={language.flag}
+                        alt={language.name}
+                        width={16}
+                        height={16}
+                      />
+                      <span>{language.nativeName}</span>
+                    </div>
+                  </Dropdown.Item>
+                ))}
+              </Dropdown.Menu>
+            </Dropdown>
+          </Col>
+        </Row>
+
+        {/* Main Content */}
+        <Row className="flex-grow-1 d-flex align-items-center justify-content-center">
+          <Col xs={12} sm={10} md={8} lg={6} xl={5} xxl={4}>
+            <div className="admin-login-container">
+              {/* Logo Section */}
+              <div className="text-center mb-5">
+                <div className="logo-container mb-3">
+                  <Image
+                    src="/assets/images/project-logo.svg"
+                    alt="WeBill365 Logo"
+                    width={260}
+                    height={45}
+                    priority
+                    className="img-fluid"
+                  />
+                </div>
+                <h2 className="admin-tagline mb-0">Simple. Smart. Secured.</h2>
               </div>
+              {/* Login Form Component */}
+              <LoginForm
+                onSubmit={handleLogin}
+                isLoading={isLoading}
+                isAdmin={true}
+              />
             </div>
           </Col>
         </Row>
 
-        {/* Features Section */}
-        <Row className="mb-5">
-          <Col>
-            <h2 className="text-center mb-4">
-              <i className="bi bi-star me-2"></i>
-              Key Features
-            </h2>
-          </Col>
-        </Row>
-        <Row className="g-4 mb-5">
-          {features.map((feature, index) => (
-            <Col md={4} key={index}>
-              <FeatureCard
-                title={feature.title}
-                description={feature.description}
-                icon={feature.icon}
-                iconColor={feature.iconColor}
-                buttonVariant={feature.buttonVariant}
-                onButtonClick={() => handleFeatureClick(feature.title)}
-              />
-            </Col>
-          ))}
-        </Row>
-
-        {/* Technology Stack */}
-        <Row className="mb-5">
-          <Col>
-            <div className="bg-light rounded p-4 text-center">
-              <h3>
-                <i className="bi bi-gear me-2"></i>
-                Built with Modern Technologies
-              </h3>
-              <div className="d-flex flex-wrap justify-content-center gap-3 mt-3">
-                <Badge bg="dark" className="fs-6 px-3 py-2">
-                  <i className="bi bi-lightning me-1"></i>
-                  Next.js 15
-                </Badge>
-                <Badge bg="primary" className="fs-6 px-3 py-2">
-                  <i className="bi bi-box me-1"></i>
-                  React 19
-                </Badge>
-                <Badge bg="success" className="fs-6 px-3 py-2">
-                  <i className="bi bi-filetype-ts me-1"></i>
-                  TypeScript
-                </Badge>
-                <Badge bg="info" className="fs-6 px-3 py-2">
-                  <i className="bi bi-bootstrap me-1"></i>
-                  Bootstrap 5.3.3
-                </Badge>
-                <Badge bg="warning" className="fs-6 px-3 py-2">
-                  <i className="bi bi-boxes me-1"></i>
-                  React Bootstrap
-                </Badge>
-              </div>
+        {/* Footer Links */}
+        <Row className="flex-grow-0 py-4">
+          <Col className="d-flex justify-content-center">
+            <div className="admin-footer-links">
+              <Button variant="link" className="footer-link">
+                <Image
+                  src="/assets/images/lock-icon.svg"
+                  alt=""
+                  width={16}
+                  height={16}
+                  className="me-1"
+                />
+                Forgot Password
+              </Button>
+              <Button variant="link" className="footer-link">
+                <Image
+                  src="/assets/images/help-icon.svg"
+                  alt=""
+                  width={16}
+                  height={16}
+                  className="me-1"
+                />
+                Help Center
+              </Button>
+              <Button variant="link" className="footer-link">
+                <Image
+                  src="/assets/images/privacy-icon.svg"
+                  alt=""
+                  width={16}
+                  height={16}
+                  className="me-1"
+                />
+                Privacy Policy
+              </Button>
             </div>
           </Col>
         </Row>
       </Container>
-
-      <Footer />
-    </>
+    </div>
   );
 }
