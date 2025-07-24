@@ -1,6 +1,7 @@
 import React from "react";
 import { Dropdown } from "react-bootstrap";
 import { useRouter } from "next/navigation";
+import Image from "next/image";
 
 interface UserProfileMenuItem {
   id: string;
@@ -18,12 +19,12 @@ interface UserProfileDropdownProps {
   children?: React.ReactNode; // For the trigger element
 }
 
-const UserProfileDropdown: React.FC<UserProfileDropdownProps> = ({ 
-  items = [], 
-  show, 
-  onHide, 
-  className = "", 
-  children 
+const UserProfileDropdown: React.FC<UserProfileDropdownProps> = ({
+  items = [],
+  show,
+  onHide,
+  className = "",
+  children,
 }) => {
   const router = useRouter();
 
@@ -90,7 +91,9 @@ const UserProfileDropdown: React.FC<UserProfileDropdownProps> = ({
           >
             <div className="user-profile-item-content">
               <div className="user-profile-item-icon">
-                <img
+                <Image
+                  width={16}
+                  height={16}
                   src={item.icon}
                   alt={item.label}
                   className="user-profile-icon"
@@ -105,4 +108,4 @@ const UserProfileDropdown: React.FC<UserProfileDropdownProps> = ({
   );
 };
 
-export default UserProfileDropdown; 
+export default UserProfileDropdown;

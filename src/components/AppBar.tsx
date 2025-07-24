@@ -1,32 +1,32 @@
-'use client';
+"use client";
 
-import React, { useState } from 'react';
-import { Navbar, Nav, Badge, Image } from 'react-bootstrap';
-import UserProfileDropdown from './UserProfileDropdown';
+import React, { useState } from "react";
+import { Navbar, Nav, Badge, Image } from "react-bootstrap";
+import UserProfileDropdown from "./UserProfileDropdown";
 
 interface AppBarProps {
   className?: string;
 }
 
-const AppBar: React.FC<AppBarProps> = ({ className = '' }) => {
+const AppBar: React.FC<AppBarProps> = ({ className = "" }) => {
   const [notificationCount] = useState(99);
 
   const handleNotificationClick = () => {
-    console.log('Notification clicked');
+    console.log("Notification clicked");
     // Here you would typically show a notification panel
   };
 
   const handleUserMenuClick = (action: string) => {
-    console.log('User menu action:', action);
+    console.log("User menu action:", action);
     switch (action) {
-      case 'profile':
-        console.log('Profile page would open');
+      case "profile":
+        console.log("Profile page would open");
         break;
-      case 'settings':
-        console.log('Settings page would open');
+      case "settings":
+        console.log("Settings page would open");
         break;
-      case 'logout':
-        console.log('Logout would be triggered');
+      case "logout":
+        console.log("Logout would be triggered");
         break;
       default:
         break;
@@ -37,20 +37,20 @@ const AppBar: React.FC<AppBarProps> = ({ className = '' }) => {
   const userProfileItems = [
     {
       id: "profile",
-      label: "Profile",
+      label: "Krong Kampuchea",
       icon: "/assets/images/user-icon.svg",
       path: "#",
     },
     {
       id: "settings",
       label: "Settings",
-      icon: "/assets/images/user-icon.svg",
+      icon: "/assets/images/setting-icon.svg",
       path: "#",
     },
     {
       id: "logout",
       label: "Logout",
-      icon: "/assets/images/user-icon.svg",
+      icon: "/assets/images/logout-icon.svg",
       path: "/",
     },
   ];
@@ -60,10 +60,13 @@ const AppBar: React.FC<AppBarProps> = ({ className = '' }) => {
       <div className="app-bar-container">
         <div className="app-bar-content">
           <div className="app-bar-spacer"></div>
-          
+
           <div className="app-bar-actions">
             <div className="notification-container">
-              <div className="notification-icon" onClick={handleNotificationClick}>
+              <div
+                className="notification-icon"
+                onClick={handleNotificationClick}
+              >
                 <Image
                   src="/assets/images/bell-icon.svg"
                   alt="Notifications"
@@ -73,12 +76,12 @@ const AppBar: React.FC<AppBarProps> = ({ className = '' }) => {
                 />
                 {notificationCount > 0 && (
                   <Badge className="notification-badge">
-                    {notificationCount > 99 ? '99+' : notificationCount}
+                    {notificationCount > 99 ? "99+" : notificationCount}
                   </Badge>
                 )}
               </div>
             </div>
-            
+
             <div className="user-avatar">
               <UserProfileDropdown items={userProfileItems}>
                 <Image
@@ -97,4 +100,4 @@ const AppBar: React.FC<AppBarProps> = ({ className = '' }) => {
   );
 };
 
-export default AppBar; 
+export default AppBar;
