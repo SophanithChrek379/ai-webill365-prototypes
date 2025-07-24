@@ -463,7 +463,8 @@ table {
 }
 
 // TODO: Language Dropdown
-.btn.show {
+.btn.show,
+.btn:first-child:active {
   background-color: #fff;
 }
 
@@ -2406,59 +2407,102 @@ table {
 }
 
 .page-size-toggle {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
   min-width: 64px;
   height: 32px;
   padding: 8px;
   background: #fff;
-  border: 1px solid rgba(0, 0, 0, 0.17);
-  border-radius: 6px;
-  box-shadow: 0px 1px 1px 0px rgba(0, 0, 0, 0.15),
-    0px 2px 3px 0px rgba(0, 0, 0, 0.08);
-
+  border: none;
+  background-color: var(--Button-Primary-Outlined-BTN-OUTL-NORMAL, #fff);
+  color: var(--Forgrounds-FG-TITLE, #171717);
+  box-shadow: var(--Outline-Button-Default-First-X-0, 0px)
+      var(--Outline-Button-Default-First-Y-0, 0px)
+      var(--Outline-Button-Default-First-B-0, 0px)
+      var(--Outline-Button-Default-First-S-0, 1px)
+      var(--Outline-Button-Default-First-Color, rgba(0, 0, 0, 0.17)),
+    var(--Outline-Button-Default-Second-X-0, 0px)
+      var(--Outline-Button-Default-Second-Y-0, 1px)
+      var(--Outline-Button-Default-Second-B-0, 1px)
+      var(--Outline-Button-Default-Second-S-0, 0px)
+      var(--Outline-Button-Default-Second-Color, rgba(0, 0, 0, 0.15)),
+    var(--Outline-Button-Default-Third-X-0, 0px)
+      var(--Outline-Button-Default-Third-Y-0, 2px)
+      var(--Outline-Button-Default-Third-B-0, 3px)
+      var(--Outline-Button-Default-Third-S-0, 0px)
+      var(--Outline-Button-Default-Third-Color, rgba(0, 0, 0, 0.08));
   font-weight: 500;
   font-size: 14px;
   line-height: 16px;
-  color: #171717;
-}
-
-.page-size-toggle:hover,
-.page-size-toggle:focus {
-  background: #fff;
-  border-color: rgba(0, 0, 0, 0.17);
-  box-shadow: 0px 1px 1px 0px rgba(0, 0, 0, 0.15),
-    0px 2px 3px 0px rgba(0, 0, 0, 0.08);
-}
-
-.dropdown-arrow {
   display: flex;
   align-items: center;
-  justify-content: center;
-  width: 14px;
-  height: 14px;
-  margin-left: 8px;
+  justify-content: space-between;
+
+  &:focus,
+  &:active {
+    background-color: var(--Button-Primary-Outlined-BTN-OUTL-PRESSED, #fafafa);
+    box-shadow: var(--Outline-Button-Pressed-First-X-0, 0px)
+        var(--Outline-Button-Pressed-First-Y-0, 0px)
+        var(--Outline-Button-Pressed-First-B-0, 1px)
+        var(--Outline-Button-Pressed-First-S-0, 1px)
+        var(--Outline-Button-Pressed-First-Color, rgba(105, 114, 129, 0.16)),
+      var(--Outline-Button-Pressed-Secord-X-0, 0px)
+        var(--Outline-Button-Pressed-Secord-Y-0, 0px)
+        var(--Outline-Button-Pressed-Secord-B-0, 0px)
+        var(--Outline-Button-Pressed-Secord-S-0, 4px)
+        var(--Outline-Button-Pressed-Secord-Colors, #d0d5dc);
+  }
+}
+
+.page-size-toggle:hover {
+  background-color: var(--Button-Primary-Outlined-BTN-OUTL-HOVER, #f5f5f5);
+  box-shadow: var(--Outline-Button-Hover-First-X-0, 0px)
+      var(--Outline-Button-Hover-First-Y-0, 0px)
+      var(--Outline-Button-Hover-First-B-0, 0px)
+      var(--Outline-Button-Hover-First-S-0, 1px)
+      var(--Outline-Button-Hover-First-Color, rgba(0, 0, 0, 0.25)),
+    var(--Outline-Button-Hover-Secord-X-0, 0px)
+      var(--Outline-Button-Hover-Secord-Y-0, 1px)
+      var(--Outline-Button-Hover-Secord-B-0, 1px)
+      var(--Outline-Button-Hover-Secord-S-0, 0px)
+      var(--Outline-Button-Hover-Secord-Color, rgba(0, 0, 0, 0.15)),
+    var(--Outline-Button-Hover-Third-X-0, 0px)
+      var(--Outline-Button-Hover-Third-Y-0, 2px)
+      var(--Outline-Button-Hover-Third-B-0, 4px)
+      var(--Outline-Button-Hover-Third-S-0, 0px)
+      var(--Outline-Button-Hover-Third-Color, rgba(0, 0, 0, 0.16));
 }
 
 .page-size-menu {
   min-width: 64px;
-  padding: 4px 0;
-  background: #fff;
-  border: 1px solid rgba(0, 0, 0, 0.17);
-  border-radius: 6px;
-  box-shadow: 0px 4px 6px 0px rgba(0, 0, 0, 0.1);
+  margin: 5px 0;
+  padding: 4px;
+  border-radius: var(--WLDS-Radius-8, 0.5rem);
+  background-color: var(--Backgrounds-BG-NORMAL, #fff);
+  border: none;
+  box-shadow: var(--Menu-First-X-0, 0px) var(--Menu-First-Y-0, 1px)
+      var(--Menu-First-B-0, 1px) var(--Menu-First-S-0, 0px)
+      var(--Menu-First-Color, rgba(0, 0, 0, 0.1)),
+    var(--Menu-Secord-X-0, 0px) var(--Menu-Secord-Y-0, 0px)
+      var(--Menu-Secord-B-0, 2px) var(--Menu-Secord-S-0, 0px)
+      var(--Menu-Secord-Color, rgba(0, 0, 0, 0.1)),
+    var(--Menu-Third-X-0, 0px) var(--Menu-Third-Y-0, 6px)
+      var(--Menu-Third-B-0, 20px) var(--Menu-Third-S-0, 0px)
+      var(--Menu-Third-Color, rgba(0, 0, 0, 0.1));
 }
 
 .page-size-menu .dropdown-item {
-  padding: 8px 12px;
-
+  padding: 8px;
+  margin-bottom: 0.125rem;
+  border-radius: 4px;
   font-weight: 500;
   font-size: 14px;
   line-height: 16px;
   color: #171717;
   background: transparent;
   border: none;
+
+  &:last-child {
+    margin-bottom: 0px;
+  }
 }
 
 .page-size-menu .dropdown-item:hover {

@@ -125,14 +125,13 @@ export default function LoginForm({
       </Form.Group>
 
       {/* btn-login  */}
-      <Button
+      <button
         type="submit"
-        className="w-100 wl-btn-lg mb-4"
-        size="lg"
+        className="w-100 wl-btn-lg wl-btn-primary mb-4"
         disabled={isLoading}
       >
         {isLoading ? "Logging in..." : "Log in"}
-      </Button>
+      </button>
     </Form>
   );
 }

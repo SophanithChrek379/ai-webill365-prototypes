@@ -80,7 +80,9 @@ export default function Home() {
                     width={16}
                     height={16}
                   />
-                  <span>{selectedLanguage.nativeName}</span>
+                  <span className="fw-medium">
+                    {selectedLanguage.nativeName}
+                  </span>
                 </div>
                 <Image
                   src="/assets/images/arrow-down.svg"
