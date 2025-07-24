@@ -703,3 +703,100 @@ $menu-height-large: 54px;
     }
   }
 }
+
+// User Profile Dropdown Component Styles
+.user-profile-dropdown {
+  background: #ffffff;
+  border: none;
+  border-radius: 8px;
+  box-shadow: 
+    0px 1px 1px 0px rgba(0, 0, 0, 0.1),
+    0px 0px 2px 0px rgba(0, 0, 0, 0.1),
+    0px 6px 20px 0px rgba(0, 0, 0, 0.1);
+  padding: 4px;
+  min-width: 200px;
+  margin: 8px 0;
+  
+  .user-profile-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    height: 32px;
+    padding: 0 8px;
+    border-radius: 4px;
+    border: none;
+    background: transparent;
+    transition: background-color 0.2s ease;
+    margin-bottom: 2px;
+    cursor: pointer;
+    position: relative;
+    z-index: 1;
+    
+    &:last-child {
+      margin-bottom: 0;
+    }
+    
+    &:hover {
+      background-color: rgba(15, 31, 234, 0.1);
+    }
+    
+    &:focus {
+      background-color: rgba(15, 31, 234, 0.1);
+      box-shadow: none;
+    }
+    
+    &:active {
+      background-color: rgba(15, 31, 234, 0.2);
+    }
+    
+    .user-profile-item-content {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      width: 100%;
+      pointer-events: none; // Prevent content from interfering with clicks
+    }
+    
+    .user-profile-item-icon {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 16px;
+      height: 16px;
+      background: rgba(15, 31, 234, 0.1);
+      border-radius: 10px;
+      border: 1px solid rgba(0, 0, 0, 0.1);
+      flex-shrink: 0;
+      
+      .user-profile-icon {
+        width: 17px;
+        height: 17px;
+        object-fit: contain;
+      }
+    }
+    
+    .user-profile-item-label {
+      font-family: 'Inter', sans-serif;
+      font-weight: 500;
+      font-size: 14px;
+      line-height: 16px;
+      color: #171717;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      flex-grow: 1;
+    }
+  }
+}
+
+// User profile toggle button
+.user-profile-toggle {
+  cursor: pointer;
+  border: none;
+  background: transparent;
+  padding: 0;
+  
+  &:focus {
+    box-shadow: none;
+  }
+}

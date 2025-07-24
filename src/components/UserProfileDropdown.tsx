@@ -1,11 +1,13 @@
 import React from "react";
-import { Dropdown, DropdownMenu, DropdownItem } from "react-bootstrap";
+import { Dropdown } from "react-bootstrap";
+import { useRouter } from "next/navigation";
 
 interface UserProfileMenuItem {
   id: string;
   label: string;
   icon: string;
   onClick?: () => void;
+  path?: string; // Navigation path
 }
 
 interface UserProfileDropdownProps {
@@ -23,14 +25,18 @@ const UserProfileDropdown: React.FC<UserProfileDropdownProps> = ({
   className = "", 
   children 
 }) => {
+  const router = useRouter();
+
   // Default menu items if none provided
   const defaultItems: UserProfileMenuItem[] = [
     {
       id: "profile",
       label: "Profile",
       icon: "/assets/images/user-icon.svg",
+      path: "/profile",
       onClick: () => {
         console.log("Profile clicked");
+        router.push("/profile");
         onHide?.();
       },
     },
@@ -38,8 +44,10 @@ const UserProfileDropdown: React.FC<UserProfileDropdownProps> = ({
       id: "settings",
       label: "Settings",
       icon: "/assets/images/user-icon.svg",
+      path: "/settings",
       onClick: () => {
         console.log("Settings clicked");
+        router.push("/settings");
         onHide?.();
       },
     },
@@ -47,8 +55,11 @@ const UserProfileDropdown: React.FC<UserProfileDropdownProps> = ({
       id: "logout",
       label: "Logout",
       icon: "/assets/images/user-icon.svg",
+      path: "/login",
       onClick: () => {
         console.log("Logout clicked");
+        // You can add logout logic here (clear tokens, etc.)
+        router.push("/login");
         onHide?.();
       },
     },
@@ -61,12 +72,21 @@ const UserProfileDropdown: React.FC<UserProfileDropdownProps> = ({
       <Dropdown.Toggle as="div" className="user-profile-toggle">
         {children}
       </Dropdown.Toggle>
-      <DropdownMenu className="user-profile-dropdown">
+      <Dropdown.Menu className="user-profile-dropdown">
         {menuItems.map((item) => (
-          <DropdownItem
+          <Dropdown.Item
             key={item.id}
             className="user-profile-item"
-            onClick={item.onClick}
+            onClick={() => {
+              console.log(`Clicked on ${item.label} with path: ${item.path}`);
+              if (item.onClick) {
+                item.onClick();
+              } else if (item.path) {
+                console.log(`Navigating to: ${item.path}`);
+                router.push(item.path);
+                onHide?.();
+              }
+            }}
           >
             <div className="user-profile-item-content">
               <div className="user-profile-item-icon">
@@ -78,9 +98,9 @@ const UserProfileDropdown: React.FC<UserProfileDropdownProps> = ({
               </div>
               <span className="user-profile-item-label">{item.label}</span>
             </div>
-          </DropdownItem>
+          </Dropdown.Item>
         ))}
-      </DropdownMenu>
+      </Dropdown.Menu>
     </Dropdown>
   );
 };

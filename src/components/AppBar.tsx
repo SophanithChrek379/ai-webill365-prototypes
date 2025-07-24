@@ -39,19 +39,19 @@ const AppBar: React.FC<AppBarProps> = ({ className = '' }) => {
       id: "profile",
       label: "Profile",
       icon: "/assets/images/user-icon.svg",
-      onClick: () => handleUserMenuClick('profile'),
+      path: "#",
     },
     {
       id: "settings",
       label: "Settings",
       icon: "/assets/images/user-icon.svg",
-      onClick: () => handleUserMenuClick('settings'),
+      path: "#",
     },
     {
       id: "logout",
       label: "Logout",
       icon: "/assets/images/user-icon.svg",
-      onClick: () => handleUserMenuClick('logout'),
+      path: "/",
     },
   ];
 

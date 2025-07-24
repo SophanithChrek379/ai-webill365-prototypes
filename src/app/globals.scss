@@ -110,8 +110,7 @@ body {
   .modal-content {
     border-radius: 12px;
     box-shadow: 0px 6px 24px 0px rgba(0, 0, 0, 0.08),
-      0px 1px 6px 0px rgba(0, 0, 0, 0.08),
-      0px 0px 0px 1px rgba(0, 0, 0, 0.04);
+      0px 1px 6px 0px rgba(0, 0, 0, 0.08), 0px 0px 0px 1px rgba(0, 0, 0, 0.04);
     border: none;
   }
 
@@ -121,7 +120,6 @@ body {
   }
 
   .modal-title {
-    font-family: 'Inter', sans-serif;
     font-size: 20px;
     font-weight: 600;
     line-height: 28px;
@@ -140,7 +138,6 @@ body {
   }
 
   .form-label {
-    font-family: 'Inter', sans-serif;
     font-size: 14px;
     font-weight: 500;
     line-height: 16px;
@@ -150,7 +147,6 @@ body {
 
   .customer-detail-input,
   .customer-detail-select {
-    font-family: 'Inter', sans-serif;
     font-size: 14px;
     font-weight: 500;
     line-height: 16px;
@@ -176,7 +172,6 @@ body {
   }
 
   .customer-detail-btn-close {
-    font-family: 'Inter', sans-serif;
     font-size: 14px;
     font-weight: 500;
     line-height: 16px;
@@ -197,7 +192,6 @@ body {
   }
 
   .customer-detail-btn-reject {
-    font-family: 'Inter', sans-serif;
     font-size: 14px;
     font-weight: 500;
     line-height: 16px;
@@ -209,8 +203,7 @@ body {
     min-height: 32px;
     border-radius: 6px;
     box-shadow: 0px 1px 1px 0px rgba(236, 0, 42, 0.15),
-      0px 2px 3px 0px rgba(236, 0, 42, 0.1),
-      0px 0px 0px 1px #fea3a8;
+      0px 2px 3px 0px rgba(236, 0, 42, 0.1), 0px 0px 0px 1px #fea3a8;
   }
 
   .customer-detail-btn-reject:hover {
@@ -220,7 +213,6 @@ body {
   }
 
   .customer-detail-btn-approve {
-    font-family: 'Inter', sans-serif;
     font-size: 14px;
     font-weight: 500;
     line-height: 16px;
@@ -231,16 +223,14 @@ body {
     min-width: 32px;
     min-height: 32px;
     border-radius: 6px;
-    box-shadow: 0px 0px 0px 1px #1221c1,
-      0px 1px 1px 0px rgba(18, 33, 193, 0.5),
+    box-shadow: 0px 0px 0px 1px #1221c1, 0px 1px 1px 0px rgba(18, 33, 193, 0.5),
       0px 2px 3px 0px rgba(18, 33, 193, 0.1);
   }
 
   .customer-detail-btn-approve:hover {
     background-color: #3e60ff;
     border-color: #0f1fea;
-    box-shadow: 0px 0px 0px 1px #0f1fea,
-      0px 1px 1px 0px rgba(15, 31, 234, 0.5),
+    box-shadow: 0px 0px 0px 1px #0f1fea, 0px 1px 1px 0px rgba(15, 31, 234, 0.5),
       0px 2px 3px 0px rgba(18, 33, 193, 0.1);
   }
 }
@@ -3498,14 +3488,12 @@ table {
   background: #ffffff;
   border: none;
   border-radius: 8px;
-  box-shadow: 
-    0px 1px 1px 0px rgba(0, 0, 0, 0.1),
-    0px 0px 2px 0px rgba(0, 0, 0, 0.1),
-    0px 6px 20px 0px rgba(0, 0, 0, 0.1);
+  box-shadow: 0px 1px 1px 0px rgba(0, 0, 0, 0.1),
+    0px 0px 2px 0px rgba(0, 0, 0, 0.1), 0px 6px 20px 0px rgba(0, 0, 0, 0.1);
   padding: 4px;
   min-width: 200px;
   margin: 8px 0;
-  
+
   .user-profile-item {
     display: flex;
     align-items: center;
@@ -3517,27 +3505,27 @@ table {
     background: transparent;
     transition: background-color 0.2s ease;
     margin-bottom: 2px;
-    
+
     &:last-child {
       margin-bottom: 0;
     }
-    
+
     &:hover {
       background-color: rgba(15, 31, 234, 0.1);
     }
-    
+
     &:focus {
       background-color: rgba(15, 31, 234, 0.1);
       box-shadow: none;
     }
-    
+
     .user-profile-item-content {
       display: flex;
       align-items: center;
       gap: 8px;
       width: 100%;
     }
-    
+
     .user-profile-item-icon {
       display: flex;
       align-items: center;
@@ -3548,16 +3536,15 @@ table {
       border-radius: 10px;
       border: 1px solid rgba(0, 0, 0, 0.1);
       flex-shrink: 0;
-      
+
       .user-profile-icon {
         width: 17px;
         height: 17px;
         object-fit: contain;
       }
     }
-    
+
     .user-profile-item-label {
-      font-family: 'Inter', sans-serif;
       font-weight: 500;
       font-size: 14px;
       line-height: 16px;
@@ -3576,7 +3563,7 @@ table {
   border: none;
   background: transparent;
   padding: 0;
-  
+
   &:focus {
     box-shadow: none;
   }
