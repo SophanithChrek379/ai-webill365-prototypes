@@ -1,8 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
-import { Dropdown, Button } from "react-bootstrap";
-import Image from "next/image";
+import { Dropdown } from "react-bootstrap";
 
 interface PaginationProps {
   currentPage: number;

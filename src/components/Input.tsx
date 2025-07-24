@@ -60,7 +60,6 @@ const Input = forwardRef<HTMLInputElement, InputProps>(({
   className = '',
   inputClassName = ''
 }, ref) => {
-  const [isFocused, setIsFocused] = useState(false);
   const [inputValue, setInputValue] = useState(value);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -70,12 +69,10 @@ const Input = forwardRef<HTMLInputElement, InputProps>(({
   };
 
   const handleFocus = () => {
-    setIsFocused(true);
     onFocus?.();
   };
 
   const handleBlur = () => {
-    setIsFocused(false);
     onBlur?.();
   };
 

@@ -1,13 +1,13 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  output: 'export',
+  output: "export",
   trailingSlash: true,
-  experimental: {
-    optimizePackageImports: ['bootstrap', 'bootstrap-icons'],
+  images: {
+    unoptimized: true,
   },
   // Ensure Bootstrap assets are properly handled
-  transpilePackages: ['bootstrap', 'bootstrap-icons'],
+  transpilePackages: ["bootstrap", "bootstrap-icons"],
 };
 
 export default nextConfig;

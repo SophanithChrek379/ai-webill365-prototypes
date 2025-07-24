@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
-import { Navbar, Nav, Badge, Image } from "react-bootstrap";
+import { Navbar, Badge, Image } from "react-bootstrap";
 import UserProfileDropdown from "./UserProfileDropdown";
 
 interface AppBarProps {
@@ -16,22 +16,7 @@ const AppBar: React.FC<AppBarProps> = ({ className = "" }) => {
     // Here you would typically show a notification panel
   };
 
-  const handleUserMenuClick = (action: string) => {
-    console.log("User menu action:", action);
-    switch (action) {
-      case "profile":
-        console.log("Profile page would open");
-        break;
-      case "settings":
-        console.log("Settings page would open");
-        break;
-      case "logout":
-        console.log("Logout would be triggered");
-        break;
-      default:
-        break;
-    }
-  };
+
 
   // Custom menu items for the user profile dropdown
   const userProfileItems = [

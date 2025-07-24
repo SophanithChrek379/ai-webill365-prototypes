@@ -1,5 +1,5 @@
 import React from "react";
-import { Modal, Button, Form, Row, Col } from "react-bootstrap";
+import { Modal, Form, Row, Col } from "react-bootstrap";
 
 interface CustomerDetailModalProps {
   show: boolean;

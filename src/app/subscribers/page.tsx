@@ -1,12 +1,11 @@
 "use client";
 
 import React, { useState } from "react";
-import { Row, Col, Card, Badge, Table, Form, Modal } from "react-bootstrap";
+import { Row, Col, Card, Badge, Table, Form } from "react-bootstrap";
 import Sidebar from "../../components/Sidebar";
 import AppBar from "../../components/AppBar";
 import Pagination from "../../components/Pagination";
 import Input from "../../components/Input";
-import Button from "../../components/Button";
 import WLDateRangePicker from "@/components/WLDateRangePicker";
 import StatusDropdown, { StatusOption } from "../../components/StatusDropdown";
 import CustomerDetailModal from "../../components/CustomerDetailModal";
@@ -205,7 +204,6 @@ export default function SubscribersPage() {
   const [searchTerm, setSearchTerm] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
   const [itemsPerPage, setItemsPerPage] = useState(10);
-  const [showDatePicker, setShowDatePicker] = useState(false);
   const [previewModal, setPreviewModal] = useState<{
     show: boolean;
     subscriber: Record<string, unknown> | null;

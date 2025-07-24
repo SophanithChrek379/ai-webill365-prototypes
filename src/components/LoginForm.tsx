@@ -1,7 +1,6 @@
 "use client";
 
 import { useState } from "react";
-import Link from "next/link";
 import Image from "next/image";
 import { Form, Button } from "react-bootstrap";
 import { useRouter } from "next/navigation";
@@ -15,7 +14,6 @@ interface LoginFormProps {
 export default function LoginForm({
   onSubmit,
   isLoading = false,
-  isAdmin = false,
 }: LoginFormProps) {
   const [showPassword, setShowPassword] = useState(false);
   const router = useRouter();
@@ -86,7 +84,7 @@ export default function LoginForm({
             value={formData.password}
             onChange={handleInputChange}
             placeholder="Password"
-            className="form-control-custom"
+            className="form-control-custom wl-input-lg"
             required
             disabled={isLoading}
           />

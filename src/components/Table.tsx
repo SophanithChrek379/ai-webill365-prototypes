@@ -105,16 +105,7 @@ export default function Table({
     }
   };
 
-  const handleActionClick = (
-    action: string,
-    row: Record<string, unknown>,
-    event: React.MouseEvent
-  ) => {
-    event.stopPropagation();
-    if (onActionClick) {
-      onActionClick(action, row);
-    }
-  };
+
 
   const handleSelectionChange = (rowId: string, checked: boolean) => {
     if (onSelectionChange) {
@@ -271,7 +262,7 @@ export function ActionCell({
         <button
           key={action}
           className={`action-button action-${action}`}
-          onClick={(e) => onActionClick(action, row)}
+          onClick={() => onActionClick(action, row)}
           title={action.charAt(0).toUpperCase() + action.slice(1)}
         >
           <Image

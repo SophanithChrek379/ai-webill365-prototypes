@@ -1,6 +1,5 @@
 import React from "react";
 import { Dropdown } from "react-bootstrap";
-import Button from "./Button";
 
 export interface BulkAction {
   id: string;
@@ -27,7 +26,6 @@ const BulkActions: React.FC<BulkActionsProps> = ({
   onClearSelection,
   className = "",
 }) => {
-  const isAllSelected = selectedCount === totalCount;
   const hasSelection = selectedCount > 0;
 
   return (

@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React from "react";
 import { Nav } from "react-bootstrap";
 import { useRouter, usePathname } from "next/navigation";
 import Image from "next/image";

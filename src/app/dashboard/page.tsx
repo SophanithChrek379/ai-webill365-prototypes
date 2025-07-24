@@ -6,16 +6,13 @@ import Sidebar from "../../components/Sidebar";
 import AppBar from "../../components/AppBar";
 import Pagination from "../../components/Pagination";
 import Input from "../../components/Input";
-import Button from "../../components/Button";
 import WLDateRangePicker from "@/components/WLDateRangePicker";
 import StatusDropdown, { StatusOption } from "../../components/StatusDropdown";
 import CustomerDetailModal from "../../components/CustomerDetailModal";
 import ViewSettingsModal, {
   ColumnOption,
 } from "../../components/ViewSettingsModal";
-import BulkActions, { BulkAction } from "../../components/BulkActions";
 import { useLocalStorage } from "../../hooks/useLocalStorage";
-import { exportToCSV, formatDateForExport } from "../../utils/exportUtils";
 
 // Mock data for the dashboard
 const mockSubscribers = [
@@ -217,7 +214,6 @@ export default function DashboardPage() {
   const [searchTerm, setSearchTerm] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
   const [itemsPerPage, setItemsPerPage] = useState(10);
-  const [showDatePicker, setShowDatePicker] = useState(false);
   const [previewModal, setPreviewModal] = useState<{
     show: boolean;
     subscriber: Record<string, unknown> | null;
@@ -257,7 +253,7 @@ export default function DashboardPage() {
   );
 
   // Bulk selection state
-  const [selectedRows, setSelectedRows] = useState<Set<number>>(new Set());
+  const [selectedRows] = useState<Set<number>>(new Set());
 
   // Filter subscribers based on search term and selected statuses
   const filteredSubscribers = mockSubscribers.filter((subscriber) => {
@@ -329,16 +325,6 @@ export default function DashboardPage() {
   };
 
   // Bulk actions handlers
-  const handleRowSelection = (subscriberId: number) => {
-    const newSelectedRows = new Set(selectedRows);
-    if (newSelectedRows.has(subscriberId)) {
-      newSelectedRows.delete(subscriberId);
-    } else {
-      newSelectedRows.add(subscriberId);
-    }
-    setSelectedRows(newSelectedRows);
-  };
-
   // Customer detail modal handlers
   const handleApprove = (subscriber: Record<string, unknown>) => {
     console.log("Approving subscriber:", subscriber);
@@ -351,120 +337,6 @@ export default function DashboardPage() {
     // Here you would typically make an API call to reject the subscriber
     // For now, we'll just log the action
   };
-
-  const handleSelectAll = () => {
-    const allIds = new Set(
-      currentSubscribers.map((subscriber) => subscriber.id)
-    );
-    setSelectedRows(allIds);
-  };
-
-  const handleClearSelection = () => {
-    setSelectedRows(new Set());
-  };
-
-  const handleBulkAction = (action: BulkAction) => {
-    const selectedSubscribers = currentSubscribers.filter((subscriber) =>
-      selectedRows.has(subscriber.id)
-    );
-
-    switch (action.id) {
-      case "approve":
-        console.log("Bulk approve:", selectedSubscribers);
-        // Here you would typically make an API call
-        break;
-      case "reject":
-        console.log("Bulk reject:", selectedSubscribers);
-        break;
-      case "export":
-        console.log("Bulk export:", selectedSubscribers);
-        // Prepare data for export
-        const exportData = selectedSubscribers.map((subscriber) => ({
-          "Full Name": subscriber.fullName,
-          "Tax ID": subscriber.taxId,
-          "Mobile Number": subscriber.mobileNo,
-          Email: subscriber.email,
-          "User ID": subscriber.userId,
-          Plan: subscriber.plan,
-          "Subscription Date": formatDateForExport(subscriber.subscriptionDate),
-          "Last Login": subscriber.lastLogin,
-          Status: subscriber.status,
-        }));
-        exportToCSV(
-          exportData,
-          `subscribers-export-${new Date().toISOString().split("T")[0]}.csv`
-        );
-        break;
-      case "delete":
-        console.log("Bulk delete:", selectedSubscribers);
-        break;
-      default:
-        console.log("Unknown bulk action:", action.id);
-    }
-
-    // Clear selection after action
-    setSelectedRows(new Set());
-  };
-
-  // Bulk actions configuration
-  const bulkActions: BulkAction[] = [
-    {
-      id: "approve",
-      label: "Approve Selected",
-      icon: "bi-check-circle",
-      variant: "success",
-      onClick: () =>
-        handleBulkAction({
-          id: "approve",
-          label: "",
-          icon: "",
-          variant: "success",
-          onClick: () => {},
-        }),
-    },
-    {
-      id: "reject",
-      label: "Reject Selected",
-      icon: "bi-x-circle",
-      variant: "danger",
-      onClick: () =>
-        handleBulkAction({
-          id: "reject",
-          label: "",
-          icon: "",
-          variant: "danger",
-          onClick: () => {},
-        }),
-    },
-    {
-      id: "export",
-      label: "Export Selected",
-      icon: "bi-download",
-      variant: "primary",
-      onClick: () =>
-        handleBulkAction({
-          id: "export",
-          label: "",
-          icon: "",
-          variant: "primary",
-          onClick: () => {},
-        }),
-    },
-    {
-      id: "delete",
-      label: "Delete Selected",
-      icon: "bi-trash",
-      variant: "danger",
-      onClick: () =>
-        handleBulkAction({
-          id: "delete",
-          label: "",
-          icon: "",
-          variant: "danger",
-          onClick: () => {},
-        }),
-    },
-  ];
 
   return (
     <div className="admin-layout">

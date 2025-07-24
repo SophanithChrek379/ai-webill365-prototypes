@@ -17,7 +17,6 @@ import {
 } from "@dnd-kit/sortable";
 import { useSortable } from "@dnd-kit/sortable";
 import { CSS } from "@dnd-kit/utilities";
-import Button from "./Button";
 
 export interface ColumnOption {
   id: string;
@@ -176,7 +175,6 @@ const ViewSettingsModal: React.FC<ViewSettingsModalProps> = ({
     onReset?.();
   };
 
-  const selectedCount = localColumns.filter((column) => column.visible).length;
   const allVisible = localColumns.every((column) => column.visible);
 
   return (
