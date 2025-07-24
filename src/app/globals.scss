@@ -16,8 +16,8 @@
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
+  // background: var(--background);
+  // color: var(--foreground);
   font-family: var(--font-inter), var(--font-kantumruy-pro),
     var(--font-noto-sans-kr), sans-serif;
   font-size: 16px;
@@ -390,6 +390,7 @@ table {
 
 /* Admin Login Page Styles - Mobile First */
 .admin-login-page {
+  width: 100%;
   min-height: 100vh;
   background-color: #ffffff;
   display: flex;
@@ -2151,7 +2152,6 @@ table {
 /* Activities Section */
 .activities-section {
   background-color: #ffffff;
-  border-radius: 0.75rem;
   padding: 1.5rem;
 }
 
