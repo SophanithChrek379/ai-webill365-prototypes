@@ -38,7 +38,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="en" wlds-color-mode="webill365" wlds-theme-mode="light">
       <body
         className={`${inter.variable} ${kantumruyPro.variable} ${notoSansKR.variable}`}
       >

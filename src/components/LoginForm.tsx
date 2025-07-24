@@ -62,7 +62,7 @@ export default function LoginForm({
             value={formData.username}
             onChange={handleInputChange}
             placeholder="ID or Mobile Number"
-            className="form-control-custom"
+            className="form-control-custom wl-input-lg"
             required
             disabled={isLoading}
           />
@@ -93,7 +93,7 @@ export default function LoginForm({
           <Button
             type="button"
             variant="link"
-            className="password-toggle-btn p-0"
+            className="password-toggle-btn p-0 wl-btn-icon"
             onClick={() => setShowPassword(!showPassword)}
             disabled={isLoading}
           >
@@ -113,19 +113,21 @@ export default function LoginForm({
 
       <Form.Group className="mb-4">
         <Form.Check
+          id="remember-me-checkbox-id"
           type="checkbox"
           name="rememberMe"
           checked={formData.rememberMe}
           onChange={handleInputChange}
           label="Remember Me"
-          className="remember-me-checkbox"
+          className="wl-checkbox-md"
           disabled={isLoading}
         />
       </Form.Group>
 
+      {/* btn-login  */}
       <Button
         type="submit"
-        className="btn-login w-100 mb-4"
+        className="w-100 wl-btn-lg mb-4"
         size="lg"
         disabled={isLoading}
       >

@@ -32,19 +32,13 @@ export default function Home() {
       code: "km",
       name: "Khmer",
       flag: "/assets/flag/cambodia-flag-icon.svg",
-      nativeName: "ខ្មែរ",
+      nativeName: "ភាសាខ្មែរ",
     },
     {
       code: "ko",
       name: "Korean",
       flag: "/assets/flag/south-korean-flag-icon.svg",
       nativeName: "한국어",
-    },
-    {
-      code: "zh",
-      name: "Chinese",
-      flag: "/assets/flag/china-flag-icon.svg",
-      nativeName: "中文",
     },
   ];
 
@@ -76,7 +70,7 @@ export default function Home() {
             <Dropdown>
               <Dropdown.Toggle
                 variant="light"
-                className="language-dropdown border rounded"
+                className="language-dropdown border rounded d-flex justify-content-between align-items-center"
                 id="language-dropdown"
               >
                 <div className="d-flex align-items-center gap-2">
@@ -87,14 +81,14 @@ export default function Home() {
                     height={16}
                   />
                   <span>{selectedLanguage.nativeName}</span>
-                  <Image
-                    src="/assets/images/arrow-down.svg"
-                    alt=""
-                    width={14}
-                    height={14}
-                    className="ms-1"
-                  />
                 </div>
+                <Image
+                  src="/assets/images/arrow-down.svg"
+                  alt=""
+                  width={14}
+                  height={14}
+                  className="ms-1"
+                />
               </Dropdown.Toggle>
 
               <Dropdown.Menu className="language-dropdown-menu">

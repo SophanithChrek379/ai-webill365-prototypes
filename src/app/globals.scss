@@ -1,7 +1,7 @@
 @import "../styles/weloop/main.scss";
 
 :root {
-  --background: #ffffff;
+  --background: #fff;
   --foreground: #171717;
   --font-inter: "Inter", sans-serif;
   --font-kantumruy-pro: "Kantumruy Pro", sans-serif;
@@ -40,7 +40,7 @@ body {
 /* Primary Button Variants */
 .btn-primary {
   background-color: #0f1fea;
-  color: #ffffff;
+  color: #fff;
   box-shadow: 0px 0px 0px 1px #1221c1, 0px 1px 1px 0px rgba(18, 33, 193, 0.5),
     0px 2px 3px 0px rgba(18, 33, 193, 0.1);
 }
@@ -58,7 +58,7 @@ body {
 
 /* Primary Outline Button */
 .btn-primary.btn-outline {
-  background-color: #ffffff;
+  background-color: #fff;
   color: #171717;
   border: 1px solid rgba(0, 0, 0, 0.17);
   box-shadow: 0px 0px 0px 1px rgba(0, 0, 0, 0.17),
@@ -94,7 +94,7 @@ body {
 /* Danger Button Variants */
 .btn-danger {
   background-color: #e1232e;
-  color: #ffffff;
+  color: #fff;
   box-shadow: 0px 0px 0px 1px #bf310f, 0px 1px 1px 0px rgba(189, 24, 34, 0.15),
     0px 2px 3px 0px rgba(189, 24, 34, 0.08);
 }
@@ -196,7 +196,7 @@ body {
     font-weight: 500;
     line-height: 16px;
     color: #bd1822;
-    background-color: #ffffff;
+    background-color: #fff;
     border: 1px solid #fea3a8;
     padding: 8px;
     min-width: 32px;
@@ -209,14 +209,14 @@ body {
   .customer-detail-btn-reject:hover {
     background-color: #bd1822;
     border-color: #bd1822;
-    color: #ffffff;
+    color: #fff;
   }
 
   .customer-detail-btn-approve {
     font-size: 14px;
     font-weight: 500;
     line-height: 16px;
-    color: #ffffff;
+    color: #fff;
     background-color: #0f1fea;
     border: 1px solid #1221c1;
     padding: 8px;
@@ -249,7 +249,7 @@ body {
 
 /* Danger Outline Button */
 .btn-danger.btn-outline {
-  background-color: #ffffff;
+  background-color: #fff;
   color: #bd1822;
   border: 1px solid #fea3a8;
   box-shadow: 0px 1px 1px 0px rgba(236, 0, 42, 0.15),
@@ -285,7 +285,7 @@ body {
 /* White Button Variants */
 .btn-white {
   background-color: transparent;
-  color: #ffffff;
+  color: #fff;
   border: 1px solid rgba(255, 255, 255, 0.2);
 }
 
@@ -383,17 +383,24 @@ table {
   position: relative;
   display: flex;
   align-items: center;
-  background-color: #ffffff;
+  background-color: #fff;
   border: 1px solid #d4d4d4;
-  border-radius: 6px;
-  padding: 0.75rem;
+  border-radius: var(--WLDS-Radius-8, 8px);
+  padding: 0.5rem 0.75rem;
+  min-height: 48px;
   height: 48px;
   transition: border-color 0.2s ease, box-shadow 0.2s ease;
 }
 
 .input-group-custom:focus-within {
-  border-color: #0f1fea;
-  box-shadow: 0 0 0 2px rgba(15, 31, 234, 0.1);
+  background-color: var(--Backgrounds-BG-NORMAL, #fff);
+  box-shadow: var(--Ouline-Normal-First-X-0, 0px)
+      var(--Ouline-Normal-First-Y-0, 0px) var(--Ouline-Normal-First-B-0, 0px)
+      var(--Ouline-Normal-First-S-0, 1px)
+      var(--Ouline-Normal-First-Color, #83b7ff),
+    var(--Ouline-Normal-Secord-X-0, 0px) var(--Ouline-Normal-Secord-Y-0, 0px)
+      var(--Ouline-Normal-Secord-B-0, 0px) var(--Ouline-Normal-Secord-S-0, 4px)
+      var(--Ouline-Normal-Secord-Colors, #b2d4ff);
 }
 
 .input-icon-wrapper {
@@ -418,7 +425,7 @@ table {
   background: transparent;
 
   font-weight: 500;
-  font-size: 1rem;
+  font-size: 1.125rem;
   line-height: 1.5;
   color: #171717;
   padding: 0;
@@ -427,7 +434,7 @@ table {
 
 .form-control-custom::placeholder {
   color: #a3a3a3;
-  font-size: 1rem;
+  font-size: 1.125rem;
 }
 
 .form-control-custom:focus {
@@ -460,38 +467,25 @@ table {
   box-shadow: none !important;
 }
 
-/* Remember Me Checkbox */
-.remember-me-checkbox {
-  margin: 0;
+// TODO: Remember Me Checkbox
+.form-check {
+  display: inline-flex;
+  align-items: center;
 }
-
-.remember-me-checkbox .form-check-input {
-  margin-top: 0.125rem;
-  width: 1.5rem;
-  height: 1.5rem;
-  border: 1px solid #d4d4d4;
-  border-radius: 4px;
-  background-color: #ffffff;
-  cursor: pointer;
+.form-check-input {
+  margin-top: 0px;
 }
-
-.remember-me-checkbox .form-check-input:checked {
-  background-color: #0f1fea;
-  border-color: #0f1fea;
+.wl-checkbox-md input[type="checkbox"] {
+  width: 24px;
+  height: 24px;
+  border-radius: 5px;
 }
-
-.remember-me-checkbox .form-check-input:focus {
-  border-color: #0f1fea;
-  box-shadow: 0 0 0 2px rgba(15, 31, 234, 0.1);
+.wl-checkbox-md input[type="checkbox"] + label,
+.wl-checkbox-md input[type="checkbox"] + span {
+  font-size: 18px;
 }
-
-.remember-me-checkbox .form-check-label {
-  font-weight: 500;
-  font-size: 1.05rem; /* 16.8px */
-  line-height: 1.14;
-  color: #171717;
-  margin-left: 0.5rem;
-  cursor: pointer;
+.wl-checkbox-md input[type="checkbox"]:checked {
+  background-size: 12px 12px;
 }
 
 /* Custom Buttons */
@@ -499,7 +493,7 @@ table {
   background-color: #0f1fea;
   border: 1px solid #1221c1;
   border-radius: 8px;
-  color: #ffffff;
+  color: #fff;
   font-weight: 500;
   font-size: 1rem;
   line-height: 1.5;
@@ -528,7 +522,7 @@ table {
 .admin-login-page {
   width: 100%;
   min-height: 100vh;
-  background-color: #ffffff;
+  background-color: #fff;
   display: flex;
   flex-direction: column;
   padding: 0;
@@ -540,29 +534,71 @@ table {
   margin: 0 auto;
 }
 
-/* Language Dropdown */
-.language-dropdown {
-  background-color: #ffffff;
-  border: 1px solid rgba(0, 0, 0, 0.17) !important;
-  border-radius: 6px;
-  box-shadow: 0px 0px 0px 1px rgba(0, 0, 0, 0.17),
-    0px 1px 1px 0px rgba(0, 0, 0, 0.15), 0px 2px 3px 0px rgba(0, 0, 0, 0.08);
-
-  font-weight: 500;
-  font-size: 0.875rem; /* 14px */
-  line-height: 1.14;
-  color: #171717;
-  padding: 0.5rem 0.75rem;
-  transition: all 0.2s ease;
-  min-width: 120px;
+// TODO: Language Dropdown
+.btn.show {
+  background-color: #fff;
 }
 
-.language-dropdown:hover,
-.language-dropdown:focus {
-  background-color: #f8f9fa;
-  border-color: rgba(0, 0, 0, 0.17) !important;
-  box-shadow: 0px 0px 0px 1px rgba(0, 0, 0, 0.17),
-    0px 2px 4px 0px rgba(0, 0, 0, 0.2), 0px 4px 6px 0px rgba(0, 0, 0, 0.12);
+.language-dropdown {
+  min-width: 120px;
+  min-height: 32px;
+  background-color: #fff;
+  border: none !important;
+  border-radius: var(--Button-Radius-BTN-RDR-06, 6px);
+  box-shadow: var(--Outline-Button-Default-First-X-0, 0)
+      var(--Outline-Button-Default-First-Y-0, 0)
+      var(--Outline-Button-Default-First-B-0, 0)
+      var(--Outline-Button-Default-First-S-0, 1px)
+      var(--Outline-Button-Default-First-Color, rgba(0, 0, 0, 0.17)),
+    var(--Outline-Button-Default-Second-X-0, 0)
+      var(--Outline-Button-Default-Second-Y-0, 1px)
+      var(--Outline-Button-Default-Second-B-0, 1px)
+      var(--Outline-Button-Default-Second-S-0, 0)
+      var(--Outline-Button-Default-Second-Color, rgba(0, 0, 0, 0.15)),
+    var(--Outline-Button-Default-Third-X-0, 0)
+      var(--Outline-Button-Default-Third-Y-0, 2px)
+      var(--Outline-Button-Default-Third-B-0, 3px)
+      var(--Outline-Button-Default-Third-S-0, 0)
+      var(--Outline-Button-Default-Third-Color, rgba(0, 0, 0, 0.08));
+  color: #171717;
+  padding: var(--Button-Spacing-Button-32-Top, 8px)
+    var(--Spacing-WLDS-Space-8, 8px) var(--Button-Spacing-Button-32-Bottom, 8px)
+    var(--Spacing-WLDS-Space-8, 8px);
+  transition: all 0.25s ease;
+}
+
+.language-dropdown:hover {
+  background-color: var(--Button-Primary-Outlined-BTN-OUTL-HOVER, #f5f5f5);
+  box-shadow: var(--Outline-Button-Hover-First-X-0, 0px)
+      var(--Outline-Button-Hover-First-Y-0, 0px)
+      var(--Outline-Button-Hover-First-B-0, 0px)
+      var(--Outline-Button-Hover-First-S-0, 1px)
+      var(--Outline-Button-Hover-First-Color, rgba(0, 0, 0, 0.25)),
+    var(--Outline-Button-Hover-Secord-X-0, 0px)
+      var(--Outline-Button-Hover-Secord-Y-0, 1px)
+      var(--Outline-Button-Hover-Secord-B-0, 1px)
+      var(--Outline-Button-Hover-Secord-S-0, 0px)
+      var(--Outline-Button-Hover-Secord-Color, rgba(0, 0, 0, 0.15)),
+    var(--Outline-Button-Hover-Third-X-0, 0px)
+      var(--Outline-Button-Hover-Third-Y-0, 2px)
+      var(--Outline-Button-Hover-Third-B-0, 4px)
+      var(--Outline-Button-Hover-Third-S-0, 0px)
+      var(--Outline-Button-Hover-Third-Color, rgba(0, 0, 0, 0.16));
+}
+
+.language-dropdown:focus,
+.language-dropdown:active {
+  background-color: var(--Button-Primary-Outlined-BTN-OUTL-PRESSED, #fafafa);
+  box-shadow: var(--Outline-Button-Pressed-First-X-0, 0px)
+      var(--Outline-Button-Pressed-First-Y-0, 0px)
+      var(--Outline-Button-Pressed-First-B-0, 1px)
+      var(--Outline-Button-Pressed-First-S-0, 1px)
+      var(--Outline-Button-Pressed-First-Color, rgba(105, 114, 129, 0.16)),
+    var(--Outline-Button-Pressed-Secord-X-0, 0px)
+      var(--Outline-Button-Pressed-Secord-Y-0, 0px)
+      var(--Outline-Button-Pressed-Secord-B-0, 0px)
+      var(--Outline-Button-Pressed-Secord-S-0, 4px)
+      var(--Outline-Button-Pressed-Secord-Colors, #d0d5dc);
 }
 
 .language-dropdown::after {
@@ -570,30 +606,30 @@ table {
 }
 
 .language-dropdown-menu {
-  border: 1px solid rgba(0, 0, 0, 0.17);
-  border-radius: 6px;
-  box-shadow: 0px 0px 0px 1px rgba(0, 0, 0, 0.17),
-    0px 1px 1px 0px rgba(0, 0, 0, 0.15), 0px 2px 3px 0px rgba(0, 0, 0, 0.08);
-  margin-top: 0.25rem;
   min-width: 120px;
+  margin: 0.5rem 0;
+  padding: 0.25rem;
+  border-radius: var(--WLDS-Radius-8, 0.5rem);
+  background-color: var(--Backgrounds-BG-NORMAL, #fff);
 }
 
 .language-dropdown-item {
-  font-weight: 500;
-  font-size: 0.875rem; /* 14px */
-  line-height: 1.14;
   color: #171717;
-  padding: 0.5rem 0.75rem;
+  padding: 0.5rem;
+  border-radius: 0.25rem;
+  font-weight: var(--Typeface-Weight-Button-Medium, 500);
+  line-height: var(--Typeface-Line-height-Button-Medium, 1rem);
+  letter-spacing: var(--Typeface-Letter-Spacing-Button-Medium, 0);
   transition: background-color 0.2s ease;
 }
 
 .language-dropdown-item:hover {
-  background-color: #f8f9fa;
+  background-color: var(--Colors-SEMANTIC-NEUTRAL-WLDS-NTL-02, #f5f5f5);
   color: #171717;
 }
 
 .language-dropdown-item:active {
-  background-color: #e9ecef;
+  background-color: var(--Colors-SEMANTIC-NEUTRAL-WLDS-NTL-02, #f5f5f5);
   color: #171717;
 }
 
@@ -1015,7 +1051,7 @@ table {
 }
 
 .badge-component.border-2 {
-  border: 2px solid #ffffff;
+  border: 2px solid #fff;
   box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.1);
 }
 
@@ -1029,22 +1065,22 @@ table {
 /* Badge Variants */
 .badge-component.bg-danger {
   background-color: #e1232e;
-  color: #ffffff;
+  color: #fff;
 }
 
 .badge-component.bg-primary {
   background-color: #0f1fea;
-  color: #ffffff;
+  color: #fff;
 }
 
 .badge-component.bg-secondary {
   background-color: #6c757d;
-  color: #ffffff;
+  color: #fff;
 }
 
 .badge-component.bg-success {
   background-color: #198754;
-  color: #ffffff;
+  color: #fff;
 }
 
 .badge-component.bg-warning {
@@ -1054,7 +1090,7 @@ table {
 
 .badge-component.bg-info {
   background-color: #0dcaf0;
-  color: #ffffff;
+  color: #fff;
 }
 
 .badge-component.bg-light {
@@ -1064,7 +1100,7 @@ table {
 
 .badge-component.bg-dark {
   background-color: #212529;
-  color: #ffffff;
+  color: #fff;
 }
 
 /* Badge Sizes */
@@ -1156,7 +1192,7 @@ table {
 
 /* AppBar Component Styles */
 .app-bar {
-  background-color: #ffffff;
+  background-color: #fff;
   backdrop-filter: blur(10px);
   border-bottom: 1px solid #d1d5db;
   padding: 0 1.5rem;
@@ -1230,9 +1266,9 @@ table {
 .notification-badge {
   position: absolute;
   top: -2px;
-  right: -2px;
+  right: -12px;
   background-color: #e1232e;
-  color: #ffffff;
+  color: #fff;
 
   font-weight: 500;
   font-size: 0.6875rem;
@@ -1240,7 +1276,7 @@ table {
   letter-spacing: -0.1px;
   padding: 0.125rem 0.25rem;
   border-radius: 0.5rem;
-  border: 1px solid #ffffff;
+  border: 1px solid #fff;
   min-width: 14px;
   height: 14px;
   display: flex;
@@ -1350,7 +1386,7 @@ table {
 
 /* Card Component Styles */
 .stat-card {
-  background-color: #ffffff;
+  background-color: #fff;
   border: 1px solid #d1d5db;
   border-radius: 0.75rem;
   padding: 0.75rem 1rem;
@@ -1556,7 +1592,7 @@ table {
 
 /* Table Component Styles */
 .data-table {
-  background-color: #ffffff;
+  background-color: #fff;
   border: 1px solid #d1d5db;
   border-radius: 0.75rem;
   overflow: hidden;
@@ -1572,7 +1608,7 @@ table {
 /* Table Header */
 .table-header {
   display: flex;
-  background-color: #ffffff;
+  background-color: #fff;
   border-bottom: 1px solid #d1d5db;
   min-height: 2.75rem;
 }
@@ -1848,7 +1884,7 @@ table {
   position: relative;
   display: flex;
   align-items: center;
-  background-color: #ffffff;
+  background-color: #fff;
   border: 1px solid #d4d4d4;
   border-radius: 0.375rem;
   padding: 0.5rem;
@@ -1890,7 +1926,7 @@ table {
 
 /* Date Range Picker Component Styles */
 .date-range-picker {
-  background-color: #ffffff;
+  background-color: #fff;
   border-radius: 0.75rem;
   box-shadow: 0px 1px 1px 0px rgba(0, 0, 0, 0.1),
     0px 0px 2px 0px rgba(0, 0, 0, 0.1), 0px 6px 20px 0px rgba(0, 0, 0, 0.1);
@@ -1920,7 +1956,7 @@ table {
   padding: 0.25rem 0.75rem;
   border: 1px solid #d4d4d4;
   border-radius: 1.25rem;
-  background-color: #ffffff;
+  background-color: #fff;
 
   font-weight: 500;
   font-size: 0.875rem;
@@ -1962,7 +1998,7 @@ table {
 
 .calendar {
   flex: 1;
-  background-color: #ffffff;
+  background-color: #fff;
   border-radius: 0.75rem;
   overflow: hidden;
 }
@@ -1983,7 +2019,7 @@ table {
 
 .month-dropdown,
 .year-dropdown {
-  background-color: #ffffff;
+  background-color: #fff;
   border: 1px solid rgba(0, 0, 0, 0.17);
   border-radius: 0.375rem;
 
@@ -2081,13 +2117,13 @@ table {
 
 .calendar-day.range-start {
   background-color: #0f1fea;
-  color: #ffffff;
+  color: #fff;
   border-radius: 2rem 0 0 2rem;
 }
 
 .calendar-day.range-end {
   background-color: #0f1fea;
-  color: #ffffff;
+  color: #fff;
   border-radius: 0 2rem 2rem 0;
 }
 
@@ -2162,7 +2198,7 @@ table {
   background-color: #0f1fea;
   border: 1px solid #1221c1;
   border-radius: 0.375rem;
-  color: #ffffff;
+  color: #fff;
 
   font-weight: 500;
   font-size: 0.875rem;
@@ -2221,7 +2257,7 @@ table {
 
 .dashboard-content {
   padding: 1.5rem;
-  background-color: #ffffff;
+  background-color: #fff;
   min-height: calc(100vh - 48px); /* Subtract app bar height */
 }
 
@@ -2287,7 +2323,7 @@ table {
 
 /* Activities Section */
 .activities-section {
-  background-color: #ffffff;
+  background-color: #fff;
   padding: 1.5rem;
 }
 
@@ -2373,7 +2409,7 @@ table {
 }
 
 .search-input .input-group-text {
-  background-color: #ffffff;
+  background-color: #fff;
   border: 1px solid rgba(0, 0, 0, 0.17);
   border-right: none;
   color: #737373;
@@ -2397,7 +2433,7 @@ table {
   letter-spacing: -0.2px;
   border-bottom: 1px solid #d1d5db;
   padding: 0.75rem 1rem;
-  background-color: #ffffff;
+  background-color: #fff;
   vertical-align: middle;
 }
 
@@ -2560,7 +2596,7 @@ table {
 .admin-content {
   flex: 1;
   padding: 1.5rem;
-  background-color: #ffffff;
+  background-color: #fff;
   min-height: calc(100vh - 64px); /* Subtract app bar height */
 }
 
@@ -2621,7 +2657,7 @@ table {
   min-width: 64px;
   height: 32px;
   padding: 8px;
-  background: #ffffff;
+  background: #fff;
   border: 1px solid rgba(0, 0, 0, 0.17);
   border-radius: 6px;
   box-shadow: 0px 1px 1px 0px rgba(0, 0, 0, 0.15),
@@ -2635,7 +2671,7 @@ table {
 
 .page-size-toggle:hover,
 .page-size-toggle:focus {
-  background: #ffffff;
+  background: #fff;
   border-color: rgba(0, 0, 0, 0.17);
   box-shadow: 0px 1px 1px 0px rgba(0, 0, 0, 0.15),
     0px 2px 3px 0px rgba(0, 0, 0, 0.08);
@@ -2653,7 +2689,7 @@ table {
 .page-size-menu {
   min-width: 64px;
   padding: 4px 0;
-  background: #ffffff;
+  background: #fff;
   border: 1px solid rgba(0, 0, 0, 0.17);
   border-radius: 6px;
   box-shadow: 0px 4px 6px 0px rgba(0, 0, 0, 0.1);
@@ -2764,7 +2800,7 @@ table {
 }
 
 .status-dropdown-menu {
-  background-color: #ffffff;
+  background-color: #fff;
   border: none;
   border-radius: 10px;
   box-shadow: 0px 0px 1px 0px rgba(0, 0, 0, 0.22),
@@ -2829,7 +2865,7 @@ table {
 }
 
 .status-reset-btn {
-  background-color: #ffffff;
+  background-color: #fff;
   color: #171717;
   border: 1px solid rgba(0, 0, 0, 0.17);
   box-shadow: 0px 0px 0px 1px rgba(0, 0, 0, 0.17),
@@ -2844,7 +2880,7 @@ table {
 
 .status-save-btn {
   background-color: #0f1fea;
-  color: #ffffff;
+  color: #fff;
   border: 1px solid #1221c1;
   box-shadow: 0px 0px 0px 1px #1221c1, 0px 1px 1px 0px rgba(18, 33, 193, 0.5),
     0px 2px 3px 0px rgba(18, 33, 193, 0.1);
@@ -2888,7 +2924,7 @@ table {
   padding: 8px 12px;
   border-radius: 5px;
   transition: background-color 0.2s ease;
-  background-color: #ffffff;
+  background-color: #fff;
 }
 
 .status-option:hover {
@@ -2910,7 +2946,7 @@ table {
   margin: 0;
   border: 1px solid #d4d4d4;
   border-radius: 4px;
-  background-color: #ffffff;
+  background-color: #fff;
   cursor: pointer;
   transition: all 0.2s ease;
   position: relative;
@@ -2992,7 +3028,7 @@ table {
 /* View Settings Modal Component Styles */
 .view-settings-modal {
   .modal-content {
-    background-color: #ffffff;
+    background-color: #fff;
     border: none;
     border-radius: 10px;
     box-shadow: 0px 0px 1px 0px rgba(0, 0, 0, 0.22),
@@ -3069,7 +3105,7 @@ table {
 }
 
 .view-reset-btn {
-  background-color: #ffffff;
+  background-color: #fff;
   color: #171717;
   border: 1px solid rgba(0, 0, 0, 0.17);
   box-shadow: 0px 0px 0px 1px rgba(0, 0, 0, 0.17),
@@ -3084,7 +3120,7 @@ table {
 
 .view-save-btn {
   background-color: #0f1fea;
-  color: #ffffff;
+  color: #fff;
   border: 1px solid #1221c1;
   box-shadow: 0px 0px 0px 1px #1221c1, 0px 1px 1px 0px rgba(18, 33, 193, 0.5),
     0px 2px 3px 0px rgba(18, 33, 193, 0.1);
@@ -3129,7 +3165,7 @@ table {
   padding: 7px 12px;
   border-radius: 5px;
   transition: background-color 0.2s ease;
-  background-color: #ffffff;
+  background-color: #fff;
 }
 
 .view-column-option:hover {
@@ -3178,7 +3214,7 @@ table {
   margin: 0;
   border: 1px solid #d4d4d4;
   border-radius: 4px;
-  background-color: #ffffff;
+  background-color: #fff;
   cursor: pointer;
   transition: all 0.2s ease;
   position: relative;
@@ -3484,7 +3520,7 @@ table {
 
 // User Profile Dropdown Component Styles
 .user-profile-dropdown {
-  background: #ffffff;
+  background: #fff;
   border: none;
   border-radius: 8px;
   box-shadow: 0px 1px 1px 0px rgba(0, 0, 0, 0.1),
