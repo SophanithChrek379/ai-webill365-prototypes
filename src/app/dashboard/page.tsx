@@ -609,7 +609,7 @@ export default function DashboardPage() {
 
             {/* Activities Table */}
             <div className="activities-table">
-              <Table responsive className="table-hover">
+              <Table responsive>
                 <thead>
                   <tr>
                     {tableColumns

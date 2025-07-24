@@ -586,7 +586,7 @@ export default function SubscribersPage() {
 
             {/* Activities Table */}
             <div className="activities-table">
-              <Table responsive className="table-hover">
+              <Table responsive>
                 <thead>
                   <tr>
                     <th className="table-checkbox-cell">
