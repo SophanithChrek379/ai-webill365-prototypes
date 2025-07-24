@@ -4,6 +4,7 @@ import { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { Form, Button } from "react-bootstrap";
+import { useRouter } from "next/navigation";
 
 interface LoginFormProps {
   onSubmit?: (formData: { username: string; password: string }) => void;
@@ -17,6 +18,7 @@ export default function LoginForm({
   isAdmin = false,
 }: LoginFormProps) {
   const [showPassword, setShowPassword] = useState(false);
+  const router = useRouter();
   const [formData, setFormData] = useState({
     username: "",
     password: "",
@@ -35,6 +37,7 @@ export default function LoginForm({
     e.preventDefault();
     if (onSubmit) {
       onSubmit(formData);
+      router.push("/dashboard");
     } else {
       console.log("Login attempt:", formData);
     }
@@ -42,7 +45,6 @@ export default function LoginForm({
 
   return (
     <Form onSubmit={handleSubmit} className="login-form">
-      {/* Username/ID Field */}
       <Form.Group className="mb-3">
         <div className="input-group-custom">
           <div className="input-icon-wrapper">
@@ -67,7 +69,6 @@ export default function LoginForm({
         </div>
       </Form.Group>
 
-      {/* Password Field */}
       <Form.Group className="mb-3">
         <div className="input-group-custom">
           <div className="input-icon-wrapper">
@@ -110,7 +111,6 @@ export default function LoginForm({
         </div>
       </Form.Group>
 
-      {/* Remember Me Checkbox */}
       <Form.Group className="mb-4">
         <Form.Check
           type="checkbox"
@@ -123,7 +123,6 @@ export default function LoginForm({
         />
       </Form.Group>
 
-      {/* Login Button */}
       <Button
         type="submit"
         className="btn-login w-100 mb-4"
@@ -132,39 +131,6 @@ export default function LoginForm({
       >
         {isLoading ? "Logging in..." : "Log in"}
       </Button>
-
-      {/* Only show these sections for non-admin login */}
-      {!isAdmin && (
-        <>
-          {/* Divider */}
-          <div className="divider-container mb-4">
-            <div className="divider-line"></div>
-            <span className="divider-text px-3">
-              Don&apos;t have an account?
-            </span>
-            <div className="divider-line"></div>
-          </div>
-
-          {/* Create Account Button */}
-          <Link href="/signup" className="text-decoration-none">
-            <Button
-              variant="outline-secondary"
-              className="btn-create-account w-100 mb-3"
-              size="lg"
-              disabled={isLoading}
-            >
-              Create an account for free
-            </Button>
-          </Link>
-
-          {/* Reset Password */}
-          <div className="text-end">
-            <Link href="/reset-password" className="reset-link">
-              Reset Password
-            </Link>
-          </div>
-        </>
-      )}
     </Form>
   );
 }

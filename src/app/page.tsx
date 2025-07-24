@@ -50,12 +50,7 @@ export default function Home() {
 
   const handleLanguageChange = (language: LanguageOption) => {
     setSelectedLanguage(language);
-    // Here you can add logic to change the application language
     console.log("Language changed to:", language);
-    // Example: You could dispatch a language change action here
-    // dispatch(changeLanguage(language.code));
-    // Example: You could update localStorage
-    // localStorage.setItem('preferredLanguage', language.code);
   };
 
   const handleLogin = async (formData: {
@@ -64,9 +59,7 @@ export default function Home() {
   }) => {
     setIsLoading(true);
     try {
-      // Handle admin login logic here
       console.log("Admin login attempt:", formData);
-      // Simulate API call
       await new Promise((resolve) => setTimeout(resolve, 1000));
     } catch (error) {
       console.error("Admin login error:", error);
@@ -78,7 +71,6 @@ export default function Home() {
   return (
     <div className="admin-login-page">
       <Container fluid className="h-100 d-flex flex-column">
-        {/* Header with Language Selector */}
         <Row className="flex-grow-0 py-4">
           <Col className="d-flex justify-content-end">
             <Dropdown>
@@ -128,11 +120,9 @@ export default function Home() {
           </Col>
         </Row>
 
-        {/* Main Content */}
         <Row className="flex-grow-1 d-flex align-items-center justify-content-center">
           <Col xs={12} sm={10} md={8} lg={6} xl={5} xxl={4}>
             <div className="admin-login-container">
-              {/* Logo Section */}
               <div className="text-center mb-5">
                 <div className="logo-container mb-3">
                   <Image
@@ -144,9 +134,11 @@ export default function Home() {
                     className="img-fluid"
                   />
                 </div>
-                <h2 className="admin-tagline mb-0">Simple. Smart. Secured.</h2>
+                <label className="wl-text-title-medium mb-0">
+                  Simple. Smart. Secured.
+                </label>
               </div>
-              {/* Login Form Component */}
+
               <LoginForm
                 onSubmit={handleLogin}
                 isLoading={isLoading}
@@ -156,13 +148,12 @@ export default function Home() {
           </Col>
         </Row>
 
-        {/* Footer Links */}
         <Row className="flex-grow-0 py-4">
           <Col className="d-flex justify-content-center">
             <div className="admin-footer-links">
               <Button variant="link" className="footer-link">
                 <Image
-                  src="/assets/images/lock-icon.svg"
+                  src="/assets/images/lock-icon-blue.svg"
                   alt=""
                   width={16}
                   height={16}
