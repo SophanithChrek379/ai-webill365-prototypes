@@ -1,0 +1,81 @@
+@use "sass:color";
+@use "sass:math";
+@use "../abstracts/breakpoints" as *;
+@use "../abstracts/functions" as *;
+@use "../abstracts/mixins" as *;
+
+// TODO: Variables
+$wl-label-title-size: rem(16);
+$wl-label-title-size-lg: rem(24);
+$wl-label-sub-title-color: var(--Forgrounds-FG-DISABLED-VALUE, #737373);
+$wl-label-require-color: var(--Forgrounds-FG-FAIL, #e20000);
+
+// TODO: Base
+@mixin wl-label-title-base {
+  color: var(--Forgrounds-FG-TITLE, #171717);
+  font-weight: var(--Typeface-Weight-Button-Medium, 500);
+  white-space: nowrap;
+}
+
+// TODO: Modifier
+@mixin wl-label-title-size {
+  font-size: var(--Typeface-Size-Button-Medium, 14px);
+  line-height: var(--Typeface-Line-height-Button-Medium, 16px);
+  letter-spacing: var(--Typeface-Letter-Spacing-Button-Medium, 0px);
+}
+
+@mixin wl-label-title-size-sm {
+  font-size: var(--Typeface-Size-Button-Small, 12px);
+  line-height: var(--Typeface-Line-height-Button-Small, 16px);
+  letter-spacing: var(--Typeface-Letter-Spacing-Button-Small, 0px);
+}
+
+@mixin wl-label-title-size-lg {
+  font-size: var(--Typeface-Size-Button-Large, 18px);
+  line-height: var(--Typeface-Line-height-Button-Large, 24px);
+  letter-spacing: var(--Typeface-Letter-Spacing-Button-Large, 0px);
+}
+
+// TODO: Component: Label-Title
+.wl-label {
+  // TODO: Title
+  &-title {
+    @include wl-label-title-base;
+    @include wl-label-title-size;
+
+    // TODO: Size: Small
+    &-sm {
+      @include wl-label-title-size-sm;
+    }
+
+    // TODO: Size: Large
+    &-lg {
+      @include wl-label-title-size-lg;
+    }
+  }
+
+  // TODO: Sub-Title
+  &-sub-title {
+    @include wl-label-title-base;
+    @include wl-label-title-size;
+    color: $wl-label-sub-title-color;
+  }
+
+  // TODO: Required
+  &-required {
+    margin-left: rem(2);
+    @include wl-label-title-base;
+    @include wl-label-title-size;
+    color: $wl-label-require-color;
+
+    // TODO: Size: Small
+    &-sm {
+      @include wl-label-title-size-sm;
+    }
+
+    // TODO: Size: Large
+    &-lg {
+      @include wl-label-title-size-lg;
+    }
+  }
+}

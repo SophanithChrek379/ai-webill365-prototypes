@@ -1,0 +1,205 @@
+@use "../abstracts/breakpoints" as *;
+@use "../abstracts/functions" as *;
+@use "../abstracts/mixins" as *;
+
+// TODO: Variables
+$wl-tabs-height: rem(40);
+$wl-tab-spacing-2: var(--Spacing-WLDS-Space-2, 2px);
+$wl-tab-spacing-4: var(--Spacing-WLDS-Space-4, 4px);
+$wl-tab-spacing-6: var(--Spacing-WLDS-Space-6, 6px);
+$wl-tab-spacing-8: var(--Spacing-WLDS-Space-8, 8px);
+$wl-tab-spacing-10: var(--Spacing-WLDS-Space-10, 10px);
+$wl-tab-spacing-12: var(--Spacing-WLDS-Space-12, 12px);
+$wl-tab-text-color: var(--Forgrounds-FG-BLACK, #0a0a0a);
+$wl-tab-text-disabled: var(--Forgrounds-FG-DISABLED-VALUE, #737373);
+$wl-tab-color-active: var(--Forgrounds-FG-INTERACTIVE, #0f1fea);
+$wl-tab-color-bg-hover: var(--Backgrounds-BG-BASE-HEAVY, #e5e5e5);
+$wl-tab-color-bg-selected: var(--Colors-PRIMARY-WLDS-PRM-02, #d8e9ff);
+$wl-tab-color-bg-active: var(--Backgrounds-BG-PRM-08, #0021fe);
+$wl-tab-color-bg-border: var(--Borders-BORDER-BASE-THIN, #d4d4d4);
+$wl-tab-btn-radius-4: var(--Button-Radius-BTN-RDR-04, 4px);
+$wl-tab-font-size-button-medium: var(--Typeface-Size-Button-Medium, 14px);
+$wl-tab-font-size-body-small: var(--Typeface-Size-Body-Small, 14px);
+$wl-tab-font-weight-button-medium: var(--Typeface-Weight-Button-Medium, 500);
+$wl-tab-font-weight-body-small: var(--Typeface-Weight-Body-Small, 500);
+$wl-tab-line-height-button-medium: var(
+  --Typeface-Line-height-Button-Medium,
+  16px
+);
+$wl-tab-letter-spacing-button-medium: var(
+  --Typeface-Letter-Spacing-Button-Medium,
+  0px
+);
+
+// TODO: Mixins
+@mixin wl-tab-transition-default {
+  transition: color 0.1s ease, background-color 0.1s ease,
+    border-color 0.1s ease, box-shadow 0.1s ease;
+}
+
+@mixin wl-tab-button-text {
+  font-size: $wl-tab-font-size-button-medium;
+  font-weight: $wl-tab-font-weight-button-medium;
+  line-height: $wl-tab-line-height-button-medium;
+  letter-spacing: $wl-tab-letter-spacing-button-medium;
+}
+
+// TODO: First Layer: Tabs Control Component
+.wl-tabs-control {
+  @include wl-aligns-inline-center;
+  gap: $wl-tab-spacing-8;
+
+  // TODO: Second Layer: With Tabs Bar Variant
+  &:has(.wl-tabs-bar) {
+    // TODO: Additional styling when tabs bar is present
+    padding: 0px;
+    border-bottom: 1px solid $wl-tab-color-bg-border;
+    @include wl-aligns-inline-center;
+    gap: $wl-tab-spacing-12;
+
+    // TODO: Third Layer: Modifiers within this context
+    .wl-tabs.wl-tabs-bar {
+      label,
+      span {
+        margin-left: 0px;
+      }
+    }
+  }
+
+  // TODO: Second Layer: With Tabs Text Variant
+  &:has(.wl-tabs-text) {
+    @include wl-aligns-inline-center;
+    gap: $wl-tab-spacing-8;
+  }
+
+  // TODO: Second Layer: Tabs Bar State Selectors
+  .wl-tabs-bar {
+    // TODO: Third Layer: Radio Focus State
+    &:has(input[type="radio"]:focus) {
+      label {
+        background-color: $wl-tab-color-bg-selected;
+      }
+    }
+
+    // TODO: Third Layer: Radio Checked State
+    &:has(input[type="radio"]:checked) {
+      label {
+        color: $wl-tab-color-active;
+      }
+
+      .wl-tabs-line {
+        visibility: visible;
+      }
+    }
+  }
+
+  // TODO: Second Layer: Tabs Text Component
+  .wl-tabs-text {
+    padding: $wl-tab-spacing-2 $wl-tab-spacing-4;
+    @include wl-tab-transition-default;
+    @include wl-flex-center;
+    gap: $wl-tab-spacing-10;
+    position: relative;
+
+    // TODO: Typography
+    @include wl-tab-button-text;
+    color: $wl-tab-text-color;
+
+    // TODO: Third Layer: Child Elements
+    label,
+    span {
+      margin-left: 0px;
+    }
+
+    // TODO: Third Layer: Hover States
+    &:hover,
+    *:hover {
+      cursor: pointer;
+    }
+
+    // TODO: Third Layer: Checked State
+    &:has(input[type="radio"]:checked) {
+      border-color: $wl-tab-color-active;
+
+      * {
+        color: $wl-tab-color-active;
+      }
+
+      &:hover * {
+        cursor: pointer;
+      }
+    }
+  }
+}
+
+// TODO: First Layer: Tabs Bar Component
+.wl-tabs-bar {
+  height: $wl-tabs-height;
+  padding-top: $wl-tab-spacing-6;
+  @include wl-flex-column;
+  @include wl-flex-between;
+  @include wl-tab-transition-default;
+  position: relative;
+
+  // TODO: Second Layer: Hover State
+  &:hover {
+    cursor: pointer;
+
+    // TODO: Third Layer: Label Hover
+    > label {
+      background-color: $wl-tab-color-bg-hover;
+    }
+  }
+
+  // TODO: Second Layer: Child Elements
+  > label {
+    padding: $wl-tab-spacing-6 $wl-tab-spacing-4;
+    border-radius: $wl-tab-btn-radius-4;
+    @include wl-aligns-center;
+    gap: $wl-tab-spacing-4;
+    align-self: stretch;
+    transition: color 0.1s ease, background-color 0.1s ease;
+    color: $wl-tab-text-color;
+    @include wl-tab-button-text;
+  }
+
+  span {
+    color: $wl-tab-text-disabled;
+    @include wl-tab-button-text;
+    user-select: none;
+  }
+
+  svg {
+    fill: $wl-tab-text-color;
+  }
+
+  *:hover {
+    cursor: pointer;
+  }
+
+  &[aria-disabled="true"] {
+    opacity: 0.5;
+    cursor: not-allowed;
+    user-select: none;
+  }
+}
+
+.wl-tabs-control input[type="radio"] {
+  position: absolute;
+  opacity: 0;
+  width: 100%;
+  height: 100%;
+  inset: 0px;
+}
+
+.wl-tabs-line {
+  width: 100%;
+  height: $wl-tab-spacing-2;
+  margin-bottom: -1px;
+  border-radius: $wl-tab-btn-radius-4 $wl-tab-btn-radius-4 0px 0px;
+  background-color: $wl-tab-color-bg-active;
+  display: flex;
+  align-self: stretch;
+  transition: width 0.1s ease;
+  visibility: hidden;
+}

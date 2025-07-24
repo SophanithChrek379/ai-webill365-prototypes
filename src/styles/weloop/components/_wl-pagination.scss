@@ -1,0 +1,213 @@
+@use "sass:math";
+@use "../abstracts/breakpoints" as *;
+@use "../abstracts/functions" as *;
+@use "../abstracts/mixins" as *;
+
+$wl-pagination-padding-top: rem(1);
+$wl-pagination-padding-bottom: rem(1);
+$wl-menu-option-min-width: 64px;
+$wl-navigation-min-height: 32px;
+$wl-navigation-button-width: 16px;
+$wl-navigation-button-height: 16px;
+
+// SVG background images
+$wl-chevron-last-bg-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 16 16' fill='none'%3E%3Cpath d='M11.8896 13.3213C11.8896 13.4489 11.86 13.5628 11.8008 13.6631C11.7461 13.7679 11.6663 13.8499 11.5615 13.9092C11.4567 13.9684 11.3428 13.998 11.2197 13.998C11.1286 13.998 11.042 13.9821 10.96 13.9502C10.8825 13.9183 10.8073 13.8682 10.7344 13.7998L5.62793 8.83691C5.47754 8.69108 5.40234 8.52246 5.40234 8.33105C5.40234 8.23079 5.42057 8.13965 5.45703 8.05762C5.49349 7.97103 5.54818 7.89355 5.62109 7.8252L10.7412 2.8623C10.8141 2.7985 10.8893 2.75065 10.9668 2.71875C11.0443 2.68229 11.1286 2.66406 11.2197 2.66406C11.3473 2.66406 11.4613 2.69368 11.5615 2.75293C11.6663 2.81217 11.7484 2.89421 11.8076 2.99902C11.8669 3.09928 11.8965 3.21322 11.8965 3.34082C11.8965 3.43652 11.8783 3.52539 11.8418 3.60742C11.8053 3.68945 11.7552 3.76237 11.6914 3.82617L6.63965 8.72754V7.93457L11.6914 12.8359C11.7552 12.9043 11.8031 12.9772 11.835 13.0547C11.8714 13.1367 11.8896 13.2256 11.8896 13.3213ZM5.42285 13.3555C5.42285 13.5423 5.35905 13.695 5.23145 13.8135C5.1084 13.9365 4.95117 13.998 4.75977 13.998C4.57292 13.998 4.41569 13.9365 4.28809 13.8135C4.16504 13.695 4.10352 13.5423 4.10352 13.3555V3.32031C4.10352 3.12891 4.16504 2.97168 4.28809 2.84863C4.41569 2.72559 4.57292 2.66406 4.75977 2.66406C4.95117 2.66406 5.1084 2.72559 5.23145 2.84863C5.35905 2.97168 5.42285 3.12891 5.42285 3.32031V13.3555Z' fill='%23737373'/%3E%3C/svg%3E");
+$wl-chevron-last-bg-image-active: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 16 16' fill='none'%3E%3Cpath d='M11.8896 13.3213C11.8896 13.4489 11.86 13.5628 11.8008 13.6631C11.7461 13.7679 11.6663 13.8499 11.5615 13.9092C11.4567 13.9684 11.3428 13.998 11.2197 13.998C11.1286 13.998 11.042 13.9821 10.96 13.9502C10.8825 13.9183 10.8073 13.8682 10.7344 13.7998L5.62793 8.83691C5.47754 8.69108 5.40234 8.52246 5.40234 8.33105C5.40234 8.23079 5.42057 8.13965 5.45703 8.05762C5.49349 7.97103 5.54818 7.89355 5.62109 7.8252L10.7412 2.8623C10.8141 2.7985 10.8893 2.75065 10.9668 2.71875C11.0443 2.68229 11.1286 2.66406 11.2197 2.66406C11.3473 2.66406 11.4613 2.69368 11.5615 2.75293C11.6663 2.81217 11.7484 2.89421 11.8076 2.99902C11.8669 3.09928 11.8965 3.21322 11.8965 3.34082C11.8965 3.43652 11.8783 3.52539 11.8418 3.60742C11.8053 3.68945 11.7552 3.76237 11.6914 3.82617L6.63965 8.72754V7.93457L11.6914 12.8359C11.7552 12.9043 11.8031 12.9772 11.835 13.0547C11.8714 13.1367 11.8896 13.2256 11.8896 13.3213ZM5.42285 13.3555C5.42285 13.5423 5.35905 13.695 5.23145 13.8135C5.1084 13.9365 4.95117 13.998 4.75977 13.998C4.57292 13.998 4.41569 13.9365 4.28809 13.8135C4.16504 13.695 4.10352 13.5423 4.10352 13.3555V3.32031C4.10352 3.12891 4.16504 2.97168 4.28809 2.84863C4.41569 2.72559 4.57292 2.66406 4.75977 2.66406C4.95117 2.66406 5.1084 2.72559 5.23145 2.84863C5.35905 2.97168 5.42285 3.12891 5.42285 3.32031V13.3555Z' fill='%23171717'/%3E%3C/svg%3E");
+$wl-chevron-previous-bg-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 16 16' fill='none'%3E%3Cpath d='M3.98958 7.99772C3.98958 8.11491 4.01128 8.22342 4.05469 8.32324C4.09809 8.42307 4.16753 8.51855 4.26302 8.6097L9.02864 13.2777C9.17621 13.4252 9.35851 13.499 9.57552 13.499C9.72309 13.499 9.85547 13.4643 9.97265 13.3949C10.0898 13.3254 10.1832 13.2299 10.2526 13.1084C10.3264 12.9912 10.3633 12.861 10.3633 12.7178C10.3633 12.5051 10.2808 12.3163 10.1159 12.1514L5.85156 7.99772L10.1159 3.84408C10.2808 3.67914 10.3633 3.49034 10.3633 3.27767C10.3633 3.1301 10.3264 2.99772 10.2526 2.88053C10.1832 2.76335 10.0898 2.6722 9.97265 2.6071C9.85547 2.53765 9.72309 2.50293 9.57552 2.50293C9.35851 2.50293 9.17621 2.57671 9.02864 2.72428L4.26302 7.38574C4.16753 7.47689 4.09809 7.57237 4.05469 7.6722C4.01128 7.77203 3.98958 7.88053 3.98958 7.99772Z' fill='%23737373'/%3E%3C/svg%3E");
+$wl-chevron-previous-bg-image-active: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 16 16' fill='none'%3E%3Cpath d='M3.98958 7.99772C3.98958 8.11491 4.01128 8.22342 4.05469 8.32324C4.09809 8.42307 4.16753 8.51855 4.26302 8.6097L9.02864 13.2777C9.17621 13.4252 9.35851 13.499 9.57552 13.499C9.72309 13.499 9.85547 13.4643 9.97265 13.3949C10.0898 13.3254 10.1832 13.2299 10.2526 13.1084C10.3264 12.9912 10.3633 12.861 10.3633 12.7178C10.3633 12.5051 10.2808 12.3163 10.1159 12.1514L5.85156 7.99772L10.1159 3.84408C10.2808 3.67914 10.3633 3.49034 10.3633 3.27767C10.3633 3.1301 10.3264 2.99772 10.2526 2.88053C10.1832 2.76335 10.0898 2.6722 9.97265 2.6071C9.85547 2.53765 9.72309 2.50293 9.57552 2.50293C9.35851 2.50293 9.17621 2.57671 9.02864 2.72428L4.26302 7.38574C4.16753 7.47689 4.09809 7.57237 4.05469 7.6722C4.01128 7.77203 3.98958 7.88053 3.98958 7.99772Z' fill='%23171717'/%3E%3C/svg%3E");
+$wl-chevron-next-bg-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 16 16' fill='none'%3E%3Cpath d='M12.0039 7.99772C12.0039 7.88053 11.9822 7.77203 11.9388 7.6722C11.8954 7.57237 11.826 7.47689 11.7305 7.38574L6.96484 2.72428C6.81727 2.57671 6.63715 2.50293 6.42448 2.50293C6.27691 2.50293 6.14236 2.53765 6.02083 2.6071C5.90365 2.6722 5.81033 2.76335 5.74089 2.88053C5.67144 2.99772 5.63672 3.1301 5.63672 3.27767C5.63672 3.49034 5.71701 3.67914 5.8776 3.84408L10.1419 7.99772L5.8776 12.1514C5.71701 12.3163 5.63672 12.5051 5.63672 12.7178C5.63672 12.861 5.67144 12.9912 5.74089 13.1084C5.81033 13.2299 5.90365 13.3254 6.02083 13.3949C6.14236 13.4643 6.27691 13.499 6.42448 13.499C6.63715 13.499 6.81727 13.4252 6.96484 13.2777L11.7305 8.6097C11.8303 8.51855 11.8997 8.42307 11.9388 8.32324C11.9822 8.22342 12.0039 8.11491 12.0039 7.99772Z' fill='%23737373'/%3E%3C/svg%3E");
+$wl-chevron-next-bg-image-active: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 16 16' fill='none'%3E%3Cpath d='M12.0039 7.99772C12.0039 7.88053 11.9822 7.77203 11.9388 7.6722C11.8954 7.57237 11.826 7.47689 11.7305 7.38574L6.96484 2.72428C6.81727 2.57671 6.63715 2.50293 6.42448 2.50293C6.27691 2.50293 6.14236 2.53765 6.02083 2.6071C5.90365 2.6722 5.81033 2.76335 5.74089 2.88053C5.67144 2.99772 5.63672 3.1301 5.63672 3.27767C5.63672 3.49034 5.71701 3.67914 5.8776 3.84408L10.1419 7.99772L5.8776 12.1514C5.71701 12.3163 5.63672 12.5051 5.63672 12.7178C5.63672 12.861 5.67144 12.9912 5.74089 13.1084C5.81033 13.2299 5.90365 13.3254 6.02083 13.3949C6.14236 13.4643 6.27691 13.499 6.42448 13.499C6.63715 13.499 6.81727 13.4252 6.96484 13.2777L11.7305 8.6097C11.8303 8.51855 11.8997 8.42307 11.9388 8.32324C11.9822 8.22342 12.0039 8.11491 12.0039 7.99772Z' fill='%23171717'/%3E%3C/svg%3E");
+$wl-chevron-first-bg-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 16 16' fill='none'%3E%3Cpath d='M4.11035 2.67871C4.11035 2.55111 4.13997 2.43717 4.19922 2.33691C4.25391 2.2321 4.33366 2.15006 4.43848 2.09082C4.5433 2.03157 4.65723 2.00195 4.78027 2.00195C4.87142 2.00195 4.95801 2.0179 5.04004 2.0498C5.11751 2.08171 5.19271 2.13184 5.26563 2.20019L10.3721 7.16309C10.5225 7.30892 10.5977 7.47754 10.5977 7.66895C10.5977 7.76921 10.5794 7.86035 10.543 7.94238C10.5065 8.02897 10.4518 8.10645 10.3789 8.1748L5.25879 13.1377C5.18587 13.2015 5.11068 13.2493 5.0332 13.2812C4.95573 13.3177 4.87142 13.3359 4.78027 13.3359C4.65267 13.3359 4.53874 13.3063 4.43848 13.2471C4.33366 13.1878 4.25163 13.1058 4.19238 13.001C4.13314 12.9007 4.10352 12.7868 4.10352 12.6592C4.10352 12.5635 4.12174 12.4746 4.1582 12.3926C4.19466 12.3105 4.24479 12.2376 4.30859 12.1738L9.36035 7.27246L9.36035 8.06543L4.30859 3.16406C4.24479 3.0957 4.19694 3.02279 4.16504 2.94531C4.12858 2.86328 4.11035 2.77441 4.11035 2.67871ZM10.5771 2.64453C10.5771 2.45768 10.641 2.30501 10.7686 2.18652C10.8916 2.06348 11.0488 2.00195 11.2402 2.00195C11.4271 2.00195 11.5843 2.06348 11.7119 2.18652C11.835 2.30501 11.8965 2.45768 11.8965 2.64453L11.8965 12.6797C11.8965 12.8711 11.835 13.0283 11.7119 13.1514C11.5843 13.2744 11.4271 13.3359 11.2402 13.3359C11.0488 13.3359 10.8916 13.2744 10.7686 13.1514C10.641 13.0283 10.5771 12.8711 10.5771 12.6797L10.5771 2.64453Z' fill='%23737373'/%3E%3C/svg%3E");
+$wl-chevron-first-bg-image-active: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 16 16' fill='none'%3E%3Cpath d='M4.11035 2.67871C4.11035 2.55111 4.13997 2.43717 4.19922 2.33691C4.25391 2.2321 4.33366 2.15006 4.43848 2.09082C4.5433 2.03157 4.65723 2.00195 4.78027 2.00195C4.87142 2.00195 4.95801 2.0179 5.04004 2.0498C5.11751 2.08171 5.19271 2.13184 5.26563 2.20019L10.3721 7.16309C10.5225 7.30892 10.5977 7.47754 10.5977 7.66895C10.5977 7.76921 10.5794 7.86035 10.543 7.94238C10.5065 8.02897 10.4518 8.10645 10.3789 8.1748L5.25879 13.1377C5.18587 13.2015 5.11068 13.2493 5.0332 13.2812C4.95573 13.3177 4.87142 13.3359 4.78027 13.3359C4.65267 13.3359 4.53874 13.3063 4.43848 13.2471C4.33366 13.1878 4.25163 13.1058 4.19238 13.001C4.13314 12.9007 4.10352 12.7868 4.10352 12.6592C4.10352 12.5635 4.12174 12.4746 4.1582 12.3926C4.19466 12.3105 4.24479 12.2376 4.30859 12.1738L9.36035 7.27246L9.36035 8.06543L4.30859 3.16406C4.24479 3.0957 4.19694 3.02279 4.16504 2.94531C4.12858 2.86328 4.11035 2.77441 4.11035 2.67871ZM10.5771 2.64453C10.5771 2.45768 10.641 2.30501 10.7686 2.18652C10.8916 2.06348 11.0488 2.00195 11.2402 2.00195C11.4271 2.00195 11.5843 2.06348 11.7119 2.18652C11.835 2.30501 11.8965 2.45768 11.8965 2.64453L11.8965 12.6797C11.8965 12.8711 11.835 13.0283 11.7119 13.1514C11.5843 13.2744 11.4271 13.3359 11.2402 13.3359C11.0488 13.3359 10.8916 13.2744 10.7686 13.1514C10.641 13.0283 10.5771 12.8711 10.5771 12.6797L10.5771 2.64453Z' fill='%23171717'/%3E%3C/svg%3E");
+
+// Base navigation icon styles
+%wl-navigation-icon-base {
+  &::before {
+    content: "";
+    display: inline-block;
+    width: 16px;
+    height: 16px;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+  }
+
+  &:hover::before {
+    cursor: pointer;
+  }
+}
+
+// Main pagination container
+.wl-pagination {
+  padding-top: $wl-pagination-padding-top;
+  padding-bottom: $wl-pagination-padding-bottom;
+  @include wl-aligns-center;
+  gap: rem(35);
+
+  // TODO: Pagination menu wrapper
+  .wl-menu-option-wrapper {
+    @include wl-aligns-center;
+    gap: rem(15);
+  }
+
+  // Pagination menu title
+  .wl-menu-title {
+    @include wl-font-style(
+      var(--Typeface-Size-Body-Small, rem(14)),
+      var(--Typeface-Weight-Body-Small, 500),
+      normal,
+      0
+    );
+  }
+
+  // Menu option
+  .wl-menu-option {
+    min-width: $wl-menu-option-min-width;
+  }
+
+  // Page number
+  .wl-page-number {
+    @include wl-font-style(
+      var(--Typeface-Size-Body-Small, rem(14)),
+      var(--Typeface-Weight-Body-Small, 500),
+      normal,
+      0
+    );
+  }
+
+  // Navigation wrapper
+  .wl-navigation-wrapper {
+    min-height: $wl-navigation-min-height;
+    @include wl-aligns-center;
+    gap: rem(36);
+  }
+
+  // Navigation button
+  .wl-navigation-button {
+    width: $wl-navigation-button-width;
+    height: $wl-navigation-button-height;
+  }
+
+  // Navigation icons (refactored into a base class and hover states)
+  .wl-navigation-icon {
+    @extend %wl-navigation-icon-base;
+    &::before {
+      background-size: contain;
+      background-repeat: no-repeat;
+      background-position: center;
+    }
+    &:hover::before {
+      cursor: pointer;
+    }
+  }
+
+  // Previous icon
+  .wl-navigation-icon.wl-navigation-previous {
+    &::before {
+      background-image: $wl-chevron-previous-bg-image;
+    }
+    &:hover::before {
+      background-image: $wl-chevron-previous-bg-image-active;
+    }
+  }
+
+  // Next icon
+  .wl-navigation-icon.wl-navigation-next {
+    &::before {
+      background-image: $wl-chevron-next-bg-image;
+    }
+    &:hover::before {
+      background-image: $wl-chevron-next-bg-image-active;
+    }
+  }
+
+  // Last icon
+  .wl-navigation-icon.wl-navigation-last {
+    &::before {
+      background-image: $wl-chevron-last-bg-image;
+    }
+    &:hover::before {
+      background-image: $wl-chevron-last-bg-image-active;
+    }
+  }
+
+  // First icon
+  .wl-navigation-icon.wl-navigation-first {
+    &::before {
+      background-image: $wl-chevron-first-bg-image;
+    }
+    &:hover::before {
+      background-image: $wl-chevron-first-bg-image-active;
+    }
+  }
+
+  // TODO: .wl-navigation-wrapper.wl-nav-next
+  &:has(.wl-nav-next) {
+    // Next icon
+    .wl-navigation-icon.wl-navigation-next {
+      &::before {
+        background-image: $wl-chevron-next-bg-image-active;
+      }
+    }
+
+    // First icon
+    .wl-navigation-icon.wl-navigation-first {
+      &::before {
+        background-image: $wl-chevron-first-bg-image-active;
+      }
+    }
+  }
+
+  // TODO: .wl-navigation-wrapper.wl-nav-previous
+  &:has(.wl-nav-previous) {
+    // Last icon
+    .wl-navigation-icon.wl-navigation-last {
+      &::before {
+        background-image: $wl-chevron-last-bg-image-active;
+      }
+    }
+
+    // Previous icon
+    .wl-navigation-icon.wl-navigation-previous {
+      &::before {
+        background-image: $wl-chevron-previous-bg-image-active;
+      }
+    }
+  }
+
+  // TODO: .wl-navigation-wrapper.wl-nav-center
+  &:has(.wl-nav-center) {
+    // Last icon
+    .wl-navigation-icon.wl-navigation-last {
+      &::before {
+        background-image: $wl-chevron-last-bg-image-active;
+      }
+    }
+
+    // Previous icon
+    .wl-navigation-icon.wl-navigation-previous {
+      &::before {
+        background-image: $wl-chevron-previous-bg-image-active;
+      }
+    }
+
+    // Next icon
+    .wl-navigation-icon.wl-navigation-next {
+      &::before {
+        background-image: $wl-chevron-next-bg-image-active;
+      }
+    }
+
+    // First icon
+    .wl-navigation-icon.wl-navigation-first {
+      &::before {
+        background-image: $wl-chevron-first-bg-image-active;
+      }
+    }
+  }
+
+  // TODO: Dropdown
+  .wl-dropdown {
+    min-width: rem(64);
+  }
+}

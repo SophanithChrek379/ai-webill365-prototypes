@@ -1,0 +1,290 @@
+// _wl-display.scss
+// Modern 3-layer architecture for display utilities
+@use "sass:map";
+@use "sass:math";
+@use "sass:meta";
+@use "sass:list";
+@use "../abstracts/breakpoints" as *;
+
+// -----------------------------------------------
+// Layer 1: Settings - Variables and configuration
+// -----------------------------------------------
+/// @group settings
+$wl-display: (
+  "values": (
+    "none": none,
+    "inline": inline,
+    "inline-block": inline-block,
+    "block": block,
+    "grid": grid,
+    "inline-grid": inline-grid,
+    "table": table,
+    "table-row": table-row,
+    "table-cell": table-cell,
+    "flex": flex,
+    "inline-flex": inline-flex,
+  ),
+  "properties": (
+    "display",
+  ),
+  "config": (
+    "class-prefix": "wl-",
+    "display-prefix": "d-",
+    "enable-responsive": true,
+    "enable-print": true,
+    "enable-only-classes": true,
+    "enable-sr-classes": true,
+    "enable-visibility": true,
+  ),
+);
+
+// ---------------------------------------------
+// Layer 2: Tools - Functions and mixins
+// ---------------------------------------------
+/// @group tools
+
+@function get-config($key) {
+  $config: map.get($wl-display, "config");
+  @if map.has-key($config, $key) {
+    @return map.get($config, $key);
+  }
+  @error "Configuration key '#{$key}' not found.";
+  @return null;
+}
+
+@function class-name($name) {
+  $prefix: get-config("class-prefix");
+  $display-prefix: get-config("display-prefix");
+  @return "#{$prefix}#{$display-prefix}#{$name}";
+}
+
+@function base-class-name($name) {
+  $prefix: get-config("class-prefix");
+  @return "#{$prefix}#{$name}";
+}
+
+@function ensure-unit($value) {
+  @if meta.type-of($value) == "number" and not math.is-unitless($value) {
+    @return $value;
+  } @else if math.is-unitless($value) {
+    @return $value * 1px;
+  }
+  @return $value;
+}
+
+@function sub-px($value, $delta: 0.02) {
+  $value: ensure-unit($value);
+  @return $value - ($delta * 1px);
+}
+
+@mixin safe-media($min: null, $max: null) {
+  @if $min != null and $max != null {
+    @media (min-width: $min) and (max-width: $max) {
+      @content;
+    }
+  } @else if $min != null {
+    @media (min-width: $min) {
+      @content;
+    }
+  } @else if $max != null {
+    @media (max-width: $max) {
+      @content;
+    }
+  }
+}
+
+@mixin create-display-class($value-name, $breakpoint: null) {
+  $values: map.get($wl-display, "values");
+  $value: map.get($values, $value-name);
+
+  @if $breakpoint {
+    .#{class-name("#{$breakpoint}-#{$value-name}")} {
+      display: $value;
+    }
+  } @else {
+    .#{class-name($value-name)} {
+      display: $value;
+    }
+  }
+}
+
+@mixin create-print-display-class($value-name) {
+  $values: map.get($wl-display, "values");
+  $value: map.get($values, $value-name);
+
+  .#{class-name("print-#{$value-name}")} {
+    display: $value;
+  }
+}
+
+@mixin create-only-display-class(
+  $breakpoint,
+  $min,
+  $max: null,
+  $next-min: null
+) {
+  .#{class-name("#{$breakpoint}-only")} {
+    @if $min != null {
+      @include safe-media(null, sub-px($min)) {
+        display: none;
+      }
+    }
+
+    @if $min != null and $max != null {
+      @include safe-media($min, $max) {
+        display: block;
+      }
+    } @else if $min == null and $max != null {
+      @include safe-media(null, $max) {
+        display: block;
+      }
+    } @else if $min != null and $next-min != null {
+      @include safe-media($min, sub-px($next-min)) {
+        display: block;
+      }
+    } @else if $min != null {
+      @include safe-media($min, null) {
+        display: block;
+      }
+    }
+
+    @if $next-min != null {
+      @include safe-media($next-min, null) {
+        display: none;
+      }
+    } @else if $max != null and $min == null {
+      @include safe-media($max + 0.02px, null) {
+        display: none;
+      }
+    }
+  }
+}
+
+// -----------------------------------------------
+// Layer 3: Utilities - Output utility classes
+// -----------------------------------------------
+/// @group utilities
+
+@mixin generate-base-display-classes() {
+  $values: map.get($wl-display, "values");
+  @each $value-name, $value in $values {
+    @include create-display-class($value-name);
+  }
+}
+
+@mixin generate-responsive-display-classes() {
+  @if get-config("enable-responsive") {
+    $values: map.get($wl-display, "values");
+
+    @each $breakpoint, $width in $breakpoints {
+      $width: ensure-unit($width);
+
+      @media (min-width: $width) {
+        @each $value-name, $value in $values {
+          @include create-display-class($value-name, $breakpoint);
+        }
+      }
+    }
+  }
+}
+
+@mixin generate-print-display-classes() {
+  @if get-config("enable-print") {
+    $values: map.get($wl-display, "values");
+
+    @media print {
+      @each $value-name, $value in $values {
+        @include create-print-display-class($value-name);
+      }
+    }
+  }
+}
+
+@mixin generate-only-display-classes() {
+  @if get-config("enable-only-classes") {
+    $breakpoint-pairs: ();
+    @each $breakpoint, $width in $breakpoints {
+      $breakpoint-pairs: list.append(
+        $breakpoint-pairs,
+        ($breakpoint, $width),
+        "comma"
+      );
+    }
+
+    $first-breakpoint: list.nth(list.nth($breakpoint-pairs, 1), 1);
+    $first-width: list.nth(list.nth($breakpoint-pairs, 1), 2);
+
+    @include create-only-display-class("xs", null, sub-px($first-width));
+
+    $length: list.length($breakpoint-pairs);
+    @for $i from 1 through $length {
+      $current-pair: list.nth($breakpoint-pairs, $i);
+      $current-breakpoint: list.nth($current-pair, 1);
+      $current-width: list.nth($current-pair, 2);
+
+      @if $i < $length {
+        $next-pair: list.nth($breakpoint-pairs, $i + 1);
+        $next-width: list.nth($next-pair, 2);
+        @include create-only-display-class(
+          $current-breakpoint,
+          $current-width,
+          sub-px($next-width)
+        );
+      } @else {
+        @include create-only-display-class($current-breakpoint, $current-width);
+      }
+    }
+  }
+}
+
+@mixin generate-sr-classes() {
+  @if get-config("enable-sr-classes") {
+    .#{base-class-name("sr-only")} {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      white-space: nowrap;
+      border: 0;
+    }
+
+    .#{base-class-name("sr-only-focusable")}:not(:focus) {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      white-space: nowrap;
+      border: 0;
+    }
+  }
+}
+
+@mixin generate-visibility-classes() {
+  @if get-config("enable-visibility") {
+    .#{base-class-name("visible")} {
+      visibility: visible;
+    }
+
+    .#{base-class-name("invisible")} {
+      visibility: hidden;
+    }
+  }
+}
+
+@mixin generate-all-display-utilities() {
+  @include generate-base-display-classes();
+  @include generate-responsive-display-classes();
+  @include generate-print-display-classes();
+  @include generate-only-display-classes();
+  @include generate-sr-classes();
+  @include generate-visibility-classes();
+}
+
+// Output all utility classes
+@include generate-all-display-utilities();

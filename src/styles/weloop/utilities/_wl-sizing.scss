@@ -1,0 +1,306 @@
+@use "sass:color";
+@use "sass:map";
+@use "sass:meta";
+@use "../abstracts/breakpoints" as *;
+
+// Local configuration for sizing properties
+// ------------------------------------------------
+
+// Percentage-based size values
+$sizes: (
+  "25": 25%,
+  "50": 50%,
+  "75": 75%,
+  "100": 100%,
+  "auto": auto,
+) !default;
+
+// Fixed size values (in rem)
+$fixed-sizes: (
+  "0": 0,
+  "1": 0.25rem,
+  // 4px
+  "2": 0.5rem,
+  // 8px
+  "3": 1rem,
+  // 16px
+  "4": 1.5rem,
+  // 24px
+  "5": 2rem,
+  // 32px
+  "6": 3rem,
+  // 48px
+  "8": 4rem,
+  // 64px
+  "10": 5rem,
+  // 80px
+  "12": 6rem,
+  // 96px
+  "16": 8rem // 128px,,,,,,
+) !default;
+
+// Viewport-based values
+$viewport-sizes: (
+  "25": 25vh,
+  "50": 50vh,
+  "75": 75vh,
+  "100": 100vh,
+) !default;
+
+// Mixins
+// ------------------------------------------------
+
+// Width mixin
+@mixin width($size) {
+  width: $size;
+}
+
+// Height mixin
+@mixin height($size) {
+  height: $size;
+}
+
+// Min-width mixin
+@mixin min-width($size) {
+  min-width: $size;
+}
+
+// Min-height mixin
+@mixin min-height($size) {
+  min-height: $size;
+}
+
+// Max-width mixin
+@mixin max-width($size) {
+  max-width: $size;
+}
+
+// Max-height mixin
+@mixin max-height($size) {
+  max-height: $size;
+}
+
+// Functions
+// ------------------------------------------------
+
+// Function to get a size value from map
+@function get-size($map, $key) {
+  @if map.has-key($map, $key) {
+    @return map.get($map, $key);
+  }
+  @warn "Unknown size '#{$key}' in provided size map.";
+  @return null;
+}
+
+// Class Generation
+// ------------------------------------------------
+
+// Width utilities (percentage-based)
+.wl-w {
+  @each $size-name, $size-value in $sizes {
+    &-#{$size-name} {
+      @include width($size-value);
+    }
+  }
+
+  // Fixed width utilities
+  @each $size-name, $size-value in $fixed-sizes {
+    &-fixed-#{$size-name} {
+      @include width($size-value);
+    }
+  }
+}
+
+// Height utilities (percentage-based)
+.wl-h {
+  @each $size-name, $size-value in $sizes {
+    &-#{$size-name} {
+      @include height($size-value);
+    }
+  }
+
+  // Fixed height utilities
+  @each $size-name, $size-value in $fixed-sizes {
+    &-fixed-#{$size-name} {
+      @include height($size-value);
+    }
+  }
+}
+
+// Viewport width utilities
+.wl-vw {
+  @each $size-name, $size-value in $sizes {
+    &-#{$size-name} {
+      @include width(#{$size-name}vw);
+    }
+  }
+}
+
+// Viewport height utilities
+.wl-vh {
+  @each $size-name, $size-value in $viewport-sizes {
+    &-#{$size-name} {
+      @include height($size-value);
+    }
+  }
+}
+
+// Min-width utilities
+.wl-min-w {
+  @each $size-name, $size-value in $sizes {
+    &-#{$size-name} {
+      @include min-width($size-value);
+    }
+  }
+
+  // Fixed min-width
+  @each $size-name, $size-value in $fixed-sizes {
+    &-fixed-#{$size-name} {
+      @include min-width($size-value);
+    }
+  }
+}
+
+// Min-height utilities
+.wl-min-h {
+  @each $size-name, $size-value in $sizes {
+    &-#{$size-name} {
+      @include min-height($size-value);
+    }
+  }
+
+  // Fixed min-height
+  @each $size-name, $size-value in $fixed-sizes {
+    &-fixed-#{$size-name} {
+      @include min-height($size-value);
+    }
+  }
+}
+
+// Max-width utilities
+.wl-max-w {
+  @each $size-name, $size-value in $sizes {
+    &-#{$size-name} {
+      @include max-width($size-value);
+    }
+  }
+
+  // Fixed max-width
+  @each $size-name, $size-value in $fixed-sizes {
+    &-fixed-#{$size-name} {
+      @include max-width($size-value);
+    }
+  }
+}
+
+// Max-height utilities
+.wl-max-h {
+  @each $size-name, $size-value in $sizes {
+    &-#{$size-name} {
+      @include max-height($size-value);
+    }
+  }
+
+  // Fixed max-height
+  @each $size-name, $size-value in $fixed-sizes {
+    &-fixed-#{$size-name} {
+      @include max-height($size-value);
+    }
+  }
+}
+
+// Special screen-based max-width utilities
+@each $breakpoint in (sm, md, lg, xl, xxl) {
+  .wl-max-w-screen-#{$breakpoint} {
+    @include max-width(get-breakpoint-size($breakpoint));
+  }
+}
+
+// Responsive variants - using imported breakpoints
+@each $breakpoint in (sm, md, lg, xl, xxl) {
+  @include breakpoint-up($breakpoint) {
+    // Width responsive utilities
+    @each $size-name, $size-value in $sizes {
+      .wl-#{$breakpoint}\:w-#{$size-name} {
+        @include width($size-value);
+      }
+    }
+
+    // Height responsive utilities
+    @each $size-name, $size-value in $sizes {
+      .wl-#{$breakpoint}\:h-#{$size-name} {
+        @include height($size-value);
+      }
+    }
+
+    // Max-width responsive utilities
+    .wl-#{$breakpoint}\:max-w-screen {
+      @include max-width(get-breakpoint-size($breakpoint));
+    }
+  }
+}
+
+// Special container class
+.wl-container {
+  width: 100%;
+  margin-right: auto;
+  margin-left: auto;
+  padding-right: map.get($fixed-sizes, "3");
+  padding-left: map.get($fixed-sizes, "3");
+
+  // Use imported breakpoints for container max-widths
+  @include breakpoint-up("sm") {
+    max-width: 540px;
+  }
+
+  @include breakpoint-up("md") {
+    max-width: 720px;
+  }
+
+  @include breakpoint-up("lg") {
+    max-width: 960px;
+  }
+
+  @include breakpoint-up("xl") {
+    max-width: 1140px;
+  }
+
+  @include breakpoint-up("xxl") {
+    max-width: 1320px;
+  }
+
+  &-fluid {
+    width: 100%;
+    margin-right: auto;
+    margin-left: auto;
+    padding-right: map.get($fixed-sizes, "3");
+    padding-left: map.get($fixed-sizes, "3");
+  }
+}
+
+// TODO: Add new
+.wl-dvh-100 {
+  height: 100dvh;
+}
+
+// Usage examples:
+//
+// 1. Basic width and height:
+// <div class="wl-w-50 wl-h-75">50% width, 75% height</div>
+//
+// 2. Fixed sizes:
+// <div class="wl-w-fixed-4 wl-h-fixed-5">1.5rem width, 2rem height</div>
+//
+// 3. Viewport sizing:
+// <div class="wl-vw-100 wl-vh-100">Full viewport width and height</div>
+//
+// 4. Min/Max constraints:
+// <div class="wl-min-w-50 wl-max-w-75">Between 50% and 75% width</div>
+//
+// 5. Responsive sizing:
+// <div class="wl-w-100 wl-md:w-75 wl-lg:w-50">
+//   Full width on small screens, 75% on medium, 50% on large
+// </div>
+//
+// 6. Container:
+// <div class="wl-container">Responsive container with paddings</div>

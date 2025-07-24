@@ -1,0 +1,110 @@
+@use "../abstracts/breakpoints" as *;
+@use "../abstracts/functions" as *;
+@use "../abstracts/mixins" as *;
+
+$wl-sidebar-width: rem(240);
+$wl-sidebar-height: rem(832);
+
+.wl-sidebar {
+  width: $wl-sidebar-width;
+  min-width: $wl-sidebar-width;
+  min-height: $wl-sidebar-height;
+  padding: rem(8);
+
+  background-color: var(--Backgrounds-BG-HIGHT-THIN, #e5f3ff);
+  border-right: 1px solid var(--Borders-BORDER-HIGHT-THIN, #a9d5ff);
+
+  @include wl-flex-column;
+  gap: var(--Spacing-WLDS-Space-12, 12px);
+  flex-shrink: 0;
+
+  // TODO: Header
+  .wl-header {
+    @include wl-flex-column;
+  }
+
+  // TODO: Body
+  .wl-body {
+    height: 100dvh;
+    @include wl-flex-column;
+    gap: rem(2);
+    align-items: flex-start;
+    flex: 1 0 0;
+    align-self: stretch;
+    overflow-y: auto;
+
+    ul {
+      li {
+        color: var(--Forgrounds-FG-INTERACTIVE, #0021fe);
+      }
+    }
+  }
+
+  // TODO: Footer
+  .wl-footer {
+    margin-top: auto;
+    @include wl-flex-column;
+  }
+
+  // TODO: Type: System-Settings
+  &.wl-system-settings {
+    min-height: rem(680);
+    padding: 0px;
+    background-color: var(--Backgrounds-BG-BASE-THIN, #fafafa);
+    border-right: 1px solid var(--Borders-BORDER-BASE-THIN, #d4d4d4);
+    border-top-left-radius: inherit;
+    border-bottom-left-radius: inherit;
+    gap: rem(10);
+    overflow: auto;
+
+    .wl-header {
+      padding: rem(8) rem(8) 0; // Top: 8, Right: 8, Bottom: 0, Left: 8
+    }
+
+    .wl-body {
+      padding: 0 rem(8) rem(8); // Top: 0, Right: 8, Bottom: 8, Left: 8
+      @include wl-flex-column;
+      gap: rem(20);
+
+      li {
+        color: var(--Forgrounds-FG-TITLE, #171717);
+
+        .wl-title {
+          color: var(--Forgrounds-FG-TITLE, #171717);
+        }
+
+        &:focus,
+        &:active,
+        &.wl-active {
+          background-color: var(--Backgrounds-BG-BASE-HEAVY, #e5e5e5);
+        }
+      }
+    }
+
+    .wl-footer {
+      padding: rem(8) rem(8) 0; // Top: 8, Right: 8, Bottom: 0, Left: 8
+    }
+  }
+
+  // TODO: List: Override Props
+  ul {
+    min-width: 100%;
+
+    li {
+      min-width: 100%;
+      width: 100%;
+
+      i.wl-icon-move {
+        color: #8eb6ff;
+        opacity: 0;
+        cursor: move;
+      }
+
+      &:hover {
+        i.wl-icon-move {
+          opacity: 1;
+        }
+      }
+    }
+  }
+}

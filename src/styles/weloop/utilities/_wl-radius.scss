@@ -1,0 +1,252 @@
+// _wl-border-radius.scss
+// Modern 3-layer architecture for border radius system
+@use "sass:map";
+@use "sass:meta";
+@use "sass:list";
+
+// -----------------------------------------------
+// Layer 1: Settings - Variables and configuration
+// -----------------------------------------------
+/// @group settings
+$wl-border-radius: (
+  // Token mapping to CSS variables
+  "tokens":
+    (
+      "none": var(--WLDS-Radius-0),
+      "2": var(--WLDS-Radius-2),
+      "4": var(--WLDS-Radius-4),
+      "6": var(--WLDS-Radius-6),
+      "8": var(--WLDS-Radius-8),
+      "10": var(--WLDS-Radius-10),
+      "12": var(--WLDS-Radius-12),
+      "16": var(--WLDS-Radius-16),
+      "20": var(--WLDS-Radius-20),
+      "24": var(--WLDS-Radius-24),
+      "28": var(--WLDS-Radius-28),
+      "32": var(--WLDS-Radius-32),
+      "64": var(--WLDS-Radius-64),
+    ),
+
+  // Semantic aliases
+  "semantic":
+    (
+      "none": var(--WLDS-Radius-0),
+      "xs": var(--WLDS-Radius-2),
+      "sm": var(--WLDS-Radius-4),
+      "md": var(--WLDS-Radius-8),
+      "lg": var(--WLDS-Radius-16),
+      "xl": var(--WLDS-Radius-24),
+      "2xl": var(--WLDS-Radius-32),
+      "full": var(--WLDS-Radius-64),
+    ),
+
+  // Configuration options
+  "config":
+    (
+      "class-prefix": "wl-",
+      "enable-semantic": true,
+      "enable-directional": true,
+      "enable-variable-classes": true,
+    )
+);
+
+// ---------------------------------------------
+// Layer 2: Tools - Functions and mixins
+// ---------------------------------------------
+/// @group tools
+
+/// Get a radius value from tokens or semantic maps
+/// @param {String} $size - The size key to retrieve
+/// @return {String} The radius value
+@function get-radius($size) {
+  $tokens: map.get($wl-border-radius, "tokens");
+  $semantic: map.get($wl-border-radius, "semantic");
+
+  @if map.has-key($tokens, $size) {
+    @return map.get($tokens, $size);
+  } @else if map.has-key($semantic, $size) {
+    @return map.get($semantic, $size);
+  }
+
+  @error "Border radius size '#{$size}' not found in radius tokens or semantic maps.";
+  @return null;
+}
+
+/// Get configuration value
+/// @param {String} $key - The configuration key
+/// @return {*} The configuration value
+@function get-config($key) {
+  $config: map.get($wl-border-radius, "config");
+
+  @if map.has-key($config, $key) {
+    @return map.get($config, $key);
+  }
+
+  @error "Configuration key '#{$key}' not found.";
+  @return null;
+}
+
+/// Create class name with proper prefix
+/// @param {String} $name - The base class name
+/// @return {String} The prefixed class name
+@function class-name($name) {
+  $prefix: get-config("class-prefix");
+  @return "#{$prefix}#{$name}";
+}
+
+/// Apply border radius to all corners
+/// @param {String} $size - The radius size key
+@mixin border-radius($size) {
+  border-radius: get-radius($size);
+}
+
+/// Apply border radius to top corners
+/// @param {String} $size - The radius size key
+@mixin border-radius-top($size) {
+  $value: get-radius($size);
+  border-top-left-radius: $value;
+  border-top-right-radius: $value;
+}
+
+/// Apply border radius to bottom corners
+/// @param {String} $size - The radius size key
+@mixin border-radius-bottom($size) {
+  $value: get-radius($size);
+  border-bottom-left-radius: $value;
+  border-bottom-right-radius: $value;
+}
+
+/// Apply border radius to left corners
+/// @param {String} $size - The radius size key
+@mixin border-radius-left($size) {
+  $value: get-radius($size);
+  border-top-left-radius: $value;
+  border-bottom-left-radius: $value;
+}
+
+/// Apply border radius to right corners
+/// @param {String} $size - The radius size key
+@mixin border-radius-right($size) {
+  $value: get-radius($size);
+  border-top-right-radius: $value;
+  border-bottom-right-radius: $value;
+}
+
+/// Apply border radius to individual corners
+/// @param {String} $corner - The corner (tl, tr, bl, br)
+/// @param {String} $size - The radius size key
+@mixin border-radius-corner($corner, $size) {
+  $value: get-radius($size);
+
+  @if $corner == "tl" {
+    border-top-left-radius: $value;
+  } @else if $corner == "tr" {
+    border-top-right-radius: $value;
+  } @else if $corner == "bl" {
+    border-bottom-left-radius: $value;
+  } @else if $corner == "br" {
+    border-bottom-right-radius: $value;
+  } @else {
+    @error "Invalid corner: #{$corner}. Must be one of: tl, tr, bl, br";
+  }
+}
+
+// -----------------------------------------------
+// Layer 3: Utilities - Output utility classes
+// -----------------------------------------------
+/// @group utilities
+
+/// Generate base border radius utility classes
+@mixin generate-base-radius-classes() {
+  $tokens: map.get($wl-border-radius, "tokens");
+
+  @each $size, $value in $tokens {
+    .#{class-name("rounded-#{$size}")} {
+      border-radius: $value;
+    }
+  }
+
+  @if get-config("enable-semantic") {
+    $semantic: map.get($wl-border-radius, "semantic");
+
+    @each $size, $value in $semantic {
+      .#{class-name("rounded-#{$size}")} {
+        border-radius: $value;
+      }
+    }
+  }
+}
+
+/// Generate directional border radius utility classes
+@mixin generate-directional-radius-classes() {
+  @if get-config("enable-directional") {
+    $tokens: map.get($wl-border-radius, "tokens");
+
+    @each $size, $value in $tokens {
+      // Top
+      .#{class-name("rounded-t-#{$size}")} {
+        border-top-left-radius: $value;
+        border-top-right-radius: $value;
+      }
+
+      // Bottom
+      .#{class-name("rounded-b-#{$size}")} {
+        border-bottom-left-radius: $value;
+        border-bottom-right-radius: $value;
+      }
+
+      // Left
+      .#{class-name("rounded-l-#{$size}")} {
+        border-top-left-radius: $value;
+        border-bottom-left-radius: $value;
+      }
+
+      // Right
+      .#{class-name("rounded-r-#{$size}")} {
+        border-top-right-radius: $value;
+        border-bottom-right-radius: $value;
+      }
+
+      // Individual corners
+      .#{class-name("rounded-tl-#{$size}")} {
+        border-top-left-radius: $value;
+      }
+
+      .#{class-name("rounded-tr-#{$size}")} {
+        border-top-right-radius: $value;
+      }
+
+      .#{class-name("rounded-bl-#{$size}")} {
+        border-bottom-left-radius: $value;
+      }
+
+      .#{class-name("rounded-br-#{$size}")} {
+        border-bottom-right-radius: $value;
+      }
+    }
+  }
+}
+
+/// Generate CSS variable-based utility classes
+@mixin generate-variable-radius-classes() {
+  @if get-config("enable-variable-classes") {
+    $tokens: map.get($wl-border-radius, "tokens");
+
+    @each $token-name, $token-value in $tokens {
+      .#{class-name("radius-#{$token-name}")} {
+        --#{class-name('border-radius')}: #{$token-value};
+        border-radius: var(--#{class-name("border-radius")});
+      }
+    }
+  }
+}
+
+/// Generate all border radius utility classes
+@mixin generate-all-radius-utilities() {
+  @include generate-base-radius-classes();
+  @include generate-directional-radius-classes();
+  @include generate-variable-radius-classes();
+}
+
+// Output all utility classes
+@include generate-all-radius-utilities();

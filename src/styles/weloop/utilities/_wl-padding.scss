@@ -1,0 +1,310 @@
+// _wl-padding.scss
+// Modern 3-layer architecture for padding utilities
+@use "sass:map";
+@use "sass:meta";
+@use "sass:list";
+@use "../abstracts/breakpoints" as *;
+
+// -----------------------------------------------
+// Layer 1: Settings - Variables and configuration
+// -----------------------------------------------
+/// @group settings
+$wl-padding: (
+  // Base padding size tokens
+  "sizes":
+    (
+      "0": 0,
+      "10": 0.625rem,
+      "12": 0.75rem,
+      "16": 1rem,
+      "20": 1.25rem,
+      "24": 1.5rem,
+      "32": 2rem,
+      "40": 2.5rem,
+      "44": 2.75rem,
+      "64": 4rem,
+      "72": 4.5rem,
+      "80": 5rem,
+      "86": 5.375rem,
+      "100": 6.25rem,
+      "148": 9.25rem,
+      "168": 10.5rem,
+    ),
+
+  // Padding directions
+  "directions":
+    (
+      "p": "padding",
+      "pt": "padding-top",
+      "pr": "padding-right",
+      "pb": "padding-bottom",
+      "pl": "padding-left",
+      "px": (
+        "padding-left",
+        "padding-right",
+      ),
+      "py": (
+        "padding-top",
+        "padding-bottom",
+      ),
+    ),
+
+  // Responsive configuration - which sizes to include for each breakpoint
+  "responsive-sizes":
+    (
+      "sm": (
+        "0",
+        "12",
+        "86",
+      ),
+      "md": (
+        "0",
+        "12",
+        "100",
+      ),
+      "lg": (
+        "0",
+        "12",
+        "40",
+        "44",
+        "64",
+        "72",
+        "80",
+        "148",
+        "168",
+      ),
+      "xl": (
+        "0",
+        "12",
+      ),
+      "xxl": (
+        "0",
+        "12",
+      ),
+    ),
+
+  // Specific directional padding for breakpoints
+  "responsive-directions":
+    (
+      "sm": (
+        "py": (
+          "86",
+        ),
+      ),
+      "md": (
+        "py": (
+          "100",
+        ),
+      ),
+      "lg": (
+        "py": (
+          "72",
+          "80",
+          "168",
+        ),
+        "px": (
+          "0",
+          "40",
+          "44",
+          "64",
+          "148",
+        ),
+      ),
+      "xl": (),
+      "xxl": (),
+    ),
+
+  // Configuration options
+  "config":
+    (
+      "class-prefix": "wl-",
+      "enable-responsive": true,
+      "generate-all-directions-for-base": true,
+    )
+);
+
+// ---------------------------------------------
+// Layer 2: Tools - Functions and mixins
+// ---------------------------------------------
+/// @group tools
+
+/// Get configuration value
+/// @param {String} $key - The configuration key
+/// @return {*} The configuration value
+@function get-config($key) {
+  $config: map.get($wl-padding, "config");
+
+  @if map.has-key($config, $key) {
+    @return map.get($config, $key);
+  }
+
+  @error "Configuration key '#{$key}' not found.";
+  @return null;
+}
+
+/// Create class name with proper prefix
+/// @param {String} $name - The base class name
+/// @return {String} The prefixed class name
+@function class-name($name) {
+  $prefix: get-config("class-prefix");
+  @return "#{$prefix}#{$name}";
+}
+
+/// Get padding value from size key
+/// @param {String} $size - The size key
+/// @return {*} The padding value
+@function get-padding-value($size) {
+  $sizes: map.get($wl-padding, "sizes");
+
+  @if map.has-key($sizes, $size) {
+    @return map.get($sizes, $size);
+  }
+
+  @error "Padding size '#{$size}' not found.";
+  @return null;
+}
+
+/// Check if a size is enabled for a breakpoint
+/// @param {String} $breakpoint - The breakpoint name
+/// @param {String} $size - The size key
+/// @return {Boolean} True if enabled
+@function is-size-enabled-for-breakpoint($breakpoint, $size) {
+  $responsive-sizes: map.get($wl-padding, "responsive-sizes");
+
+  @if map.has-key($responsive-sizes, $breakpoint) {
+    $enabled-sizes: map.get($responsive-sizes, $breakpoint);
+    @return list.index($enabled-sizes, $size) != null;
+  }
+
+  @return false;
+}
+
+/// Check if a direction is enabled for a breakpoint and size
+/// @param {String} $breakpoint - The breakpoint name
+/// @param {String} $direction - The direction key
+/// @param {String} $size - The size key
+/// @return {Boolean} True if enabled
+@function is-direction-enabled-for-breakpoint($breakpoint, $direction, $size) {
+  $responsive-directions: map.get($wl-padding, "responsive-directions");
+
+  @if map.has-key($responsive-directions, $breakpoint) {
+    $breakpoint-directions: map.get($responsive-directions, $breakpoint);
+
+    @if map.has-key($breakpoint-directions, $direction) {
+      $direction-sizes: map.get($breakpoint-directions, $direction);
+      @return list.index($direction-sizes, $size) != null;
+    }
+  }
+
+  @return false;
+}
+
+/// Create padding utility class
+/// @param {String} $direction-key - The direction key (p, pt, etc.)
+/// @param {String|List} $properties - The CSS property or properties
+/// @param {String} $size - The size key
+/// @param {String} $breakpoint - Optional breakpoint name
+@mixin create-padding-class(
+  $direction-key,
+  $properties,
+  $size,
+  $breakpoint: null
+) {
+  $value: get-padding-value($size);
+
+  @if $breakpoint {
+    .#{class-name("#{$direction-key}-#{$breakpoint}-#{$size}")} {
+      @if meta.type-of($properties) == "list" {
+        @each $property in $properties {
+          #{$property}: $value;
+        }
+      } @else {
+        #{$properties}: $value;
+      }
+    }
+  } @else {
+    .#{class-name("#{$direction-key}-#{$size}")} {
+      @if meta.type-of($properties) == "list" {
+        @each $property in $properties {
+          #{$property}: $value;
+        }
+      } @else {
+        #{$properties}: $value;
+      }
+    }
+  }
+}
+
+// -----------------------------------------------
+// Layer 3: Utilities - Output utility classes
+// -----------------------------------------------
+/// @group utilities
+
+/// Generate base padding classes
+@mixin generate-base-padding-classes() {
+  $sizes: map.get($wl-padding, "sizes");
+  $directions: map.get($wl-padding, "directions");
+
+  @each $size-key, $size-value in $sizes {
+    @each $direction-key, $properties in $directions {
+      @include create-padding-class($direction-key, $properties, $size-key);
+    }
+  }
+}
+
+/// Generate responsive padding classes
+@mixin generate-responsive-padding-classes() {
+  @if get-config("enable-responsive") {
+    $sizes: map.get($wl-padding, "sizes");
+    $directions: map.get($wl-padding, "directions");
+
+    @each $breakpoint, $width in $breakpoints {
+      @if $breakpoint != "" {
+        // Skip the base breakpoint
+        @media (min-width: $width) {
+          @each $size-key, $size-value in $sizes {
+            // Check if size is enabled for this breakpoint
+            @if is-size-enabled-for-breakpoint($breakpoint, $size-key) {
+              // Create the class for all-sides padding
+              @include create-padding-class(
+                "p",
+                "padding",
+                $size-key,
+                $breakpoint
+              );
+
+              // For other directions, check if specifically enabled
+              @each $direction-key, $properties in $directions {
+                @if $direction-key != "p" {
+                  $is_enabled: is-direction-enabled-for-breakpoint(
+                    $breakpoint,
+                    $direction-key,
+                    $size-key
+                  );
+
+                  @if $is_enabled {
+                    @include create-padding-class(
+                      $direction-key,
+                      $properties,
+                      $size-key,
+                      $breakpoint
+                    );
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+/// Generate all padding utility classes
+@mixin generate-all-padding-utilities() {
+  @include generate-base-padding-classes();
+  @include generate-responsive-padding-classes();
+}
+
+// Output all utility classes
+@include generate-all-padding-utilities();

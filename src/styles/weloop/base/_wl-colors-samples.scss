@@ -1,0 +1,25 @@
+@use "sass:map";
+
+// Foreground color variables (mapped to design tokens)
+$wl-fg-black: var(--Foregrounds-FG-BLACK, #000000) !default;
+$wl-fg-title: var(--Foregrounds-FG-TITLE, #1a1a1a) !default;
+$wl-fg-subtitle: var(--Foregrounds-FG-SUBTITLE, #4a4a4a) !default;
+$wl-fg-default: var(--Foregrounds-FG-BODY, #333333) !default;
+$wl-fg-primary: var(--Foregrounds-FG-INTERACTIVE, #0052cc) !default;
+$wl-fg-disabled: var(--Foregrounds-FG-DISABLED, #8c8c8c) !default;
+$wl-fg-disabled-value: var(--Foregrounds-FG-DISABLED-VALUE, #b3b3b3) !default;
+$wl-fg-fail: var(--Foregrounds-FG-FAIL, #cc0000) !default;
+$wl-fg-white: var(--Foregrounds-FG-WHITE, #ffffff) !default;
+
+// Map for foreground colors
+$wl-foreground-colors: (
+  "black": $wl-fg-black,
+  "title": $wl-fg-title,
+  "subtitle": $wl-fg-subtitle,
+  "default": $wl-fg-default,
+  "primary": $wl-fg-primary,
+  "disabled": $wl-fg-disabled,
+  "disabled-value": $wl-fg-disabled-value,
+  "fail": $wl-fg-fail,
+  "white": $wl-fg-white,
+) !default;

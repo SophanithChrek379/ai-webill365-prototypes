@@ -1,0 +1,281 @@
+// _wl-gap.scss
+// Modern 3-layer architecture for gap spacing system
+@use "sass:map";
+@use "sass:meta";
+@use "sass:list";
+@use "../abstracts/functions" as *;
+@use "../abstracts/mixins" as *;
+
+// -----------------------------------------------
+// Layer 1: Settings - Variables and configuration
+// -----------------------------------------------
+/// @group settings
+$wl-gap: (
+  // Base spacing tokens mapping to CSS variables with rem fallbacks
+  "tokens":
+    (
+      "0": (
+        var(--Spacing-WLDS-Space-0, 0),
+      ),
+      "2": (
+        var(--Spacing-WLDS-Space-2, rem(2)),
+      ),
+      "4": (
+        var(--Spacing-WLDS-Space-4, rem(4)),
+      ),
+      "6": (
+        var(--Spacing-WLDS-Space-6, rem(6)),
+      ),
+      "8": (
+        var(--Spacing-WLDS-Space-8, rem(8)),
+      ),
+      "10": (
+        var(--Spacing-WLDS-Space-10, rem(10)),
+      ),
+      "12": (
+        var(--Spacing-WLDS-Space-12, rem(12)),
+      ),
+      "16": (
+        var(--Spacing-WLDS-Space-16, rem(16)),
+      ),
+      "20": (
+        var(--Spacing-WLDS-Space-20, rem(20)),
+      ),
+      "24": (
+        var(--Spacing-WLDS-Space-24, rem(24)),
+      ),
+      "32": (
+        var(--Spacing-WLDS-Space-32, rem(32)),
+      ),
+      "40": (
+        var(--Spacing-WLDS-Space-40, rem(40)),
+      ),
+      "48": (
+        var(--Spacing-WLDS-Space-48, rem(48)),
+      ),
+      "56": (
+        var(--Spacing-WLDS-Space-56, rem(56)),
+      ),
+      "64": (
+        var(--Spacing-WLDS-Space-64, rem(64)),
+      ),
+      "72": (
+        var(--Spacing-WLDS-Space-72, rem(72)),
+      ),
+      "80": (
+        var(--Spacing-WLDS-Space-80, rem(80)),
+      ),
+      "88": (
+        var(--Spacing-WLDS-Space-88, rem(88)),
+      ),
+      "96": (
+        var(--Spacing-WLDS-Space-96, rem(96)),
+      ),
+      "104": (
+        var(--Spacing-WLDS-Space-104, rem(104)),
+      ),
+      "112": (
+        var(--Spacing-WLDS-Space-112, rem(112)),
+      ),
+      "120": (
+        var(--Spacing-WLDS-Space-120, rem(120)),
+      ),
+      "128": (
+        var(--Spacing-WLDS-Space-128, rem(128)),
+      ),
+      "136": (
+        var(--Spacing-WLDS-Space-136, rem(136)),
+      ),
+    ),
+
+  // Pure rem values (no CSS variable)
+  "rem-values":
+    (
+      "2-rem": rem(2),
+      "3-rem": rem(3),
+    ),
+
+  // Semantic aliases (if needed)
+  "semantic":
+    (
+      "none": var(--Spacing-WLDS-Space-0, 0),
+      "xs": var(--Spacing-WLDS-Space-4, rem(4)),
+      "sm": var(--Spacing-WLDS-Space-8, rem(8)),
+      "md": var(--Spacing-WLDS-Space-16, rem(16)),
+      "lg": var(--Spacing-WLDS-Space-24, rem(24)),
+      "xl": var(--Spacing-WLDS-Space-32, rem(32)),
+      "2xl": var(--Spacing-WLDS-Space-48, rem(48)),
+      "3xl": var(--Spacing-WLDS-Space-64, rem(64)),
+    ),
+
+  // Configuration options
+  "config":
+    (
+      "class-prefix": "wl-",
+      "enable-semantic": false,
+      // Set to true to enable semantic classes
+      "enable-standard-gap": true,
+      "enable-row-gap": true,
+      "enable-column-gap": true,
+      "enable-rem-values": true,
+    )
+);
+
+// ---------------------------------------------
+// Layer 2: Tools - Functions and mixins
+// ---------------------------------------------
+/// @group tools
+
+/// Get a gap value from tokens map
+/// @param {String} $size - The size key to retrieve
+/// @return {String} The gap value
+@function get-gap-value($size) {
+  $tokens: map.get($wl-gap, "tokens");
+  $rem-values: map.get($wl-gap, "rem-values");
+  $semantic: map.get($wl-gap, "semantic");
+
+  @if map.has-key($tokens, $size) {
+    @return map.get($tokens, $size);
+  } @else if map.has-key($rem-values, $size) {
+    @return map.get($rem-values, $size);
+  } @else if map.has-key($semantic, $size) {
+    @return map.get($semantic, $size);
+  }
+
+  @error "Gap size '#{$size}' not found in tokens, rem-values, or semantic maps.";
+  @return null;
+}
+
+/// Get configuration value
+/// @param {String} $key - The configuration key
+/// @return {*} The configuration value
+@function get-config($key) {
+  $config: map.get($wl-gap, "config");
+
+  @if map.has-key($config, $key) {
+    @return map.get($config, $key);
+  }
+
+  @error "Configuration key '#{$key}' not found.";
+  @return null;
+}
+
+/// Create class name with proper prefix
+/// @param {String} $name - The base class name
+/// @return {String} The prefixed class name
+@function class-name($name) {
+  $prefix: get-config("class-prefix");
+  @return "#{$prefix}#{$name}";
+}
+
+/// Apply standard gap
+/// @param {String} $size - The gap size key
+@mixin gap($size) {
+  gap: get-gap-value($size);
+}
+
+/// Apply row gap
+/// @param {String} $size - The gap size key
+@mixin row-gap($size) {
+  row-gap: get-gap-value($size);
+}
+
+/// Apply column gap
+/// @param {String} $size - The gap size key
+@mixin column-gap($size) {
+  column-gap: get-gap-value($size);
+}
+
+// -----------------------------------------------
+// Layer 3: Utilities - Output utility classes
+// -----------------------------------------------
+/// @group utilities
+
+/// Generate standard gap classes
+@mixin generate-standard-gap-classes() {
+  @if get-config("enable-standard-gap") {
+    $tokens: map.get($wl-gap, "tokens");
+
+    @each $size, $value in $tokens {
+      .#{class-name("gap-#{$size}")} {
+        gap: $value;
+      }
+    }
+
+    @if get-config("enable-semantic") {
+      $semantic: map.get($wl-gap, "semantic");
+
+      @each $size, $value in $semantic {
+        .#{class-name("gap-#{$size}")} {
+          gap: $value;
+        }
+      }
+    }
+
+    @if get-config("enable-rem-values") {
+      $rem-values: map.get($wl-gap, "rem-values");
+
+      @each $size, $value in $rem-values {
+        .#{class-name("gap-#{$size}")} {
+          gap: $value;
+        }
+      }
+    }
+  }
+}
+
+/// Generate row gap classes
+@mixin generate-row-gap-classes() {
+  @if get-config("enable-row-gap") {
+    $tokens: map.get($wl-gap, "tokens");
+
+    @each $size, $value in $tokens {
+      .#{class-name("row-gap-#{$size}")} {
+        row-gap: $value;
+      }
+    }
+
+    @if get-config("enable-semantic") {
+      $semantic: map.get($wl-gap, "semantic");
+
+      @each $size, $value in $semantic {
+        .#{class-name("row-gap-#{$size}")} {
+          row-gap: $value;
+        }
+      }
+    }
+  }
+}
+
+/// Generate column gap classes
+@mixin generate-column-gap-classes() {
+  @if get-config("enable-column-gap") {
+    $tokens: map.get($wl-gap, "tokens");
+
+    @each $size, $value in $tokens {
+      .#{class-name("column-gap-#{$size}")} {
+        column-gap: $value;
+      }
+    }
+
+    @if get-config("enable-semantic") {
+      $semantic: map.get($wl-gap, "semantic");
+
+      @each $size, $value in $semantic {
+        .#{class-name("column-gap-#{$size}")} {
+          column-gap: $value;
+        }
+      }
+    }
+  }
+}
+
+/// Generate all gap utility classes
+@mixin generate-all-gap-utilities() {
+  @include generate-standard-gap-classes();
+  @include generate-row-gap-classes();
+  @include generate-column-gap-classes();
+}
+
+// Output all utility classes
+@include generate-all-gap-utilities();

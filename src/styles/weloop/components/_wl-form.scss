@@ -1,0 +1,13 @@
+@use "../abstracts/breakpoints" as *;
+@use "../abstracts/functions" as *;
+@use "../abstracts/mixins" as *;
+
+@use "sass:map";
+
+// TODO: Variables: Sizes
+$wl-form-padding: var(--Spacing-WLDS-Space-16, 16px);
+$wl-form-padding-lg: var(--Spacing-WLDS-Space-24, 24px);
+
+form {
+  @include wl-flex-column;
+}

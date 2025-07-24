@@ -1,0 +1,180 @@
+@use "../abstracts/breakpoints" as *;
+@use "../abstracts/functions" as *;
+@use "../abstracts/mixins" as *;
+
+// TODO:  Variable
+$wl-select-width: rem(96);
+$wl-select-height: rem(32);
+$wl-select-bg-image-url: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12' fill='none'%3E%3Cpath d='M6 9.48047C5.80078 9.48047 5.625 9.4043 5.47266 9.24609L1.00781 4.68164C0.878906 4.55273 0.808594 4.38867 0.808594 4.20117C0.808594 3.82031 1.10742 3.52148 1.48828 3.52148C1.67578 3.52148 1.8457 3.59766 1.98047 3.72656L6 7.8457L10.0195 3.72656C10.1484 3.59766 10.3242 3.52148 10.5117 3.52148C10.8867 3.52148 11.1855 3.82031 11.1855 4.20117C11.1855 4.39453 11.1211 4.55273 10.9922 4.68164L6.52734 9.24609C6.38086 9.4043 6.19922 9.48047 6 9.48047Z' fill='%23171717'/%3E%3C/svg%3E");
+$wl-select-bg-image-disabled-url: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12' fill='none'%3E%3Cpath d='M6 9.48047C5.80078 9.48047 5.625 9.4043 5.47266 9.24609L1.00781 4.68164C0.878906 4.55273 0.808594 4.38867 0.808594 4.20117C0.808594 3.82031 1.10742 3.52148 1.48828 3.52148C1.67578 3.52148 1.8457 3.59766 1.98047 3.72656L6 7.8457L10.0195 3.72656C10.1484 3.59766 10.3242 3.52148 10.5117 3.52148C10.8867 3.52148 11.1855 3.82031 11.1855 4.20117C11.1855 4.39453 11.1211 4.55273 10.9922 4.68164L6.52734 9.24609C6.38086 9.4043 6.19922 9.48047 6 9.48047Z' fill='%23737373'/%3E%3C/svg%3E");
+$wl-select-chevron-up-bg-img-url: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12' fill='none'%3E%3Cpath d='M6 2.51953C6.19922 2.51953 6.375 2.5957 6.52734 2.75391L10.9922 7.31836C11.1211 7.44727 11.1914 7.61133 11.1914 7.79883C11.1914 8.17969 10.8926 8.47852 10.5117 8.47852C10.3242 8.47852 10.1543 8.40234 10.0195 8.27344L6 4.1543L1.98047 8.27344C1.85156 8.40234 1.67578 8.47851 1.48828 8.47851C1.11328 8.47851 0.814453 8.17969 0.814453 7.79883C0.814453 7.60547 0.878906 7.44726 1.00781 7.31836L5.47266 2.75391C5.61914 2.5957 5.80078 2.51953 6 2.51953Z' fill='%23171717'/%3E%3C/svg%3E");
+$wl-select-transition: color 0.15s ease-in-out,
+  background-color 0.15s ease-in-out, border-color 0.15s ease-in-out,
+  box-shadow 0.15s ease-in-out;
+
+// TODO: Variable: Small
+$wl-select-height-sm: rem(24);
+
+// TODO: Variable: Large
+$wl-select-height-lg: rem(48);
+
+// TODO: Mixin: Background: Color + Image
+@mixin wl-bg-image-base {
+  background-color: var(--Button-Primary-Outlined-BTN-OUTL-NORMAL, #fff);
+  background-image: $wl-select-bg-image-url;
+  background-repeat: no-repeat;
+  background-position: right rem(8) center;
+  background-size: rem(14) rem(14);
+}
+
+// TODO: Mixin: Shadow
+@mixin wl-shadow-normal {
+  background-color: var(--Button-Primary-Outlined-BTN-OUTL-NORMAL, #fff);
+  box-shadow: var(--Outline-Button-Default-First-X-0, 0px)
+      var(--Outline-Button-Default-First-Y-0, 0px)
+      var(--Outline-Button-Default-First-B-0, 0px)
+      var(--Outline-Button-Default-First-S-0, 1px)
+      var(--Outline-Button-Default-First-Color, rgba(0, 0, 0, 0.17)),
+    var(--Outline-Button-Default-Second-X-0, 0px)
+      var(--Outline-Button-Default-Second-Y-0, 1px)
+      var(--Outline-Button-Default-Second-B-0, 1px)
+      var(--Outline-Button-Default-Second-S-0, 0px)
+      var(--Outline-Button-Default-Second-Color, rgba(0, 0, 0, 0.15)),
+    var(--Outline-Button-Default-Third-X-0, 0px)
+      var(--Outline-Button-Default-Third-Y-0, 2px)
+      var(--Outline-Button-Default-Third-B-0, 3px)
+      var(--Outline-Button-Default-Third-S-0, 0px)
+      var(--Outline-Button-Default-Third-Color, rgba(0, 0, 0, 0.08));
+}
+
+@mixin wl-shadow-hover {
+  background-color: var(--Button-Primary-Outlined-BTN-OUTL-HOVER, #f5f5f5);
+  box-shadow: var(--Outline-Button-Hover-First-X-0, 0px)
+      var(--Outline-Button-Hover-First-Y-0, 0px)
+      var(--Outline-Button-Hover-First-B-0, 0px)
+      var(--Outline-Button-Hover-First-S-0, 1px)
+      var(--Outline-Button-Hover-First-Color, rgba(0, 0, 0, 0.25)),
+    var(--Outline-Button-Hover-Secord-X-0, 0px)
+      var(--Outline-Button-Hover-Secord-Y-0, 1px)
+      var(--Outline-Button-Hover-Secord-B-0, 1px)
+      var(--Outline-Button-Hover-Secord-S-0, 0px)
+      var(--Outline-Button-Hover-Secord-Color, rgba(0, 0, 0, 0.15)),
+    var(--Outline-Button-Hover-Third-X-0, 0px)
+      var(--Outline-Button-Hover-Third-Y-0, 2px)
+      var(--Outline-Button-Hover-Third-B-0, 4px)
+      var(--Outline-Button-Hover-Third-S-0, 0px)
+      var(--Outline-Button-Hover-Third-Color, rgba(0, 0, 0, 0.16));
+}
+
+@mixin wl-shadow-pressed {
+  background-color: var(--Button-Primary-Outlined-BTN-OUTL-PRESSED, #fafafa);
+  box-shadow: var(--Outline-Button-Pressed-First-X-0, 0px)
+      var(--Outline-Button-Pressed-First-Y-0, 0px)
+      var(--Outline-Button-Pressed-First-B-0, 1px)
+      var(--Outline-Button-Pressed-First-S-0, 1px)
+      var(--Outline-Button-Pressed-First-Color, rgba(105, 114, 129, 0.16)),
+    var(--Outline-Button-Pressed-Secord-X-0, 0px)
+      var(--Outline-Button-Pressed-Secord-Y-0, 0px)
+      var(--Outline-Button-Pressed-Secord-B-0, 0px)
+      var(--Outline-Button-Pressed-Secord-S-0, 4px)
+      var(--Outline-Button-Pressed-Secord-Colors, #d0d5dc);
+}
+
+@mixin wl-shadow-disabled {
+  background-color: var(--Button-Disabled-BTN-DISABLED, #e5e5e5);
+  box-shadow: 0px 0px 0px 1px var(--Primary-Button-Disabled-Color, #d4d4d4);
+}
+
+// TODO: Mixin
+@mixin wl-select-base {
+  min-height: $wl-select-height;
+  max-height: $wl-select-height;
+  padding-left: var(--Spacing-WLDS-Space-8, 8px);
+  padding-right: var(--Spacing-WLDS-Space-32, 32px);
+  @include wl-shadow-normal;
+  border-radius: var(--Button-Radius-BTN-RDR-06, 6px);
+  @include wl-bg-image-base;
+  color: var(--Forgrounds-FG-BLACK, #0a0a0a);
+  font-family: var(--Typeface-Family-Button-Large, "Inter");
+  font-size: var(--Typeface-Size-Button-Medium, 14px);
+  font-weight: var(--Typeface-Weight-Button-Medium, 500);
+  line-height: var(--Typeface-Line-height-Button-Medium, 16px);
+  letter-spacing: var(--Typeface-Letter-Spacing-Button-Medium, 0px);
+  @include wl-text-ellipsis;
+
+  transition: $wl-select-transition;
+  border: none;
+  outline: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  opacity: 1;
+}
+
+// TODO: Size: Small
+@mixin wl-select-sm {
+  min-height: $wl-select-height-sm;
+  max-height: $wl-select-height-sm;
+  padding-left: var(--Spacing-WLDS-Space-6, 6px);
+  padding-right: rem(26);
+  border-radius: var(--Button-Radius-BTN-RDR-04, 4px);
+  font-size: var(--Typeface-Size-Button-Small, 12px);
+  font-weight: var(--Typeface-Weight-Button-Medium, 500);
+  line-height: var(--Typeface-Line-height-Button-Small, 16px);
+  letter-spacing: var(--Typeface-Letter-Spacing-Button-Small, 0px);
+  background-size: rem(12) rem(12);
+}
+
+// TODO: Size: Large
+@mixin wl-select-lg {
+  min-height: $wl-select-height-lg;
+  max-height: $wl-select-height-lg;
+  padding-left: var(--Spacing-WLDS-Space-12, 12px);
+  padding-right: var(--Spacing-WLDS-Space-36, 36px);
+  border-radius: var(--Button-Radius-BTN-RDR-08, 8px);
+  font-size: var(--Typeface-Size-Button-Large, 18px);
+  font-weight: var(--Typeface-Weight-Button-Medium, 500);
+  line-height: var(--Typeface-Line-height-Button-Large, 24px);
+  letter-spacing: var(--Typeface-Letter-Spacing-Button-Large, 0px);
+  background-size: rem(16) rem(16);
+}
+
+// TODO: Select
+select {
+  @include wl-select-base;
+
+  &:hover {
+    cursor: pointer;
+    @include wl-shadow-hover;
+  }
+
+  &:focus,
+  &:active {
+    outline: 0;
+    @include wl-shadow-pressed;
+  }
+
+  &:focus {
+    // TODO: When focus change background-image to chevron-up
+    background-image: $wl-select-chevron-up-bg-img-url;
+  }
+
+  &:disabled,
+  .wl-disabled {
+    cursor: not-allowed;
+    user-select: none;
+    @include wl-shadow-disabled;
+    background-image: $wl-select-bg-image-disabled-url;
+    color: var(--Forgrounds-FG-DISABLED-VALUE, #737373);
+  }
+
+  // TODO: Size: Small
+  &.wl-select-sm {
+    @include wl-select-sm;
+  }
+
+  // TODO: Size: Large
+  &.wl-select-lg {
+    @include wl-select-lg;
+  }
+}

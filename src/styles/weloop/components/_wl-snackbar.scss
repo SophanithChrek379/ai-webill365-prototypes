@@ -1,0 +1,117 @@
+@use "sass:color";
+@use "sass:math";
+@use "../abstracts/breakpoints" as *;
+@use "../abstracts/functions" as *;
+@use "../abstracts/mixins" as *;
+
+// TODO: Variables
+$wl-snackbar-width: 266px;
+$wl-snackbar-size: 48px;
+$wl-snackbar-transition: transform 0.3s ease-out, opacity 0.3s ease-out;
+$wl-snackbar-default-bg-img-url: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none'%3E%3Cpath d='M0.80127 16.7183C0.80127 15.8467 0.962402 14.8872 1.27002 13.8618C1.73145 12.3237 2.52246 10.2583 3.26221 8.69824C3.91406 7.34326 4.33887 6.53027 6.11133 6.12744C7.62012 5.79053 9.61963 5.58545 11.9927 5.58545C14.373 5.58545 16.3726 5.79053 17.874 6.12744C19.6538 6.53027 20.0786 7.34326 20.7305 8.69824C21.4702 10.2583 22.2612 12.3237 22.7227 13.8618C23.0303 14.8872 23.1914 15.8467 23.1914 16.7183C23.1914 18.7104 21.8657 19.8457 20.1006 19.8457C18.8115 19.8457 17.8594 19.311 17.083 18.5493L15.8525 17.2969C15.6768 17.1211 15.5669 17.0405 15.3179 17.0405H8.6748C8.42578 17.0405 8.31592 17.1211 8.14014 17.2969L6.90967 18.5493C6.14062 19.3184 5.18115 19.8457 3.89209 19.8457C2.12695 19.8457 0.80127 18.7104 0.80127 16.7183ZM2.90332 16.5498C2.90332 17.2822 3.41602 17.6997 4.0752 17.6997C4.50732 17.6997 4.97607 17.4946 5.36426 17.0918L7.09277 15.3999C7.46631 15.019 7.75928 14.8652 8.27197 14.8652H15.7134C16.2334 14.8652 16.5264 15.019 16.8999 15.3999L18.6284 17.0918C19.0239 17.4873 19.4854 17.6997 19.9175 17.6997C20.5767 17.6997 21.0894 17.2822 21.0894 16.5498C21.0894 16.1543 21.0015 15.6782 20.7891 14.9751C20.2764 13.2393 19.4414 11.0493 18.7163 9.47461C18.3721 8.74219 18.189 8.42725 17.5591 8.28076C16.1602 7.94385 14.2852 7.76074 11.9927 7.76074C9.70752 7.76074 7.83252 7.94385 6.43359 8.28076C5.80371 8.42725 5.61328 8.74219 5.27637 9.47461C4.54395 11.0493 3.70898 13.2319 3.20361 14.9751C2.99854 15.6782 2.90332 16.1543 2.90332 16.5498ZM5.86963 11.4155C5.86963 10.9175 6.19922 10.6025 6.71191 10.6025H7.69336V9.67969C7.69336 9.15967 8.03027 8.80811 8.54297 8.80811C9.05566 8.80811 9.38525 9.15967 9.38525 9.67969V10.6025H10.3008C10.8501 10.6025 11.2017 10.9175 11.2017 11.4155C11.2017 11.9136 10.8501 12.2358 10.3008 12.2358H9.38525V13.1587C9.38525 13.6787 9.05566 14.0229 8.54297 14.0229C8.03027 14.0229 7.69336 13.6787 7.69336 13.1587V12.2358H6.71191C6.19922 12.2358 5.86963 11.9136 5.86963 11.4155ZM16.6362 11.4302C15.9771 11.4302 15.457 10.9175 15.457 10.2583C15.457 9.5918 15.9771 9.07178 16.6362 9.07178C17.2954 9.07178 17.8154 9.5918 17.8154 10.2583C17.8154 10.9175 17.2954 11.4302 16.6362 11.4302ZM14.395 13.7227C13.7432 13.7227 13.2158 13.2026 13.2158 12.5508C13.2158 11.8843 13.7432 11.3643 14.395 11.3643C15.0615 11.3643 15.5742 11.8843 15.5742 12.5508C15.5742 13.2026 15.0615 13.7227 14.395 13.7227Z' fill='white'/%3E%3C/svg%3E");
+$wl-snackbar-close-bg-img-url: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 16 16' fill='none'%3E%3Cpath d='M1.95313 14.4063C1.6172 14.0781 1.62501 13.5 1.95313 13.1797L6.75782 8.3672L1.95313 3.56251C1.62501 3.2422 1.6172 2.67188 1.95313 2.32813C2.28907 1.9922 2.85938 2.00001 3.18751 2.32813L7.9922 7.13282L12.7969 2.32813C13.1328 2.00001 13.6875 2.00001 14.0313 2.33595C14.375 2.66407 14.3672 3.23438 14.0391 3.56251L9.23438 8.3672L14.0391 13.1797C14.3672 13.5078 14.3672 14.0703 14.0313 14.4063C13.6953 14.75 13.1328 14.7422 12.7969 14.4141L7.9922 9.60938L3.18751 14.4141C2.85938 14.7422 2.29688 14.7422 1.95313 14.4063Z' fill='white'/%3E%3E%3C/svg%3E");
+
+// TODO: Snackbar
+.wl-snackbar {
+  // TODO: Container
+  &-container {
+    min-width: $wl-snackbar-width;
+    min-height: $wl-snackbar-size;
+    border-radius: var(--WLDS-Radius-12, 12px);
+    padding-left: var(--Spacing-WLDS-Space-16, 16px);
+    @include wl-aligns-center;
+    gap: var(--Spacing-WLDS-Space-16, 16px);
+
+    color: var(--Forgrounds-FG-WHITE, #fff);
+    font-size: var(--Typeface-Size-Body-Small, 14px);
+    font-weight: var(--Typeface-Weight-Body-Small, 500);
+    line-height: var(--Typeface-Line-height-Body-Small, 20px);
+    letter-spacing: var(--Typeface-Letter-Spacing-Body-Small, -0.2px);
+
+    // Default state: hidden and positioned off-screen
+    display: flex; // Always flex, but hidden via transform and opacity
+    position: fixed;
+    bottom: rem(20); // Final resting position
+    right: rem(20);
+    z-index: 1050;
+    transform: translateY(150%); // Start off-screen (below the viewport)
+    opacity: 0; // Start fully transparent
+    transition: $wl-snackbar-transition;
+
+    // TODO: Position when shown
+    &.wl-show {
+      transform: translateY(0); // Slide up to final position
+      opacity: 1; // Fade in
+    }
+
+    // TODO: Display for Demo in component page
+    &.wl-d-flex {
+      transform: translateY(0);
+      opacity: 1;
+    }
+  }
+
+  // TODO: Lead
+  &-lead {
+    // TODO: Default: Icon
+    .wl-icon {
+      width: rem(24);
+      height: rem(24);
+      background-image: $wl-snackbar-default-bg-img-url;
+    }
+
+    padding-right: var(--Spacing-WLDS-Space-12, 12px);
+    @include wl-aligns-center;
+    gap: var(--Spacing-WLDS-Space-8, 8px);
+  }
+
+  // TODO: Trial
+  &-trial {
+    @include wl-aligns-center;
+    gap: var(--Spacing-WLDS-Space-8, 8px);
+  }
+
+  // TODO: Button: Icon: Close
+  &-close {
+    width: $wl-snackbar-size;
+    height: $wl-snackbar-size;
+    border-radius: inherit;
+    border-left: 1px solid rgba(255, 255, 255, 0.2);
+    @include wl-flex-center;
+    gap: var(--Spacing-WLDS-Space-10, 10px);
+    cursor: pointer;
+
+    // TODO: Icon: Close
+    .wl-icon.wl-close-icon {
+      background-image: $wl-snackbar-close-bg-img-url;
+    }
+  }
+
+  // TODO: Types: Success
+  &-success {
+    background-color: var(--Tags-Positive-TAG-BG-GRE-HEAVY, #008427);
+    box-shadow: 0px 6px 24px 0px rgba(0, 0, 0, 0.08),
+      0px 1px 6px 0px rgba(0, 0, 0, 0.08), 0px 0px 0px 1px rgba(0, 0, 0, 0.04);
+  }
+
+  // TODO: Types: Warning
+  &-warning {
+    background-color: var(--Tags-Positive-TAG-BG-YEL-MIDDLE, #e28100);
+    box-shadow: 0px 6px 24px 0px rgba(0, 0, 0, 0.08),
+      0px 1px 6px 0px rgba(0, 0, 0, 0.08), 0px 0px 0px 1px rgba(0, 0, 0, 0.04);
+  }
+
+  // TODO: Types: Critical
+  &-critical {
+    background-color: var(--Tags-Negative-TAG-BG-HEAVY, #bb0005);
+    box-shadow: 0px 6px 24px 0px rgba(0, 0, 0, 0.08),
+      0px 1px 6px 0px rgba(0, 0, 0, 0.08), 0px 0px 0px 1px rgba(0, 0, 0, 0.04);
+  }
+
+  // TODO: Types: Information
+  &-information {
+    background-color: var(--Tags-Neutral-Tone-TAG-BG-NTL-HEAVY, #262626);
+    box-shadow: 0px 6px 24px 0px rgba(0, 0, 0, 0.08),
+      0px 1px 6px 0px rgba(0, 0, 0, 0.08), 0px 0px 0px 1px rgba(0, 0, 0, 0.04);
+  }
+}

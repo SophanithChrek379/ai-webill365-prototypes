@@ -1,0 +1,212 @@
+@use "../abstracts/breakpoints" as *;
+
+// Local configuration for text-related properties
+// ------------------------------------------------
+
+// Text alignments
+$text-alignments: (left, right, center, justify) !default;
+
+// Text transforms
+$text-transforms: (lowercase, uppercase, capitalize, none) !default;
+
+// Line heights
+$line-heights: (
+  tight: 1.25,
+  normal: 1.5,
+  loose: 1.75,
+) !default;
+
+// Letter spacings
+$letter-spacings: (
+  tight: -0.05em,
+  normal: 0,
+  wide: 0.05em,
+) !default;
+
+// Vertical alignment options
+$vertical-aligns: (
+  baseline,
+  top,
+  middle,
+  bottom,
+  text-top,
+  text-bottom
+) !default;
+
+// Mixins
+// ------------------------------------------------
+
+// Text alignment mixin
+@mixin text-align($alignment) {
+  text-align: $alignment;
+}
+
+// Text transform mixin
+@mixin text-transform($transform) {
+  text-transform: $transform;
+}
+
+// Line height mixin
+@mixin line-height($height) {
+  line-height: $height;
+}
+
+// Letter spacing mixin
+@mixin letter-spacing($spacing) {
+  letter-spacing: $spacing;
+}
+
+// Text decoration mixin
+@mixin text-decoration($decoration) {
+  text-decoration: $decoration;
+}
+
+// Text wrapping and truncation mixin
+@mixin text-wrapping($type) {
+  @if $type == wrap {
+    white-space: normal;
+  } @else if $type == nowrap {
+    white-space: nowrap;
+  } @else if $type == truncate {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+}
+
+// Text direction mixin
+@mixin text-direction($direction) {
+  direction: $direction;
+}
+
+// Vertical alignment mixin
+@mixin vertical-align($alignment) {
+  vertical-align: $alignment;
+}
+
+// Class Generation
+// ------------------------------------------------
+.wl-text {
+  // Text alignment utilities
+  @each $alignment in $text-alignments {
+    &-#{$alignment} {
+      @include text-align($alignment);
+    }
+  }
+
+  // Text transform utilities
+  @each $transform in $text-transforms {
+    &-#{$transform} {
+      @include text-transform($transform);
+    }
+  }
+
+  // Text decoration utilities
+  &-decoration {
+    &-none {
+      @include text-decoration(none);
+    }
+
+    &-underline {
+      @include text-decoration(underline);
+    }
+
+    &-line-through {
+      @include text-decoration(line-through);
+    }
+  }
+
+  // Text wrapping utilities
+  &-wrap {
+    @include text-wrapping("wrap");
+  }
+
+  &-nowrap {
+    @include text-wrapping("nowrap");
+  }
+
+  &-truncate {
+    @include text-wrapping("truncate");
+  }
+
+  // Text direction utilities
+  &-ltr {
+    @include text-direction(ltr);
+  }
+
+  &-rtl {
+    @include text-direction(rtl);
+  }
+}
+
+// Line height utilities (separate block)
+.wl-lh {
+  @each $name, $value in $line-heights {
+    &-#{$name} {
+      @include line-height($value);
+    }
+  }
+}
+
+// Letter spacing utilities (separate block)
+.wl-tracking {
+  @each $name, $value in $letter-spacings {
+    &-#{$name} {
+      @include letter-spacing($value);
+    }
+  }
+}
+
+// Vertical alignment utilities (separate block)
+.wl-align {
+  @each $alignment in $vertical-aligns {
+    &-#{$alignment} {
+      @include vertical-align($alignment);
+    }
+  }
+}
+
+// Responsive variants - using imported breakpoints
+@each $breakpoint in (sm, md, lg, xl, xxl) {
+  @include breakpoint-up($breakpoint) {
+    // Text alignment responsive utilities
+    @each $alignment in $text-alignments {
+      .wl-#{$breakpoint}\:text-#{$alignment} {
+        @include text-align($alignment);
+      }
+    }
+
+    // Line height responsive utilities
+    @each $name, $value in $line-heights {
+      .wl-#{$breakpoint}\:lh-#{$name} {
+        @include line-height($value);
+      }
+    }
+
+    // Text transform responsive utilities
+    @each $transform in $text-transforms {
+      .wl-#{$breakpoint}\:text-#{$transform} {
+        @include text-transform($transform);
+      }
+    }
+  }
+}
+
+// Usage examples:
+//
+// 1. Basic text alignment:
+// <p class="wl-text-center">Centered text</p>
+//
+// 2. Text transformation:
+// <h2 class="wl-text-uppercase">Uppercase heading</h2>
+//
+// 3. Line height:
+// <p class="wl-lh-loose">Text with loose line height</p>
+//
+// 4. Text truncation:
+// <div class="wl-text-truncate">This text will be truncated with ellipsis if too long</div>
+//
+// 5. Responsive alignment:
+// <p class="wl-text-start wl-md:text-center wl-lg:text-end">
+//   Left-aligned by default, centered on medium screens, right-aligned on large screens
+// </p>

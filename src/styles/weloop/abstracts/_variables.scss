@@ -1,0 +1,25 @@
+html[wlds-theme-mode=light] {
+    // TODO: WeLoop: Custom
+    --Colors-PRIMARY-WLDS-PRM-08-★: #0072ff;
+    --Button-Primary-Filled-BTN-PRM-FLD-HOVER: #1f62ff;
+    --Button-Primary-Filled-BTN-PRM-FLD-PRESSED: #0522d1;
+
+    // TODO: Background: Custom
+    --Backgrounds-BG-PRM-08: #0072ff;
+
+    // TODO: Foreground: Custom
+    --Forgrounds-FG-INTERACTIVE: #0072ff;
+
+    // TODO: Checkbox
+    --Primary-Button-Normal-First-Color: #0072ff;
+    --Primary-Button-Normal-Second-Color: #0072ff;
+
+}
+
+// TODO: SCSS Variables
+$cafe-merchant-primary-color: var(--Colors-PRIMARY-WLDS-PRM-08-★);
+$cafe-merchant-primary-hover-color: var(--Button-Primary-Filled-BTN-PRM-FLD-HOVER);
+$cafe-merchant-primary-pressed-color: var(--Button-Primary-Filled-BTN-PRM-FLD-PRESSED);
+$cafe-merchant-primary-disabled-color: #e5e5e5;
+$cafe-merchant-gray-color: #737373;
+$cafe-merchant-black-color: #171717;

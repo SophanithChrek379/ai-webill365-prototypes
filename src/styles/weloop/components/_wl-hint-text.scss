@@ -1,0 +1,65 @@
+@use "sass:color";
+@use "sass:math";
+@use "../abstracts/breakpoints" as *;
+@use "../abstracts/functions" as *;
+@use "../abstracts/mixins" as *;
+
+// TODO: Variables
+$wl-hint-text-info-color: var(--Forgrounds-FG-SUBTITLE, #404040);
+$wl-hint-text-disabled-color: var(--Forgrounds-FG-DISABLED, #a3a3a3);
+$wl-hint-text-warning-color: var(--Tags-Positive-TAG-FG-YEL-MIDDLE, #ffac00);
+$wl-hint-text-success-color: var(--Tags-Positive-TAG-FG-GRE-MIDDLE, #00a928);
+$wl-hint-text-error-color: var(--Tags-Negative-TAG-FG-HEAVY, #e20000);
+
+// TODO: Base
+@mixin wl-hint-text-base {
+  margin-top: rem(12);
+  margin-bottom: rem(8);
+  font-size: var(--Typeface-Size-Button-Small, 12px);
+  font-weight: var(--Typeface-Weight-Button-Small, 500);
+  line-height: var(--Typeface-Line-height-Button-Small, 12px);
+  letter-spacing: var(--Typeface-Letter-Spacing-Button-Small, -0.1px);
+  @include wl-text-ellipsis-double;
+}
+
+// TODO: Size: Large
+@mixin wl-hint-text-large {
+  margin-top: rem(14);
+  margin-bottom: rem(12);
+  font-size: var(--Typeface-Size-Button-Medium, 14px);
+  line-height: var(--Typeface-Line-height-Button-Medium, 14px);
+  letter-spacing: var(--Typeface-Letter-Spacing-Button-Medium, -0.1px);
+}
+
+// TODO: Component: Hint-Text
+.wl-hint-text {
+  &-information {
+    @include wl-hint-text-base;
+    color: $wl-hint-text-info-color;
+  }
+
+  &-disabled {
+    @include wl-hint-text-base;
+    color: $wl-hint-text-disabled-color;
+  }
+
+  &-warning {
+    @include wl-hint-text-base;
+    color: $wl-hint-text-warning-color;
+  }
+
+  &-success {
+    @include wl-hint-text-base;
+    color: $wl-hint-text-success-color;
+  }
+
+  &-error {
+    @include wl-hint-text-base;
+    color: $wl-hint-text-error-color;
+  }
+
+  // TODO: Size: Large
+  &-lg {
+    @include wl-hint-text-large;
+  }
+}

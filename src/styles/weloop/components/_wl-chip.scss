@@ -1,0 +1,419 @@
+@use "sass:color";
+@use "sass:math";
+@use "../abstracts/breakpoints" as *;
+@use "../abstracts/functions" as *;
+@use "../abstracts/mixins" as *;
+
+// TODO: Global Variables
+$wl-chip-height-sm: 24px;
+$wl-chip-height-md: 32px;
+$wl-chip-lead-sm: 16px;
+$wl-chip-lead-md: 24px;
+$wl-chip-transition: background-color 0.25s ease, box-shadow 0.25s ease,
+  opacity 0.25s ease-in-out, transform 0.25s ease-in-out;
+$wl-chip-background-image-url: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNiIgaGVpZ2h0PSIxNiIgdmlld0JveD0iMCAwIDE2IDE2IiBmaWxsPSJub25lIj4KICA8cGF0aCBkPSJNNi44Mzc2NyAxMy40Mzc1QzYuNTIxNyAxMy40Mzc1IDYuMjg0NzIgMTMuMzE5IDYuMDcwMzEgMTMuMDUzOEwzLjE0NzU3IDkuNDU0QzIuOTgzOTQgOS4yNTY1MSAyLjkxNjIzIDkuMDcwMzIgMi45MTYyMyA4Ljg3MjgzQzIuOTE2MjMgOC40MjE0NCAzLjI0OTEzIDguMDk0MTkgMy43MTE4IDguMDk0MTlDMy45ODgyOCA4LjA5NDE5IDQuMTgwMTIgOC4xOTU3NSA0LjM2NjMyIDguNDI3MDlMNi44MTUxMCAxMS41MzA0TDExLjU5NDIgMy45NTgzNEMxMS43ODYgMy42NTM2NSAxMS45NzcgMy41NDA4IDEyLjI5MzggMy41NDA4QzEyLjc1MDkgMy41NDA4IDEzLjA3ODEgMy44NjI0MiAxMy4wNzgxIDQuMzA4MTZDMTMuMDc4MSA0LjQ4MzA4IDEzLjAyNzMgNC42NjM2MyAxMi44OTE5IDQuODY2NzZMNy42MTA2NyAxMy4wMzY5QzcuNDMwMTIgMTMuMzA3NyA3LjE3MDU3IDEzLjQzNzUgNi44Mzc2NyAxMy40Mzc1WiIgZmlsbD0iIzBGMUZFQSIgc3R5bGU9ImZpbGw6IzBGMUZFQTtmaWxsLW9wYWNpdHk6MTsiLz4KPC9zdmc+Cg==");
+$wl-chip-close-background-image-url: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 14 14' fill='none'%3E%3Cpath d='M3.15896 11.1703C2.91211 10.9284 2.92198 10.5088 3.15402 10.2767L6.09652 7.32929L3.15402 4.3868C2.92198 4.15476 2.91704 3.74004 3.15896 3.49319C3.40088 3.24634 3.82053 3.25621 4.05751 3.48825L7 6.43074L9.93755 3.48825C10.1795 3.24634 10.5892 3.25127 10.8361 3.49319C11.083 3.74004 11.083 4.14982 10.841 4.39174L7.90348 7.32929L10.841 10.2718C11.083 10.5137 11.078 10.9235 10.8361 11.1703C10.5942 11.4172 10.1795 11.4172 9.93755 11.1753L7 8.23277L4.05751 11.1753C3.82053 11.4073 3.40581 11.4172 3.15896 11.1703Z' fill='%23171717'/%3E%3C/svg%3E");
+
+// TODO: Shadow Mixins
+@mixin wl-shadow-normal {
+  background-color: var(--Button-Primary-Outlined-BTN-OUTL-NORMAL, #fff);
+  box-shadow: var(--Ouline-Normal-X-0, 0px) var(--Ouline-Normal-Y-0, 0px)
+    var(--Ouline-Normal-B-0, 0px) var(--Ouline-Normal-S-0, 1px)
+    var(--Borders-BORDER-BASE-THIN, #d4d4d4);
+}
+
+@mixin wl-shadow-hover {
+  background-color: var(--Button-Primary-Outlined-BTN-OUTL-HOVER, #f5f5f5);
+  box-shadow: var(--Outline-Button-Hover-First-X-0, 0px)
+      var(--Outline-Button-Hover-First-Y-0, 0px)
+      var(--Outline-Button-Hover-First-B-0, 0px)
+      var(--Outline-Button-Hover-First-S-0, 1px)
+      var(--Outline-Button-Hover-First-Color, rgba(0, 0, 0, 0.25)),
+    var(--Outline-Button-Hover-Secord-X-0, 0px)
+      var(--Outline-Button-Hover-Secord-Y-0, 1px)
+      var(--Outline-Button-Hover-Secord-B-0, 1px)
+      var(--Outline-Button-Hover-Secord-S-0, 0px)
+      var(--Outline-Button-Hover-Secord-Color, rgba(0, 0, 0, 0.15)),
+    var(--Outline-Button-Hover-Third-X-0, 0px)
+      var(--Outline-Button-Hover-Third-Y-0, 2px)
+      var(--Outline-Button-Hover-Third-B-0, 4px)
+      var(--Outline-Button-Hover-Third-S-0, 0px)
+      var(--Outline-Button-Hover-Third-Color, rgba(0, 0, 0, 0.16));
+}
+
+@mixin wl-shadow-pressed {
+  background-color: var(--Button-Primary-Outlined-BTN-OUTL-PRESSED, #fafafa);
+  box-shadow: var(--Outline-Button-Pressed-First-X-0, 0px)
+      var(--Outline-Button-Pressed-First-Y-0, 0px)
+      var(--Outline-Button-Pressed-First-B-0, 1px)
+      var(--Outline-Button-Pressed-First-S-0, 1px)
+      var(--Outline-Button-Pressed-First-Color, rgba(105, 114, 129, 0.16)),
+    var(--Outline-Button-Pressed-Secord-X-0, 0px)
+      var(--Outline-Button-Pressed-Secord-Y-0, 0px)
+      var(--Outline-Button-Pressed-Secord-B-0, 0px)
+      var(--Outline-Button-Pressed-Secord-S-0, 4px)
+      var(--Outline-Button-Pressed-Secord-Colors, #d0d5dc);
+}
+
+@mixin wl-shadow-checked {
+  background-color: var(--Backgrounds-BG-PRM-02, #cfebff);
+  box-shadow: var(--pixel-wlds-pixel-00, 0px) var(--pixel-wlds-pixel-00, 0px)
+    var(--pixel-wlds-pixel-00, 0px) var(--pixel-wlds-pixel-1, 1px)
+    var(--Button-Primary-Text-BTN-TXT-HOVER, #d4eaff);
+}
+
+@mixin wl-shadow-checked-hover {
+  background-color: var(--Button-Primary-Text-BTN-TXT-PRESSED, #e5f3ff);
+  box-shadow: var(--pixel-wlds-pixel-00, 0px) var(--pixel-wlds-pixel-00, 0px)
+    var(--pixel-wlds-pixel-00, 0px) var(--pixel-wlds-pixel-1, 1px)
+    var(--Button-Primary-Text-BTN-TXT-HOVER, #d4eaff);
+}
+
+@mixin wl-shadow-checked-pressed {
+  background: var(--Button-Primary-Text-BTN-TXT-PRESSED, #e5f3ff);
+  box-shadow: var(--Primary-Button-Pressed-First-X-0, 0px)
+      var(--Primary-Button-Pressed-First-Y-0, 0px)
+      var(--Primary-Button-Pressed-First-B-0, 1px)
+      var(--Primary-Button-Pressed-First-S-0, 1px)
+      var(--Primary-Button-Pressed-First-Color, rgba(22, 51, 255, 0.16)),
+    var(--Primary-Button-Pressed-Secord-X-0, 0px)
+      var(--Primary-Button-Pressed-Secord-Y-0, 0px)
+      var(--Primary-Button-Pressed-Secord-B-0, 0px)
+      var(--Primary-Button-Pressed-Secord-S-0, 4px)
+      var(--Primary-Button-Pressed-Secord-Colors, #b2d4ff);
+}
+
+// TODO: Base Chip Mixin (Shared Styles)
+@mixin wl-chip-base(
+  $height-sm: $wl-chip-height-sm,
+  $height-md: $wl-chip-height-md
+) {
+  // Local Variables
+  $padding-x: var(--Spacing-WLDS-Space-12, 12px);
+  $padding-y: var(--Spacing-WLDS-Space-8, 8px);
+  $border-radius: var(--WLDS-Radius-20, 20px);
+  $font-size: var(--Typeface-Size-Button-Medium, 14px);
+  $font-weight: var(--Typeface-Weight-Button-Medium, 500);
+  $line-height: var(--Typeface-Line-height-Button-Medium, 16px);
+  $letter-spacing: var(--Typeface-Letter-Spacing-Button-Medium, 0px);
+
+  min-height: $height-sm;
+  height: auto;
+  max-height: $height-md;
+  padding: $padding-y $padding-x;
+  border-radius: $border-radius;
+  @include wl-shadow-normal;
+  @include wl-flex-center;
+  gap: var(--Button-Spacing-Button-24-Between, 2px);
+  transition: $wl-chip-transition;
+  position: relative;
+
+  label {
+    color: var(--Forgrounds-FG-NTL-10, #171717);
+    text-align: center;
+    white-space: nowrap;
+    font-size: $font-size;
+    font-weight: $font-weight;
+    line-height: $line-height;
+    letter-spacing: $letter-spacing;
+  }
+
+  input[type="radio"],
+  input[type="checkbox"] {
+    appearance: none;
+    -webkit-appearance: none;
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+
+    &:hover {
+      cursor: pointer;
+    }
+  }
+
+  input[type="checkbox"] {
+    & + label {
+      margin-left: 0px;
+    }
+  }
+
+  &:hover {
+    cursor: pointer;
+    @include wl-shadow-hover;
+  }
+
+  &:has(> input:focus),
+  &:has(> input:active) {
+    @include wl-shadow-pressed;
+  }
+}
+
+// TODO: Radio Chip Mixin (wl-chips)
+@mixin wl-chip-radio {
+  @include wl-chip-base;
+
+  &::before {
+    content: "";
+    width: 16px;
+    height: 16px;
+    background-image: $wl-chip-background-image-url;
+    background-size: contain;
+    background-repeat: no-repeat;
+    display: none;
+    opacity: 0;
+    transform: scale(0.8);
+    transition: $wl-chip-transition;
+  }
+
+  &:has(> input[type="radio"]:checked)::before {
+    opacity: 1;
+    display: block;
+    transform: scale(1);
+  }
+
+  &:has(> input[type="radio"]:checked) {
+    @include wl-shadow-checked;
+
+    & > label {
+      color: var(--Forgrounds-FG-PRM-08, #0021fe);
+    }
+  }
+
+  &:has(> input[type="radio"]:checked):hover {
+    @include wl-shadow-checked-hover;
+  }
+
+  &:has(> input[type="radio"]:checked:focus) {
+    @include wl-shadow-checked-pressed;
+  }
+}
+
+// TODO: Checkbox Chip Mixin (wl-chip-selection)
+@mixin wl-chip-checkbox {
+  @include wl-chip-base;
+
+  &::before {
+    content: "";
+    width: 16px;
+    height: 16px;
+    background-image: $wl-chip-background-image-url;
+    background-size: contain;
+    background-repeat: no-repeat;
+    display: none;
+    opacity: 0;
+    transform: scale(0.8);
+    transition: $wl-chip-transition;
+  }
+
+  &:has(> input[type="checkbox"]:checked)::before {
+    opacity: 1;
+    display: block;
+    transform: scale(1);
+  }
+
+  &:has(> input[type="checkbox"]:checked) {
+    @include wl-shadow-checked;
+
+    & > label {
+      color: var(--Forgrounds-FG-PRM-08, #0021fe);
+    }
+  }
+
+  &:has(> input[type="checkbox"]:checked):hover {
+    @include wl-shadow-checked-hover;
+  }
+
+  &:has(> input[type="checkbox"]:checked:focus) {
+    @include wl-shadow-checked-pressed;
+  }
+}
+
+// TODO: Small Size Mixin
+@mixin wl-chip-size-sm {
+  min-height: $wl-chip-height-sm;
+  max-height: $wl-chip-height-sm;
+  padding: var(--Spacing-WLDS-Space-4, 4px) var(--Spacing-WLDS-Space-8, 8px);
+  border-radius: var(--WLDS-Radius-16, 16px);
+
+  label {
+    font-size: var(--Typeface-Size-Button-Small, 12px);
+    font-weight: var(--Typeface-Weight-Button-Small, 500);
+    line-height: var(--Typeface-Line-height-Button-Small, 16px);
+    letter-spacing: var(--Typeface-Letter-Spacing-Button-Small, -0.1px);
+  }
+}
+
+// TODO: Chip Components
+.wl-chips {
+  @include wl-chip-radio;
+
+  &-sm {
+    @include wl-chip-size-sm;
+  }
+}
+
+.wl-chip-selection {
+  @include wl-chip-checkbox;
+
+  &-sm {
+    @include wl-chip-size-sm;
+  }
+}
+
+// TODO: Input Chip Mixin
+@mixin wl-chip-input-base {
+  // Local Variables
+  $height: $wl-chip-height-md;
+  $padding-x: var(--Spacing-WLDS-Space-8, 8px);
+  $padding-y: var(--Spacing-WLDS-Space-4, 4px);
+  $border-radius: var(--WLDS-Radius-64, 64px);
+  $font-size: var(--Typeface-Size-Button-Medium, 14px);
+  $font-weight: var(--Typeface-Weight-Button-Medium, 500);
+  $line-height: var(--Typeface-Line-height-Button-Medium, 16px);
+  $letter-spacing: var(--Typeface-Letter-Spacing-Button-Medium, 0px);
+
+  height: $height;
+  min-height: $height;
+  max-height: $height;
+  padding: $padding-y $padding-x $padding-y $padding-y;
+  @include wl-shadow-normal;
+  border-radius: $border-radius;
+  @include wl-aligns-center;
+  gap: var(--Spacing-WLDS-Space-8, 8px);
+  position: relative;
+  transition: $wl-chip-transition;
+
+  label {
+    color: var(--Forgrounds-FG-TITLE, #171717);
+    font-size: $font-size;
+    font-weight: $font-weight;
+    line-height: $line-height;
+    letter-spacing: $letter-spacing;
+  }
+
+  &:hover {
+    @include wl-shadow-hover;
+  }
+
+  &:hover,
+  &:hover * {
+    cursor: pointer;
+  }
+
+  &:active {
+    @include wl-shadow-pressed;
+  }
+}
+
+// TODO: Input Chip Component
+.wl-chips-input {
+  @include wl-chip-input-base;
+
+  .wl-head {
+    @include wl-aligns-center;
+    gap: rem(6);
+  }
+
+  .wl-close-icon {
+    content: "";
+    display: block;
+    width: rem(16);
+    height: rem(16);
+    background-image: $wl-chip-close-background-image-url;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+
+    &:hover {
+      cursor: pointer;
+    }
+  }
+
+  &-sm {
+    min-height: $wl-chip-height-sm;
+    max-height: $wl-chip-height-sm;
+
+    label {
+      font-size: var(--Typeface-Size-Button-Small, 12px);
+      font-weight: var(--Typeface-Weight-Button-Small, 500);
+      line-height: var(--Typeface-Line-height-Button-Small, 16px);
+      letter-spacing: var(--Typeface-Letter-Spacing-Button-Small, -0.1px);
+    }
+
+    .wl-head {
+      gap: rem(4);
+    }
+
+    .wl-close-icon {
+      width: rem(14);
+      height: rem(14);
+    }
+  }
+}
+
+// TODO: Chip Lead Mixin
+@mixin wl-chip-lead-base($size: $wl-chip-lead-md) {
+  width: $size;
+  height: $size;
+  @include wl-flex-center;
+
+  figure {
+    margin: 0;
+    padding: 0;
+    @include wl-flex-center;
+  }
+
+  img {
+    width: $size;
+    height: $size;
+    border-radius: 100%;
+  }
+}
+
+// TODO: Chip Lead Component
+.wl-chip-lead {
+  &-picture,
+  &-unprofile {
+    @include wl-chip-lead-base;
+  }
+
+  &-alphabet {
+    @include wl-chip-lead-base;
+    background-color: var(--Backgrounds-BG-NTL-02, #f5f5f5);
+    border-radius: 100%;
+    color: var(--Forgrounds-FG-SUBTITLE, #404040);
+    text-align: center;
+    font-size: var(--Typeface-Size-Button-Medium, 14px);
+    font-weight: var(--Typeface-Weight-Button-Medium, 500);
+    line-height: var(--Typeface-Line-height-Button-Medium, 16px);
+    letter-spacing: var(--Typeface-Letter-Spacing-Button-Medium, 0px);
+  }
+
+  &-icon {
+    @include wl-chip-lead-base;
+
+    .wl-icon {
+      width: rem(18);
+      height: rem(18);
+      // @include wl-svg-icon("bill", $bill-path, #737373, #fff);
+    }
+  }
+
+  &-sm {
+    @include wl-chip-lead-base($wl-chip-lead-sm);
+
+    &.wl-chip-lead-alphabet {
+      font-size: var(--Typeface-Size-Button-Small, 12px);
+      font-weight: var(--Typeface-Weight-Button-Small, 500);
+      line-height: var(--Typeface-Line-height-Button-Small, 16px);
+      letter-spacing: var(--Typeface-Letter-Spacing-Button-Small, -0.1px);
+    }
+
+    .wl-icon {
+      width: rem(14);
+      height: rem(14);
+    }
+  }
+}

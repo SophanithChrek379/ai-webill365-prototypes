@@ -1,0 +1,125 @@
+@use "../../abstracts/breakpoints" as *;
+@use "../../abstracts/functions" as *;
+@use "../../abstracts/mixins" as *;
+
+@use "sass:map";
+
+.wl-btn-segment {
+  width: min-content;
+  padding: rem(2);
+  border-radius: var(--WLDS-Radius-6, rem(6));
+  background-color: var(--Backgrounds-BG-NORMAL, #fff);
+  box-shadow: var(--Outline-Button-Default-First-X-0, 0px)
+      var(--Outline-Button-Default-First-Y-0, 0px)
+      var(--Outline-Button-Default-First-B-0, 0px)
+      var(--Outline-Button-Default-First-S-0, 1px)
+      var(--Outline-Button-Default-First-Color, rgba(0, 0, 0, 0.17)),
+    var(--Outline-Button-Default-Second-X-0, 0px)
+      var(--Outline-Button-Default-Second-Y-0, 1px)
+      var(--Outline-Button-Default-Second-B-0, 1px)
+      var(--Outline-Button-Default-Second-S-0, 0px)
+      var(--Outline-Button-Default-Second-Color, rgba(0, 0, 0, 0.15)),
+    var(--Outline-Button-Default-Third-X-0, 0px)
+      var(--Outline-Button-Default-Third-Y-0, 2px)
+      var(--Outline-Button-Default-Third-B-0, 3px)
+      var(--Outline-Button-Default-Third-S-0, 0px)
+      var(--Outline-Button-Default-Third-Color, rgba(0, 0, 0, 0.08));
+
+  @include wl-aligns-center;
+  gap: rem(4);
+
+  .wl-btn {
+    width: min-content;
+    height: rem(28);
+    min-height: rem(28);
+    padding: 5px 6px;
+    border-radius: var(--WLDS-Radius-4, rem(4));
+    color: var(--Forgrounds-FG-BLACK, #0a0a0a);
+    @include wl-font-style(
+      var(--Typeface-Size-Button-Medium, rem(14)),
+      var(--Typeface-Weight-Button-Medium, 500),
+      var(--Typeface-Line-height-Button-Medium, rem(16)),
+      var(--Typeface-Letter-Spacing-Button-Medium, 0)
+    );
+
+    @include wl-flex-center;
+    gap: rem(4);
+
+    transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out,
+      box-shadow 0.15s ease-in-out;
+    position: relative;
+
+    // TODO: Check if segment have <i/>/<svg/>
+    &:has(i, svg) {
+      width: rem(78);
+    }
+
+    &:hover {
+      cursor: pointer;
+    }
+
+    input[type="radio"] {
+      position: absolute;
+      opacity: 0;
+      width: 100%;
+      height: 100%;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      left: 0;
+
+      &:hover {
+        cursor: pointer;
+      }
+    }
+
+    &:has(input[type="radio"]:checked) {
+      background-color: var(--Colors-PRIMARY-WLDS-PRM-02, #e7e8fc);
+      color: var(--Forgrounds-FG-INTERACTIVE, #0021fe);
+
+      svg {
+        fill: var(--Forgrounds-FG-INTERACTIVE, #0021fe);
+      }
+    }
+  }
+
+  &.wl-disabled {
+    cursor: not-allowed;
+    user-select: none;
+
+    .wl-btn {
+      cursor: not-allowed;
+      user-select: none;
+
+      // Allow events but make them appear disabled
+      input[type="radio"] {
+        cursor: not-allowed;
+      }
+
+      svg {
+        fill: var(--Forgrounds-FG-DISABLED-VALUE, #737373);
+      }
+
+      &:has(input[type="radio"]:checked) {
+        cursor: not-allowed;
+        user-select: none;
+
+        background-color: var(--Colors-SEMANTIC-NEUTRAL-WLDS-NTL-03, #e5e5e5);
+        color: var(--Forgrounds-FG-DISABLED-VALUE, #737373);
+
+        svg {
+          fill: var(--Forgrounds-FG-DISABLED-VALUE, #737373);
+        }
+      }
+    }
+  }
+}
+
+// Responsive styles
+@each $breakpoint in map.keys($breakpoints) {
+  @include breakpoint-up($breakpoint) {
+    .wl-btn-segment-#{$breakpoint} {
+      // Add specific styles for each breakpoint if needed
+    }
+  }
+}

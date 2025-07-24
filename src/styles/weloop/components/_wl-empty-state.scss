@@ -1,0 +1,170 @@
+@use "sass:color";
+@use "sass:math";
+@use "../abstracts/breakpoints" as *;
+@use "../abstracts/functions" as *;
+@use "../abstracts/mixins" as *;
+
+$wl-empty-icon-width: rem(60);
+$wl-empty-icon-height: rem(44);
+$wl-empty-illustration-width: rem(320);
+
+// TODO: Default
+.wl-empty-state {
+  @include wl-flex-center;
+
+  &-icon {
+    width: $wl-empty-icon-width;
+    height: $wl-empty-icon-height;
+
+    img {
+      width: 100%;
+      max-width: 100%;
+      height: auto;
+      object-fit: contain;
+    }
+  }
+
+  &-illustration {
+    width: $wl-empty-illustration-width;
+    padding: var(--Spacing-WLDS-Space-24, 24px);
+    @include wl-flex-column;
+    @include wl-aligns-center;
+    gap: rem(8);
+
+    .wl-empty-state-icon {
+      width: rem(68);
+      height: rem(60);
+    }
+
+    .wl-body {
+      @include wl-flex-column;
+      gap: rem(6);
+    }
+
+    .wl-title {
+      color: var(--Forgrounds-FG-TITLE, #171717);
+      font-size: var(--Typeface-Size-Button-Small, 12px);
+      font-weight: var(--Typeface-Weight-Button-Small, 500);
+      line-height: var(--Typeface-Line-height-Button-Small, 16px);
+      letter-spacing: var(--Typeface-Letter-Spacing-Button-Small, -0.1px);
+      text-align: center;
+    }
+    .wl-sub-title {
+      color: var(--Forgrounds-FG-SUBTITLE, #404040);
+      font-size: var(--Typeface-Size-Label-2, 10px);
+      font-weight: var(--Typeface-Weight-Label-2, 500);
+      line-height: var(--Typeface-Line-height-Label-2, 12px);
+      letter-spacing: var(--Typeface-Letter-Spacing-Label-2, -0.1px);
+      text-align: center;
+    }
+  }
+}
+
+// TODO: Type: Error-Response: Base
+@mixin wl-error-response-base {
+  width: rem(480);
+  @include wl-flex-column;
+  @include wl-aligns-center;
+  gap: rem(32);
+
+  // TODO: Body
+  .wl-body {
+    @include wl-flex-column;
+    gap: rem(40);
+
+    .wl-title {
+      color: var(--Forgrounds-FG-TITLE, #171717);
+      text-align: center;
+      font-size: var(--Typeface-Size-Title-Large, 24px);
+      font-weight: var(--Typeface-Weight-Title-Large, 500);
+      line-height: var(--Typeface-Line-height-Title-Large, 32px);
+      letter-spacing: var(--Typeface-Letter-Spacing-Title-Large, -0.1px);
+    }
+
+    .wl-error-code {
+      color: var(--Forgrounds-FG-DISABLED, #a3a3a3);
+      text-align: center;
+      font-size: var(--Typeface-Size-Button-Medium, 14px);
+      font-weight: var(--Typeface-Weight-Button-Medium, 500);
+      line-height: var(--Typeface-Line-height-Button-Medium, 16px);
+      letter-spacing: var(--Typeface-Letter-Spacing-Button-Medium, 0px);
+    }
+
+    .wl-sub-title {
+      max-width: rem(300);
+      color: var(--Forgrounds-FG-SUBTITLE, #404040);
+      text-align: center;
+      font-size: var(--Typeface-Size-Body-Medium, 16px);
+      font-weight: var(--Typeface-Weight-Body-Medium, 500);
+      line-height: var(--Typeface-Line-height-Body-Medium, 24px);
+      letter-spacing: var(--Typeface-Letter-Spacing-Body-Medium, -0.2px);
+    }
+
+    .wl-title-link {
+      color: var(--Forgrounds-FG-INTERACTIVE, #0021fe);
+      text-align: left;
+      font-size: var(--Typeface-Size-Body-Medium, 16px);
+      font-weight: var(--Typeface-Weight-Body-Medium, 500);
+      line-height: var(--Typeface-Line-height-Body-Medium, 24px);
+      letter-spacing: var(--Typeface-Letter-Spacing-Body-Medium, -0.2px);
+    }
+    a.wl-title-link {
+      text-decoration: none;
+      cursor: pointer;
+    }
+
+    .wl-btn-wrapper {
+      @include wl-flex-center;
+      gap: rem(8);
+
+      button.wl-btn-primary {
+        .wl-back-icon {
+          background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='17' height='16' viewBox='0 0 17 16' fill='none'%3E%3Cpath d='M15.1104 10.6143C15.1104 13.4238 13.2646 15.2627 10.209 15.2627H8.52734C8.02148 15.2627 7.65918 14.8799 7.65918 14.4082C7.65918 13.9365 8.02148 13.5605 8.52734 13.5605H10.127C12.2324 13.5605 13.4287 12.2959 13.4287 10.5596C13.4287 8.83008 12.2324 7.60645 10.127 7.60645H6.03906L4.47363 7.53809L5.60156 8.48145L7.20117 10.0332C7.35156 10.1904 7.4541 10.375 7.4541 10.6348C7.4541 11.1064 7.12598 11.4551 6.62695 11.4551C6.4082 11.4551 6.18262 11.3594 6.01172 11.1885L2.14941 7.3877C1.98535 7.22363 1.88965 6.98438 1.88965 6.75195C1.88965 6.51953 1.98535 6.28711 2.14941 6.12305L6.01172 2.31543C6.18262 2.14453 6.4082 2.04883 6.62695 2.04883C7.12598 2.04883 7.4541 2.39746 7.4541 2.86914C7.4541 3.12891 7.35156 3.31348 7.20117 3.4707L5.60156 5.0293L4.47363 5.97266L6.03906 5.9043H10.1338C13.2305 5.9043 15.1104 7.8252 15.1104 10.6143Z' fill='white'/%3E%3C/svg%3E");
+        }
+      }
+
+      button.wl-btn-primary-outline {
+        .wl-back-icon {
+          background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='17' height='16' viewBox='0 0 17 16' fill='none'%3E%3Cpath d='M15.1104 10.6143C15.1104 13.4238 13.2646 15.2627 10.209 15.2627H8.52734C8.02148 15.2627 7.65918 14.8799 7.65918 14.4082C7.65918 13.9365 8.02148 13.5605 8.52734 13.5605H10.127C12.2324 13.5605 13.4287 12.2959 13.4287 10.5596C13.4287 8.83008 12.2324 7.60645 10.127 7.60645H6.03906L4.47363 7.53809L5.60156 8.48145L7.20117 10.0332C7.35156 10.1904 7.4541 10.375 7.4541 10.6348C7.4541 11.1064 7.12598 11.4551 6.62695 11.4551C6.4082 11.4551 6.18262 11.3594 6.01172 11.1885L2.14941 7.3877C1.98535 7.22363 1.88965 6.98438 1.88965 6.75195C1.88965 6.51953 1.98535 6.28711 2.14941 6.12305L6.01172 2.31543C6.18262 2.14453 6.4082 2.04883 6.62695 2.04883C7.12598 2.04883 7.4541 2.39746 7.4541 2.86914C7.4541 3.12891 7.35156 3.31348 7.20117 3.4707L5.60156 5.0293L4.47363 5.97266L6.03906 5.9043H10.1338C13.2305 5.9043 15.1104 7.8252 15.1104 10.6143Z' fill='%23171717'/%3E%3C/svg%3E");
+        }
+      }
+    }
+  }
+
+  // TODO: Footer
+  .wl-footer {
+    margin-top: rem(8);
+    @include wl-flex-column;
+    @include wl-aligns-center;
+    gap: rem(32);
+    .wl-datetime {
+      color: var(--Forgrounds-FG-DISABLED, #a3a3a3);
+      text-align: center;
+      font-size: var(--Typeface-Size-Body-Small, 14px);
+      font-weight: var(--Typeface-Weight-Body-Small, 500);
+      line-height: var(--Typeface-Line-height-Body-Small, 20px);
+      letter-spacing: var(--Typeface-Letter-Spacing-Body-Small, -0.2px);
+    }
+  }
+
+  figure {
+    width: rem(162);
+    height: rem(162);
+    img {
+      width: 100%;
+      max-width: 100%;
+      height: auto;
+      object-fit: contain;
+    }
+  }
+}
+
+// TODO: Type: Error-Response
+.wl-error-response {
+  @include wl-error-response-base;
+  // TODO: Default
+
+  &-general {
+    width: rem(344);
+  }
+}

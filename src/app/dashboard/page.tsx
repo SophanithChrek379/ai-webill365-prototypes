@@ -1,23 +1,13 @@
 "use client";
 
 import React, { useState } from "react";
-import {
-  Container,
-  Row,
-  Col,
-  Card,
-  Badge,
-  Form,
-  InputGroup,
-  Table,
-} from "react-bootstrap";
+import { Row, Col, Card, Badge, Table } from "react-bootstrap";
 import Sidebar from "../../components/Sidebar";
 import AppBar from "../../components/AppBar";
-import DateInput from "../../components/DateInput";
-import DateRangePicker from "../../components/DateRangePicker";
 import Pagination from "../../components/Pagination";
 import Input from "../../components/Input";
 import Button from "../../components/Button";
+import WLDateRangePicker from "@/components/WLDateRangePicker";
 
 // Mock data for the dashboard
 const mockSubscribers = [
@@ -256,13 +246,7 @@ export default function DashboardPage() {
             {/* Filters */}
             <div className="activities-filters">
               <div className="d-flex gap-3 align-items-center">
-                <div className="date-filter">
-                  <DateInput
-                    value="March 2025 — Feb 2026"
-                    showTitle={false}
-                    onChange={(value) => console.log("Date changed:", value)}
-                  />
-                </div>
+                <WLDateRangePicker />
                 <Button variant="primary" outline size="sm">
                   <i className="bi bi-check2-square me-1"></i>
                   Status

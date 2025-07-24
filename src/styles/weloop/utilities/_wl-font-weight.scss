@@ -1,0 +1,92 @@
+@use "sass:map";
+@use "sass:meta";
+
+// Map of font weight names to numeric values (100-900)
+$wl-font-weights: (
+  "thin": 100,
+  // Thinnest weight
+  "extra-light": 200,
+  // Very light weight
+  "light": 300,
+  // Light weight
+  "regular": 400,
+  // Normal/Regular weight
+  "medium": 500,
+  // Medium weight
+  "semi-bold": 600,
+  // Semi-bold weight
+  "bold": 700,
+  // Bold weight
+  "extra-bold": 800,
+  // Extra bold weight
+  "black": 900 // Heaviest weight,
+);
+
+// TODO: Alias map for alternative naming
+$wl-font-weight-aliases: (
+  "hairline": 100,
+  "thin": 100,
+  "extra-light": 200,
+  "ultra-light": 200,
+  "light": 300,
+  "book": 300,
+  "normal": 400,
+  "regular": 400,
+  "medium": 500,
+  "semi-bold": 600,
+  "demi-bold": 600,
+  "bold": 700,
+  "extra-bold": 800,
+  "heavy": 800,
+  "black": 900,
+  "ultra": 900,
+  "ultra-black": 900,
+  "ultra-bold": 900,
+);
+
+// TODO: Mixin for setting font weight
+@mixin font-weight($weight-name) {
+  @if map.has-key($wl-font-weights, $weight-name) {
+    font-weight: map.get($wl-font-weights, $weight-name);
+  } @else if map.has-key($wl-font-weight-aliases, $weight-name) {
+    font-weight: map.get($wl-font-weight-aliases, $weight-name);
+  } @else {
+    @error "Weight '#{$weight-name}' not found in $wl-font-weights or $wl-font-weight-aliases maps";
+  }
+}
+
+// TODO: Mixin to generate weight utility classes
+@mixin generate-font-weight-classes {
+  @each $name, $value in $wl-font-weights {
+    &-#{$name} {
+      font-weight: $value;
+    }
+  }
+}
+
+// TODO: Generate utility classes
+.wl-weight {
+  @include generate-font-weight-classes;
+}
+
+// TODO: Usage examples:
+//
+// 1. Apply directly to HTML elements:
+// <p class="wl-weight-regular">Regular text</p>
+// <h1 class="wl-weight-bold">Bold heading</h1>
+//
+// 2. Extend in another SCSS file:
+// .my-heading {
+//   @extend .wl-weight-semi-bold;
+// }
+//
+// 3. Mix into custom components:
+// .my-component {
+//   .title {
+//     @include font-weight("medium");
+//   }
+// }
+//
+// 4. Use with numeric values:
+// Using mixin: @include font-weight("bold"); // Outputs font-weight: 700;
+// Using class: class="wl-weight-bold" // Sets font-weight: 700;

@@ -1,0 +1,139 @@
+// _wl-container.scss
+// Container component implementation
+
+@use "sass:map";
+// Use the global breakpoints with wildcard to make mixins directly available
+@use "../abstracts/breakpoints" as *;
+
+// Container variables
+$wl-enable-responsive-containers: true !default;
+
+// Container max-widths
+$wl-container-max-widths: (
+  sm: 540px,
+  md: 720px,
+  lg: 960px,
+  xl: 1140px,
+  xxl: 1320px,
+) !default;
+
+// CSS Custom Properties for gutter
+:root {
+  --wl-gutter-x: 1rem;
+  --wl-gutter-y: 0;
+}
+
+// Container base styles with responsive padding
+.wl-container,
+.wl-container-fluid {
+  width: 100%;
+  padding-right: calc(var(--wl-gutter-x) * 0.5);
+  padding-left: calc(var(--wl-gutter-x) * 0.5);
+  margin-right: auto;
+  margin-left: auto;
+}
+
+// Responsive containers
+@if $wl-enable-responsive-containers {
+  .wl-container-sm,
+  .wl-container-md,
+  .wl-container-lg,
+  .wl-container-xl,
+  .wl-container-xxl {
+    width: 100%;
+    padding-right: calc(var(--wl-gutter-x) * 0.5);
+    padding-left: calc(var(--wl-gutter-x) * 0.5);
+    margin-right: auto;
+    margin-left: auto;
+  }
+}
+
+// Responsive styles with media queries using the breakpoint mixins
+@include breakpoint-up(sm) {
+  .wl-container,
+  .wl-container-sm {
+    max-width: map.get($wl-container-max-widths, sm);
+  }
+}
+
+@include breakpoint-up(md) {
+  .wl-container,
+  .wl-container-sm,
+  .wl-container-md {
+    max-width: map.get($wl-container-max-widths, md);
+  }
+}
+
+@include breakpoint-up(lg) {
+  .wl-container,
+  .wl-container-sm,
+  .wl-container-md,
+  .wl-container-lg {
+    max-width: map.get($wl-container-max-widths, lg);
+  }
+}
+
+@include breakpoint-up(xl) {
+  .wl-container,
+  .wl-container-sm,
+  .wl-container-md,
+  .wl-container-lg,
+  .wl-container-xl {
+    max-width: map.get($wl-container-max-widths, xl);
+  }
+}
+
+@include breakpoint-up(xxl) {
+  .wl-container,
+  .wl-container-sm,
+  .wl-container-md,
+  .wl-container-lg,
+  .wl-container-xl,
+  .wl-container-xxl {
+    max-width: map.get($wl-container-max-widths, xxl);
+  }
+}
+
+// Additional container utilities for common use cases
+.wl-container-narrow {
+  max-width: 960px;
+}
+
+.wl-container-wide {
+  max-width: 1440px;
+}
+
+// Container utility for vertical padding
+.wl-container-py-0 {
+  padding-top: 0;
+  padding-bottom: 0;
+}
+.wl-container-py-1 {
+  padding-top: 0.25rem;
+  padding-bottom: 0.25rem;
+}
+.wl-container-py-2 {
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+}
+.wl-container-py-3 {
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+}
+.wl-container-py-4 {
+  padding-top: 1.5rem;
+  padding-bottom: 1.5rem;
+}
+.wl-container-py-5 {
+  padding-top: 3rem;
+  padding-bottom: 3rem;
+}
+
+// CSS Custom Properties for container dimensions (for JS access if needed)
+:root {
+  --wl-container-sm: #{map.get($wl-container-max-widths, sm)};
+  --wl-container-md: #{map.get($wl-container-max-widths, md)};
+  --wl-container-lg: #{map.get($wl-container-max-widths, lg)};
+  --wl-container-xl: #{map.get($wl-container-max-widths, xl)};
+  --wl-container-xxl: #{map.get($wl-container-max-widths, xxl)};
+}

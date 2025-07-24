@@ -1,0 +1,71 @@
+// TODO: Local SCSS variables mapped to background design tokens
+$wl-background-normal: var(--Backgrounds-BG-NORMAL);
+$wl-background-base-thin: var(--Backgrounds-BG-BASE-THIN);
+$wl-background-base-middle: var(--Backgrounds-BG-BASE-MIDDLE);
+$wl-background-base-heavy: var(--Backgrounds-BG-BASE-HEAVY);
+$wl-background-highlight-thin: var(--Backgrounds-BG-HIGHT-THIN);
+$wl-background-highlight-middle: var(--Backgrounds-BG-HIGHT-MIDDLE);
+$wl-background-highlight-heavy: var(--Backgrounds-BG-HIGHT-HEAVY);
+$wl-background-selected: var(--Backgrounds-BG-SELECTED);
+$wl-background-interactive: var(--Backgrounds-BG-INTERACTIVE);
+$wl-background-disabled: var(--Backgrounds-BG-DISABLED);
+$wl-background-black: var(--Backgrounds-BG-BLACK, #000);
+$wl-background-white: var(--Backgrounds-BG-WHITE, #fff);
+
+// TODO: Map for background colors
+$wl-background-colors: (
+  "normal": $wl-background-normal,
+  "base-thin": $wl-background-base-thin,
+  "base-middle": $wl-background-base-middle,
+  "base-heavy": $wl-background-base-heavy,
+  "highlight-thin": $wl-background-highlight-thin,
+  "highlight-middle": $wl-background-highlight-middle,
+  "highlight-heavy": $wl-background-highlight-heavy,
+  "selected": $wl-background-selected,
+  "interactive": $wl-background-interactive,
+  "disabled": $wl-background-disabled,
+  "black": $wl-background-black,
+  "white": $wl-background-white,
+);
+
+// TODO: Mixin for background color
+@mixin background-color($color) {
+  background-color: $color;
+}
+
+// TODO: Mixin for generating all background color classes
+@mixin generate-background-classes {
+  @each $name, $color in $wl-background-colors {
+    &-#{$name} {
+      background-color: $color;
+    }
+  }
+}
+
+// TODO: Apply all background color styles
+.wl-bg {
+  @include generate-background-classes;
+}
+
+// TODO: Usage examples:
+//
+// 1. Apply directly to HTML elements:
+// <div class="wl-bg-normal">Normal background</div>
+// <button class="wl-bg-interactive">Interactive button</button>
+//
+// 2. Extend in another SCSS file:
+// .my-panel {
+//   @extend .wl-bg-base-thin;
+// }
+//
+// 3. Mix into custom components:
+// .my-component {
+//   .panel {
+//     @include background-color(map.get($wl-background-colors, "base-middle"));
+//   }
+// }
+//
+// 4. Combine with foreground and typography:
+// <div class="wl-bg-highlight-thin wl-fg-title wl-text-body-large">
+//   Styled container with text
+// </div>

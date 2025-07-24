@@ -1,0 +1,135 @@
+@use "../../abstracts/breakpoints" as *;
+@use "../../abstracts/functions" as *;
+@use "../../abstracts/mixins" as *;
+
+@use "sass:map";
+
+// TODO: Variables
+$wl-textarea-height: rem(40);
+$wl-textarea-max-height: rem(160);
+$wl-textarea-padding: var(--Spacing-WLDS-Space-8, 8px);
+$wl-textarea-border-radius: var(--WLDS-Radius-6, 6px);
+$wl-textarea-transition: background-color 0.25s, box-shadow 0.25s;
+
+// TODO: Variables: Sizes: Large
+$wl-textarea-height-lg: rem(60);
+$wl-textarea-padding-lg: var(--Spacing-WLDS-Space-12, 12px);
+$wl-textarea-border-radius-lg: var(--WLDS-Radius-8, 8px);
+$wl-textarea-text-size-lg: var(--Typeface-Size-Button-Large, 18px);
+$wl-textarea-line-height-lg: var(--Typeface-Line-height-Button-Large, 24px);
+$wl-textarea-letter-spacing-lg: var(
+  --Typeface-Letter-Spacing-Button-Large,
+  0px
+);
+
+// TODO: Variables: Text
+$wl-textarea-text-size: var(--Typeface-Size-Button-Medium, 14px);
+$wl-textarea-font-weight: var(--Typeface-Weight-Button-Medium, 500);
+$wl-textarea-line-height: var(--Typeface-Line-height-Button-Medium, 16px);
+$wl-textarea-letter-spacing: var(--Typeface-Letter-Spacing-Button-Medium, 0px);
+
+$wl-textarea-color: var(--Forgrounds-FG-TITLE, #171717);
+$wl-textarea-placeholder-color: var(--Forgrounds-FG-DISABLED, #a3a3a3);
+$wl-textarea-caret-color: var(--Forgrounds-FG-INTERACTIVE, #0021fe);
+$wl-textarea-disabled-color: var(--Forgrounds-FG-DISABLED-VALUE, #737373);
+
+// TODO: Backgrounds + Box-Shadow: Normal
+$wl-textarea-bg-color: var(--Backgrounds-BG-NORMAL, #fff);
+$wl-textarea-box-shadow: 0px 0px 0px 1px
+  var(--Colors-SEMANTIC-NEUTRAL-WLDS-NTL-04, #d4d4d4);
+
+// TODO: Backgrounds + Box-Shadow: Pressed
+$wl-textarea-pressed-bg-color: var(--Backgrounds-BG-NORMAL, #fff);
+$wl-textarea-pressed-box-shadow: var(--Ouline-Normal-First-X-0, 0px)
+    var(--Ouline-Normal-First-Y-0, 0px) var(--Ouline-Normal-First-B-0, 0px)
+    var(--Ouline-Normal-First-S-0, 1px)
+    var(--Ouline-Normal-First-Color, #83b7ff),
+  var(--Ouline-Normal-Secord-X-0, 0px) var(--Ouline-Normal-Secord-Y-0, 0px)
+    var(--Ouline-Normal-Secord-B-0, 0px) var(--Ouline-Normal-Secord-S-0, 4px)
+    var(--Ouline-Normal-Secord-Colors, #b2d4ff);
+
+// TODO: Backgrounds + Box-Shadow: Disabled
+$wl-textarea-disabled-bg-color: var(
+  --Colors-SEMANTIC-NEUTRAL-WLDS-NTL-02,
+  #f5f5f5
+);
+$wl-textarea-disabled-box-shadow: 0px 0px 0px 1px
+  var(--Colors-SEMANTIC-NEUTRAL-WLDS-NTL-04, #d4d4d4);
+
+// TODO: Mixins
+@mixin wl-textarea-text-base {
+  color: $wl-textarea-color;
+  font-size: $wl-textarea-text-size;
+  font-weight: $wl-textarea-font-weight;
+  line-height: $wl-textarea-line-height;
+  letter-spacing: $wl-textarea-letter-spacing;
+  caret-color: $wl-textarea-caret-color;
+}
+
+@mixin wl-shadow-normal {
+  background-color: $wl-textarea-bg-color;
+  box-shadow: $wl-textarea-box-shadow;
+}
+
+@mixin wl-shadow-pressed {
+  background-color: $wl-textarea-pressed-bg-color;
+  box-shadow: $wl-textarea-pressed-box-shadow;
+}
+
+@mixin wl-shadow-disabled {
+  background-color: $wl-textarea-disabled-bg-color;
+  box-shadow: $wl-textarea-disabled-box-shadow;
+}
+
+@mixin wl-textarea-mixin {
+  min-height: $wl-textarea-height;
+  max-height: $wl-textarea-max-height;
+  padding: $wl-textarea-padding;
+  border-radius: $wl-textarea-border-radius;
+  @include wl-shadow-normal;
+  @include wl-textarea-text-base;
+  @include wl-aligns-start;
+  gap: var(--Spacing-WLDS-Space-4, 4px);
+  align-self: stretch;
+  overflow-y: auto;
+  transition: $wl-textarea-transition;
+}
+
+@mixin wl-textarea-size-lg {
+  min-height: $wl-textarea-height-lg;
+  padding: $wl-textarea-padding-lg;
+  border-radius: $wl-textarea-border-radius-lg;
+  font-size: $wl-textarea-text-size-lg;
+  line-height: $wl-textarea-line-height-lg;
+  letter-spacing: $wl-textarea-letter-spacing-lg;
+}
+
+// TODO: Component: Textarea
+textarea {
+  border: none;
+  outline: none;
+  resize: vertical;
+  @include wl-textarea-mixin;
+
+  // TODO: Size: Large
+  &.wl-textarea-lg {
+    @include wl-textarea-size-lg;
+  }
+
+  // TODO: Placeholder
+  &::placeholder {
+    color: $wl-textarea-placeholder-color;
+  }
+
+  &:focus {
+    @include wl-shadow-pressed;
+  }
+
+  &:disabled {
+    cursor: not-allowed;
+    user-select: none;
+    resize: none;
+    @include wl-shadow-disabled;
+    color: $wl-textarea-disabled-color;
+  }
+}

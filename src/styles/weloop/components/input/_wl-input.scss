@@ -1,0 +1,471 @@
+@use "../../abstracts/breakpoints" as *;
+@use "../../abstracts/functions" as *;
+@use "../../abstracts/mixins" as *;
+
+@use "sass:map";
+
+// TODO: Variables: Sizes
+$wl-input-padding: var(--Spacing-WLDS-Space-8, 8px);
+$wl-input-spacing-28: rem(28);
+$wl-input-spacing-32: var(--Spacing-WLDS-Space-32, 32px);
+$wl-input-spacing-42: rem(42);
+
+$wl-input-border-radius: var(--WLDS-Radius-6, 6px);
+
+// TODO: Variables: Sizes: Large
+$wl-input-padding-lg: var(--Spacing-WLDS-Space-12, 12px);
+$wl-input-border-radius-lg: var(--WLDS-Radius-8, 8px);
+
+// TODO: Variables: Text: Size
+$wl-input-text-family: var(--Typeface-Family-Button-Medium, "Inter");
+$wl-input-text-size: var(--Typeface-Size-Button-Medium, 14px);
+$wl-input-font-weight: var(--Typeface-Weight-Button-Medium, 500);
+$wl-input-line-height: var(--Typeface-Line-height-Button-Medium, 16px);
+$wl-input-letter-spacing: var(--Typeface-Letter-Spacing-Button-Medium, 0px);
+
+// TODO: Variables: Text: Size: Large
+$wl-input-text-size-lg: var(--Typeface-Size-Button-Large, 18px);
+$wl-input-line-height-lg: var(--Typeface-Line-height-Button-Large, 24px);
+$wl-input-letter-spacing-lg: var(--Typeface-Letter-Spacing-Button-Large, 0px);
+
+// TODO:  Variables: Colors
+$wl-input-placeholder-color: var(
+  --Colors-SEMANTIC-NEUTRAL-WLDS-NTL-05,
+  #a3a3a3
+);
+$wl-input-color: var(--Forgrounds-FG-TITLE, #171717);
+$wl-input-disabled-color: var(--Forgrounds-FG-DISABLED-VALUE, #737373);
+$wl-input-caret-color: var(--Forgrounds-FG-INTERACTIVE, #0021fe);
+
+// TODO: Variables: Icon
+$wl-input-icon-size: rem(16);
+$wl-input-clear-icon-bg-img-url: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 16 16' fill='none'%3E%3Cpath d='M8 15.126C4.10352 15.126 0.938477 11.9609 0.938477 8.06445C0.938477 4.16797 4.10352 1.00293 8 1.00293C11.8965 1.00293 15.0615 4.16797 15.0615 8.06445C15.0615 11.9609 11.8965 15.126 8 15.126ZM5.75781 10.9629C5.94238 10.9629 6.09961 10.8945 6.22949 10.7715L8 8.9873L9.78418 10.7715C9.90039 10.8945 10.0645 10.9629 10.249 10.9629C10.6113 10.9629 10.8984 10.6758 10.8984 10.3066C10.8984 10.1357 10.8301 9.97851 10.707 9.85547L8.92285 8.07129L10.7139 6.28027C10.8437 6.15039 10.8984 6 10.8984 5.8291C10.8984 5.4668 10.6182 5.18652 10.2627 5.18652C10.0781 5.18652 9.93457 5.24805 9.80469 5.37793L8 7.16894L6.20898 5.38477C6.08594 5.26172 5.94238 5.20019 5.75781 5.20019C5.39551 5.20019 5.11523 5.47363 5.11523 5.83594C5.11523 6.00684 5.18359 6.16406 5.30664 6.28711L7.09082 8.07129L5.30664 9.8623C5.18359 9.98535 5.11523 10.1426 5.11523 10.3066C5.11523 10.6758 5.39551 10.9629 5.75781 10.9629Z' fill='%23A3A3A3'/%3E%3C/svg%3E");
+$wl-input-clear-icon-bg-img-hover-url: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 16 16' fill='none'%3E%3Cpath d='M8 15.126C4.10352 15.126 0.938477 11.9609 0.938477 8.06445C0.938477 4.16797 4.10352 1.00293 8 1.00293C11.8965 1.00293 15.0615 4.16797 15.0615 8.06445C15.0615 11.9609 11.8965 15.126 8 15.126ZM5.75781 10.9629C5.94238 10.9629 6.09961 10.8945 6.22949 10.7715L8 8.9873L9.78418 10.7715C9.90039 10.8945 10.0645 10.9629 10.249 10.9629C10.6113 10.9629 10.8984 10.6758 10.8984 10.3066C10.8984 10.1357 10.8301 9.97851 10.707 9.85547L8.92285 8.07129L10.7139 6.28027C10.8437 6.15039 10.8984 6 10.8984 5.8291C10.8984 5.4668 10.6182 5.18652 10.2627 5.18652C10.0781 5.18652 9.93457 5.24805 9.80469 5.37793L8 7.16894L6.20898 5.38477C6.08594 5.26172 5.94238 5.20019 5.75781 5.20019C5.39551 5.20019 5.11523 5.47363 5.11523 5.83594C5.11523 6.00684 5.18359 6.16406 5.30664 6.28711L7.09082 8.07129L5.30664 9.8623C5.18359 9.98535 5.11523 10.1426 5.11523 10.3066C5.11523 10.6758 5.39551 10.9629 5.75781 10.9629Z' fill='%23171717'/%3E%3C/svg%3E");
+$wl-input-user-icon-bg-img-url: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none'%3E%3Cpath d='M6.69336 20.2749H17.3066C17.7637 20.2749 18.122 20.1733 18.3815 19.9702C18.6411 19.7671 18.7708 19.4821 18.7708 19.1154C18.7708 18.6019 18.6128 18.0631 18.2969 17.4989C17.9865 16.929 17.5352 16.3986 16.9427 15.9077C16.3503 15.4112 15.6365 15.0078 14.8014 14.6974C13.972 14.3871 13.0382 14.2319 12 14.2319C10.9618 14.2319 10.0252 14.3871 9.1901 14.6974C8.35503 15.0078 7.64128 15.4112 7.04883 15.9077C6.46202 16.3986 6.01063 16.929 5.69466 17.4989C5.37869 18.0631 5.2207 18.6019 5.2207 19.1154C5.2207 19.4821 5.35048 19.7671 5.61003 19.9702C5.86957 20.1733 6.23069 20.2749 6.69336 20.2749ZM12 12.8185C12.5868 12.8185 13.1257 12.6605 13.6165 12.3446C14.1074 12.0286 14.4996 11.6026 14.793 11.0666C15.092 10.5249 15.2415 9.91835 15.2415 9.24691C15.2415 8.59239 15.092 8.00277 14.793 7.47803C14.4996 6.95329 14.1074 6.53857 13.6165 6.23389C13.1257 5.9292 12.5868 5.77686 12 5.77686C11.4188 5.77686 10.88 5.93202 10.3835 6.24235C9.89258 6.55268 9.49761 6.97304 9.19857 7.50342C8.90517 8.02816 8.76128 8.61496 8.76693 9.26383C8.76693 9.92399 8.91363 10.5249 9.20703 11.0666C9.50043 11.6026 9.89258 12.0286 10.3835 12.3446C10.8743 12.6605 11.4132 12.8185 12 12.8185Z' fill='%23737373'/%3E%3C/svg%3E");
+$wl-input-lock-icon-bg-img-url: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none'%3E%3Cpath d='M7.96285 20.867C6.64254 20.867 5.96545 20.173 5.96545 18.7427V12.6235C5.96545 11.354 6.50712 10.6685 7.56506 10.533V8.55257C7.56506 5.47184 9.61324 3.81299 12 3.81299C14.3782 3.81299 16.4349 5.47184 16.4349 8.55257V10.533C17.4843 10.6685 18.026 11.3625 18.026 12.6235V18.7427C18.026 20.173 17.3489 20.867 16.0286 20.867H7.96285ZM9.33394 8.42562V10.5161H14.6744V8.42562C14.6744 6.55518 13.4557 5.5057 12 5.5057C10.5358 5.5057 9.33394 6.55518 9.33394 8.42562Z' fill='%23737373'/%3E%3C/svg%3E");
+$wl-input-eye-blue-icon-bg-img-url: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 16 16' fill='none'%3E%3Cpath d='M7.99993 13.1835C8.72592 13.1835 9.40864 13.097 10.0481 12.9239C10.6876 12.7509 11.2763 12.5233 11.8142 12.2412C12.3558 11.9553 12.8392 11.6412 13.2643 11.2989C13.6893 10.9566 14.0504 10.6124 14.3476 10.2664C14.6448 9.92032 14.8723 9.60059 15.0303 9.30718C15.1883 9.01378 15.2673 8.7768 15.2673 8.59625C15.2673 8.41569 15.1883 8.18059 15.0303 7.89095C14.8723 7.59755 14.6448 7.27781 14.3476 6.93175C14.0504 6.58568 13.6874 6.2415 13.2586 5.8992C12.8336 5.55689 12.3502 5.24468 11.8085 4.96256C11.2706 4.67669 10.6819 4.44723 10.0425 4.2742C9.40676 4.10116 8.72592 4.01465 7.99993 4.01465C7.28523 4.01465 6.60815 4.10116 5.96868 4.2742C5.33298 4.44723 4.74429 4.67669 4.20262 4.96256C3.66472 5.24468 3.18136 5.55689 2.75254 5.8992C2.32748 6.2415 1.96261 6.58568 1.65792 6.93175C1.35699 7.27781 1.12566 7.59755 0.963908 7.89095C0.805922 8.18059 0.726929 8.41569 0.726929 8.59625C0.726929 8.7768 0.805922 9.01378 0.963908 9.30718C1.12566 9.60059 1.35699 9.92032 1.65792 10.2664C1.96261 10.6124 2.32748 10.9566 2.75254 11.2989C3.18136 11.6412 3.66472 11.9553 4.20262 12.2412C4.74429 12.5233 5.33298 12.7509 5.96868 12.9239C6.60815 13.097 7.28523 13.1835 7.99993 13.1835ZM7.99993 11.4908C7.46203 11.4908 6.97302 11.3591 6.53292 11.0958C6.09658 10.8325 5.74675 10.4827 5.48344 10.0463C5.22389 9.60623 5.09224 9.12475 5.08847 8.60189C5.08847 8.06022 5.21825 7.57122 5.4778 7.13487C5.74111 6.69853 6.09281 6.35247 6.53292 6.09668C6.97302 5.83713 7.46203 5.70736 7.99993 5.70736C8.53408 5.70736 9.0212 5.83713 9.4613 6.09668C9.90517 6.35247 10.2569 6.70041 10.5164 7.14052C10.7797 7.57686 10.9114 8.06398 10.9114 8.60189C10.9114 8.99309 10.8362 9.36361 10.6857 9.71343C10.5352 10.0595 10.3265 10.3679 10.0594 10.6388C9.79232 10.9059 9.48199 11.1146 9.1284 11.2651C8.77858 11.4155 8.40242 11.4908 7.99993 11.4908ZM7.99993 9.69651C8.30086 9.69651 8.55853 9.5893 8.77294 9.37489C8.99111 9.15672 9.10019 8.89905 9.10019 8.60189C9.10019 8.30096 8.99111 8.04329 8.77294 7.82888C8.55853 7.61447 8.30086 7.50727 7.99993 7.50727C7.69901 7.50727 7.43946 7.61447 7.22129 7.82888C7.00688 8.04329 6.89967 8.30096 6.89967 8.60189C6.89967 8.89905 7.00688 9.15672 7.22129 9.37489C7.43946 9.5893 7.69901 9.69651 7.99993 9.69651Z' fill='%230F1FEA'/%3E%3C/svg%3E");
+$wl-input-eye-hide-blue-icon-bg-img-url: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 16 16' fill='none'%3E%3Cpath d='M12.2485 12.8701L3.14453 3.7768C2.9834 3.61567 2.9834 3.33637 3.14453 3.17524C3.31641 3.00336 3.59033 3.00874 3.75684 3.17524L12.8501 12.2631C13.0166 12.4296 13.0273 12.6874 12.8501 12.8701C12.6782 13.0473 12.415 13.0366 12.2485 12.8701ZM8 3.51899C12.3506 3.51899 15.3047 7.03168 15.3047 8.12202C15.3047 8.73432 14.3594 10.1254 12.7588 11.2104L10.7285 9.18549C10.8682 8.86323 10.9487 8.49799 10.9487 8.12202C10.9487 6.49458 9.62744 5.17329 8 5.17329C7.62402 5.17329 7.25879 5.25385 6.93115 5.3935L5.48096 3.93794C6.24902 3.68012 7.09766 3.51899 8 3.51899ZM8 12.7197C3.70312 12.7197 0.695312 9.20698 0.695312 8.12202C0.695312 7.48823 1.71045 6.0434 3.39697 4.94233L5.33594 6.87592C5.15332 7.25727 5.05127 7.67622 5.05127 8.12202C5.05127 9.74946 6.37256 11.0707 8 11.0707C8.4458 11.0707 8.87012 10.9687 9.24609 10.7807L10.7178 12.247C9.896 12.5371 8.98291 12.7197 8 12.7197ZM9.76709 8.22407L7.89795 6.35493C8.97754 6.25825 9.85303 7.24116 9.76709 8.22407ZM8 9.89985C7.01709 9.89985 6.22217 9.10493 6.22217 8.12202C6.22217 8.00922 6.23828 7.9018 6.25977 7.79438L8.32764 9.86225C8.22021 9.88374 8.11279 9.89985 8 9.89985Z' fill='%230F1FEA'/%3E%3C/svg%3E");
+
+// TODO: Variables: Transition
+$wl-input-transition: background-color 0.25s ease, box-shadow 0.25s ease,
+  border-color 0.25s ease, color 0.25s ease, opacity 0.25s ease;
+
+// TODO: Mixins: Input: Text
+@mixin wl-input-text-base {
+  font-family: $wl-input-text-family;
+  font-weight: $wl-input-font-weight;
+  color: $wl-input-color;
+  caret-color: $wl-input-caret-color;
+  @include wl-text-ellipsis;
+}
+
+@mixin wl-input-text {
+  @include wl-input-text-base;
+  font-size: $wl-input-text-size;
+  line-height: $wl-input-line-height;
+  letter-spacing: $wl-input-letter-spacing;
+}
+
+// TODO: Mixins: Input: Text: Large
+@mixin wl-input-text-lg {
+  @include wl-input-text-base;
+  font-size: $wl-input-text-size-lg;
+  line-height: $wl-input-line-height-lg;
+  letter-spacing: $wl-input-letter-spacing-lg;
+}
+
+// TODO: Shadow-Mixins
+@mixin wl-shadow-none {
+  background-color: transparent;
+  box-shadow: none;
+}
+
+@mixin wl-shadow-normal {
+  background-color: var(--Backgrounds-BG-NORMAL, #fff);
+  box-shadow: var(--Ouline-Normal-First-X-0, 0px)
+    var(--Ouline-Normal-First-Y-0, 0px) var(--Ouline-Normal-First-B-0, 0px)
+    var(--Ouline-Normal-First-S-0, 1px) var(--Borders-BORDER-BASE-THIN, #d4d4d4);
+}
+
+@mixin wl-shadow-pressed {
+  background-color: var(--Backgrounds-BG-NORMAL, #fff);
+  box-shadow: var(--Ouline-Normal-First-X-0, 0px)
+      var(--Ouline-Normal-First-Y-0, 0px) var(--Ouline-Normal-First-B-0, 0px)
+      var(--Ouline-Normal-First-S-0, 1px)
+      var(--Ouline-Normal-First-Color, #83b7ff),
+    var(--Ouline-Normal-Secord-X-0, 0px) var(--Ouline-Normal-Secord-Y-0, 0px)
+      var(--Ouline-Normal-Secord-B-0, 0px) var(--Ouline-Normal-Secord-S-0, 4px)
+      var(--Ouline-Normal-Secord-Colors, #b2d4ff);
+}
+
+@mixin wl-shadow-disabled {
+  background-color: var(--Button-Disabled-BTN-DISABLED, #e5e5e5);
+  box-shadow: var(--Ouline-Normal-X-0, 0px) var(--Ouline-Normal-Y-0, 0px)
+    var(--Ouline-Normal-B-0, 0px) var(--Ouline-Normal-S-0, 1px)
+    var(--Borders-BORDER-BASE-THIN, #d4d4d4);
+}
+
+@mixin wl-shadow-error {
+  box-shadow: var(--Ouline-Focus-Warning-First-X-0, 0px)
+      var(--Ouline-Focus-Warning-First-Y-0, 0px)
+      var(--Ouline-Focus-Warning-First-B-0, 0px)
+      var(--Ouline-Focus-Warning-First-S-0, 1px)
+      var(--Ouline-Focus-Warning-First-Color, #ff9ea6),
+    var(--Ouline-Focus-Warning-Second-X-0, 0px)
+      var(--Ouline-Focus-Warning-Second-Y-0, 0px)
+      var(--Ouline-Focus-Warning-Second-B-0, 0px)
+      var(--Ouline-Focus-Warning-Second-S-0, 4px)
+      var(--Ouline-Focus-Warning-Second-Color, #ffc6cb);
+}
+
+@mixin wl-shadow-complete {
+  box-shadow: var(--Ouline-Focus-Valid-First-X-0, 0px)
+      var(--Ouline-Focus-Valid-First-Y-0, 0px)
+      var(--Ouline-Focus-Valid-First-B-0, 0px)
+      var(--Ouline-Focus-Valid-First-S-0, 1px)
+      var(--Ouline-Focus-Valid-First-Color, #58f2a6),
+    var(--Ouline-Focus-Valid-Secord-X-0, 0px)
+      var(--Ouline-Focus-Valid-Secord-Y-0, 0px)
+      var(--Ouline-Focus-Valid-Secord-B-0, 0px)
+      var(--Ouline-Focus-Valid-Secord-S-0, 4px)
+      var(--Ouline-Focus-Valid-Secord-Color, #aaf9cd);
+}
+
+// TODO: Mixins: Input: Base
+@mixin wl-input-base {
+  border: none;
+  outline: none;
+  padding: $wl-input-padding;
+  border-radius: $wl-input-border-radius;
+  @include wl-shadow-normal;
+  @include wl-input-text;
+  @include wl-aligns-center;
+  gap: var(--Spacing-WLDS-Space-4, 4px);
+  align-self: stretch;
+  transition: $wl-input-transition;
+}
+
+// TODO: Define a list of input types to avoid repetition
+$wl-input-types: (
+  "text",
+  "email",
+  "password",
+  "tel",
+  "number",
+  "date",
+  "month",
+  "week",
+  "time",
+  "datetime-local",
+  "url",
+  "search"
+);
+
+// TODO: Mixin to generate input type selectors
+@mixin wl-input-type-selector($types: $wl-input-types) {
+  @each $type in $types {
+    input[type="#{$type}"] {
+      @content;
+    }
+  }
+}
+
+// TODO: Component: Input
+@include wl-input-type-selector {
+  @include wl-input-base;
+
+  // TODO: Component: Input: Container
+  &.wl-input {
+    // TODO: Size: Large
+    &-lg {
+      @include wl-input-text-lg;
+      padding: $wl-input-padding-lg;
+      border-radius: $wl-input-border-radius-lg;
+    }
+
+    // TODO: State: Error
+    &-error {
+      @include wl-shadow-error;
+    }
+
+    // TODO: State: Complete
+    &-complete {
+      @include wl-shadow-complete;
+    }
+
+    // TODO: State: Border-None
+    &-border-none {
+      @include wl-shadow-none;
+    }
+  }
+
+  // TODO: Placeholder
+  &::placeholder {
+    color: $wl-input-placeholder-color;
+  }
+
+  // TODO: Focus
+  &:focus {
+    @include wl-shadow-pressed;
+  }
+
+  // TODO: Disabled
+  &:disabled {
+    cursor: not-allowed;
+    user-select: none;
+    @include wl-shadow-disabled;
+    color: $wl-input-disabled-color; // Fixed typo
+  }
+}
+
+// TODO: Mixins: Icon: Base
+@mixin wl-icon-base {
+  display: block;
+  width: $wl-input-icon-size;
+  height: $wl-input-icon-size;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 9;
+  transition: opacity 0.25s ease, color 0.25s ease;
+  cursor: pointer;
+  opacity: 0;
+
+  // TODO: Size: Icon: Large
+  &.wl-icon-lg {
+    width: rem(24);
+    height: rem(24);
+    right: rem(12);
+
+    svg {
+      width: rem(24);
+      height: rem(24);
+    }
+  }
+}
+
+// TODO: Custom: Input: Icon
+.wl-input-icon {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+
+  // TODO: Lead Position
+  &-lead {
+    color: #737373;
+    left: rem(8);
+
+    &.wl-icon-lg {
+      // TODO: Fixed :has(.wl-icon-lg)
+      left: rem(12);
+    }
+  }
+
+  // TODO: Trail Position
+  &-trail {
+    right: rem(8);
+
+    &.wl-icon-lg {
+      // TODO: Fixed :has(.wl-icon-lg)
+      right: rem(12);
+    }
+  }
+}
+
+// TODO: Mixins: Input: Container
+@mixin wl-input-container {
+  @include wl-flex-column;
+  flex-grow: 1;
+  gap: var(--Spacing-WLDS-Space-8, 8px);
+  position: relative;
+}
+
+// Mixin to generate input type selectors
+@mixin wl-input-type-selector($types: $wl-input-types, $use-has: false) {
+  @each $type in $types {
+    @if $use-has {
+      // Use :has() with proper parentheses
+      &:has(input[type="#{$type}"]) {
+        @content;
+      }
+    } @else {
+      // Direct input selector
+      input[type="#{$type}"] {
+        @content;
+      }
+    }
+  }
+}
+
+// Mixin for padding adjustments based on icon presence
+@mixin wl-input-padding($icon-type, $padding-small, $padding-large) {
+  @include wl-input-type-selector($use-has: false) {
+    padding-#{$icon-type}: $padding-small;
+
+    &.wl-input-lg {
+      padding-#{$icon-type}: $padding-large;
+    }
+  }
+}
+
+// Mixin for clear icon positioning
+@mixin wl-icon-clear-circle {
+  @include wl-icon-base;
+  right: rem(8);
+}
+
+// Main container styles
+.wl-input-container {
+  @include wl-input-container;
+
+  // Handle focus state for lead icon
+  @include wl-input-type-selector($use-has: true) {
+    &:focus-within {
+      .wl-input-icon-lead {
+        color: #171717;
+      }
+    }
+  }
+
+  // Show clear icon for specified input types
+  @include wl-input-type-selector($use-has: true) {
+    .wl-icon-clear-circle {
+      @include wl-icon-clear-circle;
+    }
+  }
+
+  // Adjust padding-left when lead icon is present
+  &:has(.wl-input-icon-lead) {
+    @include wl-input-padding(
+      "left",
+      $wl-input-spacing-28,
+      $wl-input-spacing-42
+    );
+  }
+
+  // Adjust padding-right when trail icon is present
+  &:has(.wl-input-icon-trail) {
+    @include wl-input-padding(
+      "right",
+      $wl-input-spacing-32,
+      $wl-input-spacing-42
+    );
+  }
+
+  // Adjust padding-right for clear icon when no lead/trail elements
+  @include wl-input-type-selector($use-has: true) {
+    & > input:not(.wl-element-lead):not(.wl-element-trail) {
+      padding-right: $wl-input-spacing-28;
+
+      &.wl-input-lg {
+        padding-right: $wl-input-spacing-42;
+      }
+    }
+  }
+
+  // Show clear icon when input is not placeholder-shown and not disabled
+  @include wl-input-type-selector($use-has: true) {
+    &:not(:placeholder-shown):not(:disabled) {
+      .wl-icon-clear-circle {
+        opacity: 1;
+      }
+    }
+  }
+
+  // Hide eye icons for text/password when placeholder is shown
+  &:has(input[type="text"]:placeholder-shown:not(:disabled)),
+  &:has(input[type="password"]:placeholder-shown:not(:disabled)) {
+    .wl-icon-eye,
+    .wl-icon-eye-hide {
+      opacity: 0;
+    }
+  }
+
+  // Show eye icon for password when not placeholder-shown
+  &:has(input[type="password"]:not(:placeholder-shown):not(:disabled)) {
+    .wl-icon-eye {
+      opacity: 1;
+    }
+    .wl-icon-eye-hide {
+      display: none;
+    }
+  }
+
+  // Show hide icon for text when not placeholder-shown
+  &:has(input[type="text"]:not(:placeholder-shown):not(:disabled)) {
+    .wl-icon-eye {
+      display: none;
+    }
+    .wl-icon-eye-hide {
+      display: block;
+      opacity: 1;
+    }
+  }
+
+  // Eye icon styles
+  .wl-icon-eye {
+    color: var(--Forgrounds-FG-INTERACTIVE, #0f1fea);
+    &:hover {
+      color: var(--Colors-PRIMARY-WLDS-PRM-10, #182697);
+    }
+  }
+
+  .wl-icon-eye-hide {
+    color: var(--Forgrounds-FG-INTERACTIVE, #0f1fea);
+    &:hover {
+      color: var(--Colors-PRIMARY-WLDS-PRM-09, #1221c1);
+    }
+  }
+}
+
+// TODO: Component: Group Element Container
+.wl-group-element-container {
+  @include wl-aligns-inline-center;
+  gap: rem(1);
+
+  // TODO: Element: Lead
+  .wl-element-lead {
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+
+    // TODO: Size: Large
+    &.wl-input-lg {
+      border-top-right-radius: 0;
+      border-bottom-right-radius: 0;
+    }
+  }
+
+  // TODO: Element: Trails
+  .wl-element-trail {
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+
+    // TODO: Size: Large
+    &.wl-input-lg {
+      border-top-left-radius: 0;
+      border-bottom-left-radius: 0;
+    }
+  }
+}
+
+// TODO: Type: Search
+input[type="search"] {
+  &::-webkit-search-cancel-button {
+    display: none;
+  }
+
+  &::-webkit-search-decoration {
+    display: none;
+  }
+
+  &::-webkit-search-results-button {
+    display: none;
+  }
+
+  &::-webkit-search-results-decoration {
+    display: none;
+  }
+}

@@ -1,0 +1,110 @@
+// _wl-gutter.scss
+// Extended gutter system for common use cases
+@use "../abstracts/breakpoints" as *;
+
+// Standard gutter variables
+$wl-gutter-values: (
+  0: 0,
+  1: 0.25rem,
+  // 4px
+  2: 0.5rem,
+  // 8px
+  3: 1rem,
+  // 16px
+  4: 1.5rem,
+  // 24px
+  5: 3rem,
+  // 48px
+  6: 4rem // 64px,,
+) !default;
+
+// Base gutter classes for both X and Y
+@each $key, $value in $wl-gutter-values {
+  .wl-g-#{$key} {
+    --wl-gutter-x: #{$value};
+    --wl-gutter-y: #{$value};
+  }
+}
+
+// X-axis only gutter classes
+@each $key, $value in $wl-gutter-values {
+  .wl-gx-#{$key} {
+    --wl-gutter-x: #{$value};
+  }
+}
+
+// Y-axis only gutter classes
+@each $key, $value in $wl-gutter-values {
+  .wl-gy-#{$key} {
+    --wl-gutter-y: #{$value};
+  }
+}
+
+// Responsive gutter classes
+@each $breakpoint, $breakpoint-value in $breakpoints {
+  @include breakpoint-up($breakpoint) {
+    @each $key, $value in $wl-gutter-values {
+      // Both axes
+      .wl-#{$breakpoint}\:g-#{$key} {
+        --wl-gutter-x: #{$value};
+        --wl-gutter-y: #{$value};
+      }
+
+      // X-axis only
+      .wl-#{$breakpoint}\:gx-#{$key} {
+        --wl-gutter-x: #{$value};
+      }
+
+      // Y-axis only
+      .wl-#{$breakpoint}\:gy-#{$key} {
+        --wl-gutter-y: #{$value};
+      }
+    }
+  }
+}
+
+// Pre-defined gutter combinations
+.wl-g-none {
+  --wl-gutter-x: 0;
+  --wl-gutter-y: 0;
+}
+
+.wl-g-small {
+  --wl-gutter-x: 0.5rem;
+  --wl-gutter-y: 0.5rem;
+}
+
+.wl-g-medium {
+  --wl-gutter-x: 1rem;
+  --wl-gutter-y: 1rem;
+}
+
+.wl-g-large {
+  --wl-gutter-x: 1.5rem;
+  --wl-gutter-y: 1.5rem;
+}
+
+.wl-g-xl {
+  --wl-gutter-x: 3rem;
+  --wl-gutter-y: 3rem;
+}
+
+// Asymmetric gutters
+.wl-g-x-only {
+  --wl-gutter-y: 0;
+}
+
+.wl-g-y-only {
+  --wl-gutter-x: 0;
+}
+
+// Specific combinations that were in your original file
+.wl-g-3 {
+  --wl-gutter-x: 1rem;
+  --wl-gutter-y: 1rem;
+}
+
+.wl-g-4 {
+  --wl-gutter-x: 1.5rem;
+  --wl-gutter-y: 1.5rem;
+}

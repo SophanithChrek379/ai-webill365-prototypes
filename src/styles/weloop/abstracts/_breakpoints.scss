@@ -1,0 +1,54 @@
+@use "sass:map";
+
+// Breakpoint values
+$breakpoint-sm: 576px !default;
+$breakpoint-md: 768px !default;
+$breakpoint-lg: 992px !default;
+$breakpoint-xl: 1200px !default;
+$breakpoint-xxl: 1400px !default;
+
+// Breakpoints map for programmatic access
+$breakpoints: (
+  "sm": $breakpoint-sm,
+  "md": $breakpoint-md,
+  "lg": $breakpoint-lg,
+  "xl": $breakpoint-xl,
+  "xxl": $breakpoint-xxl,
+) !default;
+
+// Mixin for media queries (mobile first - min-width)
+@mixin breakpoint-up($breakpoint) {
+  @if map.has-key($breakpoints, $breakpoint) {
+    @media (min-width: map.get($breakpoints, $breakpoint)) {
+      @content;
+    }
+  } @else {
+    @error "Unknown breakpoint: #{$breakpoint}. Available breakpoints are: #{map-keys($breakpoints)}.";
+  }
+}
+
+// Mixin for media queries (desktop first - max-width)
+@mixin breakpoint-down($breakpoint) {
+  @if map.has-key($breakpoints, $breakpoint) {
+    $value: map.get($breakpoints, $breakpoint);
+    @media (max-width: calc($value - 0.02px)) {
+      @content;
+    }
+  } @else {
+    @error "Unknown breakpoint: #{$breakpoint}. Available breakpoints are: #{map-keys($breakpoints)}.";
+  }
+}
+
+// Mixin for media queries between two breakpoints
+@mixin breakpoint-between($lower, $upper) {
+  @if map.has-key($breakpoints, $lower) and map.has-key($breakpoints, $upper) {
+    $min-value: map.get($breakpoints, $lower);
+    $max-value: map.get($breakpoints, $upper);
+
+    @media (min-width: $min-value) and (max-width: calc($max-value - 0.02px)) {
+      @content;
+    }
+  } @else {
+    @error "Unknown breakpoints: #{$lower} or #{$upper}. Available breakpoints are: #{map-keys($breakpoints)}.";
+  }
+}

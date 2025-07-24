@@ -1,0 +1,71 @@
+@use "sass:color";
+@use "sass:map";
+
+// TODO: SCSS variables mapped to foreground design tokens
+$wl-foreground-black: var(--Forgrounds-FG-BLACK);
+$wl-foreground-title: var(--Forgrounds-FG-TITLE);
+$wl-foreground-subtitle: var(--Forgrounds-FG-SUBTITLE, #404040);
+$wl-foreground-body: var(--Forgrounds-FG-BODY);
+$wl-foreground-interactive: var(--Forgrounds-FG-INTERACTIVE, #0021fe);
+$wl-foreground-disabled: var(--Forgrounds-FG-DISABLED);
+$wl-foreground-disabled-dark: var(
+  --Colors-SEMANTIC-NEUTRAL-WLDS-NTL-07,
+  #525252
+);
+$wl-foreground-disabled-value: var(--Forgrounds-FG-DISABLED-VALUE, #737373);
+$wl-foreground-fail: var(--Forgrounds-FG-FAIL);
+$wl-foreground-white: var(--Forgrounds-FG-WHITE);
+
+// TODO: Map for foreground colors
+$wl-foreground-colors: (
+  "black": $wl-foreground-black,
+  "title": $wl-foreground-title,
+  "subtitle": $wl-foreground-subtitle,
+  "body": $wl-foreground-body,
+  "interactive": $wl-foreground-interactive,
+  "disabled": $wl-foreground-disabled,
+  "disabled-dark": $wl-foreground-disabled-dark,
+  "disabled-value": $wl-foreground-disabled-value,
+  "fail": $wl-foreground-fail,
+  "white": $wl-foreground-white,
+);
+
+// TODO: Mixin for foreground color
+@mixin foreground-color($color) {
+  color: $color;
+}
+
+// TODO: Mixin for generating all foreground color classes
+@mixin generate-foreground-classes {
+  @each $name, $color in $wl-foreground-colors {
+    &-#{$name} {
+      color: $color;
+    }
+  }
+}
+
+// TODO: Apply all foreground color styles
+.wl-fg {
+  @include generate-foreground-classes;
+}
+
+// TODO: Usage examples:
+//
+// 1. Apply directly to HTML elements:
+// <p class="wl-fg-body">Body text</p>
+// <h1 class="wl-fg-title">Title text</h1>
+//
+// 2. Extend in another SCSS file:
+// .my-error-message {
+//   @extend .wl-fg-fail;
+// }
+//
+// 3. Mix into custom components:
+// .my-component {
+//   .title {
+//     @include foreground-color(map.get($wl-foreground-colors, "title"));
+//   }
+// }
+//
+// 4. Combine with typography:
+// <p class="wl-text-body-medium wl-fg-body">Medium body text with body color</p>

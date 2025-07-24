@@ -1,0 +1,423 @@
+@use "sass:color";
+@use "sass:math";
+@use "../abstracts/breakpoints" as *;
+@use "../abstracts/functions" as *;
+@use "../abstracts/mixins" as *;
+
+// TODO: Variables
+$wl-table-row-height: rem(44);
+$wl-table-spacing-0: 0px;
+$wl-table-spacing-2: var(--Spacing-WLDS-Space-2, 2px);
+$wl-table-spacing-4: var(--Spacing-WLDS-Space-4, 4px);
+$wl-table-spacing-5: rem(5);
+$wl-table-spacing-6: var(--Spacing-WLDS-Space-6, 6px);
+$wl-table-spacing-8: var(--Spacing-WLDS-Space-8, 8px);
+$wl-table-spacing-10: var(--Spacing-WLDS-Space-10, 10px);
+$wl-table-spacing-11: rem(11);
+$wl-table-spacing-12: var(--Spacing-WLDS-Space-12, 12px);
+$wl-table-spacing-16: var(--Spacing-WLDS-Space-16, 16px);
+$wl-table-cell-padding: var(--Spacing-WLDS-Space-16, 16px);
+$wl-table-cell-padding-x: var(--Spacing-WLDS-Space-16, 16px);
+$wl-table-cell-padding-y: var(--Spacing-WLDS-Space-12, 12px);
+$wl-table-header-info-bg-img-url: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='20' height='20' viewBox='0 0 20 20' fill='none'%3E%3Cpath d='M10.0003 17.8196C5.96598 17.8196 2.64404 14.4976 2.64404 10.4633C2.64404 6.43611 5.96598 3.10712 9.99322 3.10712C14.0275 3.10712 17.3565 6.43611 17.3565 10.4633C17.3565 14.4976 14.0346 17.8196 10.0003 17.8196ZM9.97206 8.12177C10.5504 8.12177 11.0088 7.64922 11.0088 7.07088C11.0088 6.47843 10.5504 6.01999 9.97206 6.01999C9.39372 6.01999 8.92117 6.47843 8.92117 7.07088C8.92117 7.64922 9.39372 8.12177 9.97206 8.12177ZM8.68842 14.5047H11.6718C12.0245 14.5047 12.3066 14.2578 12.3066 13.8911C12.3066 13.5525 12.0245 13.2775 11.6718 13.2775H10.9242V9.99785C10.9242 9.51825 10.6844 9.20087 10.233 9.20087H8.82243C8.46978 9.20087 8.18766 9.47593 8.18766 9.81447C8.18766 10.1742 8.46978 10.4281 8.82243 10.4281H9.53478V13.2775H8.68842C8.32872 13.2775 8.05366 13.5525 8.05366 13.8911C8.05366 14.2578 8.32872 14.5047 8.68842 14.5047Z' fill='%23737373'/%3E%3C/svg%3E");
+$wl-table-header-chevron-down-bg-img-url: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 16 16' fill='none'%3E%3Cpath d='M8 12.6406C7.73438 12.6406 7.5 12.5391 7.29688 12.3281L1.34375 6.24219C1.17188 6.07031 1.07812 5.85156 1.07812 5.60156C1.07812 5.09375 1.47656 4.69531 1.98438 4.69531C2.23438 4.69531 2.46094 4.79688 2.64062 4.96875L8 10.4609L13.3594 4.96875C13.5312 4.79688 13.7656 4.69531 14.0156 4.69531C14.5156 4.69531 14.9141 5.09375 14.9141 5.60156C14.9141 5.85938 14.8281 6.07031 14.6562 6.24219L8.70312 12.3281C8.50781 12.5391 8.26562 12.6406 8 12.6406Z' fill='%23737373'/%3E%3C/svg%3E");
+$wl-table-header-chevron-down-hover-bg-img-url: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 16 16' fill='none'%3E%3Cpath d='M8 12.6406C7.73438 12.6406 7.5 12.5391 7.29688 12.3281L1.34375 6.24219C1.17188 6.07031 1.07812 5.85156 1.07812 5.60156C1.07812 5.09375 1.47656 4.69531 1.98438 4.69531C2.23438 4.69531 2.46094 4.79688 2.64062 4.96875L8 10.4609L13.3594 4.96875C13.5312 4.79688 13.7656 4.69531 14.0156 4.69531C14.5156 4.69531 14.9141 5.09375 14.9141 5.60156C14.9141 5.85938 14.8281 6.07031 14.6562 6.24219L8.70312 12.3281C8.50781 12.5391 8.26562 12.6406 8 12.6406Z' fill='%23171717'/%3E%3C/svg%3E");
+$wl-table-header-chevron-up-bg-img-url: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 16 16' fill='none'%3E%3Cpath d='M1.34375 10.5156L7.29688 4.42188C7.5 4.21094 7.73438 4.10938 8 4.10938C8.26562 4.10938 8.50781 4.21875 8.70312 4.42188L14.6562 10.5156C14.8281 10.6797 14.9141 10.8984 14.9141 11.1484C14.9141 11.6562 14.5156 12.0547 14.0156 12.0547C13.7656 12.0547 13.5312 11.9609 13.3594 11.7812L8 6.28906L2.64062 11.7812C2.46875 11.9609 2.23438 12.0547 1.98438 12.0547C1.47656 12.0547 1.07812 11.6562 1.07812 11.1484C1.07812 10.8984 1.17188 10.6797 1.34375 10.5156Z' fill='%23737373'/%3E%3C/svg%3E");
+$wl-table-header-chevron-up-hover-bg-img-url: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 16 16' fill='none'%3E%3Cpath d='M1.34375 10.5156L7.29688 4.42188C7.5 4.21094 7.73438 4.10938 8 4.10938C8.26562 4.10938 8.50781 4.21875 8.70312 4.42188L14.6562 10.5156C14.8281 10.6797 14.9141 10.8984 14.9141 11.1484C14.9141 11.6562 14.5156 12.0547 14.0156 12.0547C13.7656 12.0547 13.5312 11.9609 13.3594 11.7812L8 6.28906L2.64062 11.7812C2.46875 11.9609 2.23438 12.0547 1.98438 12.0547C1.47656 12.0547 1.07812 11.6562 1.07812 11.1484C1.07812 10.8984 1.17188 10.6797 1.34375 10.5156Z' fill='%23171717'/%3E%3C/svg%3E");
+
+$wl-table-cell-reload-bg-img-url: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='20' height='20' viewBox='0 0 20 20' fill='none'%3E%3Cpath d='M17.7344 9.71142C17.7344 11.623 17.0166 13.3662 15.8374 14.6699C15.4346 15.1899 14.7974 15.146 14.4238 14.8164C14.0942 14.5161 13.9478 14.0107 14.3579 13.4468C15.2588 12.4727 15.8081 11.1543 15.8081 9.71142C15.8081 6.98681 13.9404 4.7163 11.4209 4.09374V4.958C11.4209 5.52929 10.9229 5.67578 10.5127 5.36816L8.08105 3.55908C7.76611 3.33203 7.76611 2.94384 8.08105 2.70947L10.5054 0.900385C10.9229 0.585444 11.4209 0.731928 11.4209 1.31787V2.11621C15.0098 2.76806 17.7344 5.9248 17.7344 9.71142ZM2.26562 9.71142C2.26562 7.7998 2.99072 6.05664 4.1626 4.75292C4.57275 4.2329 5.20264 4.27685 5.57617 4.60644C5.91309 4.90673 6.05225 5.4121 5.64209 5.96875C4.74121 6.95019 4.19189 8.26855 4.19189 9.71142C4.19189 12.4287 6.05957 14.7065 8.5791 15.3291V14.4648C8.5791 13.8862 9.07715 13.7471 9.49463 14.0547L11.9189 15.8638C12.2339 16.0908 12.2339 16.479 11.9189 16.7134L9.49463 18.5225C9.07715 18.8374 8.5791 18.6909 8.5791 18.105V17.3066C4.99023 16.6475 2.26562 13.498 2.26562 9.71142Z' fill='%23737373'/%3E%3C/svg%3E");
+$wl-table-cell-more-bg-img-url: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 16 16' fill='none'%3E%3Cpath d='M3.75868 9.5625C3.09852 9.5625 2.5625 9.03212 2.5625 8.37196C2.5625 7.71181 3.09852 7.17578 3.75868 7.17578C4.41884 7.17578 4.94922 7.71181 4.94922 8.37196C4.94922 9.03212 4.41884 9.5625 3.75868 9.5625ZM7.99045 9.5625C7.33594 9.5625 6.79991 9.03212 6.79991 8.37196C6.79991 7.71181 7.33594 7.17578 7.99045 7.17578C8.65061 7.17578 9.18663 7.71181 9.18663 8.37196C9.18663 9.03212 8.65061 9.5625 7.99045 9.5625ZM12.2279 9.5625C11.5677 9.5625 11.0373 9.03212 11.0373 8.37196C11.0373 7.71181 11.5677 7.17578 12.2279 7.17578C12.888 7.17578 13.424 7.71181 13.424 8.37196C13.424 9.03212 12.888 9.5625 12.2279 9.5625Z' fill='%23404040'/%3E%3C/svg%3E");
+
+$wl-table-row-transition: background-color 0.25s ease-in-out,
+  border-bottom 0.25s ease-in-out;
+
+// TODO: Mixin: Table Base
+@mixin wl-table-base {
+  // TODO: Base Properties
+  width: auto;
+  display: table;
+  border-collapse: separate;
+  border-spacing: rem(1);
+  text-indent: initial;
+}
+
+// TODO: Table Row Group
+@mixin wl-table-row-group-base {
+  // TODO: Base Properties
+  display: table-row-group;
+  vertical-align: middle;
+  border-color: inherit;
+  min-height: $wl-table-row-height;
+}
+
+// TODO: Table-Row Base for thead, tbody and tfoot
+@mixin wl-table-row-base {
+  display: table-row;
+  vertical-align: inherit;
+  border-color: inherit;
+}
+
+// TODO: Table-Header (<thead/>) Base
+@mixin wl-table-thead-base {
+  background-color: var(--Colors-NEUTRAL-WLDS-NTL-00, #fff);
+  border-bottom: 1px solid var(--Borders-BDR-NTL-04, #d4d4d4);
+}
+
+// TODO: Table-Body Row Base
+@mixin wl-table-body-row-base {
+  // TODO: Base Properties
+  @include wl-table-row-base;
+
+  background-color: var(--Colors-NEUTRAL-WLDS-NTL-00, #fff);
+  border-bottom: 1px solid var(--Colors-SEMANTIC-NEUTRAL-WLDS-NTL-04, #d4d4d4);
+  transition: $wl-table-row-transition;
+
+  &:last-child {
+    border-bottom: none;
+  }
+
+  &:only-child {
+    // border-bottom: 1px solid var(--Colors-SEMANTIC-NEUTRAL-WLDS-NTL-04, #d4d4d4);
+    border-bottom: none;
+  }
+
+  &:has(input[type="checkbox"]:checked) {
+    background-color: var(--Backgrounds-BG-HIGHT-MIDDLE, #d8e9ff);
+  }
+
+  &:hover {
+    cursor: pointer;
+    background-color: var(--Backgrounds-BG-BASE-MIDDLE, #f5f5f5);
+  }
+}
+
+// TODO: Mixin: Table-Header-Text
+@mixin wl-table-header-text-base {
+  color: var(--Forgrounds-FG-DISABLED-VALUE, #737373);
+  font-size: var(--Typeface-Size-Button-Small, 12px);
+  font-weight: var(--Typeface-Weight-Title-Medium, 600);
+  line-height: var(--Typeface-Line-height-Body-Small, 20px);
+  letter-spacing: var(--Typeface-Letter-Spacing-Body-Small, -0.2px);
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+// TODO: Table Header Cell
+@mixin wl-table-header-cell-base {
+  // TODO: Base Properties
+  display: table-cell;
+  vertical-align: inherit;
+  font-weight: bold;
+  text-align: left;
+  padding: rem(1); // TODO: Base Padding
+  border: none;
+
+  // TODO: Padding
+  padding: $wl-table-cell-padding-y $wl-table-cell-padding-x;
+
+  // TODO: Text Properties
+  @include wl-table-header-text-base;
+
+  // TODO: Icon
+  .wl-info-icon {
+    width: rem(20);
+    height: rem(20);
+    background-image: $wl-table-header-info-bg-img-url;
+  }
+
+  // TODO: Icon
+  .wl-chevron-down-icon {
+    width: rem(14);
+    height: rem(14);
+    background-image: $wl-table-header-chevron-down-bg-img-url;
+
+    &:hover {
+      cursor: pointer;
+      background-image: $wl-table-header-chevron-down-hover-bg-img-url;
+    }
+  }
+
+  // TODO: Icon
+  .wl-chevron-up-icon {
+    width: rem(14);
+    height: rem(14);
+    background-image: $wl-table-header-chevron-up-bg-img-url;
+
+    &:hover {
+      cursor: pointer;
+      background-image: $wl-table-header-chevron-up-hover-bg-img-url;
+    }
+  }
+}
+
+// TODO: Mixin: Table-Row-Text
+@mixin wl-table-data-text-base {
+  color: var(--Forgrounds-FG-TITLE, #171717);
+  font-size: var(--Typeface-Size-Body-Small, 14px);
+  font-weight: var(--Typeface-Weight-Body-Small, 500);
+  line-height: var(--Typeface-Line-height-Body-Small, 20px);
+  letter-spacing: var(--Typeface-Letter-Spacing-Body-Small, -0.2px);
+}
+
+// TODO: Table Data Cell
+@mixin wl-table-data-cell-base {
+  // TODO: Base Properties
+  display: table-cell;
+  vertical-align: inherit;
+  text-align: left;
+  padding: 1px;
+  border: none;
+
+  // TODO: Padding
+  padding: $wl-table-cell-padding-y $wl-table-cell-padding-x;
+
+  // TODO: Text Properties
+  @include wl-table-data-text-base;
+}
+
+// TODO: Table Types
+table {
+  @include wl-table-base;
+
+  // TODO: Table Prefix
+  &.wl-table {
+    // TODO:
+    &-fixed {
+      table-layout: fixed;
+    }
+
+    // TODO: Border Collapse
+    &-border-collapse {
+      border-collapse: collapse;
+    }
+
+    &-border-separate {
+      border-collapse: separate;
+    }
+
+    // TODO: Stripe
+    &-stripe {
+      tbody tr:nth-child(odd) {
+        background-color: var(--Backgrounds-BG-NTL-00, #fff);
+      }
+    }
+  }
+}
+
+// TODO: Table Row Group
+thead,
+tbody,
+tfoot {
+  @include wl-table-row-group-base;
+}
+
+thead tr {
+  @include wl-table-row-base;
+  @include wl-table-thead-base;
+}
+
+// TODO: Table Row
+tbody tr {
+  @include wl-table-row-base;
+  @include wl-table-body-row-base;
+
+  &.wl-highlight {
+    background-color: var(--Tags-Positive-TAG-BG-YEL-THIN, #fef9c3);
+  }
+
+  &.wl-active {
+    background-color: var(--Backgrounds-BG-HIGHT-MIDDLE, #d8e9ff);
+  }
+}
+
+// TODO: Table-Footer Row Base
+tfoot tr {
+  @include wl-table-row-base;
+  background-color: var(--Backgrounds-BG-BASE-MIDDLE, #f5f5f5);
+  border-top: 1px solid var(--Borders-BORDER-OUT-DISABLED, #e5e5e5);
+
+  th,
+  td {
+    min-width: rem(145);
+    padding: $wl-table-spacing-11 $wl-table-spacing-16;
+    font-weight: 600;
+  }
+}
+
+// TODO: Table Header Cell
+th {
+  @include wl-table-header-cell-base;
+
+  // TODO: Type: Selection
+  &.wl-cell-selection {
+    padding: $wl-table-cell-padding-y $wl-table-cell-padding-x;
+  }
+
+  // TODO: Type: Initial
+  &.wl-cell-initial {
+    padding: $wl-table-cell-padding-y $wl-table-cell-padding-x;
+  }
+
+  // TODO: Type: Consequence
+  &.wl-cell-consequence {
+    padding-left: $wl-table-spacing-0;
+  }
+
+  // TODO: Type: Numberic
+  &.wl-cell-numeric {
+    min-width: rem(90);
+    padding-left: $wl-table-spacing-0;
+    text-align: right;
+  }
+}
+
+// TODO: Table Data Cell
+td {
+  @include wl-table-data-cell-base;
+
+  // TODO: Type: Selection (Input: Checkbox)
+  &.wl-cell-selection {
+    padding: $wl-table-cell-padding-y $wl-table-cell-padding-x;
+  }
+
+  // TODO: Type: Text
+  &.wl-cell-text {
+    padding-left: $wl-table-spacing-0;
+  }
+
+  // TODO: Type: Text Initial
+  &.wl-cell-text-initial {
+    padding: $wl-table-cell-padding-y $wl-table-cell-padding-x;
+  }
+
+  // TODO: Type: Consequence
+  &.wl-cell-consequence {
+    padding-left: $wl-table-spacing-0;
+  }
+
+  // TODO: Type: Consequence
+  &.wl-cell-consequence-initial {
+    padding: $wl-table-cell-padding-y $wl-table-cell-padding-x;
+  }
+
+  // TODO: Type: Numeric
+  &.wl-cell-numeric {
+    min-width: rem(115);
+    padding-left: $wl-table-spacing-0;
+    text-align: right;
+  }
+
+  // TODO: Type: Numeric Initial
+  &.wl-cell-numeric-initial {
+    min-width: rem(115);
+    padding: $wl-table-cell-padding-y $wl-table-cell-padding-x;
+    text-align: right;
+  }
+
+  // TODO: Type: Dropdown
+  &.wl-cell-dropdown {
+    padding: $wl-table-spacing-5 $wl-table-spacing-16 $wl-table-spacing-5
+      $wl-table-spacing-0;
+  }
+
+  // TODO: Type: Dropdown Initial
+  &.wl-cell-dropdown-initial {
+    padding: $wl-table-spacing-5 $wl-table-cell-padding-x;
+  }
+
+  // TODO: Type: User-Profile
+  &.wl-cell-user-profile {
+    min-width: rem(166);
+    padding-left: $wl-table-spacing-0;
+    @include wl-aligns-center;
+  }
+
+  // TODO: Type: User-Profile Initial
+  &.wl-cell-user-profile-initial {
+    min-width: rem(166);
+    padding: $wl-table-cell-padding-y $wl-table-cell-padding-x;
+    @include wl-aligns-center;
+  }
+
+  // TODO: Type: Action-Button
+  &.wl-cell-action-button {
+    padding-left: $wl-table-spacing-10 $wl-table-spacing-16 $wl-table-spacing-10
+      $wl-table-spacing-0;
+  }
+
+  // TODO: Type: Action-Button-Initial
+  &.wl-cell-action-button-initial {
+    padding: $wl-table-spacing-10 $wl-table-cell-padding-x;
+  }
+
+  // TODO: Type: Text-Field
+  &.wl-cell-text-field {
+    padding: $wl-table-spacing-6 $wl-table-cell-padding-x $wl-table-spacing-6
+      $wl-table-spacing-0;
+  }
+
+  // TODO: Type: Text-Field Initial
+  &.wl-cell-text-field-initial {
+    padding: $wl-table-spacing-6 $wl-table-cell-padding-x;
+  }
+
+  // TODO: Type: Badge
+  &.wl-cell-badge {
+    padding: $wl-table-spacing-8 $wl-table-cell-padding-x $wl-table-spacing-8
+      $wl-table-spacing-0;
+  }
+
+  // TODO: Type: Badge Initial
+  &.wl-cell-badge-initial {
+    padding: $wl-table-spacing-8 $wl-table-cell-padding-x;
+  }
+
+  // TODO: Type: Skeleton
+  &.wl-cell-skeleton {
+    padding-left: $wl-table-spacing-0;
+    @include wl-aligns-center;
+  }
+
+  // TODO: Type: Skeleton Initial
+  &.wl-cell-skeleton-initial {
+    padding: $wl-table-cell-padding-y $wl-table-cell-padding-x;
+    @include wl-aligns-center;
+  }
+
+  .wl-icon {
+    &.wl-more-icon {
+      background-image: $wl-table-cell-more-bg-img-url;
+    }
+
+    &.wl-reload-icon {
+      width: rem(20);
+      height: rem(20);
+      background-image: $wl-table-cell-reload-bg-img-url;
+    }
+  }
+}
+
+// TODO: Table Cell Block
+.wl-cell-block {
+  @include wl-aligns-inline-center;
+  gap: rem(4);
+  position: relative;
+
+  &.wl-gap-6 {
+    gap: rem(6);
+  }
+}
+
+// TODO: Table Cell Block Center
+.wl-cell-center-block {
+  @include wl-flex-center;
+  gap: rem(4);
+  position: relative;
+}
+
+// TODO: Table Cell Block Center
+.wl-cell-end-block {
+  @include wl-aligns-inline-end;
+  gap: rem(4);
+  position: relative;
+}

@@ -1,0 +1,721 @@
+@use "sass:color";
+@use "sass:map";
+@use "../../abstracts/breakpoints" as *;
+@use "../../abstracts/functions" as *;
+@use "../../abstracts/mixins" as *;
+
+// ------------------------------------------------
+// LOCAL VARIABLES
+// ------------------------------------------------
+
+// TODO: Base sizing
+$btn-size-sm-height: 24px !default;
+$btn-size-md-height: 32px !default;
+$btn-size-lg-height: 48px !default;
+
+// TODO: Padding and spacing
+$btn-padding-sm: 4px !default;
+$btn-padding-md: 8px !default;
+$btn-padding-lg: 12px !default;
+
+// TODO: Gap between button content
+$btn-gap-sm: 2px !default;
+$btn-gap-md: 4px !default;
+$btn-gap-lg: 6px !default;
+
+// TODO: Border radius
+$btn-radius-sm: 4px !default;
+$btn-radius-md: 6px !default;
+$btn-radius-lg: 8px !default;
+
+// TODO: Icon sizes
+$btn-icon-sm: 12px !default;
+$btn-icon-md: 16px !default;
+$btn-icon-lg: 24px !default;
+
+// TODO: Colors
+$btn-color-primary: var(
+  --Button-Primary-Filled-BTN-PRM-FLD-NORMAL,
+  #0021fe
+) !default;
+$btn-color-primary-hover: var(
+  --Button-Primary-Filled-BTN-PRM-FLD-HOVER,
+  #1f62ff
+) !default;
+$btn-color-primary-active: var(
+  --Button-Primary-Filled-BTN-PRM-FLD-PRESSED,
+  #0522d1
+) !default;
+$btn-color-white: var(--Forgrounds-FG-WHITE, #fff) !default;
+$btn-color-disabled: var(--Button-Disabled-BTN-DISABLED, #e5e5e5) !default;
+$btn-color-disabled-text: var(--Forgrounds-FG-DISABLED-VALUE, #737373) !default;
+$btn-color-danger: var(
+  --Button-Danger-Filled-BTN-DNGR-FLD-NORMAL,
+  #f00
+) !default;
+
+// TODO: Transitions
+$btn-transition-duration: 0.3s !default;
+$btn-transition-timing: ease !default;
+
+// ------------------------------------------------
+// MIXINS & FUNCTIONS
+// ------------------------------------------------
+
+// TODO: Base button styles - shared across all variants
+@mixin btn-base {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  text-align: center;
+  white-space: nowrap;
+  font-family: var(--Typeface-Family-Button, Inter);
+  font-weight: var(--Typeface-Weight-Button-Medium, 500);
+  transition: background-color $btn-transition-duration $btn-transition-timing,
+    box-shadow $btn-transition-duration $btn-transition-timing,
+    border-color $btn-transition-duration $btn-transition-timing,
+    opacity $btn-transition-duration $btn-transition-timing;
+
+  &:disabled {
+    cursor: not-allowed;
+    user-select: none;
+    color: var(--Forgrounds-FG-DISABLED-VALUE, #737373);
+
+    // TODO: Disabled: Icon
+    .wl-icon {
+      cursor: not-allowed;
+      user-select: none;
+    }
+  }
+}
+
+// TODO: Size modifiers
+@mixin btn-size($size) {
+  @if $size == "sm" {
+    min-height: $btn-size-sm-height;
+    max-height: $btn-size-sm-height;
+    padding: 0 $btn-padding-sm;
+    gap: $btn-gap-sm;
+    border-radius: $btn-radius-sm;
+    font-size: var(--Typeface-Size-Button-Small, 12px);
+    line-height: var(--Typeface-Line-height-Button-Small, 16px);
+    letter-spacing: var(--Typeface-Letter-Spacing-Button-Small, -0.1px);
+
+    .wl-btn-icon {
+      width: $btn-icon-sm;
+      height: $btn-icon-sm;
+    }
+  } @else if $size == "md" {
+    min-height: $btn-size-md-height;
+    max-height: $btn-size-md-height;
+    padding: 0 $btn-padding-md;
+    gap: $btn-gap-md;
+    border-radius: $btn-radius-md;
+    font-size: var(--Typeface-Size-Button-Medium, 14px);
+    line-height: var(--Typeface-Line-height-Button-Medium, 16px);
+    letter-spacing: var(--Typeface-Letter-Spacing-Button-Medium, 0px);
+
+    .wl-btn-icon {
+      width: $btn-icon-md;
+      height: $btn-icon-md;
+    }
+  } @else if $size == "lg" {
+    min-height: $btn-size-lg-height;
+    max-height: $btn-size-lg-height;
+    padding: 0 $btn-padding-lg;
+    gap: $btn-gap-lg;
+    border-radius: $btn-radius-lg;
+    font-size: var(--Typeface-Size-Button-Large, 18px);
+    line-height: var(--Typeface-Line-height-Button-Large, 24px);
+    letter-spacing: var(--Typeface-Letter-Spacing-Button-Large, 0px);
+
+    .wl-btn-icon {
+      width: $btn-icon-lg;
+      height: $btn-icon-lg;
+    }
+  }
+}
+
+// TODO: Icon-only button
+@mixin btn-icon($size) {
+  padding: 0;
+  @include wl-flex-center;
+
+  @if $size == "sm" {
+    min-width: $btn-size-sm-height;
+    max-width: $btn-size-sm-height;
+    min-height: $btn-size-sm-height;
+    max-height: $btn-size-sm-height;
+  } @else if $size == "md" {
+    min-width: $btn-size-md-height;
+    max-width: $btn-size-md-height;
+    min-height: $btn-size-md-height;
+    max-height: $btn-size-md-height;
+  } @else if $size == "lg" {
+    min-width: $btn-size-lg-height;
+    max-width: $btn-size-lg-height;
+    min-height: $btn-size-lg-height;
+    max-height: $btn-size-lg-height;
+  }
+}
+
+// TODO: Variant mixins
+@mixin btn-primary {
+  background-color: $btn-color-primary;
+  color: $btn-color-white;
+  box-shadow: var(--Primary-Button-Normal-First-X-0, 0px)
+      var(--Primary-Button-Normal-First-Y-0, 0px)
+      var(--Primary-Button-Normal-First-B-0, 0px)
+      var(--Primary-Button-Normal-First-S-0, 1px)
+      var(--Primary-Button-Normal-First-Color, #0d21c9),
+    var(--Primary-Button-Normal-Second-X-0, 0px)
+      var(--Primary-Button-Normal-Second-Y-0, 1px)
+      var(--Primary-Button-Normal-Second-B-0, 1px)
+      var(--Primary-Button-Normal-Second-S-0, 0px)
+      var(--Primary-Button-Normal-Second-Color, rgba(13, 33, 201, 0.5)),
+    var(--Primary-Button-Normal-Third-X-0, 0px)
+      var(--Primary-Button-Normal-Third-Y-0, 2px)
+      var(--Primary-Button-Normal-Third-B-0, 3px)
+      var(--Primary-Button-Normal-Third-S-0, 0px)
+      var(--Primary-Button-Normal-Third-Color, rgba(13, 33, 201, 0.1));
+
+  &:hover {
+    background-color: $btn-color-primary-hover;
+    box-shadow: var(--Primary-Button-Hover-First-X-0, 0px)
+        var(--Primary-Button-Hover-First-Y-0, 0px)
+        var(--Primary-Button-Hover-First-B-0, 0px)
+        var(--Primary-Button-Hover-First-S-0, 1px)
+        var(--Primary-Button-Hover-First-Color, #0920f4),
+      var(--Primary-Button-Hover-Second-X-0, 0px)
+        var(--Primary-Button-Hover-Second-Y-0, 1px)
+        var(--Primary-Button-Hover-Second-B-0, 1px)
+        var(--Primary-Button-Hover-Second-S-0, 0px)
+        var(--Primary-Button-Hover-Second-Color, rgba(9, 32, 244, 0.5)),
+      var(--Primary-Button-Hover-Third-X-0, 0px)
+        var(--Primary-Button-Hover-Third-Y-0, 2px)
+        var(--Primary-Button-Hover-Third-B-0, 3px)
+        var(--Primary-Button-Hover-Third-S-0, 0px)
+        var(--Primary-Button-Hover-Third-Color, rgba(13, 33, 201, 0.1));
+  }
+
+  &:focus,
+  &:active {
+    background-color: $btn-color-primary-active;
+    box-shadow: var(--Primary-Button-Pressed-First-X-0, 0px)
+        var(--Primary-Button-Pressed-First-Y-0, 0px)
+        var(--Primary-Button-Pressed-First-B-0, 1px)
+        var(--Primary-Button-Pressed-First-S-0, 1px)
+        var(--Primary-Button-Pressed-First-Color, rgba(22, 51, 255, 0.16)),
+      var(--Primary-Button-Pressed-Secord-X-0, 0px)
+        var(--Primary-Button-Pressed-Secord-Y-0, 0px)
+        var(--Primary-Button-Pressed-Secord-B-0, 0px)
+        var(--Primary-Button-Pressed-Secord-S-0, 4px)
+        var(--Primary-Button-Pressed-Secord-Colors, #b2d4ff);
+  }
+
+  &:disabled {
+    background-color: $btn-color-disabled;
+    box-shadow: 0px 0px 0px 1px var(--Primary-Button-Disabled-Color, #d4d4d4);
+    color: $btn-color-disabled-text;
+  }
+}
+
+@mixin btn-primary-outline {
+  background-color: var(--Button-Primary-Outlined-BTN-OUTL-NORMAL, #fff);
+  color: var(--Forgrounds-FG-TITLE, #171717);
+  box-shadow: var(--Outline-Button-Default-First-X-0, 0px)
+      var(--Outline-Button-Default-First-Y-0, 0px)
+      var(--Outline-Button-Default-First-B-0, 0px)
+      var(--Outline-Button-Default-First-S-0, 1px)
+      var(--Outline-Button-Default-First-Color, rgba(0, 0, 0, 0.17)),
+    var(--Outline-Button-Default-Second-X-0, 0px)
+      var(--Outline-Button-Default-Second-Y-0, 1px)
+      var(--Outline-Button-Default-Second-B-0, 1px)
+      var(--Outline-Button-Default-Second-S-0, 0px)
+      var(--Outline-Button-Default-Second-Color, rgba(0, 0, 0, 0.15)),
+    var(--Outline-Button-Default-Third-X-0, 0px)
+      var(--Outline-Button-Default-Third-Y-0, 2px)
+      var(--Outline-Button-Default-Third-B-0, 3px)
+      var(--Outline-Button-Default-Third-S-0, 0px)
+      var(--Outline-Button-Default-Third-Color, rgba(0, 0, 0, 0.08));
+
+  &:hover {
+    background-color: var(--Button-Primary-Outlined-BTN-OUTL-HOVER, #f5f5f5);
+    box-shadow: var(--Outline-Button-Hover-First-X-0, 0px)
+        var(--Outline-Button-Hover-First-Y-0, 0px)
+        var(--Outline-Button-Hover-First-B-0, 0px)
+        var(--Outline-Button-Hover-First-S-0, 1px)
+        var(--Outline-Button-Hover-First-Color, rgba(0, 0, 0, 0.25)),
+      var(--Outline-Button-Hover-Secord-X-0, 0px)
+        var(--Outline-Button-Hover-Secord-Y-0, 1px)
+        var(--Outline-Button-Hover-Secord-B-0, 1px)
+        var(--Outline-Button-Hover-Secord-S-0, 0px)
+        var(--Outline-Button-Hover-Secord-Color, rgba(0, 0, 0, 0.15)),
+      var(--Outline-Button-Hover-Third-X-0, 0px)
+        var(--Outline-Button-Hover-Third-Y-0, 2px)
+        var(--Outline-Button-Hover-Third-B-0, 4px)
+        var(--Outline-Button-Hover-Third-S-0, 0px)
+        var(--Outline-Button-Hover-Third-Color, rgba(0, 0, 0, 0.16));
+  }
+
+  &:focus,
+  &:active {
+    background-color: var(--Button-Primary-Outlined-BTN-OUTL-PRESSED, #fafafa);
+    box-shadow: var(--Outline-Button-Pressed-First-X-0, 0px)
+        var(--Outline-Button-Pressed-First-Y-0, 0px)
+        var(--Outline-Button-Pressed-First-B-0, 1px)
+        var(--Outline-Button-Pressed-First-S-0, 1px)
+        var(--Outline-Button-Pressed-First-Color, rgba(105, 114, 129, 0.16)),
+      var(--Outline-Button-Pressed-Secord-X-0, 0px)
+        var(--Outline-Button-Pressed-Secord-Y-0, 0px)
+        var(--Outline-Button-Pressed-Secord-B-0, 0px)
+        var(--Outline-Button-Pressed-Secord-S-0, 4px)
+        var(--Outline-Button-Pressed-Secord-Colors, #d0d5dc);
+  }
+
+  &:disabled {
+    background-color: $btn-color-disabled;
+    box-shadow: 0px 0px 0px 1px var(--Primary-Button-Disabled-Color, #d4d4d4);
+    color: $btn-color-disabled-text;
+  }
+}
+
+@mixin btn-primary-text {
+  background-color: transparent;
+  color: var(--Forgrounds-FG-INTERACTIVE, #0021fe);
+
+  &:hover {
+    background-color: var(--Button-Primary-Text-BTN-TXT-HOVER, #cfebff);
+  }
+
+  &:focus,
+  &:active {
+    background-color: var(--Button-Primary-Text-BTN-TXT-PRESSED, #e5f3ff);
+    box-shadow: var(--Text-Button-Primary-Pressed-X-0, 0px)
+      var(--Text-Button-Primary-Pressed-Y-0, 0px)
+      var(--Text-Button-Primary-Pressed-B-0, 0px)
+      var(--Text-Button-Primary-Pressed-S-0, 4px)
+      var(--Text-Button-Primary-Pressed-Color, #83b7ff);
+  }
+
+  &:disabled {
+    background-color: transparent;
+    box-shadow: none;
+    color: $btn-color-disabled-text;
+  }
+}
+
+@mixin btn-danger {
+  background-color: $btn-color-danger;
+  color: $btn-color-white;
+  box-shadow: var(--Danger-Filled-Normal-First-X-0, 0px)
+      var(--Danger-Filled-Normal-First-Y-0, 0px)
+      var(--Danger-Filled-Normal-First-B-0, 0px)
+      var(--Danger-Filled-Normal-First-S-0, 1px)
+      var(--Danger-Filled-Normal-First-Color, #d01a00),
+    var(--Danger-Filled-Normal-Secord-X-0, 0px)
+      var(--Danger-Filled-Normal-Secord-Y-0, 1px)
+      var(--Danger-Filled-Normal-Secord-B-0, 1px)
+      var(--Danger-Filled-Normal-Secord-S-0, 0px)
+      var(--Danger-Filled-Normal-Secord-Color, rgba(207, 0, 20, 0.15)),
+    var(--Danger-Filled-Normal-Third-X-0, 0px)
+      var(--Danger-Filled-Normal-Third-Y-0, 2px)
+      var(--Danger-Filled-Normal-Third-B-0, 3px)
+      var(--Danger-Filled-Normal-Third-S-0, 0px)
+      var(--Danger-Filled-Normal-Third-Color, rgba(207, 0, 20, 0.08));
+
+  &:hover {
+    background-color: var(--Button-Danger-Filled-BTN-DNGR-FLD-HOVER, #ff516d);
+    box-shadow: var(--Danger-Filled-Hover-First-X-0, 0px)
+        var(--Danger-Filled-Hover-First-Y-0, 0px)
+        var(--Danger-Filled-Hover-First-B-0, 0px)
+        var(--Danger-Filled-Hover-First-S-0, 1px)
+        var(--Danger-Filled-Hover-First-Color, #ff2241),
+      var(--Danger-Filled-Hover-Secord-X-0, 0px)
+        var(--Danger-Filled-Hover-Secord-Y-0, 1px)
+        var(--Danger-Filled-Hover-Secord-B-0, 1px)
+        var(--Danger-Filled-Hover-Secord-S-0, 0px)
+        var(--Danger-Filled-Hover-Secord-Color, rgba(207, 0, 20, 0.15)),
+      var(--Danger-Filled-Hover-Third-X-0, 0px)
+        var(--Danger-Filled-Hover-Third-Y-0, 2px)
+        var(--Danger-Filled-Hover-Third-B-0, 3px)
+        var(--Danger-Filled-Hover-Third-S-0, 0px)
+        var(--Danger-Filled-Hover-Third-Color, rgba(207, 0, 20, 0.08));
+  }
+
+  &:focus,
+  &:active {
+    background-color: var(--Button-Danger-Filled-BTN-DNGR-FLD-PRESSED, #e20000);
+    box-shadow: var(--Danger-Filled-Pressed-First-X-0, 0px)
+        var(--Danger-Filled-Pressed-First-Y-0, 0px)
+        var(--Danger-Filled-Pressed-First-B-0, 1px)
+        var(--Danger-Filled-Pressed-First-S-0, 1px)
+        var(--Danger-Filled-Pressed-First-Color, rgba(246, 0, 31, 0.16)),
+      var(--Danger-Filled-Pressed-Secord-X-0, 0px)
+        var(--Danger-Filled-Pressed-Secord-Y-0, 0px)
+        var(--Danger-Filled-Pressed-Secord-B-0, 0px)
+        var(--Danger-Filled-Pressed-Secord-S-0, 4px)
+        var(--Danger-Filled-Pressed-Secord-Colors, rgba(246, 0, 31, 0.2));
+  }
+
+  &:disabled {
+    background-color: $btn-color-disabled;
+    box-shadow: 0px 0px 0px 1px var(--Primary-Button-Disabled-Color, #d4d4d4);
+    color: $btn-color-disabled-text;
+  }
+}
+
+@mixin btn-danger-outline {
+  background-color: var(--Backgrounds-BG-NTL-00, #fff);
+  color: var(--Forgrounds-FG-RED-07, #f00);
+  box-shadow: var(--Danger-Button-Default-First-X-0, 0px)
+      var(--Danger-Button-Default-First-Y-0, 1px)
+      var(--Danger-Button-Default-First-B-0, 1px)
+      var(--Danger-Button-Default-First-S-0, 0px)
+      var(--Danger-Button-Default-First-Color, rgba(255, 0, 24, 0.15)),
+    var(--Danger-Button-Default-Secord-X-0, 0px)
+      var(--Danger-Button-Default-Secord-Y-0, 2px)
+      var(--Danger-Button-Default-Secord-B-0, 3px)
+      var(--Danger-Button-Default-Secord-S-0, 0px)
+      var(--Danger-Button-Default-Secord-Color, rgba(255, 0, 24, 0.1)),
+    var(--Danger-Button-Default-Third-X-0, 0px)
+      var(--Danger-Button-Default-Third-Y-0, 0px)
+      var(--Danger-Button-Default-Third-B-0, 0px)
+      var(--Danger-Button-Default-Third-S-0, 1px)
+      var(--Danger-Button-Default-Third-Color, #ff9ea6);
+
+  &:hover {
+    background-color: var(
+      --Button-Danger-Outlined-BTN-DNGR-OUTL-HOVER,
+      #fff0f3
+    );
+    box-shadow: var(--Danger-Button-Hover-First-X-0, 0px)
+        var(--Danger-Button-Hover-First-Y-0, 1px)
+        var(--Danger-Button-Hover-First-B-0, 1px)
+        var(--Danger-Button-Hover-First-S-0, 0px)
+        var(--Danger-Button-Hover-First-Color, rgba(255, 0, 24, 0.15)),
+      var(--Danger-Button-Hover-Secord-X-0, 0px)
+        var(--Danger-Button-Hover-Secord-Y-0, 2px)
+        var(--Danger-Button-Hover-Secord-B-0, 3px)
+        var(--Danger-Button-Hover-Secord-S-0, 0px)
+        var(--Danger-Button-Hover-Secord-Color, rgba(255, 0, 24, 0.1)),
+      var(--Danger-Button-Hover-Third-X-0, 0px)
+        var(--Danger-Button-Hover-Third-Y-0, 0px)
+        var(--Danger-Button-Hover-Third-B-0, 0px)
+        var(--Danger-Button-Hover-Third-S-0, 1px)
+        var(--Danger-Button-Hover-Third-Color, #ff2241);
+  }
+
+  &:focus,
+  &:active {
+    background-color: var(
+      --Button-Danger-Outlined-BTN-DNGR-OUTL-PRESSED,
+      #ffdfe3
+    );
+    box-shadow: var(--Danger-Button-Pressed-First-X-0, 0px)
+        var(--Danger-Button-Pressed-First-Y-0, 0px)
+        var(--Danger-Button-Pressed-First-B-0, 1px)
+        var(--Danger-Button-Pressed-First-S-0, 1px)
+        var(--Danger-Button-Pressed-First-Color, rgba(255, 34, 65, 0.16)),
+      var(--Danger-Button-Pressed-Secord-X-0, 0px)
+        var(--Danger-Button-Pressed-Secord-Y-0, 0px)
+        var(--Danger-Button-Pressed-Secord-B-0, 0px)
+        var(--Danger-Button-Pressed-Secord-S-0, 4px)
+        var(--Colors-RED-WLDS-RED-03, #ffc6cb);
+  }
+
+  &:disabled {
+    background-color: $btn-color-disabled;
+    box-shadow: 0px 0px 0px 1px var(--Primary-Button-Disabled-Color, #d4d4d4);
+    color: $btn-color-disabled-text;
+  }
+}
+
+@mixin btn-danger-text {
+  background-color: transparent;
+  color: var(--Forgrounds-FG-RED-07, #f00);
+
+  &:hover {
+    background-color: var(--Button-Danger-Text-BTN-DNGR-TXT-HOVER, #ffdfe3);
+  }
+
+  &:focus,
+  &:active {
+    background-color: var(--Button-Danger-Text-Button-pressed, #ffdfe3);
+    box-shadow: var(--Danger-Text-Pressed-First-X-0, 0px)
+      var(--Danger-Text-Pressed-First-Y-0, 0px)
+      var(--Danger-Text-Pressed-First-B-0, 0px)
+      var(--Danger-Text-Pressed-First-S-0, 4px)
+      var(--Danger-Text-Pressed-First-Color, #ff9ea6);
+  }
+
+  &:disabled {
+    background-color: transparent;
+    box-shadow: none;
+    color: $btn-color-disabled-text;
+  }
+}
+
+@mixin btn-white {
+  background-color: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: $btn-color-white;
+
+  &:hover {
+    background-color: rgba(255, 255, 255, 0.2);
+    border: 1px solid rgba(255, 255, 255, 0.5);
+  }
+
+  &:focus,
+  &:active {
+    background-color: rgba(255, 255, 255, 0.1);
+    box-shadow: var(--Outline-Button-Pressed-First-X-0, 0px)
+        var(--Outline-Button-Pressed-First-Y-0, 0px)
+        var(--Outline-Button-Pressed-First-B-0, 1px)
+        var(--Outline-Button-Pressed-First-S-0, 1px) rgba(255, 255, 255, 0.32),
+      var(--Outline-Button-Pressed-Secord-X-0, 0px)
+        var(--Outline-Button-Pressed-Secord-Y-0, 0px)
+        var(--Outline-Button-Pressed-Secord-B-0, 0px)
+        var(--Outline-Button-Pressed-Secord-S-0, 4px) rgba(255, 255, 255, 0.4);
+  }
+
+  &:disabled {
+    opacity: 0.5;
+    background-color: transparent;
+    box-shadow: none;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    color: $btn-color-white;
+  }
+}
+
+// ------------------------------------------------
+// UTILITY CLASSES
+// ------------------------------------------------
+
+// TODO: Base button class - independent of element type
+.wl-btn {
+  @include btn-base;
+  @include btn-size("md");
+  background-color: transparent;
+  color: var(--Forgrounds-FG-TITLE, #171717);
+
+  &:hover {
+    cursor: pointer;
+    background-color: var(--Colors-SEMANTIC-GRAY-WLDS-GRY-03, #e5e7eb);
+  }
+
+  &:focus,
+  &:active {
+    background-color: var(--Colors-SEMANTIC-NEUTRAL-WLDS-NTL-00, #fff);
+    box-shadow: var(--Text-Button-Default-Pressed-X-0, 0px)
+      var(--Text-Button-Default-Pressed-Y-0, 0px)
+      var(--Text-Button-Default-Pressed-B-0, 0px)
+      var(--Text-Button-Default-Pressed-S-0, 4px)
+      var(--Text-Button-Default-Pressed-Color, #d0d5dc);
+  }
+
+  &.wl-btn-disabled {
+    background-color: transparent;
+    box-shadow: none;
+  }
+
+  &.wl-btn-disabled,
+  &.wl-btn-disabled * {
+    cursor: not-allowed;
+    user-select: none;
+  }
+
+  // Icon handling
+  &-icon {
+    width: rem(24);
+    min-width: rem(24);
+    height: rem(24);
+    min-height: rem(24);
+
+    // .wl-icon {
+    //   width: rem(16);
+    //   height: rem(16);
+    // }
+
+    // .wl-icon-sm {
+    //   width: rem(12);
+    //   height: rem(12);
+    // }
+
+    // .wl-icon-lg {
+    //   width: rem(24);
+    //   height: rem(24);
+    // }
+
+    &-fill-none {
+      fill: none;
+      stroke: currentColor;
+    }
+  }
+
+  // TODO: Icon-only buttons
+  &-icon {
+    @include btn-icon("md");
+
+    &.wl-btn-sm {
+      @include btn-icon("sm");
+    }
+
+    &.wl-btn-lg {
+      @include btn-icon("lg");
+    }
+  }
+
+  // TODO: Variant modifiers
+  &-primary {
+    @include btn-primary;
+  }
+
+  &-primary-outline {
+    @include btn-primary-outline;
+  }
+
+  &-primary-text {
+    @include btn-primary-text;
+  }
+
+  &-danger {
+    @include btn-danger;
+  }
+
+  &-danger-outline {
+    @include btn-danger-outline;
+  }
+
+  &-danger-text {
+    @include btn-danger-text;
+  }
+
+  &-white {
+    @include btn-white;
+  }
+}
+
+// TODO: Legacy support for existing class names in the codebase
+button {
+  @include btn-base;
+  @include btn-size("md");
+  background-color: transparent;
+  color: var(--Forgrounds-FG-TITLE, #171717);
+
+  // TODO: SVG icons inside buttons
+  .wl-fill-none,
+  &:has(svg) svg.wl-fill-none {
+    fill: none;
+    stroke: var(--Forgrounds-FG-TITLE, #171717);
+  }
+
+  // TODO: Button Sizes
+  &.wl-btn-sm {
+    @include btn-size("sm");
+  }
+
+  &.wl-btn-lg {
+    @include btn-size("lg");
+  }
+
+  // Button Variants
+  &.wl-btn-primary {
+    @include btn-primary;
+  }
+
+  &.wl-btn-primary-outline {
+    @include btn-primary-outline;
+  }
+
+  &.wl-btn-primary-text {
+    @include btn-primary-text;
+  }
+
+  &.wl-btn-danger {
+    @include btn-danger;
+  }
+
+  &.wl-btn-danger-outline {
+    @include btn-danger-outline;
+  }
+
+  &.wl-btn-danger-text {
+    @include btn-danger-text;
+  }
+
+  &.wl-btn-white {
+    @include btn-white;
+  }
+
+  &.wl-btn-icon {
+    @include btn-icon("md");
+
+    &.wl-btn-sm {
+      @include btn-icon("sm");
+    }
+
+    &.wl-btn-lg {
+      @include btn-icon("lg");
+    }
+  }
+}
+
+// TODO: Button class
+.wl-btn {
+  @include btn-base;
+  @include btn-size("md");
+
+  // TODO: Variant modifiers
+  &-primary {
+    @include btn-primary;
+  }
+
+  // TODO: Primary outline variant
+  &-primary-outline {
+    @include btn-primary-outline;
+  }
+
+  // TODO: Primary text variant
+  &-primary-text {
+    @include btn-primary-text;
+  }
+
+  // TODO: Danger variant
+  &-danger {
+    @include btn-danger;
+  }
+
+  // TODO: Danger outline variant
+  &-danger-outline {
+    @include btn-danger-outline;
+  }
+
+  // TODO: Danger text variant
+  &-danger-text {
+    @include btn-danger-text;
+  }
+
+  // TODO: White variant
+  &-white {
+    @include btn-white;
+  }
+
+  // TODO: Icon variant
+  &-icon {
+    @include btn-icon("md");
+  }
+
+  // TODO: Small size variant
+  &-sm {
+    @include btn-size("sm");
+  }
+
+  // TODO: Large size variant
+  &-lg {
+    @include btn-size("lg");
+  }
+}

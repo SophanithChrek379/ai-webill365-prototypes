@@ -1,0 +1,139 @@
+@use "../abstracts/breakpoints" as *;
+@use "../abstracts/functions" as *;
+@use "../abstracts/mixins" as *;
+
+@use "../abstracts/animations" as *;
+
+.wl-progress {
+  width: min(100%, rem(420)); // min: 100%, max: 420px
+  height: rem(8);
+  background-color: var(--Backgrounds-BG-BASE-HEAVY, #e5e5e5);
+  border-radius: var(--WLDS-Radius-4, 4px);
+  align-self: stretch;
+
+  // TODO: Wrapper
+  &-wrapper {
+    width: 100%;
+    max-width: rem(420);
+    padding-block: rem(8);
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    overflow: hidden; // Prevents the progress bar from overflowing the container
+  }
+
+  // TODO: Title
+  &-title {
+    width: min(100%, rem(420)); // min: 100%, max: 420px
+    margin-bottom: rem(8);
+    color: var(--Forgrounds-FG-TITLE, #171717);
+    font-size: var(--Typeface-Size-Body-Small, 14px);
+    font-weight: var(--Typeface-Weight-Body-Small, 500);
+    line-height: var(--Typeface-Line-height-Body-Small, 20px);
+    letter-spacing: var(--Typeface-Letter-Spacing-Body-Small, -0.2px);
+  }
+
+  // TODO: Title: Require
+  &-title-require {
+    color: var(--Forgrounds-FG-FAIL, #e20000);
+  }
+
+  // TODO: Line
+  &-line {
+    width: rem(8);
+    height: rem(8);
+    min-height: rem(8);
+    background-color: var(--Forgrounds-FG-INTERACTIVE, #0021fe);
+    border-radius: var(--WLDS-Radius-4, 4px);
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+    transition: width 2s ease; // Animate width
+
+    &.wl-loading {
+      // infinite
+      animation: wl-progress-loading 2s ease-in-out; // Animate loading
+      border-top-right-radius: inherit; // Inherit from the parent container
+      border-bottom-right-radius: inherit; // Inherit from the parent container
+    }
+
+    // TODO: Line: Completed
+    &.wl-complete {
+      width: 100%; // Set width to 100% when complete
+      border-top-right-radius: inherit; // Inherit from the parent container
+      border-bottom-right-radius: inherit; // Inherit from the parent container
+    }
+  }
+
+  // TODO: Size: Small
+  &-sm {
+    width: min(100%, 105px); // min: 100%, max: 105px
+    height: rem(2);
+    border-radius: rem(1);
+
+    // TODO: Line
+    .wl-progress-line {
+      width: rem(2);
+      height: rem(2);
+      min-height: rem(2);
+      border-radius: rem(1);
+      border-top-right-radius: 0;
+      border-bottom-right-radius: 0;
+    }
+  }
+
+  // TODO: Position: Start from End
+  &-end {
+    transform: rotate(-180deg);
+  }
+
+  // TODO: -------------
+
+  // TODO: Type: Fail
+  &-fail {
+    // TODO: Line
+    .wl-progress-line {
+      background-color: var(--Backgrounds-BG-BLACK, #0a0a0a);
+
+      &.wl-complete {
+        background-color: var(--Tags-Negative-TAG-BG-MIDDLE, #f00);
+      }
+    }
+  }
+
+  // TODO: Type: Complete
+  &-complete {
+    // TODO: Line
+    .wl-progress-line {
+      background-color: var(--Backgrounds-BG-BLACK, #0a0a0a);
+
+      &.wl-complete {
+        background-color: var(--Colors-SEMANTIC-GREEN-WLDS-GRN-07, #00a928);
+      }
+    }
+  }
+  // TODO: Type: Indicator
+  &-indicator {
+    .wl-progress-title {
+      color: var(--Forgrounds-FG-TITLE, #171717);
+      font-size: var(--Typeface-Size-Button-Medium, 14px);
+      font-weight: var(--Typeface-Weight-Button-Medium, 500);
+      line-height: var(--Typeface-Line-height-Button-Medium, 16px);
+      letter-spacing: var(--Typeface-Letter-Spacing-Button-Medium, 0px);
+    }
+  }
+
+  // TODO: Type: Pie
+  &-pie {
+    width: 16px;
+    height: 16px;
+    border-radius: 16px;
+    background: conic-gradient(
+      from 180deg at 50% 50%,
+      #fff 0deg,
+      #a2a2a2 360deg
+    );
+    transition: transform 0.5s ease-in-out;
+    // infinite
+    animation: wl-pie-progress 2s linear;
+  }
+}

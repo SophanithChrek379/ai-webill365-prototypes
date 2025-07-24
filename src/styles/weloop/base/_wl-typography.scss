@@ -1,0 +1,220 @@
+@use "sass:color";
+@use "sass:map";
+
+// TODO: SCSS variables for font families
+$wl-text-family-display: var(--Typeface-Family-Display);
+$wl-text-family-headline: var(--Typeface-Family-Head);
+$wl-text-family-title: var(--Typeface-Family-Title);
+$wl-text-family-body: var(--Typeface-Family-Body);
+$wl-text-family-button: var(--Typeface-Family-Button);
+$wl-text-family-caption: var(--Typeface-Family-Caption);
+$wl-text-family-label: var(--Typeface-Family-Label);
+$wl-text-family-label-2: var(--Typeface-Family-Label-2);
+
+// TODO: Maps for typography properties to enable more flexible mixin usage
+$wl-text-sizes: (
+  "display": (
+    "large": var(--Typeface-Size-Display-Large),
+    "medium": var(--Typeface-Size-Display-Medium),
+    "small": var(--Typeface-Size-Display-Small),
+  ),
+  "headline": (
+    "large": var(--Typeface-Size-Headline-Large),
+    "medium": var(--Typeface-Size-Headline-Medium),
+    "small": var(--Typeface-Size-Headline-Small),
+  ),
+  "title": (
+    "large": var(--Typeface-Size-Title-Large),
+    "medium": var(--Typeface-Size-Title-Medium),
+    "small": var(--Typeface-Size-Title-Small),
+  ),
+  "body": (
+    "large": var(--Typeface-Size-Body-Large),
+    "medium": var(--Typeface-Size-Body-Medium),
+    "small": var(--Typeface-Size-Body-Small),
+  ),
+  "button": (
+    "large": var(--Typeface-Size-Button-Large),
+    "medium": var(--Typeface-Size-Button-Medium),
+    "small": var(--Typeface-Size-Button-Small),
+  ),
+  "caption": var(--Typeface-Size-Caption),
+  "label": var(--Typeface-Size-Label),
+  "label-2": var(--Typeface-Size-Label-2),
+);
+
+$wl-text-line-heights: (
+  "display": (
+    "large": var(--Typeface-Line-height-Display-Large),
+    "medium": var(--Typeface-Line-height-Display-Medium),
+    "small": var(--Typeface-Line-height-Display-Small),
+  ),
+  "headline": (
+    "large": var(--Typeface-Line-height-Headline-Large),
+    "medium": var(--Typeface-Line-height-Headline-Medium),
+    "small": var(--Typeface-Line-height-Headline-Small),
+  ),
+  "title": (
+    "large": var(--Typeface-Line-height-Title-Large),
+    "medium": var(--Typeface-Line-height-Title-Medium),
+    "small": var(--Typeface-Line-height-Title-Small),
+  ),
+  "body": (
+    "large": var(--Typeface-Line-height-Body-Large),
+    "medium": var(--Typeface-Line-height-Body-Medium),
+    "small": var(--Typeface-Line-height-Body-Small),
+  ),
+  "button": (
+    "large": var(--Typeface-Line-height-Button-Large),
+    "medium": var(--Typeface-Line-height-Button-Medium),
+    "small": var(--Typeface-Line-height-Button-Small),
+  ),
+  "caption": var(--Typeface-Line-height-Caption),
+  "label": var(--Typeface-Line-height-Label),
+  "label-2": var(--Typeface-Line-height-Label-2),
+);
+
+$wl-text-letter-spacings: (
+  "display": (
+    "large": var(--Typeface-Letter-Spacing-Display-Large),
+    "medium": var(--Typeface-Letter-Spacing-Display-Medium),
+    "small": var(--Typeface-Letter-Spacing-Display-Small),
+  ),
+  "headline": (
+    "large": var(--Typeface-Letter-Spacing-Headline-Large),
+    "medium": var(--Typeface-Letter-Spacing-Headline-Medium),
+    "small": var(--Typeface-Letter-Spacing-Headline-Small),
+  ),
+  "title": (
+    "large": var(--Typeface-Letter-Spacing-Title-Large),
+    "medium": var(--Typeface-Letter-Spacing-Title-Medium),
+    "small": var(--Typeface-Letter-Spacing-Title-Small),
+  ),
+  "body": (
+    "large": var(--Typeface-Letter-Spacing-Body-Large),
+    "medium": var(--Typeface-Letter-Spacing-Body-Medium),
+    "small": var(--Typeface-Letter-Spacing-Body-Small),
+  ),
+  "button": (
+    "large": var(--Typeface-Letter-Spacing-Button-Large),
+    "medium": var(--Typeface-Letter-Spacing-Button-Medium),
+    "small": var(--Typeface-Letter-Spacing-Button-Small),
+  ),
+  "caption": var(--Typeface-Letter-Spacing-Caption),
+  "label": var(--Typeface-Letter-Spacing-Label),
+  "label-2": var(--Typeface-Letter-Spacing-Label-2),
+);
+
+$wl-text-weights: (
+  "display": (
+    "large": var(--Typeface-Weight-Display-Large),
+    "medium": var(--Typeface-Weight-Display-Medium),
+    "small": var(--Typeface-Weight-Display-Small),
+  ),
+  "headline": (
+    "large": var(--Typeface-Weight-Headline-Large),
+    "medium": var(--Typeface-Weight-Headline-Medium),
+    "small": var(--Typeface-Weight-Headline-Small),
+  ),
+  "title": (
+    "large": var(--Typeface-Weight-Title-Large),
+    "medium": var(--Typeface-Weight-Title-Medium),
+    "small": var(--Typeface-Weight-Title-Small),
+  ),
+  "body": (
+    "large": var(--Typeface-Weight-Body-Large),
+    "medium": var(--Typeface-Weight-Body-Medium),
+    "small": var(--Typeface-Weight-Body-Small),
+  ),
+  "button": (
+    "large": var(--Typeface-Weight-Button-Large),
+    "medium": var(--Typeface-Weight-Button-Medium),
+    "small": var(--Typeface-Weight-Button-Small),
+  ),
+  "caption": var(--Typeface-Weight-Caption),
+  "label": var(--Typeface-Weight-Label),
+  "label-2": var(--Typeface-Weight-Label-2),
+);
+
+// TODO:Base typography mixin
+@mixin typography-base(
+  $font-family,
+  $font-size,
+  $line-height,
+  $letter-spacing,
+  $font-weight
+) {
+  font-family: $font-family;
+  font-size: $font-size;
+  line-height: $line-height;
+  letter-spacing: $letter-spacing;
+  font-weight: $font-weight;
+}
+
+// TODO: Mixin for type styles with size variants (display, headline, title, body, button)
+@mixin text-style-with-sizes($type, $family-var) {
+  font-family: $family-var;
+
+  @each $size in ("large", "medium", "small") {
+    &-#{$size} {
+      @include typography-base(
+        $family-var,
+        map.get(map.get($wl-text-sizes, $type), $size),
+        map.get(map.get($wl-text-line-heights, $type), $size),
+        map.get(map.get($wl-text-letter-spacings, $type), $size),
+        map.get(map.get($wl-text-weights, $type), $size)
+      );
+    }
+  }
+}
+
+// TODO: Mixin for type styles without size variants (caption, label, label-2)
+@mixin text-style-single($type, $family-var) {
+  @include typography-base(
+    $family-var,
+    map.get($wl-text-sizes, $type),
+    map.get($wl-text-line-heights, $type),
+    map.get($wl-text-letter-spacings, $type),
+    map.get($wl-text-weights, $type)
+  );
+}
+
+// TODO: Mixin to generate all text styles
+@mixin generate-text-styles {
+  &-display {
+    @include text-style-with-sizes("display", $wl-text-family-display);
+  }
+
+  &-headline {
+    @include text-style-with-sizes("headline", $wl-text-family-headline);
+  }
+
+  &-title {
+    @include text-style-with-sizes("title", $wl-text-family-title);
+  }
+
+  &-body {
+    @include text-style-with-sizes("body", $wl-text-family-body);
+  }
+
+  &-button {
+    @include text-style-with-sizes("button", $wl-text-family-button);
+  }
+
+  &-caption {
+    @include text-style-single("caption", $wl-text-family-caption);
+  }
+
+  &-label {
+    @include text-style-single("label", $wl-text-family-label);
+  }
+
+  &-label-2 {
+    @include text-style-single("label-2", $wl-text-family-label-2);
+  }
+}
+
+// TODO: Apply all text styles
+.wl-text {
+  @include generate-text-styles;
+}

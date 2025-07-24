@@ -1,0 +1,357 @@
+@use "../../abstracts/breakpoints" as *;
+@use "../../abstracts/functions" as *;
+@use "../../abstracts/mixins" as *;
+@use "sass:map";
+
+$switch-width: rem(36);
+$switch-height: rem(20);
+$switch-thumb-size: rem(16);
+$switch-border-radius: 9999px;
+$switch-transition: 0.2s;
+
+$switch-sm-width: rem(36);
+$switch-sm-height: rem(20);
+$switch-sm-thumb-size: rem(16);
+
+$switch-md-width: rem(44);
+$switch-md-height: rem(24);
+$switch-md-thumb-size: rem(20);
+
+$switch-lg-width: rem(52);
+$switch-lg-height: rem(28);
+$switch-lg-thumb-size: rem(24);
+
+// TODO: State: Default
+$switch-bg-color: var(--Colors-SEMANTIC-NEUTRAL-WLDS-NTL-03, #e5e5e5);
+$switch-box-shadow: 0px 0px 1px 1px rgba(0, 0, 0, 0.04) inset,
+  0px 0px 4px 0px rgba(0, 0, 0, 0.04) inset,
+  0px 0px 8px 0px rgba(0, 0, 0, 0.02) inset,
+  0px 0px 0px 0.75px rgba(0, 0, 0, 0.06) inset;
+
+// TODO: State: Default: Hover
+$switch-hover-bg-color: var(--Button-Primary-Outlined-BTN-OUTL-HOVER, #f5f5f5);
+$switch-hover-box-shadow: 0px 0px 1px 1px rgba(0, 0, 0, 0.04) inset,
+  0px 0px 4px 0px rgba(0, 0, 0, 0.04) inset,
+  0px 0px 8px 0px rgba(0, 0, 0, 0.02) inset,
+  0px 0px 0px 0.75px rgba(0, 0, 0, 0.06) inset;
+
+// TODO: State: Default: Pressed
+$switch-pressed-bg-color: var(
+  --Button-Primary-Outlined-BTN-OUTL-HOVER,
+  #f5f5f5
+);
+$switch-pressed-box-shadow: 0px 0px 0px 0.65px #fff,
+  var(--Primary-Button-Pressed-First-X-0, 0px)
+    var(--Primary-Button-Pressed-First-Y-0, 0px)
+    var(--Primary-Button-Pressed-First-B-0, 1px)
+    var(--Primary-Button-Pressed-First-S-0, 1px)
+    var(--Primary-Button-Pressed-First-Color, rgba(22, 51, 255, 0.16)),
+  var(--Primary-Button-Pressed-Secord-X-0, 0px)
+    var(--Primary-Button-Pressed-Secord-Y-0, 0px)
+    var(--Primary-Button-Pressed-Secord-B-0, 0px) 3px
+    var(--Primary-Button-Pressed-Secord-Colors, #b2d4ff),
+  0px 0px 1px 0px rgba(0, 0, 0, 0.04) inset,
+  0px 0px 4px 0px rgba(0, 0, 0, 0.04) inset,
+  0px 0px 0px 0.75px rgba(0, 0, 0, 0.06) inset,
+  0px 0px 8px 0px rgba(0, 0, 0, 0.02) inset, 0px 2px 4px 0px rgba(0, 0, 0, 0.04);
+
+// TODO: State: Default: Disabled
+$switch-disabled-bg-color: var(--Button-Disabled-BTN-DISABLED, #e5e5e5);
+$switch-disabled-box-shadow: 0px 0px 1px 1px rgba(0, 0, 0, 0.04) inset,
+  0px 0px 4px 0px rgba(0, 0, 0, 0.04) inset,
+  0px 0px 8px 0px rgba(0, 0, 0, 0.02) inset,
+  0px 0px 0px 0.75px rgba(0, 0, 0, 0.06) inset;
+
+// TODO: State: Checked: Default
+$switch-checked-bg-color: var(--Backgrounds-BG-INTERACTIVE, #0021fe);
+$switch-checked-box-shadow: 0px 0px 1px 0px rgba(13, 33, 201, 0.08) inset,
+  0px 0px 8px 0px rgba(13, 33, 201, 0.08) inset,
+  0px 0px 0px 0.75px #0d21c9 inset, 0px 0px 4px 0px rgba(13, 33, 201, 0.04);
+
+$switch-checked-hover-bg-color: var(--Colors-PRIMARY-WLDS-PRM-06, #1f62ff);
+$switch-checked-hover-box-shadow: 0px 0px 4px 0px rgba(13, 33, 201, 0.04),
+  0px 0px 1px 0px rgba(13, 33, 201, 0.08) inset,
+  0px 0px 6px 0px rgba(13, 33, 201, 0.08) inset,
+  0px 0px 0px 0.75px rgba(13, 33, 201, 0.5) inset;
+
+$switch-checked-pressed-bg-color: var(--Backgrounds-BG-INTERACTIVE, #0021fe);
+$switch-checked-pressed-box-shadow: 0px 0px 0px 0.65px #fff,
+  var(--Primary-Button-Pressed-First-X-0, 0px)
+    var(--Primary-Button-Pressed-First-Y-0, 0px)
+    var(--Primary-Button-Pressed-First-B-0, 1px)
+    var(--Primary-Button-Pressed-First-S-0, 1px)
+    var(--Primary-Button-Pressed-First-Color, rgba(22, 51, 255, 0.16)),
+  var(--Primary-Button-Pressed-Secord-X-0, 0px)
+    var(--Primary-Button-Pressed-Secord-Y-0, 0px)
+    var(--Primary-Button-Pressed-Secord-B-0, 0px) 3px
+    var(--Primary-Button-Pressed-Secord-Colors, #b2d4ff),
+  0px 0px 1px 0px rgba(0, 0, 0, 0.04) inset,
+  0px 0px 4px 0px rgba(0, 0, 0, 0.04) inset,
+  0px 0px 0px 0.75px rgba(0, 0, 0, 0.06) inset,
+  0px 0px 8px 0px rgba(0, 0, 0, 0.02) inset, 0px 2px 4px 0px rgba(0, 0, 0, 0.04);
+
+$switch-checked-disabled-bg-color: var(--Button-Disabled-BTN-DISABLED, #e5e5e5);
+$switch-checked-disabled-box-shadow: 0px 0px 1px 1px rgba(0, 0, 0, 0.04) inset,
+  0px 0px 4px 0px rgba(0, 0, 0, 0.04) inset,
+  0px 0px 8px 0px rgba(0, 0, 0, 0.02) inset,
+  0px 0px 0px 0.75px rgba(0, 0, 0, 0.06) inset;
+
+// TODO: Slider: State: Default
+$slider-bg-color: var(--Colors-SEMANTIC-NEUTRAL-WLDS-NTL-00, #fff);
+$slider-box-shadow: 0px 0px 2px 1px #fff inset, 0px 1px 0px 0px #fff inset,
+  0px 0px 0px 0.5px rgba(0, 0, 0, 0.02), 0px 5px 3px 0px rgba(0, 0, 0, 0.02),
+  0px 3px 3px 0px rgba(0, 0, 0, 0.04), 0px 1px 2px 0px rgba(0, 0, 0, 0.1),
+  0px 0px 1px 0px rgba(0, 0, 0, 0.12);
+
+$slider-hover-bg-color: var(--Colors-SEMANTIC-NEUTRAL-WLDS-NTL-00, #fff);
+$slider-hover-box-shadow: 0px 0px 2px 1px #fff inset, 0px 1px 0px 0px #fff inset,
+  0px 0px 0px 0.5px rgba(0, 0, 0, 0.02), 0px 5px 3px 0px rgba(0, 0, 0, 0.02),
+  0px 3px 3px 0px rgba(0, 0, 0, 0.04), 0px 1px 2px 0px rgba(0, 0, 0, 0.1),
+  0px 0px 1px 0px rgba(0, 0, 0, 0.12);
+
+$slider-active-bg-color: var(--Colors-SEMANTIC-NEUTRAL-WLDS-NTL-00, #fff);
+$slider-active-box-shadow: 0px 0px 2px 1px #fff inset,
+  0px 1px 0px 0px #fff inset, 0px 0px 0px 0.5px rgba(0, 0, 0, 0.02),
+  0px 5px 3px 0px rgba(0, 0, 0, 0.02), 0px 3px 3px 0px rgba(0, 0, 0, 0.04),
+  0px 1px 2px 0px rgba(0, 0, 0, 0.1), 0px 0px 1px 0px rgba(0, 0, 0, 0.12);
+
+$slider-disabled-bg-color: var(--Forgrounds-FG-DISABLED-VALUE, #737373);
+$slider-disabled-box-shadow: 0px 0px 2px 1px
+    var(--Forgrounds-FG-DISABLED-VALUE, #737373) inset,
+  0px 1px 0px 0px var(--Forgrounds-FG-DISABLED-VALUE, #737373) inset;
+
+// TODO: Slider: State: Checked
+$slider-checked-bg-color: var(--Colors-SEMANTIC-NEUTRAL-WLDS-NTL-00, #fff);
+$slider-checked-box-shadow: 0px 0px 0px 0.5px rgba(0, 0, 0, 0.06),
+  0px 5px 4px 0px rgba(0, 0, 0, 0.02), 0px 3px 3px 0px rgba(0, 0, 0, 0.04),
+  0px 0px 1px 0px rgba(0, 0, 0, 0.08), 0px 1px 2px 0px rgba(0, 0, 0, 0.12),
+  0px 0px 2px 1px #fff inset, 0px 1px 0px 0px #fff inset;
+
+$slider-checked-hover-bg-color: var(
+  --Colors-SEMANTIC-NEUTRAL-WLDS-NTL-00,
+  #fff
+);
+$slider-checked-hover-box-shadow: 0px 0px 0px 0.5px rgba(0, 0, 0, 0.06),
+  0px 5px 4px 0px rgba(0, 0, 0, 0.02), 0px 3px 3px 0px rgba(0, 0, 0, 0.04),
+  0px 0px 1px 0px rgba(0, 0, 0, 0.08), 0px 1px 2px 0px rgba(0, 0, 0, 0.12),
+  0px 0px 2px 1px #fff inset, 0px 1px 0px 0px #fff inset;
+
+$slider-checked-pressed-bg-color: var(
+  --Colors-SEMANTIC-NEUTRAL-WLDS-NTL-00,
+  #fff
+);
+$slider-checked-pressed-box-shadow: 0px 0px 0px 0.5px rgba(0, 0, 0, 0.06),
+  0px 5px 4px 0px rgba(0, 0, 0, 0.02), 0px 3px 3px 0px rgba(0, 0, 0, 0.04),
+  0px 0px 1px 0px rgba(0, 0, 0, 0.08), 0px 1px 2px 0px rgba(0, 0, 0, 0.12),
+  0px 0px 2px 1px #fff inset, 0px 1px 0px 0px #fff inset;
+
+$slider-checked-disabled-bg-color: var(--Forgrounds-FG-DISABLED-VALUE, #737373);
+$slider-checked-disabled-box-shadow: 0px 0px 2px 1px
+    var(--Forgrounds-FG-DISABLED-VALUE, #737373) inset,
+  0px 1px 0px 0px var(--Forgrounds-FG-DISABLED-VALUE, #737373) inset;
+
+// TODO: Switch Container
+.wl-switch-container {
+  @include wl-aligns-center;
+  gap: rem(10);
+
+  // TODO: Slider
+  .wl-switch-slider {
+    width: $switch-sm-width;
+    height: $switch-sm-height;
+    border-radius: $switch-border-radius;
+    transition: background-color $switch-transition ease-in-out;
+    background-color: $switch-bg-color;
+    box-shadow: $switch-box-shadow;
+
+    position: relative;
+    cursor: pointer;
+
+    &::before {
+      height: $switch-thumb-size;
+      width: $switch-thumb-size;
+
+      background-color: $slider-bg-color;
+      border-radius: 50%;
+      box-shadow: $slider-box-shadow;
+
+      @include wl-flex-center;
+      aspect-ratio: 1/1;
+
+      content: "";
+      position: absolute;
+      top: 50%;
+      left: 0;
+      transform: translate(2px, -50%);
+
+      transition: transform $switch-transition ease-in-out,
+        background-color $switch-transition ease-in-out;
+    }
+  }
+
+  input[type="checkbox"][role="switch"] {
+    position: absolute;
+    opacity: 0;
+    height: 0;
+    width: 0;
+    display: none;
+
+    &:hover + .wl-switch-slider {
+      cursor: pointer;
+      background-color: $switch-hover-bg-color;
+      box-shadow: $switch-hover-box-shadow;
+
+      &::before {
+        background-color: $slider-hover-bg-color;
+        box-shadow: $slider-hover-box-shadow;
+      }
+    }
+
+    &:focus + .wl-switch-slider,
+    &:active + .wl-switch-slider {
+      background-color: $switch-pressed-bg-color;
+      box-shadow: $switch-pressed-box-shadow;
+      &::before {
+        background-color: $slider-active-bg-color;
+        box-shadow: $slider-active-box-shadow;
+      }
+    }
+
+    &:disabled + .wl-switch-slider {
+      cursor: not-allowed;
+      user-select: none;
+      background-color: $switch-disabled-bg-color;
+      box-shadow: $switch-disabled-box-shadow;
+
+      &::before {
+        background-color: $slider-disabled-bg-color;
+        box-shadow: $slider-disabled-box-shadow;
+      }
+    }
+
+    &:checked {
+      + .wl-switch-slider {
+        background-color: $switch-checked-bg-color;
+        box-shadow: $switch-checked-box-shadow;
+
+        &::before {
+          transform: translate(
+            calc(#{$switch-width} - #{$switch-thumb-size} - 2px),
+            -50%
+          );
+
+          background-color: $slider-checked-bg-color;
+          box-shadow: $slider-checked-box-shadow;
+        }
+      }
+
+      &:hover + .wl-switch-slider {
+        cursor: pointer;
+        background-color: $switch-checked-hover-bg-color;
+        box-shadow: $switch-checked-hover-box-shadow;
+
+        &::before {
+          background-color: $slider-checked-hover-bg-color;
+          box-shadow: $slider-checked-hover-box-shadow;
+        }
+      }
+
+      &:focus + .wl-switch-slider,
+      &:active + .wl-switch-slider {
+        background-color: $switch-checked-pressed-bg-color;
+        box-shadow: $switch-checked-pressed-box-shadow;
+
+        &::before {
+          background-color: $slider-checked-pressed-bg-color;
+          box-shadow: $slider-checked-pressed-box-shadow;
+        }
+      }
+
+      &:disabled + .wl-switch-slider {
+        background-color: $switch-checked-disabled-bg-color;
+        box-shadow: $switch-checked-disabled-box-shadow;
+
+        &::before {
+          background-color: $slider-checked-disabled-bg-color;
+          box-shadow: $slider-checked-disabled-box-shadow;
+        }
+      }
+    }
+  }
+}
+
+// TODO: Switch: Size
+.wl-switch-sm {
+  .wl-switch-slider {
+    width: $switch-sm-width;
+    height: $switch-sm-height;
+
+    &::before {
+      height: $switch-sm-thumb-size;
+      width: $switch-sm-thumb-size;
+    }
+  }
+
+  input[type="checkbox"][role="switch"] {
+    &:checked {
+      + .wl-switch-slider {
+        &::before {
+          transform: translate(
+            calc(#{$switch-sm-width} - #{$switch-sm-thumb-size} - 2px),
+            -50%
+          );
+        }
+      }
+    }
+  }
+}
+
+.wl-switch-md {
+  .wl-switch-slider {
+    width: $switch-md-width;
+    height: $switch-md-height;
+
+    &::before {
+      height: $switch-md-thumb-size;
+      width: $switch-md-thumb-size;
+    }
+  }
+
+  input[type="checkbox"][role="switch"] {
+    &:checked {
+      + .wl-switch-slider {
+        &::before {
+          transform: translate(
+            calc(#{$switch-md-width} - #{$switch-md-thumb-size} - 2px),
+            -50%
+          );
+        }
+      }
+    }
+  }
+}
+
+.wl-switch-lg {
+  .wl-switch-slider {
+    width: $switch-lg-width;
+    height: $switch-lg-height;
+
+    &::before {
+      height: $switch-lg-thumb-size;
+      width: $switch-lg-thumb-size;
+    }
+  }
+
+  input[type="checkbox"][role="switch"] {
+    &:checked {
+      + .wl-switch-slider {
+        &::before {
+          transform: translate(
+            calc(#{$switch-lg-width} - #{$switch-lg-thumb-size} - 2px),
+            -50%
+          );
+        }
+      }
+    }
+  }
+}

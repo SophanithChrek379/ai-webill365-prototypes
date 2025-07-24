@@ -1,0 +1,173 @@
+@use "sass:string";
+@use "sass:meta";
+@use "functions" as *;
+
+@mixin wl-aligns-start {
+  display: flex;
+  align-items: flex-start;
+}
+
+@mixin wl-aligns-end {
+  display: flex;
+  align-items: flex-end;
+}
+
+@mixin wl-aligns-inline-center {
+  display: inline-flex;
+  align-items: center;
+}
+
+@mixin wl-aligns-inline-start {
+  display: inline-flex;
+  align-items: flex-start;
+}
+
+@mixin wl-aligns-inline-end {
+  display: inline-flex;
+  align-items: flex-end;
+}
+
+@mixin wl-aligns-center {
+  display: flex;
+  align-items: center;
+}
+
+@mixin wl-flex-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+@mixin wl-flex-end {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+@mixin wl-flex-row {
+  display: flex;
+  flex-direction: row;
+}
+
+@mixin wl-flex-column {
+  display: flex;
+  flex-direction: column;
+}
+
+@mixin wl-flex-between {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+@mixin wl-justify-around {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+@mixin wl-flex-wrap {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+@mixin wl-grid-columns($cols) {
+  display: grid;
+  grid-template-columns: repeat($cols, 1fr);
+}
+
+// TODO: Typography mixins
+@mixin wl-font-style($size, $weight, $line-height, $letter-spacing) {
+  font-size: $size;
+  font-weight: $weight;
+  line-height: $line-height;
+  letter-spacing: $letter-spacing;
+}
+
+@mixin wl-text-ellipsis {
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+@mixin wl-text-ellipsis-double {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  align-self: stretch;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+@mixin modal-button-align($alignment) {
+  display: flex;
+  justify-content: $alignment;
+  width: 100%;
+}
+
+// Responsive mixins
+@mixin wl-responsive($breakpoint) {
+  @if $breakpoint == mobile {
+    @media (max-width: 767px) {
+      @content;
+    }
+  } @else if $breakpoint == tablet {
+    @media (min-width: 768px) and (max-width: 1023px) {
+      @content;
+    }
+  } @else if $breakpoint == desktop {
+    @media (min-width: 1024px) {
+      @content;
+    }
+  }
+}
+
+// Helper function to replace strings (for color encoding)
+@function str-replace($string, $search, $replace) {
+  // string.index returns the 1-based position of the search string
+  $index: string.index($string, $search);
+
+  @if $index {
+    // string.slice takes start and end positions (both 1-based)
+    $before: string.slice($string, 1, $index - 1);
+    $after-position: $index + string.length($search);
+    $after: string.slice($string, $after-position);
+
+    // Recursively replace any remaining instances in the 'after' part
+    $after-replaced: str-replace($after, $search, $replace);
+
+    @return $before + $replace + $after-replaced;
+  }
+
+  @return $string;
+}
+
+// Mixin for SVG icon with color control
+@mixin wl-svg-icon(
+  $icon-name,
+  $svg-path,
+  $light-color: #000000,
+  $dark-color: #ffffff
+) {
+  $encoded-light-color: str-replace(meta.inspect($light-color), "#", "%23");
+  $encoded-dark-color: str-replace(meta.inspect($dark-color), "#", "%23");
+
+  &.wl-#{$icon-name}-icon {
+    background-image: url("data:image/svg+xml,%3Csvg #{$svg-path} fill='#{$encoded-light-color}'/%3E%3C/svg%3E");
+  }
+
+  @at-root html[wlds-theme-mode="dark"] .wl-icon {
+    &.wl-#{$icon-name}-icon {
+      background-image: url("data:image/svg+xml,%3Csvg #{$svg-path} fill='#{$encoded-dark-color}'/%3E%3C/svg%3E");
+    }
+  }
+}
+
+// For icons that always have a specific color regardless of theme
+@mixin svg-icon-fixed($icon-name, $svg-path, $color: #ffffff) {
+  $encoded-color: str-replace(meta.inspect($color), "#", "%23");
+
+  &.wl-#{$icon-name}-white-icon {
+    background-image: url("data:image/svg+xml,%3Csvg #{$svg-path} fill='#{$encoded-color}'/%3E%3C/svg%3E");
+  }
+}

@@ -1,0 +1,48 @@
+@use "sass:color";
+@use "sass:math";
+@use "../abstracts/functions" as *;
+@use "../abstracts/mixins" as *;
+
+.wl-scrollbar {
+  &::-webkit-scrollbar {
+    width: rem(10);
+    height: rem(10);
+    transition: background-color 0.25s ease-in-out;
+  }
+
+  &::-webkit-scrollbar-track {
+    background-color: var(--Colors-SEMANTIC-NEUTRAL-WLDS-NTL-03, #e5e5e5);
+    border-radius: inherit;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background-color: var(--Colors-SEMANTIC-NEUTRAL-WLDS-NTL-04, #d4d4d4);
+    background-clip: padding-box;
+    border-radius: inherit;
+  }
+  &::-webkit-scrollbar-thumb:hover {
+    background-color: var(--Colors-SEMANTIC-NEUTRAL-WLDS-NTL-05, #a3a3a3);
+    cursor: pointer;
+  }
+}
+
+// TODO: Global: Default
+// ::-webkit-scrollbar {
+//   width: rem(10);
+//   height: rem(10);
+//   transition: background-color 0.25s ease-in-out;
+// }
+// ::-webkit-scrollbar-track {
+//   background-color: var(--Colors-SEMANTIC-NEUTRAL-WLDS-NTL-03, #e5e5e5);
+//   border-radius: inherit;
+// }
+
+// ::-webkit-scrollbar-thumb {
+//   background-color: var(--Colors-SEMANTIC-NEUTRAL-WLDS-NTL-04, #d4d4d4);
+//   background-clip: padding-box;
+//   border-radius: inherit;
+// }
+// ::-webkit-scrollbar-thumb:hover {
+//   background-color: var(--Colors-SEMANTIC-NEUTRAL-WLDS-NTL-05, #a3a3a3);
+//   cursor: pointer;
+// }

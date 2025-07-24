@@ -1,0 +1,506 @@
+// _wl-flex.scss
+// Modern 3-layer architecture for flex utilities
+@use "sass:map";
+@use "sass:meta";
+@use "sass:list";
+@use "../abstracts/breakpoints" as *;
+
+// -----------------------------------------------
+// Layer 1: Settings - Variables and configuration
+// -----------------------------------------------
+/// @group settings
+$wl-flex: (
+  // Flex direction values
+  "direction":
+    (
+      "row": row,
+      "column": column,
+      "row-reverse": row-reverse,
+      "column-reverse": column-reverse,
+    ),
+
+  // Flex wrap values
+  "wrap":
+    (
+      "wrap": wrap,
+      "nowrap": nowrap,
+      "wrap-reverse": wrap-reverse,
+    ),
+
+  // Justify content values
+  "justify-content":
+    (
+      "start": flex-start,
+      "end": flex-end,
+      "center": center,
+      "between": space-between,
+      "around": space-around,
+      "evenly": space-evenly,
+    ),
+
+  // Align items values
+  "align-items":
+    (
+      "start": flex-start,
+      "end": flex-end,
+      "center": center,
+      "baseline": baseline,
+      "stretch": stretch,
+    ),
+
+  // Align content values
+  "align-content":
+    (
+      "start": flex-start,
+      "end": flex-end,
+      "center": center,
+      "between": space-between,
+      "around": space-around,
+      "stretch": stretch,
+    ),
+
+  // Align self values
+  "align-self":
+    (
+      "auto": auto,
+      "start": flex-start,
+      "end": flex-end,
+      "center": center,
+      "baseline": baseline,
+      "stretch": stretch,
+    ),
+
+  // Flex grow values
+  "grow":
+    (
+      "0": 0,
+      "1": 1,
+    ),
+
+  // Flex shrink values
+  "shrink":
+    (
+      "0": 0,
+      "1": 1,
+    ),
+
+  // Order range
+  "order-range": (0, 5),
+  // Gap values
+  "gap":
+    (
+      "0": 0,
+      "1": 0.25rem,
+      "2": 0.5rem,
+      "3": 1rem,
+      "4": 1.5rem,
+      "5": 3rem,
+    ),
+
+  // Auto margin directions
+  "auto-margins":
+    (
+      "me": margin-right,
+      "ms": margin-left,
+      "mt": margin-top,
+      "mb": margin-bottom,
+    ),
+
+  // Shorthand presets
+  "shorthand-presets":
+    (
+      "flex-center": (
+        "display": flex,
+        "justify-content": center,
+        "align-items": center,
+      ),
+      "flex-between-center": (
+        "display": flex,
+        "justify-content": space-between,
+        "align-items": center,
+      ),
+      "flex-column-center": (
+        "display": flex,
+        "flex-direction": column,
+        "justify-content": center,
+        "align-items": center,
+      ),
+    ),
+
+  // Configuration options
+  "config":
+    (
+      "class-prefix": "wl-",
+      "enable-responsive": true,
+      "enable-flex-direction": true,
+      "enable-flex-wrap": true,
+      "enable-justify-content": true,
+      "enable-align-items": true,
+      "enable-align-content": true,
+      "enable-align-self": true,
+      "enable-flex-grow-shrink": true,
+      "enable-auto-margins": true,
+      "enable-order": true,
+      "enable-shorthand": true,
+      "enable-gap": true,
+      "max-order": 5,
+    )
+);
+
+// ---------------------------------------------
+// Layer 2: Tools - Functions and mixins
+// ---------------------------------------------
+/// @group tools
+
+/// Get configuration value
+/// @param {String} $key - The configuration key
+/// @return {*} The configuration value
+@function get-config($key) {
+  $config: map.get($wl-flex, "config");
+
+  @if map.has-key($config, $key) {
+    @return map.get($config, $key);
+  }
+
+  @error "Configuration key '#{$key}' not found.";
+  @return null;
+}
+
+/// Create class name with proper prefix
+/// @param {String} $name - The base class name
+/// @return {String} The prefixed class name
+@function class-name($name) {
+  $prefix: get-config("class-prefix");
+  @return "#{$prefix}#{$name}";
+}
+
+/// Get flex property value from map
+/// @param {String} $property - The property name (direction, wrap, etc.)
+/// @param {String} $key - The value key
+/// @return {*} The property value
+@function get-flex-value($property, $key) {
+  $values: map.get($wl-flex, $property);
+
+  @if map.has-key($values, $key) {
+    @return map.get($values, $key);
+  }
+
+  @error "Flex #{$property} value '#{$key}' not found.";
+  @return null;
+}
+
+/// Create flex utility class for a specific property
+/// @param {String} $property - The CSS property
+/// @param {String} $class-prefix - The class prefix
+/// @param {String} $value-key - The value key
+/// @param {String} $value - The CSS value
+/// @param {String} $breakpoint - Optional breakpoint name
+@mixin create-flex-utility(
+  $property,
+  $class-prefix,
+  $value-key,
+  $value,
+  $breakpoint: null
+) {
+  @if $breakpoint {
+    .#{class-name("#{$class-prefix}-#{$breakpoint}-#{$value-key}")} {
+      #{$property}: $value;
+    }
+  } @else {
+    .#{class-name("#{$class-prefix}-#{$value-key}")} {
+      #{$property}: $value;
+    }
+  }
+}
+
+/// Create shorthand flex utility class
+/// @param {String} $name - The class name
+/// @param {Map} $properties - Map of properties and values
+@mixin create-shorthand-utility($name, $properties) {
+  .#{class-name($name)} {
+    @each $property, $value in $properties {
+      #{$property}: $value;
+    }
+  }
+}
+
+// -----------------------------------------------
+// Layer 3: Utilities - Output utility classes
+// -----------------------------------------------
+/// @group utilities
+
+/// Generate flex direction classes
+@mixin generate-flex-direction-classes($breakpoint: null) {
+  @if get-config("enable-flex-direction") {
+    $direction-values: map.get($wl-flex, "direction");
+
+    @each $key, $value in $direction-values {
+      @include create-flex-utility(
+        "flex-direction",
+        "flex",
+        $key,
+        $value,
+        $breakpoint
+      );
+    }
+  }
+}
+
+/// Generate flex wrap classes
+@mixin generate-flex-wrap-classes($breakpoint: null) {
+  @if get-config("enable-flex-wrap") {
+    $wrap-values: map.get($wl-flex, "wrap");
+
+    @each $key, $value in $wrap-values {
+      @include create-flex-utility(
+        "flex-wrap",
+        "flex",
+        $key,
+        $value,
+        $breakpoint
+      );
+    }
+  }
+}
+
+/// Generate justify content classes
+@mixin generate-justify-content-classes($breakpoint: null) {
+  @if get-config("enable-justify-content") {
+    $justify-values: map.get($wl-flex, "justify-content");
+
+    @each $key, $value in $justify-values {
+      @include create-flex-utility(
+        "justify-content",
+        "justify-content",
+        $key,
+        $value,
+        $breakpoint
+      );
+    }
+  }
+}
+
+/// Generate align items classes
+@mixin generate-align-items-classes($breakpoint: null) {
+  @if get-config("enable-align-items") {
+    $align-values: map.get($wl-flex, "align-items");
+
+    @each $key, $value in $align-values {
+      @include create-flex-utility(
+        "align-items",
+        "align-items",
+        $key,
+        $value,
+        $breakpoint
+      );
+    }
+  }
+}
+
+/// Generate align content classes
+@mixin generate-align-content-classes($breakpoint: null) {
+  @if get-config("enable-align-content") {
+    $align-values: map.get($wl-flex, "align-content");
+
+    @each $key, $value in $align-values {
+      @include create-flex-utility(
+        "align-content",
+        "align-content",
+        $key,
+        $value,
+        $breakpoint
+      );
+    }
+  }
+}
+
+/// Generate align self classes
+@mixin generate-align-self-classes($breakpoint: null) {
+  @if get-config("enable-align-self") {
+    $align-values: map.get($wl-flex, "align-self");
+
+    @each $key, $value in $align-values {
+      @include create-flex-utility(
+        "align-self",
+        "align-self",
+        $key,
+        $value,
+        $breakpoint
+      );
+    }
+  }
+}
+
+/// Generate flex grow and shrink classes
+@mixin generate-flex-grow-shrink-classes($breakpoint: null) {
+  @if get-config("enable-flex-grow-shrink") {
+    $grow-values: map.get($wl-flex, "grow");
+    $shrink-values: map.get($wl-flex, "shrink");
+
+    @each $key, $value in $grow-values {
+      @include create-flex-utility(
+        "flex-grow",
+        "flex-grow",
+        $key,
+        $value,
+        $breakpoint
+      );
+    }
+
+    @each $key, $value in $shrink-values {
+      @include create-flex-utility(
+        "flex-shrink",
+        "flex-shrink",
+        $key,
+        $value,
+        $breakpoint
+      );
+    }
+
+    // Add flex-fill utility
+    @if $breakpoint {
+      .#{class-name("flex-#{$breakpoint}-fill")} {
+        flex: 1 1 auto;
+      }
+    } @else {
+      .#{class-name("flex-fill")} {
+        flex: 1 1 auto;
+      }
+    }
+  }
+}
+
+/// Generate auto margin classes
+@mixin generate-auto-margin-classes($breakpoint: null) {
+  @if get-config("enable-auto-margins") {
+    $margins: map.get($wl-flex, "auto-margins");
+
+    @each $class-suffix, $property in $margins {
+      @if $breakpoint {
+        .#{class-name("#{$class-suffix}-#{$breakpoint}-auto")} {
+          #{$property}: auto;
+        }
+      } @else {
+        .#{class-name("#{$class-suffix}-auto")} {
+          #{$property}: auto;
+        }
+      }
+    }
+  }
+}
+
+/// Generate order classes
+@mixin generate-order-classes($breakpoint: null) {
+  @if get-config("enable-order") {
+    $range: map.get($wl-flex, "order-range");
+    $min: list.nth($range, 1);
+    $max: list.nth($range, 2);
+
+    @for $i from $min through $max {
+      @if $breakpoint {
+        .#{class-name("order-#{$breakpoint}-#{$i}")} {
+          order: $i;
+        }
+      } @else {
+        .#{class-name("order-#{$i}")} {
+          order: $i;
+        }
+      }
+    }
+  }
+}
+
+/// Generate gap classes
+@mixin generate-gap-classes($breakpoint: null) {
+  @if get-config("enable-gap") {
+    $gaps: map.get($wl-flex, "gap");
+
+    @each $key, $value in $gaps {
+      // Standard gap
+      @if $breakpoint {
+        .#{class-name("gap-#{$breakpoint}-#{$key}")} {
+          gap: $value;
+        }
+
+        .#{class-name("row-gap-#{$breakpoint}-#{$key}")},
+        .#{class-name("gy-#{$breakpoint}-#{$key}")} {
+          row-gap: $value;
+        }
+
+        .#{class-name("column-gap-#{$breakpoint}-#{$key}")},
+        .#{class-name("gx-#{$breakpoint}-#{$key}")} {
+          column-gap: $value;
+        }
+      } @else {
+        .#{class-name("gap-#{$key}")} {
+          gap: $value;
+        }
+
+        .#{class-name("row-gap-#{$key}")},
+        .#{class-name("gy-#{$key}")} {
+          row-gap: $value;
+        }
+
+        .#{class-name("column-gap-#{$key}")},
+        .#{class-name("gx-#{$key}")} {
+          column-gap: $value;
+        }
+      }
+    }
+  }
+}
+
+/// Generate shorthand utility classes
+@mixin generate-shorthand-classes() {
+  @if get-config("enable-shorthand") {
+    $presets: map.get($wl-flex, "shorthand-presets");
+
+    @each $name, $properties in $presets {
+      @include create-shorthand-utility($name, $properties);
+    }
+  }
+}
+
+/// Generate base (non-responsive) flex utility classes
+@mixin generate-base-flex-classes() {
+  @include generate-flex-direction-classes();
+  @include generate-flex-wrap-classes();
+  @include generate-justify-content-classes();
+  @include generate-align-items-classes();
+  @include generate-align-content-classes();
+  @include generate-align-self-classes();
+  @include generate-flex-grow-shrink-classes();
+  @include generate-auto-margin-classes();
+  @include generate-order-classes();
+  @include generate-gap-classes();
+  @include generate-shorthand-classes();
+}
+
+/// Generate responsive flex utility classes
+@mixin generate-responsive-flex-classes() {
+  @if get-config("enable-responsive") {
+    @each $breakpoint, $width in $breakpoints {
+      @media (min-width: $width) {
+        @include generate-flex-direction-classes($breakpoint);
+        @include generate-flex-wrap-classes($breakpoint);
+        @include generate-justify-content-classes($breakpoint);
+        @include generate-align-items-classes($breakpoint);
+        @include generate-align-content-classes($breakpoint);
+        @include generate-align-self-classes($breakpoint);
+        @include generate-flex-grow-shrink-classes($breakpoint);
+        @include generate-auto-margin-classes($breakpoint);
+        @include generate-order-classes($breakpoint);
+        @include generate-gap-classes($breakpoint);
+      }
+    }
+  }
+}
+
+/// Generate all flex utility classes
+@mixin generate-all-flex-utilities() {
+  @include generate-base-flex-classes();
+  @include generate-responsive-flex-classes();
+}
+
+// Output all utility classes
+@include generate-all-flex-utilities();

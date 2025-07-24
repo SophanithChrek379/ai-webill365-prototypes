@@ -1,0 +1,514 @@
+@use "../../abstracts/breakpoints" as *;
+@use "../../abstracts/functions" as *;
+@use "../../abstracts/mixins" as *;
+
+@use "sass:map";
+@use "sass:color";
+
+// -----------------------------------------------------------------------------
+// 1. VARIABLES
+// -----------------------------------------------------------------------------
+
+// 1.1 Layout Variables
+$wl-input-date-max-width: rem(132);
+$wl-input-date-range-min-width: rem(240);
+$wl-input-date-section-width: rem(295);
+$wl-input-calendar-range-section-width: rem(656);
+$wl-input-date-spacing-8: var(--Spacing-WLDS-Space-8, 8px);
+$wl-input-date-padding: var(--Spacing-WLDS-Space-8, 8px);
+$wl-input-date-border-radius-8: var(--WLDS-Radius-8, 8px);
+
+// 1.2 Background Image URLs
+$wl-input-date-bg-image-url: url("data:image/svg+xml,%3Csvg width='18' height='18' fill='none' xmlns='http://www.w3.org/2000/svg' viewBox='0 0 18 18'%3E%3Cpath fill='%23171717' d='M3.60888 17H14.3911C15.2497 17 15.8992 16.7748 16.3395 16.3243C16.7798 15.8795 17 15.2235 17 14.3564V4.65203C17 3.78491 16.7798 3.12613 16.3395 2.67568C15.8992 2.22523 15.2497 2 14.3911 2L3.60888 2C2.75576 2 2.1063 2.22523 1.66047 2.67568C1.22016 3.1205 1 3.77928 1 4.65203L1 14.3564C1 15.2292 1.22016 15.888 1.66047 16.3328C2.1063 16.7776 2.75576 17 3.60888 17ZM3.63364 15.3193C3.31441 15.3193 3.07224 15.2348 2.90712 15.0659C2.742 14.897 2.65944 14.6408 2.65944 14.2973L2.65944 6.99155C2.65944 6.64809 2.742 6.39471 2.90712 6.23142C3.07224 6.0625 3.31441 5.97804 3.63364 5.97804L14.3581 5.97804C14.6773 5.97804 14.9223 6.0625 15.0929 6.23142C15.2635 6.39471 15.3488 6.64809 15.3488 6.99155L15.3488 14.2973C15.3488 14.6408 15.2635 14.897 15.0929 15.0659C14.9223 15.2348 14.6773 15.3193 14.3581 15.3193L3.63364 15.3193ZM7.50568 8.69764H7.95975C8.10285 8.69764 8.20193 8.6723 8.25697 8.62162C8.31201 8.57095 8.33953 8.47241 8.33953 8.32601V7.86149C8.33953 7.71509 8.31201 7.61655 8.25697 7.56588C8.20193 7.5152 8.10285 7.48986 7.95975 7.48986H7.50568C7.36808 7.48986 7.26901 7.5152 7.20846 7.56588C7.15342 7.61655 7.1259 7.71509 7.1259 7.86149V8.32601C7.1259 8.47241 7.15342 8.57095 7.20846 8.62162C7.26901 8.6723 7.36808 8.69764 7.50568 8.69764ZM10.0402 8.69764H10.5026C10.6457 8.69764 10.7448 8.6723 10.7998 8.62162C10.8548 8.57095 10.8824 8.47241 10.8824 8.32601V7.86149C10.8824 7.71509 10.8548 7.61655 10.7998 7.56588C10.7448 7.5152 10.6457 7.48986 10.5026 7.48986H10.0402C9.89714 7.48986 9.79807 7.5152 9.74303 7.56588C9.6935 7.61655 9.66873 7.71509 9.66873 7.86149V8.32601C9.66873 8.47241 9.6935 8.57095 9.74303 8.62162C9.79807 8.6723 9.89714 8.69764 10.0402 8.69764ZM12.5748 8.69764H13.0372C13.1803 8.69764 13.2793 8.6723 13.3344 8.62162C13.3894 8.57095 13.4169 8.47241 13.4169 8.32601V7.86149C13.4169 7.71509 13.3894 7.61655 13.3344 7.56588C13.2793 7.5152 13.1803 7.48986 13.0372 7.48986H12.5748C12.4317 7.48986 12.3326 7.5152 12.2776 7.56588C12.2281 7.61655 12.2033 7.71509 12.2033 7.86149V8.32601C12.2033 8.47241 12.2281 8.57095 12.2776 8.62162C12.3326 8.6723 12.4317 8.69764 12.5748 8.69764ZM4.9711 11.2568H5.42518C5.56828 11.2568 5.66735 11.2314 5.72239 11.1807C5.77743 11.1244 5.80495 11.0259 5.80495 10.8851V10.4122C5.80495 10.2658 5.77743 10.1672 5.72239 10.1166C5.66735 10.0659 5.56828 10.0405 5.42518 10.0405H4.9711C4.828 10.0405 4.72893 10.0659 4.67389 10.1166C4.61885 10.1672 4.59133 10.2658 4.59133 10.4122V10.8851C4.59133 11.0259 4.61885 11.1244 4.67389 11.1807C4.72893 11.2314 4.828 11.2568 4.9711 11.2568ZM7.50568 11.2568H7.95975C8.10285 11.2568 8.20193 11.2314 8.25697 11.1807C8.31201 11.1244 8.33953 11.0259 8.33953 10.8851V10.4122C8.33953 10.2658 8.31201 10.1672 8.25697 10.1166C8.20193 10.0659 8.10285 10.0405 7.95975 10.0405H7.50568C7.36808 10.0405 7.26901 10.0659 7.20846 10.1166C7.15342 10.1672 7.1259 10.2658 7.1259 10.4122V10.8851C7.1259 11.0259 7.15342 11.1244 7.20846 11.1807C7.26901 11.2314 7.36808 11.2568 7.50568 11.2568ZM10.0402 11.2568H10.5026C10.6457 11.2568 10.7448 11.2314 10.7998 11.1807C10.8548 11.1244 10.8824 11.0259 10.8824 10.8851V10.4122C10.8824 10.2658 10.8548 10.1672 10.7998 10.1166C10.7448 10.0659 10.6457 10.0405 10.5026 10.0405H10.0402C9.89714 10.0405 9.79807 10.0659 9.74303 10.1166C9.6935 10.1672 9.66873 10.2658 9.66873 10.4122V10.8851C9.66873 11.0259 9.6935 11.1244 9.74303 11.1807C9.79807 11.2314 9.89714 11.2568 10.0402 11.2568ZM12.5748 11.2568H13.0372C13.1803 11.2568 13.2793 11.2314 13.3344 11.1807C13.3894 11.1244 13.4169 11.0259 13.4169 10.8851V10.4122C13.4169 10.2658 13.3894 10.1672 13.3344 10.1166C13.2793 10.0659 13.1803 10.0405 13.0372 10.0405H12.5748C12.4317 10.0405 12.3326 10.0659 12.2776 10.1166C12.2281 10.1672 12.2033 10.2658 12.2033 10.4122V10.8851C12.2033 11.0259 12.2281 11.1244 12.2776 11.1807C12.3326 11.2314 12.4317 11.2568 12.5748 11.2568ZM4.9711 13.8074H5.42518C5.56828 13.8074 5.66735 13.7821 5.72239 13.7314C5.77743 13.6751 5.80495 13.5766 5.80495 13.4358V12.9713C5.80495 12.8249 5.77743 12.7264 5.72239 12.6757C5.66735 12.6194 5.56828 12.5912 5.42518 12.5912H4.9711C4.828 12.5912 4.72893 12.6194 4.67389 12.6757C4.61885 12.7264 4.59133 12.8249 4.59133 12.9713V13.4358C4.59133 13.5766 4.61885 13.6751 4.67389 13.7314C4.72893 13.7821 4.828 13.8074 4.9711 13.8074ZM7.50568 13.8074H7.95975C8.10285 13.8074 8.20193 13.7821 8.25697 13.7314C8.31201 13.6751 8.33953 13.5766 8.33953 13.4358V12.9713C8.33953 12.8249 8.31201 12.7264 8.25697 12.6757C8.20193 12.6194 8.10285 12.5912 7.95975 12.5912H7.50568C7.36808 12.5912 7.26901 12.6194 7.20846 12.6757C7.15342 12.7264 7.1259 12.8249 7.1259 12.9713V13.4358C7.1259 13.5766 7.15342 13.6751 7.20846 13.7314C7.26901 13.7821 7.36808 13.8074 7.50568 13.8074ZM10.0402 13.8074H10.5026C10.6457 13.8074 10.7448 13.7821 10.7998 13.7314C10.8548 13.6751 10.8824 13.5766 10.8824 13.4358V12.9713C10.8824 12.8249 10.8548 12.7264 10.7998 12.6757C10.7448 12.6194 10.6457 12.5912 10.5026 12.5912H10.0402C9.89714 12.5912 9.79807 12.6194 9.74303 12.6757C9.6935 12.7264 9.66873 12.8249 9.66873 12.9713V13.4358C9.66873 13.5766 9.6935 13.6751 9.74303 13.7314C9.79807 13.7821 9.89714 13.8074 10.0402 13.8074Z' /%3E%3C/svg%3E");
+$wl-input-date-bg-image-disable-url: url("data:image/svg+xml,%3Csvg width='18' height='18' fill='none' xmlns='http://www.w3.org/2000/svg' viewBox='0 0 18 18'%3E%3Cpath fill='%23737373' d='M3.60888 17H14.3911C15.2497 17 15.8992 16.7748 16.3395 16.3243C16.7798 15.8795 17 15.2235 17 14.3564V4.65203C17 3.78491 16.7798 3.12613 16.3395 2.67568C15.8992 2.22523 15.2497 2 14.3911 2L3.60888 2C2.75576 2 2.1063 2.22523 1.66047 2.67568C1.22016 3.1205 1 3.77928 1 4.65203L1 14.3564C1 15.2292 1.22016 15.888 1.66047 16.3328C2.1063 16.7776 2.75576 17 3.60888 17ZM3.63364 15.3193C3.31441 15.3193 3.07224 15.2348 2.90712 15.0659C2.742 14.897 2.65944 14.6408 2.65944 14.2973L2.65944 6.99155C2.65944 6.64809 2.742 6.39471 2.90712 6.23142C3.07224 6.0625 3.31441 5.97804 3.63364 5.97804L14.3581 5.97804C14.6773 5.97804 14.9223 6.0625 15.0929 6.23142C15.2635 6.39471 15.3488 6.64809 15.3488 6.99155L15.3488 14.2973C15.3488 14.6408 15.2635 14.897 15.0929 15.0659C14.9223 15.2348 14.6773 15.3193 14.3581 15.3193L3.63364 15.3193ZM7.50568 8.69764H7.95975C8.10285 8.69764 8.20193 8.6723 8.25697 8.62162C8.31201 8.57095 8.33953 8.47241 8.33953 8.32601V7.86149C8.33953 7.71509 8.31201 7.61655 8.25697 7.56588C8.20193 7.5152 8.10285 7.48986 7.95975 7.48986H7.50568C7.36808 7.48986 7.26901 7.5152 7.20846 7.56588C7.15342 7.61655 7.1259 7.71509 7.1259 7.86149V8.32601C7.1259 8.47241 7.15342 8.57095 7.20846 8.62162C7.26901 8.6723 7.36808 8.69764 7.50568 8.69764ZM10.0402 8.69764H10.5026C10.6457 8.69764 10.7448 8.6723 10.7998 8.62162C10.8548 8.57095 10.8824 8.47241 10.8824 8.32601V7.86149C10.8824 7.71509 10.8548 7.61655 10.7998 7.56588C10.7448 7.5152 10.6457 7.48986 10.5026 7.48986H10.0402C9.89714 7.48986 9.79807 7.5152 9.74303 7.56588C9.6935 7.61655 9.66873 7.71509 9.66873 7.86149V8.32601C9.66873 8.47241 9.6935 8.57095 9.74303 8.62162C9.79807 8.6723 9.89714 8.69764 10.0402 8.69764ZM12.5748 8.69764H13.0372C13.1803 8.69764 13.2793 8.6723 13.3344 8.62162C13.3894 8.57095 13.4169 8.47241 13.4169 8.32601V7.86149C13.4169 7.71509 13.3894 7.61655 13.3344 7.56588C13.2793 7.5152 13.1803 7.48986 13.0372 7.48986H12.5748C12.4317 7.48986 12.3326 7.5152 12.2776 7.56588C12.2281 7.61655 12.2033 7.71509 12.2033 7.86149V8.32601C12.2033 8.47241 12.2281 8.57095 12.2776 8.62162C12.3326 8.6723 12.4317 8.69764 12.5748 8.69764ZM4.9711 11.2568H5.42518C5.56828 11.2568 5.66735 11.2314 5.72239 11.1807C5.77743 11.1244 5.80495 11.0259 5.80495 10.8851V10.4122C5.80495 10.2658 5.77743 10.1672 5.72239 10.1166C5.66735 10.0659 5.56828 10.0405 5.42518 10.0405H4.9711C4.828 10.0405 4.72893 10.0659 4.67389 10.1166C4.61885 10.1672 4.59133 10.2658 4.59133 10.4122V10.8851C4.59133 11.0259 4.61885 11.1244 4.67389 11.1807C4.72893 11.2314 4.828 11.2568 4.9711 11.2568ZM7.50568 11.2568H7.95975C8.10285 11.2568 8.20193 11.2314 8.25697 11.1807C8.31201 11.1244 8.33953 11.0259 8.33953 10.8851V10.4122C8.33953 10.2658 8.31201 10.1672 8.25697 10.1166C8.20193 10.0659 8.10285 10.0405 7.95975 10.0405H7.50568C7.36808 10.0405 7.26901 10.0659 7.20846 10.1166C7.15342 10.1672 7.1259 10.2658 7.1259 10.4122V10.8851C7.1259 11.0259 7.15342 11.1244 7.20846 11.1807C7.26901 11.2314 7.36808 11.2568 7.50568 11.2568ZM10.0402 11.2568H10.5026C10.6457 11.2568 10.7448 11.2314 10.7998 11.1807C10.8548 11.1244 10.8824 11.0259 10.8824 10.8851V10.4122C10.8824 10.2658 10.8548 10.1672 10.7998 10.1166C10.7448 10.0659 10.6457 10.0405 10.5026 10.0405H10.0402C9.89714 10.0405 9.79807 10.0659 9.74303 10.1166C9.6935 10.1672 9.66873 10.2658 9.66873 10.4122V10.8851C9.66873 11.0259 9.6935 11.1244 9.74303 11.1807C9.79807 11.2314 9.89714 11.2568 10.0402 11.2568ZM12.5748 11.2568H13.0372C13.1803 11.2568 13.2793 11.2314 13.3344 11.1807C13.3894 11.1244 13.4169 11.0259 13.4169 10.8851V10.4122C13.4169 10.2658 13.3894 10.1672 13.3344 10.1166C13.2793 10.0659 13.1803 10.0405 13.0372 10.0405H12.5748C12.4317 10.0405 12.3326 10.0659 12.2776 10.1166C12.2281 10.1672 12.2033 10.2658 12.2033 10.4122V10.8851C12.2033 11.0259 12.2281 11.1244 12.2776 11.1807C12.3326 11.2314 12.4317 11.2568 12.5748 11.2568ZM4.9711 13.8074H5.42518C5.56828 13.8074 5.66735 13.7821 5.72239 13.7314C5.77743 13.6751 5.80495 13.5766 5.80495 13.4358V12.9713C5.80495 12.8249 5.77743 12.7264 5.72239 12.6757C5.66735 12.6194 5.56828 12.5912 5.42518 12.5912H4.9711C4.828 12.5912 4.72893 12.6194 4.67389 12.6757C4.61885 12.7264 4.59133 12.8249 4.59133 12.9713V13.4358C4.59133 13.5766 4.61885 13.6751 4.67389 13.7314C4.72893 13.7821 4.828 13.8074 4.9711 13.8074ZM7.50568 13.8074H7.95975C8.10285 13.8074 8.20193 13.7821 8.25697 13.7314C8.31201 13.6751 8.33953 13.5766 8.33953 13.4358V12.9713C8.33953 12.8249 8.31201 12.7264 8.25697 12.6757C8.20193 12.6194 8.10285 12.5912 7.95975 12.5912H7.50568C7.36808 12.5912 7.26901 12.6194 7.20846 12.6757C7.15342 12.7264 7.1259 12.8249 7.1259 12.9713V13.4358C7.1259 13.5766 7.15342 13.6751 7.20846 13.7314C7.26901 13.7821 7.36808 13.8074 7.50568 13.8074ZM10.0402 13.8074H10.5026C10.6457 13.8074 10.7448 13.7821 10.7998 13.7314C10.8548 13.6751 10.8824 13.5766 10.8824 13.4358V12.9713C10.8824 12.8249 10.8548 12.7264 10.7998 12.6757C10.7448 12.6194 10.6457 12.5912 10.5026 12.5912H10.0402C9.89714 12.5912 9.79807 12.6194 9.74303 12.6757C9.6935 12.7264 9.66873 12.8249 9.66873 12.9713V13.4358C9.66873 13.5766 9.6935 13.6751 9.74303 13.7314C9.79807 13.7821 9.89714 13.8074 10.0402 13.8074Z' /%3E%3C/svg%3E");
+$wl-chevron-first-bg-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 16 16' fill='none'%3E%3Cpath d='M4.28168 8.37067C4.28732 8.13934 4.36631 7.9475 4.55251 7.76694L8.89713 3.51824C9.03819 3.37154 9.2131 3.30383 9.42751 3.30383C9.85069 3.30383 10.1892 3.63673 10.1892 4.05991C10.1892 4.26868 10.1046 4.46052 9.95225 4.61286L6.09288 8.36503L9.95225 12.1285C10.1046 12.2808 10.1892 12.467 10.1892 12.6814C10.1892 13.1046 9.85069 13.4432 9.42751 13.4432C9.21874 13.4432 9.03819 13.3698 8.89713 13.2231L4.55251 8.97441C4.36631 8.79385 4.28168 8.60201 4.28168 8.37067Z' fill='%230F1FEA'/%3E%3C/svg%3E");
+$wl-chevron-next-bg-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 16 16' fill='none'%3E%3Cpath d='M11.7127 8.37067C11.7127 8.60201 11.6337 8.79385 11.4475 8.97441L7.10286 13.2231C6.95616 13.3698 6.78124 13.4432 6.57248 13.4432C6.1493 13.4432 5.80511 13.1046 5.80511 12.6814C5.80511 12.467 5.89539 12.2808 6.04774 12.1285L9.90711 8.36503L6.04774 4.61286C5.89539 4.46052 5.80511 4.26868 5.80511 4.05991C5.80511 3.63673 6.1493 3.30383 6.57248 3.30383C6.78124 3.30383 6.95616 3.37154 7.10286 3.51824L11.4475 7.76694C11.628 7.9475 11.7127 8.13934 11.7127 8.37067Z' fill='%230F1FEA'/%3E%3C/svg%3E");
+$wl-chevron-arrow-bg-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none'%3E%3Cpath d='M20.0996 12.539C20.0996 12.8268 19.9811 13.1146 19.7695 13.3177L14.2174 18.8698C13.9889 19.0898 13.735 19.1914 13.4727 19.1914C12.8633 19.1914 12.4316 18.7597 12.4316 18.1927C12.4316 17.8795 12.5586 17.6256 12.7533 17.4394L14.6491 15.5267L16.8835 13.487L14.9622 13.597H4.98372C4.34049 13.597 3.90039 13.1653 3.90039 12.539C3.90039 11.9127 4.34049 11.4811 4.98372 11.4811H14.9622L16.875 11.5911L14.6491 9.55141L12.7533 7.63865C12.5586 7.44399 12.4316 7.19008 12.4316 6.8854C12.4316 6.30988 12.8633 5.87823 13.4727 5.87823C13.735 5.87823 13.9889 5.98826 14.2259 6.22524L19.7695 11.7604C19.9811 11.9635 20.0996 12.2513 20.0996 12.539Z' fill='%23A3A3A3'/%3E%3C/svg%3E");
+
+// 1.3 Transitions
+$wl-input-date-transition: color 0.15s ease-in-out,
+  background-color 0.15s ease-in-out, border-color 0.15s ease-in-out,
+  box-shadow 0.15s ease-in-out;
+
+// -----------------------------------------------------------------------------
+// 2. MIXINS
+// -----------------------------------------------------------------------------
+
+// 2.1 Layout Mixins
+@mixin wl-aligns-center {
+  display: flex;
+  align-items: center;
+}
+
+@mixin wl-flex-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+@mixin wl-flex-between {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+@mixin wl-justify-around {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
+
+// 2.2 Appearance Mixins
+@mixin wl-bg-base {
+  background-color: var(--Button-Primary-Outlined-BTN-OUTL-NORMAL, #fff);
+  background-image: $wl-input-date-bg-image-url;
+  background-repeat: no-repeat;
+  background-position: right var(--Spacing-WLDS-Space-8, 8px) center;
+  background-size: var(--Spacing-WLDS-Space-16, 16px)
+    var(--Spacing-WLDS-Space-16, 16px);
+}
+
+@mixin wl-shadow-normal {
+  background-color: var(--Button-Primary-Outlined-BTN-OUTL-NORMAL, #fff);
+  box-shadow: var(--Outline-Button-Default-First-X-0, 0px)
+      var(--Outline-Button-Default-First-Y-0, 0px)
+      var(--Outline-Button-Default-First-B-0, 0px)
+      var(--Outline-Button-Default-First-S-0, 1px)
+      var(--Outline-Button-Default-First-Color, rgba(0, 0, 0, 0.17)),
+    var(--Outline-Button-Default-Second-X-0, 0px)
+      var(--Outline-Button-Default-Second-Y-0, 1px)
+      var(--Outline-Button-Default-Second-B-0, 1px)
+      var(--Outline-Button-Default-Second-S-0, 0px)
+      var(--Outline-Button-Default-Second-Color, rgba(0, 0, 0, 0.15)),
+    var(--Outline-Button-Default-Third-X-0, 0px)
+      var(--Outline-Button-Default-Third-Y-0, 2px)
+      var(--Outline-Button-Default-Third-B-0, 3px)
+      var(--Outline-Button-Default-Third-S-0, 0px)
+      var(--Outline-Button-Default-Third-Color, rgba(0, 0, 0, 0.08));
+}
+
+@mixin wl-shadow-hover {
+  background-color: var(--Button-Primary-Outlined-BTN-OUTL-HOVER, #f5f5f5);
+  box-shadow: var(--Outline-Button-Hover-First-X-0, 0px)
+      var(--Outline-Button-Hover-First-Y-0, 0px)
+      var(--Outline-Button-Hover-First-B-0, 0px)
+      var(--Outline-Button-Hover-First-S-0, 1px)
+      var(--Outline-Button-Hover-First-Color, rgba(0, 0, 0, 0.25)),
+    var(--Outline-Button-Hover-Secord-X-0, 0px)
+      var(--Outline-Button-Hover-Secord-Y-0, 1px)
+      var(--Outline-Button-Hover-Secord-B-0, 1px)
+      var(--Outline-Button-Hover-Secord-S-0, 0px)
+      var(--Outline-Button-Hover-Secord-Color, rgba(0, 0, 0, 0.15)),
+    var(--Outline-Button-Hover-Third-X-0, 0px)
+      var(--Outline-Button-Hover-Third-Y-0, 2px)
+      var(--Outline-Button-Hover-Third-B-0, 4px)
+      var(--Outline-Button-Hover-Third-S-0, 0px)
+      var(--Outline-Button-Hover-Third-Color, rgba(0, 0, 0, 0.16));
+}
+
+@mixin wl-shadow-pressed {
+  background-color: var(--Button-Primary-Outlined-BTN-OUTL-PRESSED, #fafafa);
+  box-shadow: var(--Outline-Button-Pressed-First-X-0, 0px)
+      var(--Outline-Button-Pressed-First-Y-0, 0px)
+      var(--Outline-Button-Pressed-First-B-0, 1px)
+      var(--Outline-Button-Pressed-First-S-0, 1px)
+      var(--Outline-Button-Pressed-First-Color, rgba(105, 114, 129, 0.16)),
+    var(--Outline-Button-Pressed-Secord-X-0, 0px)
+      var(--Outline-Button-Pressed-Secord-Y-0, 0px)
+      var(--Outline-Button-Pressed-Secord-B-0, 0px)
+      var(--Outline-Button-Pressed-Secord-S-0, 4px)
+      var(--Outline-Button-Pressed-Secord-Colors, #d0d5dc);
+}
+
+@mixin wl-shadow-disabled {
+  background-color: var(--Button-Disabled-BTN-DISABLED, #e5e5e5);
+  box-shadow: 0px 0px 0px 1px var(--Primary-Button-Disabled-Color, #d4d4d4);
+}
+
+// 2.3 Component Mixins
+@mixin wl-input-date-base {
+  border: none;
+  outline: none;
+  padding: $wl-input-date-padding;
+  @include wl-bg-base;
+  @include wl-shadow-normal;
+  border-radius: var(--Spacing-WLDS-Space-6, 6px);
+  color: var(--Forgrounds-FG-SUBTITLE, #404040);
+  font-size: var(--Typeface-Size-Button-Medium, 14px);
+  font-weight: var(--Typeface-Weight-Button-Medium, 500);
+  line-height: var(--Typeface-Line-height-Button-Medium, 16px);
+  letter-spacing: var(--Typeface-Letter-Spacing-Button-Medium, 0px);
+  @include wl-aligns-center;
+  gap: var(--Spacing-WLDS-Space-8, 8px);
+  transition: $wl-input-date-transition;
+
+  &:hover {
+    cursor: pointer;
+    @include wl-shadow-hover;
+  }
+
+  // TODO: Combined: Lead / Trail position in Group Element Container
+  &.wl-element-lead {
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+  }
+
+  &.wl-element-trail {
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+  }
+}
+
+@mixin wl-calendar-container-base {
+  width: $wl-input-calendar-range-section-width;
+  margin-top: $wl-input-date-spacing-8;
+  border: none;
+  border-radius: var(--WLDS-Radius-12, 12px);
+  background-color: var(--Backgrounds-BG-NORMAL, #fff);
+  box-shadow: var(--Menu-First-X-0, 0px) var(--Menu-First-Y-0, 1px)
+      var(--Menu-First-B-0, 1px) var(--Menu-First-S-0, 0px)
+      var(--Menu-First-Color, rgba(0, 0, 0, 0.1)),
+    var(--Menu-Secord-X-0, 0px) var(--Menu-Secord-Y-0, 0px)
+      var(--Menu-Secord-B-0, 2px) var(--Menu-Secord-S-0, 0px)
+      var(--Menu-Secord-Color, rgba(0, 0, 0, 0.1)),
+    var(--Menu-Third-X-0, 0px) var(--Menu-Third-Y-0, 6px)
+      var(--Menu-Third-B-0, 20px) var(--Menu-Third-S-0, 0px)
+      var(--Menu-Third-Color, rgba(0, 0, 0, 0.1));
+  position: absolute;
+  top: 100%;
+  left: 0;
+  z-index: 3;
+  transition: opacity 0.15s ease-in-out, visibility 0.15s ease-in-out;
+  visibility: hidden;
+}
+
+// -----------------------------------------------------------------------------
+// 3. COMPONENT STYLES
+// -----------------------------------------------------------------------------
+
+// 3.1 Date Input Styles
+input[type="text"].wl-datepicker {
+  @include wl-input-date-base;
+  max-width: $wl-input-date-max-width;
+}
+
+input[type="text"].wl-datepicker.wl-datepicker-range {
+  min-width: $wl-input-date-range-min-width;
+}
+
+input[type="date"]:focus,
+input[type="date"]:active,
+input[type="text"].wl-datepicker:focus,
+input[type="text"].wl-datepicker:active {
+  @include wl-shadow-pressed;
+}
+
+// TODO: Disabled
+input[type="date"],
+input[type="text"].wl-datepicker {
+  &:disabled {
+    cursor: not-allowed;
+    user-select: none;
+    @include wl-shadow-disabled;
+    background-image: $wl-input-date-bg-image-disable-url;
+    color: var(--Forgrounds-FG-DISABLED-VALUE, #737373);
+  }
+}
+
+input[type="date"]::-webkit-calendar-picker-indicator {
+  opacity: 0;
+  cursor: pointer;
+}
+
+// 3.2 Calendar Container Styles
+.wl-date-picker-container {
+  position: relative;
+}
+
+.wl-calendar-container {
+  @include wl-calendar-container-base;
+
+  &.wl-show {
+    visibility: visible;
+  }
+
+  .wl-dual-calendar-wrapper {
+    padding: var(--Spacing-WLDS-Space-16, 16px)
+      var(--Spacing-WLDS-Space-16, 16px) var(--Spacing-WLDS-Space-0, 0px)
+      var(--Spacing-WLDS-Space-16, 16px);
+    @include wl-flex-center;
+    gap: rem(4);
+  }
+
+  .wl-calendar-arrow {
+    width: 24px;
+    min-width: 24px;
+    height: 24px;
+    min-height: 24px;
+    @include wl-flex-center;
+    content: "";
+    display: block;
+    background-image: $wl-chevron-arrow-bg-image;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 24px 24px;
+  }
+
+  .wl-calendar-section {
+    width: $wl-input-date-section-width;
+  }
+
+  .wl-calendar-header {
+    padding: var(--Spacing-WLDS-Space-12, 12px);
+    @include wl-justify-around;
+    gap: rem(8);
+  }
+
+  .wl-btn-primary-text {
+    &[data-direction="prev"],
+    &[data-direction="next"] {
+      width: 32px;
+      min-width: 32px;
+      height: 32px;
+      min-height: 32px;
+      content: "";
+      display: block;
+      background-repeat: no-repeat;
+      background-position: center;
+      background-size: 16px 16px;
+    }
+
+    &.wl-btn-primary-text[data-direction="prev"] {
+      background-image: $wl-chevron-first-bg-image;
+    }
+    &.wl-btn-primary-text[data-direction="next"] {
+      background-image: $wl-chevron-next-bg-image;
+    }
+  }
+
+  .wl-calendar-body {
+    padding: var(--Spacing-WLDS-Space-8, 8px);
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--Spacing-WLDS-Space-8, 8px);
+  }
+
+  .wl-weekday-wrapper {
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    grid-row-gap: 4px;
+  }
+
+  .wl-weekday-text {
+    min-width: 40px;
+    min-height: 16px;
+    color: var(--Forgrounds-FG-DISABLED, #a3a3a3);
+    text-align: center;
+    font-size: var(--Typeface-Size-Button-Small, 12px);
+    font-weight: var(--Typeface-Weight-Button-Small, 500);
+    line-height: var(--Typeface-Line-height-Button-Small, 16px);
+    letter-spacing: var(--Typeface-Letter-Spacing-Button-Small, -0.1px);
+  }
+
+  .wl-datepicker-wrapper {
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    grid-row-gap: 4px;
+  }
+
+  .wl-calendar-item {
+    width: 40px;
+    min-width: 40px;
+    height: 40px;
+    min-height: 40px;
+    background-color: transparent;
+    color: var(--Forgrounds-FG-BLACK, #0a0a0a);
+    text-align: center;
+    font-size: var(--Typeface-Size-Button-Medium, 14px);
+    font-weight: var(--Typeface-Weight-Button-Medium, 500);
+    line-height: var(--Typeface-Line-height-Button-Medium, 16px);
+    letter-spacing: var(--Typeface-Letter-Spacing-Button-Medium, 0px);
+    @include wl-flex-center;
+    position: relative;
+
+    .wl-calendar-item-number {
+      width: 40px;
+      min-width: 40px;
+      height: 40px;
+      min-height: 40px;
+      background-color: var(--Backgrounds-BG-INTERACTIVE, #0021fe);
+      border-radius: 100%;
+      color: var(--Forgrounds-FG-WHITE, #fff);
+      @include wl-flex-center;
+      position: absolute;
+      top: 0px;
+      left: 0px;
+      z-index: 2;
+    }
+
+    &:hover {
+      cursor: pointer;
+      background-color: var(--Backgrounds-BG-BASE-HEAVY, #e5e5e5);
+    }
+
+    &:focus,
+    &:active {
+      background-color: var(--Backgrounds-BG-HIGHT-THIN, #e5f3ff);
+      color: var(--Forgrounds-FG-INTERACTIVE, #0021fe);
+    }
+
+    &.wl-today,
+    &.wl-selected {
+      border-radius: $wl-input-date-border-radius-8;
+      color: var(--Forgrounds-FG-INTERACTIVE, #0021fe);
+
+      .wl-calendar-date-tags {
+        opacity: 1;
+      }
+    }
+
+    // TODO: User select date-range filter: Today
+    &.wl-today.wl-in-range.wl-range-start.wl-range-end {
+      .wl-background-range {
+        opacity: 0;
+      }
+    }
+
+    &.wl-selected {
+      background-color: var(--Forgrounds-FG-INTERACTIVE, #0021fe);
+      border-radius: 100%;
+      color: var(--Forgrounds-FG-WHITE, #fff);
+    }
+
+    &.wl-in-range {
+      background-color: var(--Backgrounds-BG-HIGHT-THIN, #e5f3ff);
+      border-radius: 0px;
+      color: var(--Forgrounds-FG-INTERACTIVE, #0021fe);
+
+      &:nth-child(7n + 1) {
+        border-radius: 8px 0px 0px 8px;
+      }
+      &:nth-child(7n) {
+        border-radius: 0px 8px 8px 0px;
+      }
+
+      .wl-calendar-date-tags {
+        opacity: 1;
+      }
+
+      // TODO: User select date-range filter: Yesterday
+      &.wl-range-start.wl-range-end {
+        .wl-background-range {
+          opacity: 0;
+        }
+      }
+    }
+
+    &.wl-range-start,
+    &.wl-range-end {
+      background-color: var(--Forgrounds-FG-INTERACTIVE, #0021fe);
+      color: var(--Forgrounds-FG-WHITE, #fff);
+      border-radius: 100%;
+
+      &:nth-child(7n + 1) {
+        border-radius: 100%;
+      }
+      &:nth-child(7n) {
+        border-radius: 100%;
+      }
+    }
+
+    &.wl-range-start {
+      &:nth-child(7n) {
+        .wl-background-range {
+          border-radius: 0px 8px 8px 0px;
+        }
+      }
+
+      .wl-background-range {
+        right: 0px;
+      }
+    }
+
+    &.wl-range-end {
+      .wl-background-range {
+        left: 0px;
+      }
+    }
+
+    &:disabled,
+    &.wl-other-month {
+      cursor: not-allowed;
+      user-select: none;
+      background-color: transparent;
+      color: var(--Forgrounds-FG-NTL, #a3a3a3);
+
+      .wl-background-range {
+        opacity: 0;
+      }
+    }
+  }
+
+  .wl-calendar-footer {
+    padding: var(--Spacing-WLDS-Space-12, 12px)
+      var(--Spacing-WLDS-Space-16, 16px) var(--Spacing-WLDS-Space-16, 16px)
+      var(--Spacing-WLDS-Space-16, 16px);
+    @include wl-flex-between;
+  }
+}
+
+// 3.3 Calendar Elements
+.wl-background-range {
+  width: 20px;
+  min-width: 20px;
+  height: 40px;
+  min-height: 40px;
+  background-color: var(--Backgrounds-BG-HIGHT-THIN, #e5f3ff);
+  border-radius: 0px;
+  position: absolute;
+  top: 0px;
+  z-index: -1;
+}
+
+.wl-calendar-date-tags {
+  width: 3px;
+  height: 3px;
+  min-width: 3px;
+  min-height: 3px;
+  background-color: var(--Forgrounds-FG-INTERACTIVE, #0021fe);
+  border-radius: 100%;
+  position: absolute;
+  left: 50%;
+  bottom: 8px;
+  transform: translateX(-50%);
+  opacity: 0;
+}
+
+// 3.4 Special Cases and Variants
+.wl-datepicker-single + .wl-calendar-container {
+  width: $wl-input-date-section-width;
+}
+
+.wl-datepicker-single + .wl-calendar-container .wl-calendar-section {
+  width: $wl-input-date-section-width;
+}
+
+// Custom: Date: Filter
+.wl-date-filter-wrapper {
+  padding: var(--Spacing-WLDS-Space-16, 16px) var(--Spacing-WLDS-Space-16, 16px)
+    0px var(--Spacing-WLDS-Space-16, 16px);
+  @include wl-flex-center;
+  flex-wrap: wrap;
+  align-self: stretch;
+}
+
+// Custom: Date: Filter: Divider
+.wl-date-filter-divider {
+  background-color: #d9d9d9;
+  width: rem(1);
+  height: rem(16);
+  flex-shrink: 0;
+}

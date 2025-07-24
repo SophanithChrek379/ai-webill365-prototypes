@@ -1,0 +1,1988 @@
+// Auto-generated SCSS variables from design tokens
+
+// Style Effect - Light Mode
+$style-effect-light: (
+  Blur: (
+    B-0: "20px",
+
+  ),
+  Primary-Button: (
+    Normal: (
+      First: (
+        X-0: "0px",
+        Y-0: "0px",
+        B-0: "0px",
+        S-0: "1px",
+        Color: map-deep-get($tokens, "Colors", "PRIMARY", "WLDS-PRM-09"),
+
+      ),
+      Second: (
+        X-0: "0px",
+        Y-0: "1px",
+        B-0: "1px",
+        S-0: "0px",
+        Color: "#1221c180",
+
+      ),
+      Third: (
+        X-0: "0px",
+        Y-0: "2px",
+        B-0: "3px",
+        S-0: "0px",
+        Color: "#1221c11a",
+
+      ),
+
+    ),
+    Hover: (
+      First: (
+        X-0: "0px",
+        Y-0: "0px",
+        B-0: "0px",
+        S-0: "1px",
+        Color: map-deep-get($tokens, "Colors", "PRIMARY", "WLDS-PRM-08_"),
+
+      ),
+      Second: (
+        X-0: "0px",
+        Y-0: "1px",
+        B-0: "1px",
+        S-0: "0px",
+        Color: "#0f1fea80",
+
+      ),
+      Third: (
+        X-0: "0px",
+        Y-0: "2px",
+        B-0: "3px",
+        S-0: "0px",
+        Color: "#1221c11a",
+
+      ),
+
+    ),
+    Pressed: (
+      First: (
+        X-0: "0px",
+        Y-0: "0px",
+        B-0: "1px",
+        S-0: "1px",
+        Color: "#1d32ff29",
+
+      ),
+      Secord: (
+        X-0: "0px",
+        Y-0: "0px",
+        B-0: "0px",
+        S-0: "4px",
+        Colors: map-deep-get($tokens, "Colors", "PRIMARY", "WLDS-PRM-03"),
+
+      ),
+
+    ),
+    Disabled: (
+      X-0: "0px",
+      Y-0: "0px",
+      B-0: "0px",
+      S-0: "1px",
+      Color: map-deep-get($tokens, "Colors", "SEMANTIC", "NEUTRAL", "WLDS-NTL-04"),
+
+    ),
+
+  ),
+  Text-Button: (
+    Default: (
+      Pressed: (
+        X-0: "0px",
+        Y-0: "0px",
+        B-0: "0px",
+        S-0: "4px",
+        Color: map-deep-get($tokens, "Colors", "SEMANTIC", "GRAY", "WLDS-GRY-04"),
+
+      ),
+
+    ),
+    Primary: (
+      Pressed: (
+        X-0: "0px",
+        Y-0: "0px",
+        B-0: "0px",
+        S-0: "4px",
+        Color: map-deep-get($tokens, "Colors", "PRIMARY", "WLDS-PRM-04"),
+
+      ),
+
+    ),
+
+  ),
+  Outline-Button: (
+    Default: (
+      First: (
+        X-0: "0px",
+        Y-0: "0px",
+        B-0: "0px",
+        S-0: "1px",
+        Color: "#0000002b",
+
+      ),
+      Second: (
+        X-0: "0px",
+        Y-0: "1px",
+        B-0: "1px",
+        S-0: "0px",
+        Color: "#00000026",
+
+      ),
+      Third: (
+        X-0: "0px",
+        Y-0: "2px",
+        B-0: "3px",
+        S-0: "0px",
+        Color: "#00000014",
+
+      ),
+
+    ),
+    Hover: (
+      First: (
+        X-0: "0px",
+        Y-0: "0px",
+        B-0: "0px",
+        S-0: "1px",
+        Color: "#00000040",
+
+      ),
+      Secord: (
+        X-0: "0px",
+        Y-0: "1px",
+        B-0: "1px",
+        S-0: "0px",
+        Color: "#00000026",
+
+      ),
+      Third: (
+        X-0: "0px",
+        Y-0: "2px",
+        B-0: "4px",
+        S-0: "0px",
+        Color: "#00000029",
+
+      ),
+
+    ),
+    Pressed: (
+      First: (
+        X-0: "0px",
+        Y-0: "0px",
+        B-0: "1px",
+        S-0: "1px",
+        Color: "#6b728029",
+
+      ),
+      Secord: (
+        X-0: "0px",
+        Y-0: "0px",
+        B-0: "0px",
+        S-0: "4px",
+        Colors: map-deep-get($tokens, "Colors", "SEMANTIC", "GRAY", "WLDS-GRY-04"),
+
+      ),
+
+    ),
+
+  ),
+  Danger-Button: (
+    Default: (
+      First: (
+        X-0: "0px",
+        Y-0: "1px",
+        B-0: "1px",
+        S-0: "0px",
+        Color: "#ec002a26",
+
+      ),
+      Secord: (
+        X-0: "0px",
+        Y-0: "2px",
+        B-0: "3px",
+        S-0: "0px",
+        Color: "#ec002a1a",
+
+      ),
+      Third: (
+        X-0: "0px",
+        Y-0: "0px",
+        B-0: "0px",
+        S-0: "1px",
+        Color: map-deep-get($tokens, "Colors", "SEMANTIC", "RED", "WLDS-RED-04"),
+
+      ),
+
+    ),
+    Hover: (
+      First: (
+        X-0: "0px",
+        Y-0: "1px",
+        B-0: "1px",
+        S-0: "0px",
+        Color: "#ec002a26",
+
+      ),
+      Secord: (
+        X-0: "0px",
+        Y-0: "2px",
+        B-0: "3px",
+        S-0: "0px",
+        Color: "#ec002a1a",
+
+      ),
+      Third: (
+        X-0: "0px",
+        Y-0: "0px",
+        B-0: "0px",
+        S-0: "1px",
+        Color: map-deep-get($tokens, "Colors", "SEMANTIC", "RED", "WLDS-RED-06"),
+
+      ),
+
+    ),
+    Pressed: (
+      First: (
+        X-0: "0px",
+        Y-0: "0px",
+        B-0: "1px",
+        S-0: "1px",
+        Color: "#f3404a29",
+
+      ),
+      Secord: (
+        X-0: "0px",
+        Y-0: "0px",
+        B-0: "0px",
+        S-0: "4px",
+        Colors: map-deep-get($tokens, "Colors", "SEMANTIC", "RED", "WLDS-RED-03"),
+
+      ),
+
+    ),
+
+  ),
+  Danger-Filled: (
+    Normal: (
+      First: (
+        X-0: "0px",
+        Y-0: "0px",
+        B-0: "0px",
+        S-0: "1px",
+        Color: map-deep-get($tokens, "Colors", "SEMANTIC", "SECONDARY", "WLDS-SEC-08"),
+
+      ),
+      Secord: (
+        X-0: "0px",
+        Y-0: "1px",
+        B-0: "1px",
+        S-0: "0px",
+        Color: "#bd182226",
+
+      ),
+      Third: (
+        X-0: "0px",
+        Y-0: "2px",
+        B-0: "3px",
+        S-0: "0px",
+        Color: "#bd182214",
+
+      ),
+
+    ),
+    Hover: (
+      First: (
+        X-0: "0px",
+        Y-0: "0px",
+        B-0: "0px",
+        S-0: "1px",
+        Color: map-deep-get($tokens, "Colors", "SEMANTIC", "RED", "WLDS-RED-06"),
+
+      ),
+      Secord: (
+        X-0: "0px",
+        Y-0: "1px",
+        B-0: "1px",
+        S-0: "0px",
+        Color: "#bd182226",
+
+      ),
+      Third: (
+        X-0: "0px",
+        Y-0: "2px",
+        B-0: "3px",
+        S-0: "0px",
+        Color: "#bd182214",
+
+      ),
+
+    ),
+    Pressed: (
+      First: (
+        X-0: "0px",
+        Y-0: "0px",
+        B-0: "1px",
+        S-0: "1px",
+        Color: "#e1232e29",
+
+      ),
+      Secord: (
+        X-0: "0px",
+        Y-0: "0px",
+        B-0: "0px",
+        S-0: "4px",
+        Colors: "#e1232e33",
+
+      ),
+
+    ),
+
+  ),
+  Danger-Text: (
+    Pressed: (
+      First: (
+        X-0: "0px",
+        Y-0: "0px",
+        B-0: "0px",
+        S-0: "4px",
+        Color: map-deep-get($tokens, "Colors", "SEMANTIC", "RED", "WLDS-RED-04"),
+
+      ),
+
+    ),
+
+  ),
+  Ouline: (
+    Normal: (
+      First: (
+        X-0: "0px",
+        Y-0: "0px",
+        B-0: "0px",
+        S-0: "1px",
+        Color: map-deep-get($tokens, "Colors", "PRIMARY", "WLDS-PRM-04"),
+
+      ),
+      Secord: (
+        X-0: "0px",
+        Y-0: "0px",
+        B-0: "0px",
+        S-0: "4px",
+        Colors: map-deep-get($tokens, "Colors", "PRIMARY", "WLDS-PRM-03"),
+
+      ),
+      X-0: "0px",
+      Y-0: "0px",
+      B-0: "0px",
+      S-0: "1px",
+      Color: map-deep-get($tokens, "Colors", "SEMANTIC", "NEUTRAL", "WLDS-NTL-03"),
+
+    ),
+    Focus: (
+      Warning: (
+        First: (
+          X-0: "0px",
+          Y-0: "0px",
+          B-0: "0px",
+          S-0: "1px",
+          Color: map-deep-get($tokens, "Colors", "SEMANTIC", "RED", "WLDS-RED-04"),
+
+        ),
+        Second: (
+          X-0: "0px",
+          Y-0: "0px",
+          B-0: "0px",
+          S-0: "4px",
+          Color: map-deep-get($tokens, "Colors", "SEMANTIC", "RED", "WLDS-RED-03"),
+
+        ),
+
+      ),
+      Valid: (
+        First: (
+          X-0: "0px",
+          Y-0: "0px",
+          B-0: "0px",
+          S-0: "1px",
+          Color: map-deep-get($tokens, "Colors", "SEMANTIC", "GREEN", "WLDS-GRN-04"),
+
+        ),
+        Secord: (
+          X-0: "0px",
+          Y-0: "0px",
+          B-0: "0px",
+          S-0: "4px",
+          Color: map-deep-get($tokens, "Colors", "SEMANTIC", "GREEN", "WLDS-GRN-03"),
+
+        ),
+
+      ),
+
+    ),
+
+  ),
+  Menu: (
+    First: (
+      X-0: "0px",
+      Y-0: "1px",
+      B-0: "1px",
+      S-0: "0px",
+      Color: "#0000001a",
+
+    ),
+    Secord: (
+      X-0: "0px",
+      Y-0: "0px",
+      B-0: "2px",
+      S-0: "0px",
+      Color: "#0000001a",
+
+    ),
+    Third: (
+      X-0: "0px",
+      Y-0: "6px",
+      B-0: "20px",
+      S-0: "0px",
+      Color: "#0000001a",
+
+    ),
+
+  ),
+);
+
+// Style Effect - Dark Mode
+$style-effect-dark: (
+  Blur: (
+    B-0: "20px",
+
+  ),
+  Primary-Button: (
+    Normal: (
+      First: (
+        X-0: "0px",
+        Y-0: "0px",
+        B-0: "0px",
+        S-0: "1px",
+        Color: map-deep-get($tokens, "Colors", "SEMANTIC", "NEUTRAL", "WLDS-NTL-03"),
+
+      ),
+      Second: (
+        X-0: "0px",
+        Y-0: "1px",
+        B-0: "1px",
+        S-0: "0px",
+        Color: "#d4d6eb80",
+
+      ),
+      Third: (
+        X-0: "0px",
+        Y-0: "2px",
+        B-0: "3px",
+        S-0: "0px",
+        Color: "#d4d6eb1a",
+
+      ),
+
+    ),
+    Hover: (
+      First: (
+        X-0: "0px",
+        Y-0: "0px",
+        B-0: "0px",
+        S-0: "1px",
+        Color: map-deep-get($tokens, "Colors", "SEMANTIC", "NEUTRAL", "WLDS-NTL-04"),
+
+      ),
+      Second: (
+        X-0: "0px",
+        Y-0: "1px",
+        B-0: "1px",
+        S-0: "0px",
+        Color: "#8eb6ff80",
+
+      ),
+      Third: (
+        X-0: "0px",
+        Y-0: "2px",
+        B-0: "3px",
+        S-0: "0px",
+        Color: "#d4d6eb1a",
+
+      ),
+
+    ),
+    Pressed: (
+      First: (
+        X-0: "0px",
+        Y-0: "0px",
+        B-0: "1px",
+        S-0: "1px",
+        Color: "#8eb6ff29",
+
+      ),
+      Secord: (
+        X-0: "0px",
+        Y-0: "0px",
+        B-0: "0px",
+        S-0: "4px",
+        Colors: map-deep-get($tokens, "Colors", "PRIMARY", "WLDS-PRM-03"),
+
+      ),
+
+    ),
+    Disabled: (
+      X-0: "0px",
+      Y-0: "0px",
+      B-0: "0px",
+      S-0: "1px",
+      Color: map-deep-get($tokens, "Colors", "SEMANTIC", "NEUTRAL", "WLDS-NTL-07"),
+
+    ),
+
+  ),
+  Text-Button: (
+    Default: (
+      Pressed: (
+        X-0: "0px",
+        Y-0: "0px",
+        B-0: "0px",
+        S-0: "4px",
+        Color: map-deep-get($tokens, "Colors", "SEMANTIC", "GRAY", "WLDS-GRY-06"),
+
+      ),
+
+    ),
+    Primary: (
+      Pressed: (
+        X-0: "0px",
+        Y-0: "0px",
+        B-0: "0px",
+        S-0: "4px",
+        Color: map-deep-get($tokens, "Colors", "SEMANTIC", "NEUTRAL", "WLDS-NTL-06"),
+
+      ),
+
+    ),
+
+  ),
+  Outline-Button: (
+    Default: (
+      First: (
+        X-0: "0px",
+        Y-0: "0px",
+        B-0: "0px",
+        S-0: "1px",
+        Color: "#ffffff2b",
+
+      ),
+      Second: (
+        X-0: "0px",
+        Y-0: "1px",
+        B-0: "1px",
+        S-0: "0px",
+        Color: "#00000026",
+
+      ),
+      Third: (
+        X-0: "0px",
+        Y-0: "2px",
+        B-0: "3px",
+        S-0: "0px",
+        Color: "#ffffff14",
+
+      ),
+
+    ),
+    Hover: (
+      First: (
+        X-0: "0px",
+        Y-0: "0px",
+        B-0: "0px",
+        S-0: "1px",
+        Color: "#b7bbc240",
+
+      ),
+      Secord: (
+        X-0: "0px",
+        Y-0: "1px",
+        B-0: "1px",
+        S-0: "0px",
+        Color: "#b7bbc226",
+
+      ),
+      Third: (
+        X-0: "0px",
+        Y-0: "2px",
+        B-0: "4px",
+        S-0: "0px",
+        Color: "#b7bbc229",
+
+      ),
+
+    ),
+    Pressed: (
+      First: (
+        X-0: "0px",
+        Y-0: "0px",
+        B-0: "1px",
+        S-0: "1px",
+        Color: "#6b728029",
+
+      ),
+      Secord: (
+        X-0: "0px",
+        Y-0: "0px",
+        B-0: "0px",
+        S-0: "4px",
+        Colors: map-deep-get($tokens, "Colors", "SEMANTIC", "GRAY", "WLDS-GRY-04"),
+
+      ),
+
+    ),
+
+  ),
+  Danger-Button: (
+    Default: (
+      First: (
+        X-0: "0px",
+        Y-0: "1px",
+        B-0: "1px",
+        S-0: "0px",
+        Color: "#ec002a26",
+
+      ),
+      Secord: (
+        X-0: "0px",
+        Y-0: "2px",
+        B-0: "3px",
+        S-0: "0px",
+        Color: "#ec002a1a",
+
+      ),
+      Third: (
+        X-0: "0px",
+        Y-0: "0px",
+        B-0: "0px",
+        S-0: "1px",
+        Color: map-deep-get($tokens, "Colors", "SEMANTIC", "RED", "WLDS-RED-06"),
+
+      ),
+
+    ),
+    Hover: (
+      First: (
+        X-0: "0px",
+        Y-0: "1px",
+        B-0: "1px",
+        S-0: "0px",
+        Color: "#ec002a26",
+
+      ),
+      Secord: (
+        X-0: "0px",
+        Y-0: "2px",
+        B-0: "3px",
+        S-0: "0px",
+        Color: "#ec002a1a",
+
+      ),
+      Third: (
+        X-0: "0px",
+        Y-0: "0px",
+        B-0: "0px",
+        S-0: "1px",
+        Color: map-deep-get($tokens, "Colors", "SEMANTIC", "RED", "WLDS-RED-06"),
+
+      ),
+
+    ),
+    Pressed: (
+      First: (
+        X-0: "0px",
+        Y-0: "0px",
+        B-0: "1px",
+        S-0: "1px",
+        Color: "#f3404a29",
+
+      ),
+      Secord: (
+        X-0: "0px",
+        Y-0: "0px",
+        B-0: "0px",
+        S-0: "4px",
+        Colors: map-deep-get($tokens, "Colors", "SEMANTIC", "RED", "WLDS-RED-07"),
+
+      ),
+
+    ),
+
+  ),
+  Danger-Filled: (
+    Normal: (
+      First: (
+        X-0: "0px",
+        Y-0: "0px",
+        B-0: "0px",
+        S-0: "1px",
+        Color: map-deep-get($tokens, "Colors", "SEMANTIC", "SECONDARY", "WLDS-SEC-08"),
+
+      ),
+      Secord: (
+        X-0: "0px",
+        Y-0: "1px",
+        B-0: "1px",
+        S-0: "0px",
+        Color: "#bd182226",
+
+      ),
+      Third: (
+        X-0: "0px",
+        Y-0: "2px",
+        B-0: "3px",
+        S-0: "0px",
+        Color: "#bd182214",
+
+      ),
+
+    ),
+    Hover: (
+      First: (
+        X-0: "0px",
+        Y-0: "0px",
+        B-0: "0px",
+        S-0: "1px",
+        Color: map-deep-get($tokens, "Colors", "SEMANTIC", "RED", "WLDS-RED-06"),
+
+      ),
+      Secord: (
+        X-0: "0px",
+        Y-0: "1px",
+        B-0: "1px",
+        S-0: "0px",
+        Color: "#bd182226",
+
+      ),
+      Third: (
+        X-0: "0px",
+        Y-0: "2px",
+        B-0: "3px",
+        S-0: "0px",
+        Color: "#bd182214",
+
+      ),
+
+    ),
+    Pressed: (
+      First: (
+        X-0: "0px",
+        Y-0: "0px",
+        B-0: "1px",
+        S-0: "1px",
+        Color: "#e1232e29",
+
+      ),
+      Secord: (
+        X-0: "0px",
+        Y-0: "0px",
+        B-0: "0px",
+        S-0: "4px",
+        Colors: "#e1232e33",
+
+      ),
+
+    ),
+
+  ),
+  Danger-Text: (
+    Pressed: (
+      First: (
+        X-0: "0px",
+        Y-0: "0px",
+        B-0: "0px",
+        S-0: "4px",
+        Color: map-deep-get($tokens, "Colors", "SEMANTIC", "RED", "WLDS-RED-06"),
+
+      ),
+
+    ),
+
+  ),
+  Ouline: (
+    Normal: (
+      First: (
+        X-0: "0px",
+        Y-0: "0px",
+        B-0: "0px",
+        S-0: "1px",
+        Color: map-deep-get($tokens, "Colors", "SEMANTIC", "NEUTRAL", "WLDS-NTL-04"),
+
+      ),
+      Secord: (
+        X-0: "0px",
+        Y-0: "0px",
+        B-0: "0px",
+        S-0: "4px",
+        Colors: map-deep-get($tokens, "Colors", "SEMANTIC", "NEUTRAL", "WLDS-NTL-03"),
+
+      ),
+      X-0: "0px",
+      Y-0: "0px",
+      B-0: "0px",
+      S-0: "1px",
+      Color: map-deep-get($tokens, "Colors", "SEMANTIC", "NEUTRAL", "WLDS-NTL-03"),
+
+    ),
+    Focus: (
+      Warning: (
+        First: (
+          X-0: "0px",
+          Y-0: "0px",
+          B-0: "0px",
+          S-0: "1px",
+          Color: map-deep-get($tokens, "Colors", "SEMANTIC", "RED", "WLDS-RED-06"),
+
+        ),
+        Second: (
+          X-0: "0px",
+          Y-0: "0px",
+          B-0: "0px",
+          S-0: "4px",
+          Color: map-deep-get($tokens, "Colors", "SEMANTIC", "RED", "WLDS-RED-08"),
+
+        ),
+
+      ),
+      Valid: (
+        First: (
+          X-0: "0px",
+          Y-0: "0px",
+          B-0: "0px",
+          S-0: "1px",
+          Color: map-deep-get($tokens, "Colors", "SEMANTIC", "GREEN", "WLDS-GRN-04"),
+
+        ),
+        Secord: (
+          X-0: "0px",
+          Y-0: "0px",
+          B-0: "0px",
+          S-0: "4px",
+          Color: map-deep-get($tokens, "Colors", "SEMANTIC", "GREEN", "WLDS-GRN-03"),
+
+        ),
+
+      ),
+
+    ),
+
+  ),
+  Menu: (
+    First: (
+      X-0: "0px",
+      Y-0: "1px",
+      B-0: "1px",
+      S-0: "0px",
+      Color: "#d2d2d21a",
+
+    ),
+    Secord: (
+      X-0: "0px",
+      Y-0: "0px",
+      B-0: "2px",
+      S-0: "0px",
+      Color: "#ffffff1a",
+
+    ),
+    Third: (
+      X-0: "0px",
+      Y-0: "6px",
+      B-0: "20px",
+      S-0: "0px",
+      Color: "#ffffff1a",
+
+    ),
+
+  ),
+);
+
+// Color Mode: webill365
+$color-mode-webill365: (
+  Translucent-Gray: "#f3f5f7f2",
+  Colors: (
+    PRIMARY: (
+      WLDS-PRM-01: "#eaf3ff",
+      WLDS-PRM-02: "#d8e9ff",
+      WLDS-PRM-03: "#b9d3ff",
+      WLDS-PRM-04: "#8eb6ff",
+      WLDS-PRM-05: "#628aff",
+      WLDS-PRM-06: "#3e60ff",
+      WLDS-PRM-07: "#1d32ff",
+      WLDS-PRM-08-: "#0f1fea",
+      WLDS-PRM-09: "#1221c1",
+      WLDS-PRM-10: "#182697",
+      WLDS-PRM-11: "#0f1657",
+
+    ),
+    SEMANTIC: (
+      SECONDARY: (
+        WLDS-SEC-01: "#fff5ed",
+        WLDS-SEC-02: "#fee9d6",
+        WLDS-SEC-03: "#fdcfab",
+        WLDS-SEC-04: "#fbad76",
+        WLDS-SEC-05: "#f87d39",
+        WLDS-SEC-06: "#f65f19",
+        WLDS-SEC-07: "#e7450f",
+        WLDS-SEC-08: "#bf310f",
+        WLDS-SEC-09: "#982914",
+        WLDS-SEC-10: "#7a2414",
+        WLDS-SEC-11: "#420f08",
+
+      ),
+      NEUTRAL: (
+        WLDS-NTL-00: "#ffffff",
+        WLDS-NTL-01: "#fafafa",
+        WLDS-NTL-02: "#f5f5f5",
+        WLDS-NTL-03: "#e5e5e5",
+        WLDS-NTL-04: "#d4d4d4",
+        WLDS-NTL-05: "#a3a3a3",
+        WLDS-NTL-06: "#737373",
+        WLDS-NTL-07: "#525252",
+        WLDS-NTL-08: "#404040",
+        WLDS-NTL-09: "#262626",
+        WLDS-NTL-10: "#171717",
+        WLDS-NTL-11: "#0a0a0a",
+
+      ),
+      GRAY: (
+        WLDS-GRY-01: "#f9fafb",
+        WLDS-GRY-02: "#f3f4f6",
+        WLDS-GRY-03: "#e5e7eb",
+        WLDS-GRY-04: "#d1d5db",
+        WLDS-GRY-05: "#9ca3af",
+        WLDS-GRY-06: "#6b7280",
+        WLDS-GRY-07: "#4b5563",
+        WLDS-GRY-08: "#374151",
+        WLDS-GRY-09: "#1f2937",
+        WLDS-GRY-10: "#111827",
+        WLDS-GRY-11: "#030712",
+
+      ),
+      GREEN: (
+        WLDS-GRN-01: "#f0fdf4",
+        WLDS-GRN-02: "#dcfce7",
+        WLDS-GRN-03: "#bbf7d0",
+        WLDS-GRN-04: "#86efac",
+        WLDS-GRN-05: "#4ade80",
+        WLDS-GRN-06: "#22c55e",
+        WLDS-GRN-07: "#16a34a",
+        WLDS-GRN-08: "#15803d",
+        WLDS-GRN-09: "#166534",
+        WLDS-GRN-10: "#14532d",
+        WLDS-GRN-11: "#052e16",
+
+      ),
+      RED: (
+        WLDS-RED-01: "#fef2f3",
+        WLDS-RED-02: "#ffe1e3",
+        WLDS-RED-03: "#ffc9cc",
+        WLDS-RED-04: "#fea3a8",
+        WLDS-RED-05: "#fc6d75",
+        WLDS-RED-06: "#f3404a",
+        WLDS-RED-07: "#e1232e",
+        WLDS-RED-08: "#bd1822",
+        WLDS-RED-09: "#9c1820",
+        WLDS-RED-10: "#821a20",
+        WLDS-RED-11: "#47080c",
+
+      ),
+      YELLOW: (
+        WLDS-YEL-01: "#fefce8",
+        WLDS-YEL-02: "#fef9c3",
+        WLDS-YEL-03: "#fef08a",
+        WLDS-YEL-04: "#fde047",
+        WLDS-YEL-05: "#facc15",
+        WLDS-YEL-06: "#eab308",
+        WLDS-YEL-07: "#ca8a04",
+        WLDS-YEL-08: "#a16207",
+        WLDS-YEL-09: "#854d0e",
+        WLDS-YEL-10: "#713f12",
+        WLDS-YEL-11: "#422006",
+
+      ),
+
+    ),
+
+  ),
+  Optional: "Optional",
+);
+
+// Color Mode: wecms
+$color-mode-wecms: (
+  Translucent-Gray: "#f3f5f7f2",
+  Colors: (
+    PRIMARY: (
+      WLDS-PRM-01: "#f0f7ff",
+      WLDS-PRM-02: "#e0eefe",
+      WLDS-PRM-03: "#b9dcfe",
+      WLDS-PRM-04: "#7cc1fd",
+      WLDS-PRM-05: "#36a2fa",
+      WLDS-PRM-06: "#0c87eb",
+      WLDS-PRM-07: "#0060b9",
+      WLDS-PRM-08-: "#0152a3",
+      WLDS-PRM-09: "#064786",
+      WLDS-PRM-10: "#0b3c6f",
+      WLDS-PRM-11: "#07264a",
+
+    ),
+    SEMANTIC: (
+      SECONDARY: (
+        WLDS-SEC-01: "#fff5ed",
+        WLDS-SEC-02: "#fee9d6",
+        WLDS-SEC-03: "#fdcfab",
+        WLDS-SEC-04: "#fbad76",
+        WLDS-SEC-05: "#f87d39",
+        WLDS-SEC-06: "#f65f19",
+        WLDS-SEC-07: "#e7450f",
+        WLDS-SEC-08: "#bf310f",
+        WLDS-SEC-09: "#982914",
+        WLDS-SEC-10: "#7a2414",
+        WLDS-SEC-11: "#420f08",
+
+      ),
+      NEUTRAL: (
+        WLDS-NTL-00: "#ffffff",
+        WLDS-NTL-01: "#fafafa",
+        WLDS-NTL-02: "#f5f5f5",
+        WLDS-NTL-03: "#e5e5e5",
+        WLDS-NTL-04: "#d4d4d4",
+        WLDS-NTL-05: "#a3a3a3",
+        WLDS-NTL-06: "#737373",
+        WLDS-NTL-07: "#525252",
+        WLDS-NTL-08: "#404040",
+        WLDS-NTL-09: "#262626",
+        WLDS-NTL-10: "#171717",
+        WLDS-NTL-11: "#0a0a0a",
+
+      ),
+      GRAY: (
+        WLDS-GRY-01: "#f9fafb",
+        WLDS-GRY-02: "#f3f4f6",
+        WLDS-GRY-03: "#e5e7eb",
+        WLDS-GRY-04: "#d1d5db",
+        WLDS-GRY-05: "#9ca3af",
+        WLDS-GRY-06: "#6b7280",
+        WLDS-GRY-07: "#4b5563",
+        WLDS-GRY-08: "#374151",
+        WLDS-GRY-09: "#1f2937",
+        WLDS-GRY-10: "#111827",
+        WLDS-GRY-11: "#030712",
+
+      ),
+      GREEN: (
+        WLDS-GRN-01: "#f0fdf4",
+        WLDS-GRN-02: "#dcfce7",
+        WLDS-GRN-03: "#bbf7d0",
+        WLDS-GRN-04: "#86efac",
+        WLDS-GRN-05: "#4ade80",
+        WLDS-GRN-06: "#22c55e",
+        WLDS-GRN-07: "#16a34a",
+        WLDS-GRN-08: "#15803d",
+        WLDS-GRN-09: "#166534",
+        WLDS-GRN-10: "#14532d",
+        WLDS-GRN-11: "#052e16",
+
+      ),
+      RED: (
+        WLDS-RED-01: "#fef2f3",
+        WLDS-RED-02: "#ffe1e3",
+        WLDS-RED-03: "#ffc9cc",
+        WLDS-RED-04: "#fea3a8",
+        WLDS-RED-05: "#fc6d75",
+        WLDS-RED-06: "#f3404a",
+        WLDS-RED-07: "#e1232e",
+        WLDS-RED-08: "#bd1822",
+        WLDS-RED-09: "#9c1820",
+        WLDS-RED-10: "#821a20",
+        WLDS-RED-11: "#47080c",
+
+      ),
+      YELLOW: (
+        WLDS-YEL-01: "#fefce8",
+        WLDS-YEL-02: "#fef9c3",
+        WLDS-YEL-03: "#fef08a",
+        WLDS-YEL-04: "#fde047",
+        WLDS-YEL-05: "#facc15",
+        WLDS-YEL-06: "#eab308",
+        WLDS-YEL-07: "#ca8a04",
+        WLDS-YEL-08: "#a16207",
+        WLDS-YEL-09: "#854d0e",
+        WLDS-YEL-10: "#713f12",
+        WLDS-YEL-11: "#422006",
+
+      ),
+
+    ),
+
+  ),
+  Optional: "Optional",
+);
+
+// Spacing
+$spacing: (
+  Spacing: (
+    WLDS-Space-0: "0px",
+    WLDS-Space-2: "2px",
+    WLDS-Space-4: "4px",
+    WLDS-Space-6: "6px",
+    WLDS-Space-8: "8px",
+    WLDS-Space-10: "10px",
+    WLDS-Space-12: "12px",
+    WLDS-Space-16: "16px",
+    WLDS-Space-24: "24px",
+    WLDS-Space-32: "32px",
+    WLDS-Space-40: "40px",
+    WLDS-Space-48: "48px",
+    WLDS-Space-56: "56px",
+    WLDS-Space-64: "64px",
+    WLDS-Space-72: "72px",
+    WLDS-Space-80: "80px",
+    WLDS-Space-88: "88px",
+    WLDS-Space-96: "96px",
+    WLDS-Space-104: "104px",
+    WLDS-Space-112: "112px",
+    WLDS-Space-120: "120px",
+    WLDS-Space-128: "128px",
+    WLDS-Space-136: "136px",
+
+  ),
+);
+
+// Colors Asset
+$colors: (
+  Button: (
+    Primary: (
+      Filled: (
+        BTN-PRM-FLD-NORMAL: map-deep-get($tokens, "Colors", "PRIMARY", "WLDS-PRM-08_"),
+        BTN-PRM-FLD-HOVER: map-deep-get($tokens, "Colors", "PRIMARY", "WLDS-PRM-06"),
+        BTN-PRM-FLD-PRESSED: map-deep-get($tokens, "Colors", "PRIMARY", "WLDS-PRM-09"),
+
+      ),
+      Outlined: (
+        BTN-OUTL-NORMAL: map-deep-get($tokens, "Colors", "SEMANTIC", "NEUTRAL", "WLDS-NTL-00"),
+        BTN-OUTL-HOVER: map-deep-get($tokens, "Colors", "SEMANTIC", "NEUTRAL", "WLDS-NTL-02"),
+        BTN-OUTL-PRESSED: map-deep-get($tokens, "Colors", "SEMANTIC", "NEUTRAL", "WLDS-NTL-01"),
+
+      ),
+      Text: (
+        BTN-TXT-HOVER: map-deep-get($tokens, "Colors", "PRIMARY", "WLDS-PRM-02"),
+        BTN-TXT-PRESSED: map-deep-get($tokens, "Colors", "PRIMARY", "WLDS-PRM-01"),
+
+      ),
+
+    ),
+    Danger: (
+      Filled: (
+        BTN-DNGR-FLD-NORMAL: map-deep-get($tokens, "Colors", "SEMANTIC", "RED", "WLDS-RED-07"),
+        BTN-DNGR-FLD-HOVER: map-deep-get($tokens, "Colors", "SEMANTIC", "RED", "WLDS-RED-05"),
+        BTN-DNGR-FLD-PRESSED: map-deep-get($tokens, "Colors", "SEMANTIC", "RED", "WLDS-RED-08"),
+
+      ),
+      Outlined: (
+        BTN-DNGR-OUTL-NORMAL: map-deep-get($tokens, "Colors", "SEMANTIC", "NEUTRAL", "WLDS-NTL-00"),
+        BTN-DNGR-OUTL-HOVER: map-deep-get($tokens, "Colors", "SEMANTIC", "RED", "WLDS-RED-01"),
+        BTN-DNGR-OUTL-PRESSED: map-deep-get($tokens, "Colors", "SEMANTIC", "RED", "WLDS-RED-02"),
+
+      ),
+      Text: (
+        BTN-DNGR-TXT-HOVER: map-deep-get($tokens, "Colors", "SEMANTIC", "RED", "WLDS-RED-02"),
+        BTN-DNGR-TXT-PRESSED: map-deep-get($tokens, "Colors", "SEMANTIC", "RED", "WLDS-RED-01"),
+
+      ),
+
+    ),
+    Disabled: (
+      BTN-DISABLED: map-deep-get($tokens, "Colors", "SEMANTIC", "NEUTRAL", "WLDS-NTL-03"),
+
+    ),
+    Radius: (
+      BTN-RDR-04: map-deep-get($tokens, "WLDS-Radius-4"),
+      BTN-RDR-06: map-deep-get($tokens, "WLDS-Radius-6"),
+      BTN-RDR-08: map-deep-get($tokens, "WLDS-Radius-8"),
+
+    ),
+    Spacing: (
+      Button-24: (
+        Right: map-deep-get($tokens, "Spacing", "WLDS-Space-4"),
+        Left: map-deep-get($tokens, "Spacing", "WLDS-Space-4"),
+        Bottom: map-deep-get($tokens, "Spacing", "WLDS-Space-4"),
+        Top: map-deep-get($tokens, "Spacing", "WLDS-Space-4"),
+        Between: map-deep-get($tokens, "Spacing", "WLDS-Space-2"),
+
+      ),
+      Button-32: (
+        Right: map-deep-get($tokens, "Spacing", "WLDS-Space-8"),
+        Left: map-deep-get($tokens, "Spacing", "WLDS-Space-8"),
+        Bottom: map-deep-get($tokens, "Spacing", "WLDS-Space-8"),
+        Top: map-deep-get($tokens, "Spacing", "WLDS-Space-8"),
+        Between: map-deep-get($tokens, "Spacing", "WLDS-Space-4"),
+
+      ),
+      Button-48: (
+        Right: map-deep-get($tokens, "Spacing", "WLDS-Space-12"),
+        Left: map-deep-get($tokens, "Spacing", "WLDS-Space-12"),
+        Bottom: map-deep-get($tokens, "Spacing", "WLDS-Space-16"),
+        Top: map-deep-get($tokens, "Spacing", "WLDS-Space-16"),
+        Between: map-deep-get($tokens, "Spacing", "WLDS-Space-6"),
+
+      ),
+
+    ),
+
+  ),
+  Borders: (
+    BORDER-OUT-DISABLED: map-deep-get($tokens, "Colors", "SEMANTIC", "NEUTRAL", "WLDS-NTL-03"),
+    BORDER-BASE-THIN: map-deep-get($tokens, "Colors", "SEMANTIC", "NEUTRAL", "WLDS-NTL-04"),
+    BORDER-BASE-MIDDLE: map-deep-get($tokens, "Colors", "SEMANTIC", "NEUTRAL", "WLDS-NTL-05"),
+    BORDER-BASE-HEAVY: map-deep-get($tokens, "Colors", "SEMANTIC", "NEUTRAL", "WLDS-NTL-06"),
+    BORDER-HIGHT-THIN: map-deep-get($tokens, "Colors", "PRIMARY", "WLDS-PRM-03"),
+    BORDER-HIGHT-MIDDLE: map-deep-get($tokens, "Colors", "PRIMARY", "WLDS-PRM-05"),
+    BORDER-HIGHT-HEAVY: map-deep-get($tokens, "Colors", "PRIMARY", "WLDS-PRM-07"),
+    BORDER-FAIL: map-deep-get($tokens, "Colors", "SEMANTIC", "RED", "WLDS-RED-06"),
+    BORDER-INTERATIVE: map-deep-get($tokens, "Colors", "PRIMARY", "WLDS-PRM-08_"),
+    BORDER-HIGHT-DIVIDER: map-deep-get($tokens, "Colors", "SEMANTIC", "GRAY", "WLDS-GRY-11"),
+    BORDER-DIVIDER: map-deep-get($tokens, "Colors", "SEMANTIC", "GRAY", "WLDS-GRY-04"),
+    BORDER-WHITE: map-deep-get($tokens, "Colors", "SEMANTIC", "NEUTRAL", "WLDS-NTL-00"),
+
+  ),
+  Backgrounds: (
+    BG-NORMAL: map-deep-get($tokens, "Colors", "SEMANTIC", "NEUTRAL", "WLDS-NTL-00"),
+    BG-BASE-THIN: map-deep-get($tokens, "Colors", "SEMANTIC", "NEUTRAL", "WLDS-NTL-01"),
+    BG-BASE-MIDDLE: map-deep-get($tokens, "Colors", "SEMANTIC", "NEUTRAL", "WLDS-NTL-02"),
+    BG-BASE-HEAVY: map-deep-get($tokens, "Colors", "SEMANTIC", "NEUTRAL", "WLDS-NTL-03"),
+    BG-HIGHT-THIN: map-deep-get($tokens, "Colors", "PRIMARY", "WLDS-PRM-01"),
+    BG-HIGHT-MIDDLE: map-deep-get($tokens, "Colors", "PRIMARY", "WLDS-PRM-02"),
+    BG-HIGHT-HEAVY: map-deep-get($tokens, "Colors", "PRIMARY", "WLDS-PRM-03"),
+    BG-SELECTED: map-deep-get($tokens, "Colors", "PRIMARY", "WLDS-PRM-02"),
+    BG-INTERACTIVE: map-deep-get($tokens, "Colors", "PRIMARY", "WLDS-PRM-08_"),
+    BG-DISABLED: map-deep-get($tokens, "Colors", "SEMANTIC", "NEUTRAL", "WLDS-NTL-03"),
+    BG-BLACK: map-deep-get($tokens, "Colors", "SEMANTIC", "NEUTRAL", "WLDS-NTL-11"),
+
+  ),
+  Forgrounds: (
+    FG-BLACK: map-deep-get($tokens, "Colors", "SEMANTIC", "NEUTRAL", "WLDS-NTL-11"),
+    FG-TITLE: map-deep-get($tokens, "Colors", "SEMANTIC", "NEUTRAL", "WLDS-NTL-10"),
+    FG-SUBTITLE: map-deep-get($tokens, "Colors", "SEMANTIC", "NEUTRAL", "WLDS-NTL-08"),
+    FG-BODY: map-deep-get($tokens, "Colors", "SEMANTIC", "NEUTRAL", "WLDS-NTL-06"),
+    FG-INTERACTIVE: map-deep-get($tokens, "Colors", "PRIMARY", "WLDS-PRM-08_"),
+    FG-DISABLED: map-deep-get($tokens, "Colors", "SEMANTIC", "NEUTRAL", "WLDS-NTL-05"),
+    FG-DISABLED-VALUE: map-deep-get($tokens, "Colors", "SEMANTIC", "NEUTRAL", "WLDS-NTL-06"),
+    FG-FAIL: map-deep-get($tokens, "Colors", "SEMANTIC", "RED", "WLDS-RED-08"),
+    FG-WHITE: map-deep-get($tokens, "Colors", "SEMANTIC", "NEUTRAL", "WLDS-NTL-00"),
+
+  ),
+  Tags: (
+    Positive: (
+      TAG-BG-PRM-THIN: map-deep-get($tokens, "Colors", "PRIMARY", "WLDS-PRM-02"),
+      TAG-BG-PRM-MIDDLE: map-deep-get($tokens, "Colors", "PRIMARY", "WLDS-PRM-06"),
+      TAG-BG-PRM-HEAVY: map-deep-get($tokens, "Colors", "PRIMARY", "WLDS-PRM-09"),
+      TAG-FG-PRM-THIN: map-deep-get($tokens, "Colors", "PRIMARY", "WLDS-PRM-01"),
+      TAG-FG-PRM-MIDDLE: map-deep-get($tokens, "Colors", "PRIMARY", "WLDS-PRM-08_"),
+      TAG-FG-PRM-HEAVY: map-deep-get($tokens, "Colors", "PRIMARY", "WLDS-PRM-11"),
+      TAG-OUTL-PRM-THIN: map-deep-get($tokens, "Colors", "PRIMARY", "WLDS-PRM-03"),
+      TAG-OUTL-PRM-MIDDLE: map-deep-get($tokens, "Colors", "PRIMARY", "WLDS-PRM-05"),
+      TAG-OUTL-PRM-HEAVY: map-deep-get($tokens, "Colors", "PRIMARY", "WLDS-PRM-07"),
+      TAG-BG-SEC-THIN: map-deep-get($tokens, "Colors", "SEMANTIC", "SECONDARY", "WLDS-SEC-02"),
+      TAG-BG-SEC-MIDDLE: map-deep-get($tokens, "Colors", "SEMANTIC", "SECONDARY", "WLDS-SEC-05"),
+      TAG-BG-SEC-HEAVY: map-deep-get($tokens, "Colors", "SEMANTIC", "SECONDARY", "WLDS-SEC-07"),
+      TAG-FG-SEC-THIN: map-deep-get($tokens, "Colors", "SEMANTIC", "SECONDARY", "WLDS-SEC-01"),
+      TAG-FG-SEC-MIDDLE: map-deep-get($tokens, "Colors", "SEMANTIC", "SECONDARY", "WLDS-SEC-06"),
+      TAG-FG-SEC-HEAVY: map-deep-get($tokens, "Colors", "SEMANTIC", "SECONDARY", "WLDS-SEC-08"),
+      TAG-OUTL-SEC-THIN: map-deep-get($tokens, "Colors", "SEMANTIC", "SECONDARY", "WLDS-SEC-03"),
+      TAG-OUTL-SEC-MIDDLE: map-deep-get($tokens, "Colors", "SEMANTIC", "SECONDARY", "WLDS-SEC-06"),
+      TAG-OUTL-SEC-HEAVY: map-deep-get($tokens, "Colors", "SEMANTIC", "SECONDARY", "WLDS-SEC-10"),
+      TAG-BG-YEL-THIN: map-deep-get($tokens, "Colors", "SEMANTIC", "YELLOW", "WLDS-YEL-02"),
+      TAG-BG-YEL-MIDDLE: map-deep-get($tokens, "Colors", "SEMANTIC", "YELLOW", "WLDS-YEL-07"),
+      TAG-BG-YEL-HEAVY: map-deep-get($tokens, "Colors", "SEMANTIC", "YELLOW", "WLDS-YEL-09"),
+      TAG-FG-YEL-THIN: map-deep-get($tokens, "Colors", "SEMANTIC", "YELLOW", "WLDS-YEL-01"),
+      TAG-FG-YEL-MIDDLE: map-deep-get($tokens, "Colors", "SEMANTIC", "YELLOW", "WLDS-YEL-06"),
+      TAG-FG-YEL-HEAVY: map-deep-get($tokens, "Colors", "SEMANTIC", "YELLOW", "WLDS-YEL-10"),
+      TAG-OUTL-YEL-THIN: map-deep-get($tokens, "Colors", "SEMANTIC", "YELLOW", "WLDS-YEL-03"),
+      TAG-OUTL-YEL-MIDDLE: map-deep-get($tokens, "Colors", "SEMANTIC", "YELLOW", "WLDS-YEL-07"),
+      TAG-OUTL-YEL-HEAVY: map-deep-get($tokens, "Colors", "SEMANTIC", "YELLOW", "WLDS-YEL-11"),
+      TAG-BG-GRE-THIN: map-deep-get($tokens, "Colors", "SEMANTIC", "GREEN", "WLDS-GRN-02"),
+      TAG-BG-GRE-MIDDLE: map-deep-get($tokens, "Colors", "SEMANTIC", "GREEN", "WLDS-GRN-04"),
+      TAG-BG-GRE-HEAVY: map-deep-get($tokens, "Colors", "SEMANTIC", "GREEN", "WLDS-GRN-08"),
+      TAG-FG-GRE-THIN: map-deep-get($tokens, "Colors", "SEMANTIC", "GREEN", "WLDS-GRN-01"),
+      TAG-FG-GRE-MIDDLE: map-deep-get($tokens, "Colors", "SEMANTIC", "GREEN", "WLDS-GRN-07"),
+      TAG-FG-GRE-HEAVY: map-deep-get($tokens, "Colors", "SEMANTIC", "GREEN", "WLDS-GRN-10"),
+      TAG-OUTL-GRE-THIN: map-deep-get($tokens, "Colors", "SEMANTIC", "GREEN", "WLDS-GRN-03"),
+      TAG-OUTL-GRE-MIDDLE: map-deep-get($tokens, "Colors", "SEMANTIC", "GREEN", "WLDS-GRN-05"),
+      TAG-OUTL-GRE-HEAVY: map-deep-get($tokens, "Colors", "SEMANTIC", "GREEN", "WLDS-GRN-06"),
+
+    ),
+    Negative: (
+      TAG-FG-THIN: map-deep-get($tokens, "Colors", "SEMANTIC", "RED", "WLDS-RED-01"),
+      TAG-FG-MIDDLE: map-deep-get($tokens, "Colors", "SEMANTIC", "RED", "WLDS-RED-04"),
+      TAG-FG-HEAVY: map-deep-get($tokens, "Colors", "SEMANTIC", "RED", "WLDS-RED-08"),
+      TAG-BG-THIN: map-deep-get($tokens, "Colors", "SEMANTIC", "RED", "WLDS-RED-02"),
+      TAG-BG-MIDDLE: map-deep-get($tokens, "Colors", "SEMANTIC", "RED", "WLDS-RED-07"),
+      TAG-BG-HEAVY: map-deep-get($tokens, "Colors", "SEMANTIC", "RED", "WLDS-RED-09"),
+      TAG-OUTL-THIN: map-deep-get($tokens, "Colors", "SEMANTIC", "RED", "WLDS-RED-03"),
+      TAG-OUTL-MIDDLE: map-deep-get($tokens, "Colors", "SEMANTIC", "RED", "WLDS-RED-05"),
+      TAG-OUTL-HEAVY: map-deep-get($tokens, "Colors", "SEMANTIC", "RED", "WLDS-RED-06"),
+
+    ),
+    Neutral-Tone: (
+      TAG-FG-NTL-THIN: map-deep-get($tokens, "Colors", "SEMANTIC", "NEUTRAL", "WLDS-NTL-05"),
+      TAG-FG-NTL-MIDDLE: map-deep-get($tokens, "Colors", "SEMANTIC", "NEUTRAL", "WLDS-NTL-08"),
+      TAG-FG-NTL-HEAVY: map-deep-get($tokens, "Colors", "SEMANTIC", "NEUTRAL", "WLDS-NTL-10"),
+      TAG-FG-GRY-THIN: map-deep-get($tokens, "Colors", "SEMANTIC", "GRAY", "WLDS-GRY-01"),
+      TAG-FG-GRY-MIDDLE: map-deep-get($tokens, "Colors", "SEMANTIC", "GRAY", "WLDS-GRY-04"),
+      TAG-FG-GRY-HEAVY: map-deep-get($tokens, "Colors", "SEMANTIC", "GRAY", "WLDS-GRY-11"),
+      TAG-BG-NTL-THIN: map-deep-get($tokens, "Colors", "SEMANTIC", "NEUTRAL", "WLDS-NTL-02"),
+      TAG-BG-NTL-MIDDLE: map-deep-get($tokens, "Colors", "SEMANTIC", "NEUTRAL", "WLDS-NTL-05"),
+      TAG-BG-NTL-HEAVY: map-deep-get($tokens, "Colors", "SEMANTIC", "NEUTRAL", "WLDS-NTL-09"),
+      TAG-BG-GRY-THIN: map-deep-get($tokens, "Colors", "SEMANTIC", "GRAY", "WLDS-GRY-05"),
+      TAG-BG-GRY-MIDDLE: map-deep-get($tokens, "Colors", "SEMANTIC", "GRAY", "WLDS-GRY-06"),
+      TAG-BG-GRY-HEAVY: map-deep-get($tokens, "Colors", "SEMANTIC", "GRAY", "WLDS-GRY-09"),
+      TAG-OUTL-NTL-THIN: map-deep-get($tokens, "Colors", "SEMANTIC", "NEUTRAL", "WLDS-NTL-03"),
+      TAG-OUTL-NTL-MIDDLE: map-deep-get($tokens, "Colors", "SEMANTIC", "NEUTRAL", "WLDS-NTL-04"),
+      TAG-OUTL-NTL-HEAVY: map-deep-get($tokens, "Colors", "SEMANTIC", "NEUTRAL", "WLDS-NTL-05"),
+      TAG-OUTL-GRY-THIN: map-deep-get($tokens, "Colors", "SEMANTIC", "GRAY", "WLDS-GRY-04"),
+      TAG-OUTL-GRY-MIDDLE: map-deep-get($tokens, "Colors", "SEMANTIC", "GRAY", "WLDS-GRY-07"),
+      TAG-OUTL-GRY-HEAVY: map-deep-get($tokens, "Colors", "SEMANTIC", "GRAY", "WLDS-GRY-09"),
+
+    ),
+
+  ),
+);
+
+$colors: (
+  Button: (
+    Primary: (
+      Filled: (
+        BTN-PRM-FLD-NORMAL: map-deep-get($tokens, "Colors", "SEMANTIC", "NEUTRAL", "WLDS-NTL-08"),
+        BTN-PRM-FLD-HOVER: map-deep-get($tokens, "Colors", "SEMANTIC", "NEUTRAL", "WLDS-NTL-06"),
+        BTN-PRM-FLD-PRESSED: map-deep-get($tokens, "Colors", "SEMANTIC", "NEUTRAL", "WLDS-NTL-09"),
+
+      ),
+      Outlined: (
+        BTN-OUTL-NORMAL: map-deep-get($tokens, "Colors", "SEMANTIC", "NEUTRAL", "WLDS-NTL-09"),
+        BTN-OUTL-HOVER: map-deep-get($tokens, "Colors", "SEMANTIC", "NEUTRAL", "WLDS-NTL-08"),
+        BTN-OUTL-PRESSED: map-deep-get($tokens, "Colors", "SEMANTIC", "NEUTRAL", "WLDS-NTL-10"),
+
+      ),
+      Text: (
+        BTN-TXT-HOVER: map-deep-get($tokens, "Colors", "PRIMARY", "WLDS-PRM-02"),
+        BTN-TXT-PRESSED: map-deep-get($tokens, "Colors", "PRIMARY", "WLDS-PRM-01"),
+
+      ),
+
+    ),
+    Danger: (
+      Filled: (
+        BTN-DNGR-FLD-NORMAL: map-deep-get($tokens, "Colors", "SEMANTIC", "RED", "WLDS-RED-07"),
+        BTN-DNGR-FLD-HOVER: map-deep-get($tokens, "Colors", "SEMANTIC", "RED", "WLDS-RED-05"),
+        BTN-DNGR-FLD-PRESSED: map-deep-get($tokens, "Colors", "SEMANTIC", "RED", "WLDS-RED-08"),
+
+      ),
+      Outlined: (
+        BTN-DNGR-OUTL-NORMAL: map-deep-get($tokens, "Colors", "SEMANTIC", "NEUTRAL", "WLDS-NTL-00"),
+        BTN-DNGR-OUTL-HOVER: map-deep-get($tokens, "Colors", "SEMANTIC", "RED", "WLDS-RED-01"),
+        BTN-DNGR-OUTL-PRESSED: map-deep-get($tokens, "Colors", "SEMANTIC", "RED", "WLDS-RED-02"),
+
+      ),
+      Text: (
+        BTN-DNGR-TXT-HOVER: map-deep-get($tokens, "Colors", "SEMANTIC", "RED", "WLDS-RED-02"),
+        BTN-DNGR-TXT-PRESSED: map-deep-get($tokens, "Colors", "SEMANTIC", "RED", "WLDS-RED-01"),
+
+      ),
+
+    ),
+    Disabled: (
+      BTN-DISABLED: map-deep-get($tokens, "Colors", "SEMANTIC", "NEUTRAL", "WLDS-NTL-08"),
+
+    ),
+    Radius: (
+      BTN-RDR-04: map-deep-get($tokens, "WLDS-Radius-4"),
+      BTN-RDR-06: map-deep-get($tokens, "WLDS-Radius-6"),
+      BTN-RDR-08: map-deep-get($tokens, "WLDS-Radius-8"),
+
+    ),
+    Spacing: (
+      Button-24: (
+        Right: map-deep-get($tokens, "Spacing", "WLDS-Space-4"),
+        Left: map-deep-get($tokens, "Spacing", "WLDS-Space-4"),
+        Bottom: map-deep-get($tokens, "Spacing", "WLDS-Space-4"),
+        Top: map-deep-get($tokens, "Spacing", "WLDS-Space-4"),
+        Between: map-deep-get($tokens, "Spacing", "WLDS-Space-2"),
+
+      ),
+      Button-32: (
+        Right: map-deep-get($tokens, "Spacing", "WLDS-Space-8"),
+        Left: map-deep-get($tokens, "Spacing", "WLDS-Space-8"),
+        Bottom: map-deep-get($tokens, "Spacing", "WLDS-Space-8"),
+        Top: map-deep-get($tokens, "Spacing", "WLDS-Space-8"),
+        Between: map-deep-get($tokens, "Spacing", "WLDS-Space-4"),
+
+      ),
+      Button-48: (
+        Right: map-deep-get($tokens, "Spacing", "WLDS-Space-12"),
+        Left: map-deep-get($tokens, "Spacing", "WLDS-Space-12"),
+        Bottom: map-deep-get($tokens, "Spacing", "WLDS-Space-16"),
+        Top: map-deep-get($tokens, "Spacing", "WLDS-Space-16"),
+        Between: map-deep-get($tokens, "Spacing", "WLDS-Space-6"),
+
+      ),
+
+    ),
+
+  ),
+  Borders: (
+    BORDER-OUT-DISABLED: map-deep-get($tokens, "Colors", "SEMANTIC", "NEUTRAL", "WLDS-NTL-07"),
+    BORDER-BASE-THIN: map-deep-get($tokens, "Colors", "SEMANTIC", "NEUTRAL", "WLDS-NTL-06"),
+    BORDER-BASE-MIDDLE: map-deep-get($tokens, "Colors", "SEMANTIC", "NEUTRAL", "WLDS-NTL-06"),
+    BORDER-BASE-HEAVY: map-deep-get($tokens, "Colors", "SEMANTIC", "NEUTRAL", "WLDS-NTL-07"),
+    BORDER-HIGHT-THIN: map-deep-get($tokens, "Colors", "SEMANTIC", "NEUTRAL", "WLDS-NTL-06"),
+    BORDER-HIGHT-MIDDLE: map-deep-get($tokens, "Colors", "PRIMARY", "WLDS-PRM-05"),
+    BORDER-HIGHT-HEAVY: map-deep-get($tokens, "Colors", "PRIMARY", "WLDS-PRM-07"),
+    BORDER-FAIL: map-deep-get($tokens, "Colors", "SEMANTIC", "RED", "WLDS-RED-06"),
+    BORDER-INTERATIVE: map-deep-get($tokens, "Colors", "PRIMARY", "WLDS-PRM-08_"),
+    BORDER-HIGHT-DIVIDER: map-deep-get($tokens, "Colors", "SEMANTIC", "GRAY", "WLDS-GRY-11"),
+    BORDER-DIVIDER: map-deep-get($tokens, "Colors", "SEMANTIC", "GRAY", "WLDS-GRY-04"),
+    BORDER-WHITE: map-deep-get($tokens, "Colors", "SEMANTIC", "NEUTRAL", "WLDS-NTL-00"),
+
+  ),
+  Backgrounds: (
+    BG-NORMAL: map-deep-get($tokens, "Colors", "SEMANTIC", "NEUTRAL", "WLDS-NTL-10"),
+    BG-BASE-THIN: map-deep-get($tokens, "Colors", "SEMANTIC", "NEUTRAL", "WLDS-NTL-09"),
+    BG-BASE-MIDDLE: map-deep-get($tokens, "Colors", "SEMANTIC", "NEUTRAL", "WLDS-NTL-08"),
+    BG-BASE-HEAVY: map-deep-get($tokens, "Colors", "SEMANTIC", "NEUTRAL", "WLDS-NTL-07"),
+    BG-HIGHT-THIN: map-deep-get($tokens, "Colors", "SEMANTIC", "NEUTRAL", "WLDS-NTL-09"),
+    BG-HIGHT-MIDDLE: map-deep-get($tokens, "Colors", "PRIMARY", "WLDS-PRM-09"),
+    BG-HIGHT-HEAVY: map-deep-get($tokens, "Colors", "PRIMARY", "WLDS-PRM-08_"),
+    BG-SELECTED: map-deep-get($tokens, "Colors", "SEMANTIC", "NEUTRAL", "WLDS-NTL-10"),
+    BG-INTERACTIVE: map-deep-get($tokens, "Colors", "PRIMARY", "WLDS-PRM-09"),
+    BG-DISABLED: map-deep-get($tokens, "Colors", "SEMANTIC", "GRAY", "WLDS-GRY-08"),
+    BG-BLACK: map-deep-get($tokens, "Colors", "SEMANTIC", "GRAY", "WLDS-GRY-01"),
+
+  ),
+  Forgrounds: (
+    FG-BLACK: map-deep-get($tokens, "Colors", "SEMANTIC", "NEUTRAL", "WLDS-NTL-00"),
+    FG-TITLE: map-deep-get($tokens, "Colors", "SEMANTIC", "NEUTRAL", "WLDS-NTL-01"),
+    FG-SUBTITLE: map-deep-get($tokens, "Colors", "SEMANTIC", "NEUTRAL", "WLDS-NTL-04"),
+    FG-BODY: map-deep-get($tokens, "Colors", "SEMANTIC", "NEUTRAL", "WLDS-NTL-04"),
+    FG-INTERACTIVE: map-deep-get($tokens, "Colors", "PRIMARY", "WLDS-PRM-04"),
+    FG-DISABLED: map-deep-get($tokens, "Colors", "SEMANTIC", "NEUTRAL", "WLDS-NTL-05"),
+    FG-DISABLED-VALUE: map-deep-get($tokens, "Colors", "SEMANTIC", "NEUTRAL", "WLDS-NTL-06"),
+    FG-FAIL: map-deep-get($tokens, "Colors", "SEMANTIC", "RED", "WLDS-RED-08"),
+    FG-WHITE: map-deep-get($tokens, "Colors", "SEMANTIC", "NEUTRAL", "WLDS-NTL-00"),
+
+  ),
+  Tags: (
+    Positive: (
+      TAG-BG-PRM-THIN: map-deep-get($tokens, "Colors", "PRIMARY", "WLDS-PRM-02"),
+      TAG-BG-PRM-MIDDLE: map-deep-get($tokens, "Colors", "PRIMARY", "WLDS-PRM-06"),
+      TAG-BG-PRM-HEAVY: map-deep-get($tokens, "Colors", "PRIMARY", "WLDS-PRM-09"),
+      TAG-FG-PRM-THIN: map-deep-get($tokens, "Colors", "PRIMARY", "WLDS-PRM-01"),
+      TAG-FG-PRM-MIDDLE: map-deep-get($tokens, "Colors", "PRIMARY", "WLDS-PRM-08_"),
+      TAG-FG-PRM-HEAVY: map-deep-get($tokens, "Colors", "PRIMARY", "WLDS-PRM-01"),
+      TAG-OUTL-PRM-THIN: map-deep-get($tokens, "Colors", "PRIMARY", "WLDS-PRM-03"),
+      TAG-OUTL-PRM-MIDDLE: map-deep-get($tokens, "Colors", "PRIMARY", "WLDS-PRM-05"),
+      TAG-OUTL-PRM-HEAVY: map-deep-get($tokens, "Colors", "PRIMARY", "WLDS-PRM-07"),
+      TAG-BG-SEC-THIN: map-deep-get($tokens, "Colors", "SEMANTIC", "SECONDARY", "WLDS-SEC-02"),
+      TAG-BG-SEC-MIDDLE: map-deep-get($tokens, "Colors", "SEMANTIC", "SECONDARY", "WLDS-SEC-05"),
+      TAG-BG-SEC-HEAVY: map-deep-get($tokens, "Colors", "SEMANTIC", "SECONDARY", "WLDS-SEC-07"),
+      TAG-FG-SEC-THIN: map-deep-get($tokens, "Colors", "SEMANTIC", "SECONDARY", "WLDS-SEC-01"),
+      TAG-FG-SEC-MIDDLE: map-deep-get($tokens, "Colors", "SEMANTIC", "SECONDARY", "WLDS-SEC-06"),
+      TAG-FG-SEC-HEAVY: map-deep-get($tokens, "Colors", "SEMANTIC", "SECONDARY", "WLDS-SEC-08"),
+      TAG-OUTL-SEC-THIN: map-deep-get($tokens, "Colors", "SEMANTIC", "SECONDARY", "WLDS-SEC-03"),
+      TAG-OUTL-SEC-MIDDLE: map-deep-get($tokens, "Colors", "SEMANTIC", "SECONDARY", "WLDS-SEC-05"),
+      TAG-OUTL-SEC-HEAVY: map-deep-get($tokens, "Colors", "SEMANTIC", "SECONDARY", "WLDS-SEC-10"),
+      TAG-BG-YEL-THIN: map-deep-get($tokens, "Colors", "SEMANTIC", "SECONDARY", "WLDS-SEC-02"),
+      TAG-BG-YEL-MIDDLE: map-deep-get($tokens, "Colors", "SEMANTIC", "SECONDARY", "WLDS-SEC-07"),
+      TAG-BG-YEL-HEAVY: map-deep-get($tokens, "Colors", "SEMANTIC", "YELLOW", "WLDS-YEL-09"),
+      TAG-FG-YEL-THIN: map-deep-get($tokens, "Colors", "SEMANTIC", "YELLOW", "WLDS-YEL-01"),
+      TAG-FG-YEL-MIDDLE: map-deep-get($tokens, "Colors", "SEMANTIC", "YELLOW", "WLDS-YEL-06"),
+      TAG-FG-YEL-HEAVY: map-deep-get($tokens, "Colors", "SEMANTIC", "YELLOW", "WLDS-YEL-10"),
+      TAG-OUTL-YEL-THIN: map-deep-get($tokens, "Colors", "SEMANTIC", "YELLOW", "WLDS-YEL-03"),
+      TAG-OUTL-YEL-MIDDLE: map-deep-get($tokens, "Colors", "SEMANTIC", "YELLOW", "WLDS-YEL-07"),
+      TAG-OUTL-YEL-HEAVY: map-deep-get($tokens, "Colors", "SEMANTIC", "YELLOW", "WLDS-YEL-11"),
+      TAG-BG-GRE-THIN: map-deep-get($tokens, "Colors", "SEMANTIC", "GREEN", "WLDS-GRN-02"),
+      TAG-BG-GRE-MIDDLE: map-deep-get($tokens, "Colors", "SEMANTIC", "GREEN", "WLDS-GRN-04"),
+      TAG-BG-GRE-HEAVY: map-deep-get($tokens, "Colors", "SEMANTIC", "GREEN", "WLDS-GRN-08"),
+      TAG-FG-GRE-THIN: map-deep-get($tokens, "Colors", "SEMANTIC", "GREEN", "WLDS-GRN-01"),
+      TAG-FG-GRE-MIDDLE: map-deep-get($tokens, "Colors", "SEMANTIC", "GREEN", "WLDS-GRN-07"),
+      TAG-FG-GRE-HEAVY: map-deep-get($tokens, "Colors", "SEMANTIC", "GREEN", "WLDS-GRN-10"),
+      TAG-OUTL-GRE-THIN: map-deep-get($tokens, "Colors", "SEMANTIC", "GREEN", "WLDS-GRN-03"),
+      TAG-OUTL-GRE-MIDDLE: map-deep-get($tokens, "Colors", "SEMANTIC", "GREEN", "WLDS-GRN-05"),
+      TAG-OUTL-GRE-HEAVY: map-deep-get($tokens, "Colors", "SEMANTIC", "GREEN", "WLDS-GRN-06"),
+
+    ),
+    Negative: (
+      TAG-FG-THIN: map-deep-get($tokens, "Colors", "SEMANTIC", "RED", "WLDS-RED-01"),
+      TAG-FG-MIDDLE: map-deep-get($tokens, "Colors", "SEMANTIC", "RED", "WLDS-RED-04"),
+      TAG-FG-HEAVY: map-deep-get($tokens, "Colors", "SEMANTIC", "RED", "WLDS-RED-08"),
+      TAG-BG-THIN: map-deep-get($tokens, "Colors", "SEMANTIC", "RED", "WLDS-RED-02"),
+      TAG-BG-MIDDLE: map-deep-get($tokens, "Colors", "SEMANTIC", "RED", "WLDS-RED-07"),
+      TAG-BG-HEAVY: map-deep-get($tokens, "Colors", "SEMANTIC", "RED", "WLDS-RED-09"),
+      TAG-OUTL-THIN: map-deep-get($tokens, "Colors", "SEMANTIC", "RED", "WLDS-RED-03"),
+      TAG-OUTL-MIDDLE: map-deep-get($tokens, "Colors", "SEMANTIC", "RED", "WLDS-RED-05"),
+      TAG-OUTL-HEAVY: map-deep-get($tokens, "Colors", "SEMANTIC", "RED", "WLDS-RED-06"),
+
+    ),
+    Neutral-Tone: (
+      TAG-FG-NTL-THIN: map-deep-get($tokens, "Colors", "SEMANTIC", "NEUTRAL", "WLDS-NTL-05"),
+      TAG-FG-NTL-MIDDLE: map-deep-get($tokens, "Colors", "SEMANTIC", "NEUTRAL", "WLDS-NTL-08"),
+      TAG-FG-NTL-HEAVY: map-deep-get($tokens, "Colors", "SEMANTIC", "NEUTRAL", "WLDS-NTL-10"),
+      TAG-FG-GRY-THIN: map-deep-get($tokens, "Colors", "SEMANTIC", "GRAY", "WLDS-GRY-01"),
+      TAG-FG-GRY-MIDDLE: map-deep-get($tokens, "Colors", "SEMANTIC", "GRAY", "WLDS-GRY-04"),
+      TAG-FG-GRY-HEAVY: map-deep-get($tokens, "Colors", "SEMANTIC", "GRAY", "WLDS-GRY-11"),
+      TAG-BG-NTL-THIN: map-deep-get($tokens, "Colors", "SEMANTIC", "NEUTRAL", "WLDS-NTL-02"),
+      TAG-BG-NTL-MIDDLE: map-deep-get($tokens, "Colors", "SEMANTIC", "NEUTRAL", "WLDS-NTL-05"),
+      TAG-BG-NTL-HEAVY: map-deep-get($tokens, "Colors", "SEMANTIC", "NEUTRAL", "WLDS-NTL-09"),
+      TAG-BG-GRY-THIN: map-deep-get($tokens, "Colors", "SEMANTIC", "GRAY", "WLDS-GRY-05"),
+      TAG-BG-GRY-MIDDLE: map-deep-get($tokens, "Colors", "SEMANTIC", "GRAY", "WLDS-GRY-06"),
+      TAG-BG-GRY-HEAVY: map-deep-get($tokens, "Colors", "SEMANTIC", "GRAY", "WLDS-GRY-09"),
+      TAG-OUTL-NTL-THIN: map-deep-get($tokens, "Colors", "SEMANTIC", "NEUTRAL", "WLDS-NTL-03"),
+      TAG-OUTL-NTL-MIDDLE: map-deep-get($tokens, "Colors", "SEMANTIC", "NEUTRAL", "WLDS-NTL-04"),
+      TAG-OUTL-NTL-HEAVY: map-deep-get($tokens, "Colors", "SEMANTIC", "NEUTRAL", "WLDS-NTL-05"),
+      TAG-OUTL-GRY-THIN: map-deep-get($tokens, "Colors", "SEMANTIC", "GRAY", "WLDS-GRY-04"),
+      TAG-OUTL-GRY-MIDDLE: map-deep-get($tokens, "Colors", "SEMANTIC", "GRAY", "WLDS-GRY-07"),
+      TAG-OUTL-GRY-HEAVY: map-deep-get($tokens, "Colors", "SEMANTIC", "GRAY", "WLDS-GRY-09"),
+
+    ),
+
+  ),
+);
+
+// Radius
+$radius: (
+  WLDS-Radius-0: "0px",
+  WLDS-Radius-2: "2px",
+  WLDS-Radius-4: "4px",
+  WLDS-Radius-6: "6px",
+  WLDS-Radius-8: "8px",
+  WLDS-Radius-10: "10px",
+  WLDS-Radius-12: "12px",
+  WLDS-Radius-16: "16px",
+  WLDS-Radius-20: "20px",
+  WLDS-Radius-24: "24px",
+  WLDS-Radius-28: "28px",
+  WLDS-Radius-32: "32px",
+  WLDS-Radius-64: "64px",
+);
+
+// Auto count
+$auto-count: (
+  Add: (
+    Count: "0px",
+    Count-Continue: "17px",
+    MandH: true,
+    Hint: "Error",
+
+  ),
+  Minus: (
+    Count: "60px",
+
+  ),
+  Naming: (
+    Sucess: "Upload Successfully.",
+    Error: "Ooops, there is something wrong.",
+
+  ),
+);
+
+// Typography
+$typography-en: (
+  Typeface: (
+    Family: (
+      Display: "Inter",
+      Head: "Inter",
+      Title: "Inter",
+      Body: "Inter",
+      Button: "Inter",
+      Caption: "Inter",
+      Label: "Inter",
+      Label-2: "Inter",
+
+    ),
+    Size: (
+      Display-Large: "64px",
+      Display-Medium: "52px",
+      Display-Small: "44px",
+      Headline-Large: "42px",
+      Headline-Medium: "40px",
+      Headline-Small: "36px",
+      Title-Large: "24px",
+      Title-Medium: "20px",
+      Title-Small: "16px",
+      Body-Large: "20px",
+      Body-Medium: "16px",
+      Body-Small: "14px",
+      Button-Large: "18px",
+      Button-Medium: "14px",
+      Button-Small: "12px",
+      Caption: "12px",
+      Label: "11px",
+      Label-2: "10px",
+
+    ),
+    Line-height: (
+      Display-Large: "78px",
+      Display-Medium: "64px",
+      Display-Small: "56px",
+      Headline-Large: "48px",
+      Headline-Medium: "44px",
+      Headline-Small: "40px",
+      Title-Large: "32px",
+      Title-Medium: "28px",
+      Title-Small: "20px",
+      Body-Large: "28px",
+      Body-Medium: "24px",
+      Body-Small: "20px",
+      Button-Large: "24px",
+      Button-Medium: "16px",
+      Button-Small: "12px",
+      Caption: "14px",
+      Label: "14px",
+      Label-2: "12px",
+
+    ),
+    Letter-Spacing: (
+      Display-Large: "-1px",
+      Display-Medium: "-1px",
+      Display-Small: "-0.2px",
+      Headline-Large: "-0.2px",
+      Headline-Medium: "-0.2px",
+      Headline-Small: "-0.2px",
+      Title-Large: "-0.1px",
+      Title-Medium: "-0.1px",
+      Title-Small: "-0.1px",
+      Body-Large: "-0.1px",
+      Body-Medium: "-0.2px",
+      Body-Small: "-0.2px",
+      Button-Large: "0px",
+      Button-Medium: "0px",
+      Button-Small: "-0.1px",
+      Caption: "-0.1px",
+      Label: "-0.1px",
+      Label-2: "-0.1px",
+
+    ),
+    Weight: (
+      Display-Large: "600",
+      Display-Medium: "600",
+      Display-Small: "500",
+      Headline-Large: "600",
+      Headline-Medium: "500",
+      Headline-Small: "500",
+      Title-Large: "500",
+      Title-Medium: "600",
+      Title-Small: "600",
+      Body-Large: "500",
+      Body-Medium: "500",
+      Body-Small: "500",
+      Button-Large: "500",
+      Button-Medium: "500",
+      Button-Small: "500",
+      Caption: "500",
+      Label: "500",
+      Label-2: "500",
+
+    ),
+
+  ),
+);
+
+$typography-km: (
+  Typeface: (
+    Family: (
+      Display: "Kantumruy Pro",
+      Head: "Kantumruy Pro",
+      Title: "Kantumruy Pro",
+      Body: "Kantumruy Pro",
+      Button: "Kantumruy Pro",
+      Caption: "Kantumruy Pro",
+      Label: "Kantumruy Pro",
+      Label-2: "Kantumruy Pro",
+
+    ),
+    Size: (
+      Display-Large: "64px",
+      Display-Medium: "52px",
+      Display-Small: "44px",
+      Headline-Large: "42px",
+      Headline-Medium: "40px",
+      Headline-Small: "36px",
+      Title-Large: "24px",
+      Title-Medium: "20px",
+      Title-Small: "16px",
+      Body-Large: "20px",
+      Body-Medium: "16px",
+      Body-Small: "14px",
+      Button-Large: "18px",
+      Button-Medium: "14px",
+      Button-Small: "12px",
+      Caption: "12px",
+      Label: "11px",
+      Label-2: "10px",
+
+    ),
+    Line-height: (
+      Display-Large: "90px",
+      Display-Medium: "72px",
+      Display-Small: "64px",
+      Headline-Large: "58px",
+      Headline-Medium: "54px",
+      Headline-Small: "60px",
+      Title-Large: "36px",
+      Title-Medium: "28px",
+      Title-Small: "24px",
+      Body-Large: "28px",
+      Body-Medium: "24px",
+      Body-Small: "20px",
+      Button-Large: "24px",
+      Button-Medium: "16px",
+      Button-Small: "16px",
+      Caption: "16px",
+      Label: "16px",
+      Label-2: "14px",
+
+    ),
+    Letter-Spacing: (
+      Display-Large: "-0.2px",
+      Display-Medium: "-0.2px",
+      Display-Small: "-0.2px",
+      Headline-Large: "-0.2px",
+      Headline-Medium: "-0.2px",
+      Headline-Small: "-0.2px",
+      Title-Large: "-0.1px",
+      Title-Medium: "-0.1px",
+      Title-Small: "-0.1px",
+      Body-Large: "-0.1px",
+      Body-Medium: "-0.2px",
+      Body-Small: "-0.2px",
+      Button-Large: "0px",
+      Button-Medium: "0px",
+      Button-Small: "-0.2px",
+      Caption: "-0.2px",
+      Label: "-0.2px",
+      Label-2: "-0.2px",
+
+    ),
+    Weight: (
+      Display-Large: "600",
+      Display-Medium: "600",
+      Display-Small: "500",
+      Headline-Large: "600",
+      Headline-Medium: "500",
+      Headline-Small: "500",
+      Title-Large: "500",
+      Title-Medium: "600",
+      Title-Small: "600",
+      Body-Large: "500",
+      Body-Medium: "500",
+      Body-Small: "500",
+      Button-Large: "500",
+      Button-Medium: "500",
+      Button-Small: "500",
+      Caption: "500",
+      Label: "500",
+      Label-2: "500",
+
+    ),
+
+  ),
+);
+
+$typography-ko: (
+  Typeface: (
+    Family: (
+      Display: "Noto Sans KR",
+      Head: "Noto Sans KR",
+      Title: "Noto Sans KR",
+      Body: "Noto Sans KR",
+      Button: "Noto Sans KR",
+      Caption: "Noto Sans KR",
+      Label: "Noto Sans KR",
+      Label-2: "Noto Sans KR",
+
+    ),
+    Size: (
+      Display-Large: "64px",
+      Display-Medium: "52px",
+      Display-Small: "44px",
+      Headline-Large: "40px",
+      Headline-Medium: "40px",
+      Headline-Small: "36px",
+      Title-Large: "24px",
+      Title-Medium: "20px",
+      Title-Small: "16px",
+      Body-Large: "20px",
+      Body-Medium: "16px",
+      Body-Small: "14px",
+      Button-Large: "18px",
+      Button-Medium: "14px",
+      Button-Small: "12px",
+      Caption: "12px",
+      Label: "11px",
+      Label-2: "11px",
+
+    ),
+    Line-height: (
+      Display-Large: "88px",
+      Display-Medium: "72px",
+      Display-Small: "64px",
+      Headline-Large: "58px",
+      Headline-Medium: "52px",
+      Headline-Small: "60px",
+      Title-Large: "32px",
+      Title-Medium: "28px",
+      Title-Small: "24px",
+      Body-Large: "28px",
+      Body-Medium: "24px",
+      Body-Small: "20px",
+      Button-Large: "24px",
+      Button-Medium: "16px",
+      Button-Small: "16px",
+      Caption: "18px",
+      Label: "16px",
+      Label-2: "14px",
+
+    ),
+    Letter-Spacing: (
+      Display-Large: "-0.4px",
+      Display-Medium: "-0.4px",
+      Display-Small: "-0.4px",
+      Headline-Large: "-0.4px",
+      Headline-Medium: "-0.4px",
+      Headline-Small: "-0.4px",
+      Title-Large: "-0.4px",
+      Title-Medium: "-0.4px",
+      Title-Small: "-0.4px",
+      Body-Large: "-0.4px",
+      Body-Medium: "-0.4px",
+      Body-Small: "-0.4px",
+      Button-Large: "0px",
+      Button-Medium: "0px",
+      Button-Small: "-0.4px",
+      Caption: "-0.4px",
+      Label: "-0.4px",
+      Label-2: "-0.4px",
+
+    ),
+    Weight: (
+      Display-Large: "600",
+      Display-Medium: "600",
+      Display-Small: "500",
+      Headline-Large: "600",
+      Headline-Medium: "500",
+      Headline-Small: "500",
+      Title-Large: "500",
+      Title-Medium: "600",
+      Title-Small: "600",
+      Body-Large: "500",
+      Body-Medium: "500",
+      Body-Small: "500",
+      Button-Large: "500",
+      Button-Medium: "500",
+      Button-Small: "500",
+      Caption: "500",
+      Label: "500",
+      Label-2: "500",
+
+    ),
+
+  ),
+);
+
+// Helper functions for accessing nested maps
+
+// Get a value from a nested map
+@function map-deep-get($map, $keys...) {
+  @each $key in $keys {
+    $map: map.get($map, $key);
+    @if $map == null {
+      @return null;
+    }
+  }
+  @return $map;
+}
+
+// Get a color from color mode
+@function color($mode, $category, $name) {
+  $color-mode: map.get($color-modes, $mode);
+  @if $color-mode == null {
+    @return null;
+  }
+  
+  @return map-deep-get($color-mode, "colors", $category, $name);
+}
+
+// Get a brand color (from current color mode)
+@function brand-color($name) {
+  @return var(--Colors-PRIMARY-#{$name});
+}
+
+// Get a spacing value
+@function spacing($name) {
+  @return map.get($spacing, $name);
+}
+
+// Get a radius value
+@function radius($name) {
+  @return map.get($radius, $name);
+}
+
+// Get a typography value
+@function typography($lang, $category, $property) {
+  $typography-map: map.get($typography, $lang);
+  @if $typography-map == null {
+    @return null;
+  }
+  
+  @return map-deep-get($typography-map, $category, $property);
+}
+
+// Helper functions for accessing Style Effect tokens
+@function style-effect($mode, $component, $state, $layer, $property) {
+  @if $mode == "dark" {
+    @return map-deep-get($style-effect-dark, $component, $state, $layer, $property);
+  } @else if $mode == "light" {
+    @return map-deep-get($style-effect-light, $component, $state, $layer, $property);
+  } @else if $mode == "mode1" {
+    @return map-deep-get($style-effect-mode1, $component, $state, $layer, $property);
+  } @else {
+    @return null;
+  }
+}
+
+// Shorthand for box shadow using Style Effect tokens
+@mixin style-effect-shadow($mode, $component, $state: "Normal") {
+  $first-x: style-effect($mode, $component, $state, "First", "X-0");
+  $first-y: style-effect($mode, $component, $state, "First", "Y-0");
+  $first-blur: style-effect($mode, $component, $state, "First", "B-0");
+  $first-spread: style-effect($mode, $component, $state, "First", "S-0");
+  $first-color: style-effect($mode, $component, $state, "First", "Color");
+  
+  $second-x: style-effect($mode, $component, $state, "Second", "X-0");
+  $second-y: style-effect($mode, $component, $state, "Second", "Y-0");
+  $second-blur: style-effect($mode, $component, $state, "Second", "B-0");
+  $second-spread: style-effect($mode, $component, $state, "Second", "S-0");
+  $second-color: style-effect($mode, $component, $state, "Second", "Color");
+  
+  $third-x: style-effect($mode, $component, $state, "Third", "X-0");
+  $third-y: style-effect($mode, $component, $state, "Third", "Y-0");
+  $third-blur: style-effect($mode, $component, $state, "Third", "B-0");
+  $third-spread: style-effect($mode, $component, $state, "Third", "S-0");
+  $third-color: style-effect($mode, $component, $state, "Third", "Color");
+  
+  box-shadow: 
+    $first-x $first-y $first-blur $first-spread $first-color,
+    $second-x $second-y $second-blur $second-spread $second-color,
+    $third-x $third-y $third-blur $third-spread $third-color;
+}

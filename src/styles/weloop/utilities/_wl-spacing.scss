@@ -1,0 +1,357 @@
+// _wl-spacing.scss
+// Modern 3-layer architecture for spacing utilities (margin & padding)
+@use "sass:map";
+@use "sass:meta";
+@use "sass:list";
+@use "../abstracts/breakpoints" as *;
+
+// -----------------------------------------------
+// Layer 1: Settings - Variables and configuration
+// -----------------------------------------------
+/// @group settings
+$wl-spacing: (
+  // Spacing scale (values in rems)
+  "spacers":
+    (
+      "0": 0,
+      "1": 0.25rem,
+      // 4px
+      "2": 0.5rem,
+      // 8px
+      "3": 1rem,
+      // 16px
+      "4": 1.5rem,
+      // 24px
+      "5": 3rem,
+      // 48px
+      "6": 4.5rem,
+      // 72px
+      "7": 6rem // 96px,,
+    ),
+
+  // CSS properties to generate
+  "properties":
+    (
+      "m": "margin",
+      "p": "padding",
+    ),
+
+  // Sides and directions
+  "sides":
+    (
+      "t": (
+        "top",
+      ),
+      "b": (
+        "bottom",
+      ),
+      "s": (
+        "left",
+      ),
+      "e": (
+        "right",
+      ),
+      "x": (
+        "left",
+        "right",
+      ),
+      "y": (
+        "top",
+        "bottom",
+      ),
+      "": (
+        "top",
+        "right",
+        "bottom",
+        "left",
+      ),
+    ),
+
+  // Shortcuts for common patterns
+  "shortcuts":
+    (
+      "no-margin": (
+        "property": "margin",
+        "value": 0,
+      ),
+      "no-padding": (
+        "property": "padding",
+        "value": 0,
+      ),
+      "p-card": (
+        "property": "padding",
+        "value": 1.5rem // Same as p-4,,
+      ),
+      "p-card-sm": (
+        "property": "padding",
+        "value": 1rem // Same as p-3,,
+      ),
+      "p-card-lg": (
+        "property": "padding",
+        "value": 3rem // Same as p-5,,
+      ),
+      "mx-auto": (
+        "property": (
+          "margin-left",
+          "margin-right",
+        ),
+        "value": auto,
+      ),
+      "my-auto": (
+        "property": (
+          "margin-top",
+          "margin-bottom",
+        ),
+        "value": auto,
+      ),
+      "m-center": (
+        "property": "margin",
+        "value": auto,
+      ),
+    ),
+
+  // Configuration options
+  "config":
+    (
+      "class-prefix": "wl-",
+      "enable-responsive": true,
+      "enable-negative-margins": true,
+      "enable-auto-margins": true,
+      "enable-shortcuts": true,
+    )
+);
+
+// ---------------------------------------------
+// Layer 2: Tools - Functions and mixins
+// ---------------------------------------------
+/// @group tools
+
+/// Get configuration value
+/// @param {String} $key - The configuration key
+/// @return {*} The configuration value
+@function get-config($key) {
+  $config: map.get($wl-spacing, "config");
+
+  @if map.has-key($config, $key) {
+    @return map.get($config, $key);
+  }
+
+  @error "Configuration key '#{$key}' not found.";
+  @return null;
+}
+
+/// Create class name with proper prefix
+/// @param {String} $name - The base class name
+/// @return {String} The prefixed class name
+@function class-name($name) {
+  $prefix: get-config("class-prefix");
+  @return "#{$prefix}#{$name}";
+}
+
+/// Get spacing value from size key
+/// @param {String} $size - The size key
+/// @return {*} The spacing value
+@function get-spacing-value($size) {
+  $spacers: map.get($wl-spacing, "spacers");
+
+  @if map.has-key($spacers, $size) {
+    @return map.get($spacers, $size);
+  }
+
+  @error "Spacing size '#{$size}' not found.";
+  @return null;
+}
+
+/// Create spacing utility class
+/// @param {String} $property-key - The property key (m, p)
+/// @param {String} $property - The CSS property
+/// @param {String} $side-key - The side key (t, b, x, etc.)
+/// @param {List} $sides - List of sides
+/// @param {String} $size-key - The size key
+/// @param {*} $value - The value to apply
+/// @param {String} $breakpoint - Optional breakpoint name
+@mixin create-spacing-class(
+  $property-key,
+  $property,
+  $side-key,
+  $sides,
+  $size-key,
+  $value,
+  $breakpoint: null
+) {
+  $class-name: "#{$property-key}#{$side-key}-#{$size-key}";
+
+  @if $breakpoint {
+    $class-name: "#{$property-key}#{$side-key}-#{$breakpoint}-#{$size-key}";
+  }
+
+  .#{class-name($class-name)} {
+    @each $side in $sides {
+      #{$property}-#{$side}: $value;
+    }
+  }
+}
+
+/// Create auto margin utility class
+/// @param {String} $side-key - The side key (t, b, x, etc.)
+/// @param {List} $sides - List of sides
+/// @param {String} $breakpoint - Optional breakpoint name
+@mixin create-auto-margin-class($side-key, $sides, $breakpoint: null) {
+  $class-name: "m#{$side-key}-auto";
+
+  @if $breakpoint {
+    $class-name: "m#{$side-key}-#{$breakpoint}-auto";
+  }
+
+  .#{class-name($class-name)} {
+    @each $side in $sides {
+      margin-#{$side}: auto;
+    }
+  }
+}
+
+/// Create shortcut utility class
+/// @param {String} $name - The shortcut name
+/// @param {Map} $shortcut - The shortcut definition
+@mixin create-shortcut-class($name, $shortcut) {
+  $property: map.get($shortcut, "property");
+  $value: map.get($shortcut, "value");
+
+  .#{class-name($name)} {
+    @if meta.type-of($property) == "list" {
+      @each $prop in $property {
+        #{$prop}: $value;
+      }
+    } @else {
+      #{$property}: $value;
+    }
+  }
+}
+
+// -----------------------------------------------
+// Layer 3: Utilities - Output utility classes
+// -----------------------------------------------
+/// @group utilities
+
+/// Generate base spacing classes (non-responsive)
+@mixin generate-base-spacing-classes() {
+  $properties: map.get($wl-spacing, "properties");
+  $sides: map.get($wl-spacing, "sides");
+  $spacers: map.get($wl-spacing, "spacers");
+
+  @each $property-key, $property in $properties {
+    @each $side-key, $side-values in $sides {
+      @each $spacer-key, $spacer-value in $spacers {
+        @include create-spacing-class(
+          $property-key,
+          $property,
+          $side-key,
+          $side-values,
+          $spacer-key,
+          $spacer-value
+        );
+      }
+    }
+  }
+}
+
+/// Generate responsive spacing classes
+@mixin generate-responsive-spacing-classes() {
+  @if get-config("enable-responsive") {
+    $properties: map.get($wl-spacing, "properties");
+    $sides: map.get($wl-spacing, "sides");
+    $spacers: map.get($wl-spacing, "spacers");
+
+    @each $breakpoint, $width in $breakpoints {
+      @media (min-width: $width) {
+        @each $property-key, $property in $properties {
+          @each $side-key, $side-values in $sides {
+            @each $spacer-key, $spacer-value in $spacers {
+              @include create-spacing-class(
+                $property-key,
+                $property,
+                $side-key,
+                $side-values,
+                $spacer-key,
+                $spacer-value,
+                $breakpoint
+              );
+            }
+          }
+        }
+
+        // Responsive auto margins
+        @if get-config("enable-auto-margins") {
+          @each $side-key, $side-values in $sides {
+            @if $side-key != "" {
+              @include create-auto-margin-class(
+                $side-key,
+                $side-values,
+                $breakpoint
+              );
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+/// Generate auto margin classes (non-responsive)
+@mixin generate-auto-margin-classes() {
+  @if get-config("enable-auto-margins") {
+    $sides: map.get($wl-spacing, "sides");
+
+    @each $side-key, $side-values in $sides {
+      @if $side-key != "" {
+        @include create-auto-margin-class($side-key, $side-values);
+      }
+    }
+  }
+}
+
+/// Generate negative margin classes
+@mixin generate-negative-margin-classes() {
+  @if get-config("enable-negative-margins") {
+    $sides: map.get($wl-spacing, "sides");
+    $spacers: map.get($wl-spacing, "spacers");
+
+    @each $spacer-key, $spacer-value in $spacers {
+      @if $spacer-key != "0" {
+        @each $side-key, $side-values in $sides {
+          @include create-spacing-class(
+            "m",
+            "margin",
+            $side-key,
+            $side-values,
+            "n#{$spacer-key}",
+            -$spacer-value
+          );
+        }
+      }
+    }
+  }
+}
+
+/// Generate shortcut utility classes
+@mixin generate-shortcut-classes() {
+  @if get-config("enable-shortcuts") {
+    $shortcuts: map.get($wl-spacing, "shortcuts");
+
+    @each $name, $shortcut in $shortcuts {
+      @include create-shortcut-class($name, $shortcut);
+    }
+  }
+}
+
+/// Generate all spacing utility classes
+@mixin generate-all-spacing-utilities() {
+  @include generate-base-spacing-classes();
+  @include generate-responsive-spacing-classes();
+  @include generate-auto-margin-classes();
+  @include generate-negative-margin-classes();
+  @include generate-shortcut-classes();
+}
+
+// Output all utility classes
+@include generate-all-spacing-utilities();

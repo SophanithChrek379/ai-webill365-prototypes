@@ -1,0 +1,433 @@
+@use "sass:color";
+@use "sass:math";
+@use "../abstracts/functions" as *;
+@use "../abstracts/mixins" as *;
+
+// Spacing
+$spacing-2: var(--Spacing-WLDS-Space-2, 2px);
+$spacing-4: var(--Spacing-WLDS-Space-4, 4px);
+$spacing-6: var(--Spacing-WLDS-Space-6, 6px);
+$spacing-8: var(--Spacing-WLDS-Space-8, 8px);
+$spacing-10: var(--Spacing-WLDS-Space-10, 10px);
+
+// Border Radius
+$radius-4: var(--WLDS-Radius-4, 4px);
+$radius-6: var(--WLDS-Radius-6, 6px);
+$radius-16: var(--WLDS-Radius-16, 16px);
+$radius-24: var(--WLDS-Radius-24, 24px);
+
+// Typography
+$font-size-label: var(--Typeface-Size-Label, 11px);
+$font-size-button-small: var(--Typeface-Size-Button-Small, 12px);
+$font-size-button-medium: var(--Typeface-Size-Button-Medium, 14px);
+
+$font-weight-label: var(--Typeface-Weight-Label, 500);
+$font-weight-button-small: var(--Typeface-Weight-Button-Small, 500);
+$font-weight-button-medium: var(--Typeface-Weight-Button-Medium, 500);
+
+$line-height-label: var(--Typeface-Line-height-Label, 14px);
+$line-height-button-small: var(--Typeface-Line-height-Button-Small, 16px);
+$line-height-button-medium: var(--Typeface-Line-height-Button-Medium, 16px);
+
+$letter-spacing-label: var(--Typeface-Letter-Spacing-Label, -0.1px);
+$letter-spacing-button-small: var(
+  --Typeface-Letter-Spacing-Button-Small,
+  -0.1px
+);
+$letter-spacing-button-medium: var(
+  --Typeface-Letter-Spacing-Button-Medium,
+  0px
+);
+
+// Colors
+$color-white: var(--Forgrounds-FG-NTL-00, #fff);
+$color-border-divider: var(--Borders-BORDER-DIVIDER, #d4d4d4);
+$color-fg-disabled: var(--Forgrounds-FG-DISABLED-VALUE, #737373);
+$color-fg-ntl-08: var(--Forgrounds-FG-NTL-08, #404040);
+$color-bg-ntl-02: var(--Backgrounds-BG-NTL-02, #f5f5f5);
+
+// Badge Status Colors (grouped by type)
+// Draft
+$badge-draft-bg: var(--Tags-Neutral-Draft-TAG-DRAFT-BG, #fff);
+$badge-draft-line: var(--Tags-Neutral-Draft-TAG-DRAFT-LINE, #e5e5e5);
+$badge-draft-txt: var(--Tags-Neutral-Draft-TAG-DRAFT-TXT, #737373);
+
+// Scheduled
+$badge-scheduled-bg: var(--Tags-Neutral-Scheduled-TAG-SCHDL-BG, #f5f5f5);
+$badge-scheduled-line: var(--Tags-Neutral-Scheduled-TAG-SCHDL-LINE, #d4d4d4);
+$badge-scheduled-txt: var(--Tags-Neutral-Scheduled-TAG-SCHDL-TXT, #171717);
+
+// Progress
+$badge-progress-bg: var(--Tags-Positive-In-Progress-TAG-PROGRESS-BG, #cfebff);
+$badge-progress-line: var(
+  --Tags-Positive-In-Progress-TAG-PROGRESS-LINE,
+  #a9d5ff
+);
+$badge-progress-txt: var(--Tags-Positive-In-Progress-TAG-PROGRESS-TXT, #0021fe);
+
+// Pending
+$badge-pending-bg: var(--Tags-Neutral-Approval-Pending-TAG-PENDING-BG, #ffe7d1);
+$badge-pending-line: var(
+  --Tags-Neutral-Approval-Pending-TAG-PENDING-LINE,
+  #ffcba0
+);
+$badge-pending-txt: var(
+  --Tags-Neutral-Approval-Pending-TAG-PENDING-TXT,
+  #ff3900
+);
+
+// Partially
+$badge-partially-bg: var(--Tags-Positive-Paid-TAG-PAIDPART-BG, #fff9b4);
+$badge-partially-line: var(--Tags-Positive-Paid-TAG-PAIDPART-LINE, #ffee62);
+$badge-partially-txt: var(--Tags-Positive-Paid-TAG-PAIDPART-TXT, #b75900);
+
+// Paid
+$badge-paid-bg: var(--Tags-Positive-Paid-TAG-PAID-BG, #c9ffe3);
+$badge-paid-line: var(--Tags-Positive-Paid-TAG-PAID-LINE, #90fcca);
+$badge-paid-txt: var(--Tags-Positive-Paid-TAG-PAID-TXT, #005723);
+
+// Overpaid
+$badge-overpaid-bg: var(--Tags-Positive-Paid-TAG-PAIDOVER-BG, #00f69f);
+$badge-overpaid-line: var(--Tags-Positive-Paid-TAG-PAIDOVER-LINE, #00e667);
+
+// Closed
+$badge-closed-bg: var(--Tags-Negative-Closed-TAG-CLOSED-BG, #677283);
+$badge-closed-line: var(--Tags-Negative-Closed-TAG-CLOSED-LINE, #465566);
+$badge-closed-txt: var(--Tags-Negative-Closed-TAG-CLOSED-TXT, #f9fafb);
+
+// Overdue
+$badge-overdue-bg: var(--Tags-Negative-Overdue-TAG-DUE-BG, #ffdfe3);
+$badge-overdue-line: var(--Tags-Negative-Overdue-TAG-DUE-LINE, #ffc3ca);
+$badge-overdue-txt: var(--Tags-Negative-Overdue-TAG-DUE-TXT, #e20000);
+
+// Rejected
+$badge-rejected-bg: var(--Tags-Negative-TAG-BG-MIDDLE, #f00);
+$badge-rejected-line: var(--Tags-Negative-TAG-BG-MIDDLE, #f00);
+$badge-rejected-txt: var(--Borders-BORDER-WHITE, #fff);
+
+// Valid
+$badge-valid-bg: var(--Tags-Positive-Valid-TAG-VALID-BG, #1f62ff);
+$badge-valid-line: var(--Tags-Positive-Valid-TAG-VALID-LINE, #0834ff);
+$badge-valid-txt: var(--Tags-Positive-Valid-TAG-VALID-TXT, #e5f3ff);
+
+// Shadows
+$outline-normal: var(--Ouline-Normal-X-0, 0px) var(--Ouline-Normal-Y-0, 0px)
+  var(--Ouline-Normal-B-0, 0px) var(--Ouline-Normal-S-0, 1px);
+
+// Mixins
+@mixin badge-variant($bg, $border, $color) {
+  background-color: $bg;
+  border: 1px solid $border;
+  color: $color;
+}
+
+@mixin badge-typography($size, $weight, $line-height, $letter-spacing) {
+  font-size: $size;
+  font-weight: $weight;
+  line-height: $line-height;
+  letter-spacing: $letter-spacing;
+}
+
+// First Layer: Badge & Guide Component
+.wl-badge-guide {
+  min-height: 28px;
+  height: 28px;
+  padding: $spacing-6;
+  background-color: $badge-draft-bg;
+  border-radius: $radius-6;
+  border: 1px solid $badge-draft-line;
+  color: $badge-draft-txt;
+  @include badge-typography(
+    $font-size-button-medium,
+    $font-weight-button-medium,
+    $line-height-button-medium,
+    $letter-spacing-button-medium
+  );
+  white-space: nowrap;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  flex-shrink: 0;
+
+  // Second Layer: Size Variants
+  &-sm {
+    min-height: 24px;
+    height: 24px;
+    padding: $spacing-4;
+    border-radius: $radius-4;
+    @include badge-typography(
+      $font-size-button-small,
+      $font-weight-button-small,
+      $line-height-button-small,
+      $letter-spacing-button-small
+    );
+  }
+
+  // Second Layer: Shape Variants
+  &-rounded {
+    padding: $spacing-6 $spacing-10;
+    border-radius: $radius-24;
+
+    // Third Layer: Combined Size and Shape
+    &.wl-badge-guide-sm {
+      padding: $spacing-4 $spacing-8;
+      border-radius: $radius-16;
+    }
+  }
+
+  // Second Layer: Status Variants
+  &-draft {
+    @include badge-variant(
+      $badge-draft-bg,
+      $badge-draft-line,
+      $badge-draft-txt
+    );
+  }
+
+  &-scheduled {
+    @include badge-variant(
+      $badge-scheduled-bg,
+      $badge-scheduled-line,
+      $badge-scheduled-txt
+    );
+  }
+
+  &-progress {
+    @include badge-variant(
+      $badge-progress-bg,
+      $badge-progress-line,
+      $badge-progress-txt
+    );
+  }
+
+  &-pending {
+    @include badge-variant(
+      $badge-pending-bg,
+      $badge-pending-line,
+      $badge-pending-txt
+    );
+  }
+
+  &-partially {
+    @include badge-variant(
+      $badge-partially-bg,
+      $badge-partially-line,
+      $badge-partially-txt
+    );
+  }
+
+  &-paid {
+    @include badge-variant($badge-paid-bg, $badge-paid-line, $badge-paid-txt);
+  }
+
+  &-overpaid {
+    @include badge-variant(
+      $badge-overpaid-bg,
+      $badge-overpaid-line,
+      $badge-paid-txt
+    );
+  }
+
+  &-closed {
+    @include badge-variant(
+      $badge-closed-bg,
+      $badge-closed-line,
+      $badge-closed-txt
+    );
+  }
+
+  &-overdue {
+    @include badge-variant(
+      $badge-overdue-bg,
+      $badge-overdue-line,
+      $badge-overdue-txt
+    );
+  }
+
+  &-rejected {
+    @include badge-variant(
+      $badge-rejected-bg,
+      $badge-rejected-line,
+      $badge-rejected-txt
+    );
+  }
+
+  &-valid {
+    @include badge-variant(
+      $badge-valid-bg,
+      $badge-valid-line,
+      $badge-valid-txt
+    );
+  }
+
+  // TODO: Second Layer: Special Variants
+  &-tags {
+    width: 8px;
+    height: 8px;
+    min-width: 8px;
+    min-height: 8px;
+    border-radius: 100%;
+    background-color: var(--Positive-TAG-BG-PRM-MIDDLE, #1f62ff);
+    border: 2px solid var(--Positive-TAG-OUTL-PRM-THIN, #a9d5ff);
+
+    &.wl-badge-tags-danger {
+      background-color: var(--Negative-TAG-BG-MIDDLE, #f00);
+      border: 2px solid var(--Borders-BORDER-WHITE, #fff);
+    }
+
+    &.wl-badge-tags-lg {
+      min-width: 14px;
+      min-height: 14px;
+      width: fit-content;
+      height: fit-content;
+      padding: 0 4px;
+      background-color: $badge-rejected-bg;
+      border-radius: 10px;
+      border: 2px solid $color-white;
+      outline: auto;
+      color: $color-white;
+
+      @include badge-typography(
+        $font-size-label,
+        $font-weight-label,
+        normal,
+        $letter-spacing-label
+      );
+      text-align: center;
+      text-transform: uppercase;
+    }
+  }
+
+  &-icon {
+    padding: 0px $spacing-2;
+  }
+
+  &-text {
+    padding: 0px $spacing-4;
+  }
+
+  &-border {
+    min-height: 16px;
+    border-radius: $radius-4;
+    background-color: $color-white;
+    box-shadow: $outline-normal $color-border-divider;
+
+    // Third Layer: Status Variations
+    &[wl-status="disabled"] {
+      background-color: $color-bg-ntl-02;
+      box-shadow: $outline-normal $color-border-divider;
+    }
+  }
+}
+
+// First Layer: Guide Shortcut Component
+.wl-guide-shortcut {
+  color: $color-fg-ntl-08;
+  text-align: center;
+  @include badge-typography(
+    $font-size-button-small,
+    $font-weight-button-small,
+    $line-height-button-small,
+    $letter-spacing-button-small
+  );
+  @include wl-flex-center;
+
+  // Second Layer: Status Variations
+  &[wl-status="disabled"] {
+    color: $color-fg-disabled;
+  }
+}
+
+// First Layer: Badge Component (for media queries)
+.wl-badge {
+  // Media query styles will be nested here
+}
+
+// Media Queries
+@media (min-width: 992px) {
+  .wl-badge {
+    // Second Layer: Size Variants at Larger Screens
+    &.wl-lg {
+      font-size: 18px;
+      line-height: 24px;
+      letter-spacing: -0.18px;
+      padding: 12px;
+      border-radius: 12px;
+
+      // Third Layer: Child Elements
+      .wl-badge-icon {
+        width: 48px;
+        height: 48px;
+        border-radius: 8px;
+        gap: 6px;
+      }
+
+      svg {
+        width: 1.5rem;
+        height: 1.5rem;
+      }
+
+      .wl-title {
+        font-size: 18px;
+        line-height: 24px;
+        letter-spacing: -0.18px;
+      }
+
+      .wl-sub-title {
+        font-size: 16px;
+        line-height: 24px;
+        letter-spacing: -0.16px;
+      }
+    }
+
+    &.wl-xl {
+      padding: 24px;
+      border-radius: 16px;
+
+      // Third Layer: Child Elements
+      .wl-badge-icon {
+        width: 48px;
+        height: 48px;
+        border-radius: 8px;
+        gap: 6px;
+
+        svg {
+          width: 24px;
+          height: 24px;
+        }
+      }
+
+      .wl-title {
+        font-size: 32px;
+        line-height: normal;
+        letter-spacing: -1.28px;
+      }
+
+      .wl-sub-title {
+        font-size: 16px;
+        line-height: 24px;
+        letter-spacing: -0.16px;
+      }
+    }
+  }
+}
+
+@media (min-width: 1200px) {
+  .wl-badge {
+    &.wl-xl {
+      padding: 24px;
+      border-radius: 16px;
+
+      .wl-badge-icon {
+        width: 88px;
+        height: 88px;
+
+        svg {
+          width: 88px;
+          height: 88px;
+          margin-top: 0px;
+        }
+      }
+    }
+  }
+}

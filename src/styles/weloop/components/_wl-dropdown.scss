@@ -1,0 +1,181 @@
+@use "../abstracts/breakpoints" as *;
+@use "../abstracts/functions" as *;
+@use "../abstracts/mixins" as *;
+
+// TODO: Dropdown
+.wl-dropdown {
+  position: relative;
+  display: inline-block;
+
+  // TODO: Toggle Button
+  .wl-dropdown-toggle {
+    transition: all 0.2s ease;
+    position: relative;
+  }
+
+  // TODO: Dropdown Toggle Divider
+  .wl-toggle-divider {
+    width: 1px;
+    min-height: inherit;
+    height: inherit;
+    margin: 0 rem(2) 0 rem(4);
+    background-color: var(--Borders-BORDER-BASE-THIN, #d4d4d4);
+    display: flex;
+    align-self: stretch;
+    transition: background-color 0.3s ease;
+
+    &.wl-bg-primary {
+      background-color: var(--Positive-TAG-BG-PRM-HEAVY, #0522d1);
+    }
+  }
+
+  // TODO: WlButton (.wl-btn): Disabled
+  .wl-btn-primary {
+    &:hover {
+      .wl-toggle-divider {
+        background-color: var(--Positive-TAG-FG-PRM-MIDDLE, #0021fe);
+      }
+    }
+    &:focus {
+      background-color: var(
+        --Button-Primary-Filled-BTN-PRM-FLD-NORMAL,
+        #0021fe
+      );
+      .wl-toggle-divider {
+        background-color: var(--Positive-TAG-BG-PRM-HEAVY, #0522d1);
+      }
+    }
+    &:disabled {
+      .wl-toggle-divider {
+        background-color: var(--Borders-BORDER-BASE-THIN, #d4d4d4);
+      }
+    }
+  }
+
+  // TODO: Disabled Dropdown
+  &.wl-dropdown-disabled {
+    // TODO: Button
+    .wl-btn:not(.wl-btn-primary):not(.wl-btn-primary-outline) {
+      cursor: not-allowed;
+      user-select: none;
+
+      &:hover,
+      &:focus,
+      &:active {
+        background-color: transparent;
+        box-shadow: none;
+      }
+    }
+  }
+
+  .wl-dropdown-menu {
+    min-width: rem(160);
+    width: auto;
+    margin: rem(8) 0;
+    padding: rem(4);
+    border-radius: var(--WLDS-Radius-8, rem(8));
+    background-color: var(--Backgrounds-BG-NORMAL, #fff);
+    box-shadow: var(--Menu-First-X-0, 0px) var(--Menu-First-Y-0, 1px)
+        var(--Menu-First-B-0, 1px) var(--Menu-First-S-0, 0px)
+        var(--Menu-First-Color, rgba(0, 0, 0, 0.1)),
+      var(--Menu-Secord-X-0, 0px) var(--Menu-Secord-Y-0, 0px)
+        var(--Menu-Secord-B-0, 2px) var(--Menu-Secord-S-0, 0px)
+        var(--Menu-Secord-Color, rgba(0, 0, 0, 0.1)),
+      var(--Menu-Third-X-0, 0px) var(--Menu-Third-Y-0, 6px)
+        var(--Menu-Third-B-0, 20px) var(--Menu-Third-S-0, 0px)
+        var(--Menu-Third-Color, rgba(0, 0, 0, 0.1));
+    position: absolute;
+    top: 100%;
+    right: 0;
+    z-index: 99;
+    display: none;
+
+    &.wl-show {
+      display: block;
+    }
+  }
+
+  .wl-dropdown-menu.wl-w-100 {
+    min-width: 100%;
+    width: 100%;
+  }
+
+  // TODO: Menu sizing adjustments size: Small
+  &:has(.wl-btn-sm) .wl-dropdown-menu {
+    min-width: rem(140);
+    padding: rem(4);
+    border-radius: var(--WLDS-Radius-4, 4px);
+
+    .wl-dropdown-item {
+      padding: rem(4);
+      border-radius: var(--WLDS-Radius-2, 2px);
+      @include wl-font-style(
+        var(--Typeface-Size-Button-Small, rem(12)),
+        var(--Typeface-Weight-Button-Small, 500),
+        var(--Typeface-Line-height-Button-Small, rem(16)),
+        var(--Typeface-Letter-Spacing-Button-Small, -0.1px)
+      );
+
+      .wl-gap-8 {
+        gap: rem(4);
+      }
+    }
+  }
+
+  // TODO: Menu sizing adjustments size: Large
+  &:has(.wl-btn-lg) .wl-dropdown-menu {
+    min-width: rem(180);
+    padding: rem(4);
+    border-radius: var(--WLDS-Radius-8, rem(8));
+
+    .wl-dropdown-item {
+      min-height: rem(48);
+      padding: rem(12) rem(8);
+      border-radius: var(--WLDS-Radius-4, 4px);
+      @include wl-font-style(
+        var(--Typeface-Size-Button-Large, rem(18)),
+        var(--Typeface-Weight-Button-Medium, 500),
+        var(--Typeface-Line-height-Button-Large, rem(24)),
+        var(--Typeface-Letter-Spacing-Button-Large, 0)
+      );
+
+      .wl-gap-8 {
+        gap: rem(10);
+      }
+    }
+  }
+
+  // TODO: Dropdown Item
+  &-item {
+    width: 100%;
+    margin-bottom: rem(2);
+    padding: rem(8);
+    background-color: transparent;
+    border-radius: var(--WLDS-Radius-4, rem(4));
+    color: var(--Forgrounds-FG-BLACK, #0a0a0a);
+    @include wl-font-style(
+      var(--Typeface-Size-Button-Medium, rem(14)),
+      var(--Typeface-Weight-Button-Medium, 500),
+      var(--Typeface-Line-height-Button-Medium, rem(16)),
+      var(--Typeface-Letter-Spacing-Button-Medium, 0)
+    );
+    @include wl-text-ellipsis;
+    @include wl-aligns-center;
+    @include wl-flex-between;
+    gap: rem(8);
+    position: relative;
+    cursor: pointer;
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+
+    &:hover {
+      background-color: var(--Colors-SEMANTIC-NEUTRAL-WLDS-NTL-02, #f5f5f5);
+    }
+
+    &.wl-active {
+      background-color: var(--Colors-SEMANTIC-NEUTRAL-WLDS-NTL-02, #f5f5f5);
+    }
+  }
+}

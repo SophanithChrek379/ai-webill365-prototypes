@@ -1,0 +1,272 @@
+@use "../../abstracts/breakpoints" as *;
+@use "../../abstracts/functions" as *;
+@use "../../abstracts/mixins" as *;
+@use "sass:map";
+
+// TODO: Variables
+$wl-checkbox-size: 20px;
+$wl-checkbox-size-md: 24px;
+$wl-checkbox-radius: 4px;
+$wl-checkbox-size-lg: 32px;
+$wl-checkbox-radius-lg: var(--WLDS-Radius-6, 6px);
+$wl-checkbox-circle-radius: 100%;
+$wl-checkbox-spacing-label: var(--Spacing-WLDS-Space-8, 8px);
+$wl-checkbox-spacing-label-lg: var(--Spacing-WLDS-Space-12, 12px);
+
+// TODO: Colors
+$wl-color-bg-normal: var(--Backgrounds-BG-NORMAL, #fff);
+$wl-color-bg-hover: var(--Button-Primary-Outlined-BTN-OUTL-HOVER, #f5f5f5);
+$wl-color-bg-checked: var(--Forgrounds-FG-INTERACTIVE, #0021fe);
+$wl-color-bg-disabled: var(--Button-Disabled-BTN-DISABLED, #e5e5e5);
+$wl-color-text-normal: var(--Forgrounds-FG-TITLE, #171717);
+$wl-color-text-disabled: var(--Forgrounds-FG-DISABLED-VALUE, #737373);
+$wl-color-text-checked-circle: var(--Forgrounds-FG-INTERACTIVE, #0f1fea);
+
+// TODO: Shadow mixins
+@mixin wl-checkbox-shadow-normal {
+  box-shadow: var(--Outline-Button-Default-First-X-0, 0px)
+      var(--Outline-Button-Default-First-Y-0, 0px)
+      var(--Outline-Button-Default-First-B-0, 0px)
+      var(--Outline-Button-Default-First-S-0, 1px)
+      var(--Outline-Button-Default-First-Color, rgba(0, 0, 0, 0.17)),
+    var(--Outline-Button-Default-Second-X-0, 0px)
+      var(--Outline-Button-Default-Second-Y-0, 1px)
+      var(--Outline-Button-Default-Second-B-0, 1px)
+      var(--Outline-Button-Default-Second-S-0, 0px)
+      var(--Outline-Button-Default-Second-Color, rgba(0, 0, 0, 0.15)),
+    var(--Outline-Button-Default-Third-X-0, 0px)
+      var(--Outline-Button-Default-Third-Y-0, 2px)
+      var(--Outline-Button-Default-Third-B-0, 3px)
+      var(--Outline-Button-Default-Third-S-0, 0px)
+      var(--Outline-Button-Default-Third-Color, rgba(0, 0, 0, 0.08));
+}
+
+@mixin wl-checkbox-shadow-hover {
+  box-shadow: var(--Outline-Button-Hover-First-X-0, 0px)
+      var(--Outline-Button-Hover-First-Y-0, 0px)
+      var(--Outline-Button-Hover-First-B-0, 0px)
+      var(--Outline-Button-Hover-First-S-0, 1px)
+      var(--Outline-Button-Hover-First-Color, rgba(0, 0, 0, 0.25)),
+    var(--Outline-Button-Hover-Secord-X-0, 0px)
+      var(--Outline-Button-Hover-Secord-Y-0, 1px)
+      var(--Outline-Button-Hover-Secord-B-0, 1px)
+      var(--Outline-Button-Hover-Secord-S-0, 0px)
+      var(--Outline-Button-Hover-Secord-Color, rgba(0, 0, 0, 0.15)),
+    var(--Outline-Button-Hover-Third-X-0, 0px)
+      var(--Outline-Button-Hover-Third-Y-0, 2px)
+      var(--Outline-Button-Hover-Third-B-0, 4px)
+      var(--Outline-Button-Hover-Third-S-0, 0px)
+      var(--Outline-Button-Hover-Third-Color, rgba(0, 0, 0, 0.16));
+}
+
+@mixin wl-checkbox-shadow-focus {
+  box-shadow: var(--Primary-Button-Pressed-First-X-0, 0px)
+      var(--Primary-Button-Pressed-First-Y-0, 0px)
+      var(--Primary-Button-Pressed-First-B-0, 1px)
+      var(--Primary-Button-Pressed-First-S-0, 1px)
+      var(--Primary-Button-Pressed-First-Color, rgba(22, 51, 255, 0.16)),
+    var(--Primary-Button-Pressed-Secord-X-0, 0px)
+      var(--Primary-Button-Pressed-Secord-Y-0, 0px)
+      var(--Primary-Button-Pressed-Secord-B-0, 0px)
+      var(--Primary-Button-Pressed-Secord-S-0, 4px)
+      var(--Primary-Button-Pressed-Secord-Colors, #b2d4ff);
+}
+
+@mixin wl-checkbox-shadow-checked {
+  box-shadow: var(--Primary-Button-Normal-First-X-0, 0px)
+      var(--Primary-Button-Normal-First-Y-0, 0px)
+      var(--Primary-Button-Normal-First-B-0, 0px)
+      var(--Primary-Button-Normal-First-S-0, 1px)
+      var(--Primary-Button-Normal-First-Color, #0d21c9),
+    var(--Primary-Button-Normal-Second-X-0, 0px)
+      var(--Primary-Button-Normal-Second-Y-0, 1px)
+      var(--Primary-Button-Normal-Second-B-0, 1px)
+      var(--Primary-Button-Normal-Second-S-0, 0px)
+      var(--Primary-Button-Normal-Second-Color, rgba(13, 33, 201, 0.5)),
+    var(--Primary-Button-Normal-Third-X-0, 0px)
+      var(--Primary-Button-Normal-Third-Y-0, 2px)
+      var(--Primary-Button-Normal-Third-B-0, 3px)
+      var(--Primary-Button-Normal-Third-S-0, 0px)
+      var(--Primary-Button-Normal-Third-Color, rgba(13, 33, 201, 0.1));
+}
+
+@mixin wl-checkbox-shadow-disabled {
+  box-shadow: 0px 0px 0px 1px var(--Primary-Button-Disabled-Color, #d4d4d4);
+}
+
+// TODO: Typography mixin
+@mixin wl-checkbox-label-base {
+  font-size: var(--Typeface-Size-Button-Medium, 14px);
+  font-weight: var(--Typeface-Weight-Button-Medium, 500);
+  line-height: var(--Typeface-Line-height-Button-Medium, 16px);
+  letter-spacing: var(--Typeface-Letter-Spacing-Button-Medium, 0px);
+}
+@mixin wl-checkbox-label-large-base {
+  font-size: var(--Typeface-Size-Button-Large, 18px);
+  font-weight: var(--Typeface-Weight-Button-Medium, 500);
+  line-height: var(--Typeface-Line-height-Button-Large, 24px);
+  letter-spacing: var(--Typeface-Letter-Spacing-Button-Large, 0px);
+}
+
+// Background image URLs
+$bg-image-checked: url("data:image/svg+xml,%3Csvg width='10' height='10' viewBox='0 0 8 8' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M3.07617 7.48828C3.39551 7.48828 3.63721 7.3667 3.80127 7.12354L7.65527 1.27441C7.7168 1.18359 7.76074 1.0957 7.78711 1.01074C7.81348 0.922852 7.82666 0.839355 7.82666 0.760254C7.82666 0.543457 7.75195 0.363281 7.60254 0.219727C7.45605 0.0732422 7.27002 0 7.04443 0C6.89209 0 6.76318 0.0307617 6.65771 0.0922852C6.55225 0.153809 6.45117 0.257812 6.35449 0.404297L3.05859 5.59424L1.39746 3.57275C1.2334 3.37939 1.02832 3.28271 0.782227 3.28271C0.556641 3.28271 0.369141 3.35596 0.219727 3.50244C0.0732422 3.646 0 3.82764 0 4.04736C0 4.14697 0.0161133 4.24072 0.0483398 4.32861C0.0834961 4.4165 0.143555 4.50879 0.228516 4.60547L2.36865 7.16309C2.55615 7.37988 2.79199 7.48828 3.07617 7.48828Z' fill='%23FDFDFD'/%3E%3C/svg%3E");
+$bg-image-indeterminate: url("data:image/svg+xml,%3Csvg width='10' height='2' viewBox='0 0 10 2' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Crect width='10' height='2' rx='1' fill='%23fff' /%3E%3C/svg%3E");
+$bg-image-checked-disabled: url("data:image/svg+xml,%3Csvg width='10' height='10' viewBox='0 0 8 8' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M3.07617 7.48828C3.39551 7.48828 3.63721 7.3667 3.80127 7.12354L7.65527 1.27441C7.7168 1.18359 7.76074 1.0957 7.78711 1.01074C7.81348 0.922852 7.82666 0.839355 7.82666 0.760254C7.82666 0.543457 7.75195 0.363281 7.60254 0.219727C7.45605 0.0732422 7.27002 0 7.04443 0C6.89209 0 6.76318 0.0307617 6.65771 0.0922852C6.55225 0.153809 6.45117 0.257812 6.35449 0.404297L3.05859 5.59424L1.39746 3.57275C1.2334 3.37939 1.02832 3.28271 0.782227 3.28271C0.556641 3.28271 0.369141 3.35596 0.219727 3.50244C0.0732422 3.646 0 3.82764 0 4.04736C0 4.14697 0.0161133 4.24072 0.0483398 4.32861C0.0834961 4.4165 0.143555 4.50879 0.228516 4.60547L2.36865 7.16309C2.55615 7.37988 2.79199 7.48828 3.07617 7.48828Z' fill='%23737373'/%3E%3C/svg%3E");
+$bg-image-indeterminate-disabled: url("data:image/svg+xml,%3Csvg width='10' height='2' viewBox='0 0 10 2' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Crect width='10' height='2' rx='1' fill='%23737373' /%3E%3C/svg%3E");
+
+// TODO: Size-Mixins
+@mixin wl-checkbox-lg-base {
+  width: $wl-checkbox-size-lg;
+  min-width: $wl-checkbox-size-lg;
+  height: $wl-checkbox-size-lg;
+  min-height: $wl-checkbox-size-lg;
+  border-radius: $wl-checkbox-radius-lg;
+}
+
+// Main checkbox styles
+input[type="checkbox"] {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  width: $wl-checkbox-size;
+  min-width: $wl-checkbox-size;
+  height: $wl-checkbox-size;
+  min-height: $wl-checkbox-size;
+  border: none;
+  outline: none;
+  position: relative;
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
+  border-radius: $wl-checkbox-radius;
+  background-color: $wl-color-bg-normal;
+  @include wl-checkbox-shadow-normal;
+
+  // States
+  &:hover {
+    cursor: pointer;
+    background-color: $wl-color-bg-hover;
+    @include wl-checkbox-shadow-hover;
+  }
+
+  &:focus,
+  &:active {
+    outline: 0;
+    background-color: $wl-color-bg-normal;
+    @include wl-checkbox-shadow-focus;
+  }
+
+  // Checked and indeterminate states
+  &:checked,
+  &:indeterminate,
+  &[indeterminate="true"]:checked {
+    background-color: $wl-color-bg-checked;
+    @include wl-checkbox-shadow-checked;
+    background-repeat: no-repeat;
+    background-position: center;
+  }
+
+  // Specific checked state
+  &:checked:not(:indeterminate):not([role="switch"]) {
+    background-image: $bg-image-checked;
+  }
+
+  // Specific indeterminate state
+  &:not([role="switch"]) {
+    &:indeterminate,
+    &[indeterminate="true"]:checked {
+      background-image: $bg-image-indeterminate;
+    }
+  }
+
+  // Disabled states
+  &:disabled {
+    cursor: not-allowed;
+    user-select: none;
+    background-color: $wl-color-bg-disabled;
+    @include wl-checkbox-shadow-disabled;
+
+    &:checked:not(:indeterminate):not([role="switch"]) {
+      background-image: $bg-image-checked-disabled;
+    }
+
+    &:indeterminate,
+    &[indeterminate="true"]:checked {
+      background-color: var(--Button-Disabled-BTN-DISABLED, #e5e5e5);
+      box-shadow: 0px 0px 0px 1px var(--Primary-Button-Disabled-Color, #d4d4d4);
+      background-image: $bg-image-indeterminate-disabled !important;
+    }
+  }
+
+  // Associated label styles
+  & + label,
+  & + span {
+    margin-left: $wl-checkbox-spacing-label;
+    color: $wl-color-text-normal;
+    @include wl-checkbox-label-base;
+
+    &:hover {
+      cursor: pointer;
+    }
+  }
+
+  // Disabled label styles
+  &:disabled + label,
+  &:disabled + span {
+    cursor: not-allowed;
+    user-select: none;
+    color: $wl-color-text-disabled;
+  }
+
+  // Circle variant
+  &.wl-checkbox-circle {
+    border-radius: $wl-checkbox-circle-radius;
+
+    &:checked + label,
+    &:checked + span {
+      color: $wl-color-text-checked-circle;
+    }
+
+    &:checked:disabled + label,
+    &:checked:disabled + span {
+      color: $wl-color-text-disabled;
+    }
+  }
+
+  &.wl-checkbox-md {
+    width: $wl-checkbox-size-md;
+    height: $wl-checkbox-size-md;
+    border-radius: rem(5);
+
+    // TODO: Checked and indeterminate states
+    &:checked,
+    &:indeterminate,
+    &[indeterminate="true"]:checked {
+      background-size: rem(12) rem(12);
+    }
+
+    // TODO: Associated label styles
+    & + label,
+    & + span {
+      margin-left: $wl-checkbox-spacing-label-lg;
+      @include wl-checkbox-label-large-base;
+    }
+  }
+
+  // TODO: Size: Large
+  &.wl-checkbox-lg {
+    @include wl-checkbox-lg-base;
+
+    // TODO: Checked and indeterminate states
+    &:checked,
+    &:indeterminate,
+    &[indeterminate="true"]:checked {
+      background-size: rem(16) rem(16);
+    }
+
+    // TODO: Associated label styles
+    & + label,
+    & + span {
+      margin-left: $wl-checkbox-spacing-label-lg;
+      @include wl-checkbox-label-large-base;
+    }
+  }
+}

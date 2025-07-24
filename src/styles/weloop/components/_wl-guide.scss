@@ -1,0 +1,172 @@
+@use "../abstracts/functions" as *;
+@use "../abstracts/mixins" as *;
+
+// TODO: Guide: Shortcut (Icon, Text)
+.wl-guide-shortcut {
+  color: var(--Forgrounds-FG-NTL-08, #404040);
+  text-align: center;
+  font-size: var(--Typeface-Size-Button-Small, 12px);
+  font-weight: var(--Typeface-Weight-Button-Small, 500);
+  line-height: var(--Typeface-Line-height-Button-Small, 16px);
+  letter-spacing: var(--Typeface-Letter-Spacing-Button-Small, -0.1px);
+}
+.wl-badge-guide-icon {
+  padding: 0px var(--Spacing-WLDS-Space-2, 2px);
+}
+.wl-badge-guide-text {
+  padding: 0px var(--Spacing-WLDS-Space-4, 4px);
+}
+.wl-badge-guide-border {
+  min-height: 16px;
+  border-radius: var(--WLDS-Radius-4, 4px);
+  background-color: var(--Forgrounds-FG-NTL-00, #fff);
+  box-shadow: var(--Ouline-Normal-X-0, 0px) var(--Ouline-Normal-Y-0, 0px)
+    var(--Ouline-Normal-B-0, 0px) var(--Ouline-Normal-S-0, 1px)
+    var(--Borders-BORDER-DIVIDER, #d4d4d4);
+}
+.wl-guide-shortcut[wl-status="disabled"] {
+  color: var(--Forgrounds-FG-DISABLED-VALUE, #737373);
+}
+.wl-badge-guide-border[wl-status="disabled"] {
+  background-color: var(--Backgrounds-BG-NTL-02, #f5f5f5);
+  box-shadow: var(--Ouline-Normal-X-0, 0px) var(--Ouline-Normal-Y-0, 0px)
+    var(--Ouline-Normal-B-0, 0px) var(--Ouline-Normal-S-0, 1px)
+    var(--Borders-BORDER-DIVIDER, #d4d4d4);
+}
+
+// TODO: Guide: Storyboard Description
+.wl-guide-storyboard {
+  width: 269px;
+  border-radius: 5px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+
+  .wl-guide-header {
+    padding: 12px 12px 8px 12px;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    align-self: stretch;
+    gap: 2px;
+
+    .wl-title {
+      color: #000;
+      font-size: var(--Typeface-Size-Button-Medium, 14px);
+      font-weight: var(--Typeface-Weight-Button-Medium, 500);
+      line-height: var(--Typeface-Line-height-Button-Medium, 16px);
+      letter-spacing: var(--Typeface-Letter-Spacing-Button-Medium, 0px);
+    }
+
+    .wl-sub-title {
+      color: #000;
+      font-size: 10px;
+      font-weight: var(--Typeface-Weight-Label, 500);
+      line-height: var(--Typeface-Line-height-Label, 14px);
+      letter-spacing: var(--Typeface-Letter-Spacing-Label, -0.1px);
+      text-transform: uppercase;
+      opacity: 0.5;
+    }
+  }
+
+  .wl-guide-body {
+    padding: 12px 12px 20px 12px;
+    border-bottom-left-radius: inherit;
+    border-bottom-right-radius: inherit;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    align-self: stretch;
+    gap: 16px;
+
+    .wl-text {
+      color: #000;
+      font-size: var(--Typeface-Size-Body-Small, 14px);
+      font-weight: var(--Typeface-Weight-Body-Small, 500);
+      line-height: var(--Typeface-Line-height-Body-Small, 20px);
+      letter-spacing: var(--Typeface-Letter-Spacing-Body-Small, -0.2px);
+    }
+  }
+}
+
+// TODO: Type: Yellow
+.wl-bg-yellow {
+  background-color: #ffee92;
+
+  .wl-guide-body {
+    background-color: #fff5bd;
+  }
+}
+
+// TODO: Type: Blue
+.wl-bg-blue {
+  background-color: var(--Colors-PRIMARY-WLDS-PRM-03, #a9d5ff);
+
+  .wl-guide-body {
+    background-color: var(--Colors-PRIMARY-WLDS-PRM-02, #cfebff);
+  }
+}
+
+// TODO: Type: Green
+.wl-bg-green {
+  background-color: var(--Colors-SEMANTIC-GREEN-WLDS-GRN-03, #90fcca);
+
+  .wl-guide-body {
+    background-color: var(--Colors-SEMANTIC-GREEN-WLDS-GRN-02, #c9ffe3);
+  }
+}
+
+// TODO: Type: Red
+.wl-bg-red {
+  background-color: var(--Colors-SEMANTIC-RED-WLDS-RED-03, #ffc3ca);
+
+  .wl-guide-body {
+    background-color: var(--Colors-SEMANTIC-RED-WLDS-RED-02, #ffdfe3);
+  }
+}
+
+// TODO: Guide: Stamp
+.wl-guide-stamp {
+  min-height: 48px;
+  height: 48px;
+  display: inline-flex;
+  &::before {
+    content: "";
+    min-height: 48px;
+    height: 48px;
+    display: block;
+    background-image: url("/src/assets/stamps/overdue.png");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+  }
+}
+
+.wl-guide-stamp.wl-overpaid-stamp {
+  &::before {
+    width: 237px;
+    background-image: url("/src/assets/stamps/overpaid.png");
+  }
+}
+
+.wl-guide-stamp.wl-overdue-stamp {
+  &::before {
+    width: 228px;
+    background-image: url("/src/assets/stamps/overdue.png");
+  }
+}
+
+.wl-guide-stamp.wl-paid-stamp {
+  &::before {
+    width: 112px;
+    background-image: url("/src/assets/stamps/paid.png");
+  }
+}
+
+.wl-guide-stamp.wl-partial-paid-stamp {
+  &::before {
+    width: 358px;
+    background-image: url("/src/assets/stamps/partailly-paid.png");
+  }
+}

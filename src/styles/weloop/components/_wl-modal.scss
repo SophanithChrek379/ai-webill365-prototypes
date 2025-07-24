@@ -1,0 +1,254 @@
+@use "../abstracts/breakpoints" as *;
+@use "../abstracts/functions" as *;
+@use "../abstracts/mixins" as *;
+
+// TODO: Variables
+$wl-modal-default-icon-bg-url: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='48' height='48' viewBox='0 0 48 48' fill='none'%3E%3Cpath d='M3.875 35.4219V14.8555C3.875 11.1484 5.8724 9.16797 9.61328 9.16797H38.3724C42.1133 9.16797 44.1107 11.1484 44.1107 14.8555V35.4219C44.1107 39.1289 42.1133 41.0924 38.3724 41.0924H9.61328C5.8724 41.0924 3.875 39.1289 3.875 35.4219ZM10.1042 15.2786C11.0013 15.2786 11.7292 14.5169 11.7292 13.6367C11.7292 12.7734 11.0013 12.0286 10.1042 12.0286C9.20703 12.0286 8.47917 12.7734 8.47917 13.6367C8.47917 14.5169 9.20703 15.2786 10.1042 15.2786ZM15.1823 15.2786C16.0794 15.2786 16.8073 14.5169 16.8073 13.6367C16.8073 12.7734 16.0794 12.0286 15.1823 12.0286C14.2852 12.0286 13.5573 12.7734 13.5573 13.6367C13.5573 14.5169 14.2852 15.2786 15.1823 15.2786ZM20.2773 15.2617C21.1745 15.2617 21.9023 14.5169 21.9023 13.6367C21.9023 12.7734 21.1745 12.0286 20.2773 12.0286C19.3802 12.0286 18.6523 12.7734 18.6523 13.6367C18.6523 14.5169 19.3802 15.2617 20.2773 15.2617ZM7.64974 35.0156C7.64974 36.5729 8.44531 37.3346 9.9349 37.3346H38.0508C39.5234 37.3346 40.3359 36.5729 40.3359 35.0156V18.1224H7.64974V35.0156Z' fill='%23737373'/%3E%3C/svg%3E");
+
+// TODO: Variable: Size
+$wl-modal-default-height: rem(110);
+$wl-modal-dynamic-view-height: 100dvh;
+$wl-modal-size-default-width: rem(320);
+$wl-modal-size-hero-icon-width: rem(320);
+$wl-modal-size-loading-width: rem(400);
+$wl-modal-size-form-width: rem(480);
+$wl-modal-size-settings-width: rem(920);
+$wl-modal-size-settings-height: rem(680);
+$wl-modal-body-padding-16: var(--Spacing-WLDS-Space-16, rem(16));
+$wl-modal-border-radius: var(--WLDS-Radius-12, rem(12));
+$wl-modal-icon-size: rem(48);
+
+// TODO: Variables: Animation
+$wl-modal-animation-duration: 0.3s;
+$wl-modal-animation-transition: all $wl-modal-animation-duration ease;
+
+// TODO: Typeface: Mixin
+@mixin wl-modal-typeface-title {
+  color: var(--Forgrounds-FG-TITLE, #171717);
+  font-size: var(--Typeface-Size-Title-Medium, 20px);
+  font-weight: var(--Typeface-Weight-Title-Medium, 600);
+  line-height: var(--Typeface-Line-height-Title-Medium, 28px);
+  letter-spacing: var(--Typeface-Letter-Spacing-Title-Medium, -0.1px);
+}
+
+@mixin wl-modal-typeface-body {
+  color: var(--Forgrounds-FG-SUBTITLE, #404040);
+  font-size: var(--Typeface-Size-Body-Small, 14px);
+  font-weight: var(--Typeface-Weight-Body-Small, 500);
+  line-height: var(--Typeface-Line-height-Body-Small, 20px);
+  letter-spacing: var(--Typeface-Letter-Spacing-Body-Small, -0.2px);
+}
+
+@mixin wl-modal-overlay-base {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  opacity: 0;
+
+  // TODO: Modal Overlay
+  pointer-events: none;
+  transition: opacity $wl-modal-animation-duration ease;
+  z-index: 100;
+  visibility: hidden;
+
+  &.wl-show {
+    opacity: 1;
+    pointer-events: all;
+    visibility: visible;
+  }
+
+  .wl-modal {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+// TODO: Shadow: Mixin
+@mixin wl-modal-shadow-base {
+  background-color: var(--Backgrounds-BG-NORMAL, #fff);
+  box-shadow: 0px 6px 24px 0px rgba(0, 0, 0, 0.08),
+    0px 1px 6px 0px rgba(0, 0, 0, 0.08), 0px 0px 0px 1px rgba(0, 0, 0, 0.04);
+}
+
+// TODO: Shadow: Mixin
+@mixin wl-modal-shadow-none {
+  box-shadow: none;
+}
+
+// TODO: Background: With Image Mixin
+@mixin wl-modal-background-image-base {
+  content: "";
+  display: block;
+  width: $wl-modal-icon-size;
+  height: $wl-modal-icon-size;
+  background-image: none;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
+}
+
+// TODO: Component: Modal
+.wl-modal {
+  min-height: $wl-modal-default-height;
+  max-height: calc($wl-modal-dynamic-view-height - $wl-modal-default-height);
+  border-radius: $wl-modal-border-radius;
+  @include wl-modal-shadow-base;
+  position: relative;
+  overflow-y: auto;
+  pointer-events: auto;
+  transform: translateY(-20px);
+  transition: $wl-modal-animation-transition;
+  opacity: 0;
+
+  // TODO: Typeface: Title
+  .wl-title {
+    @include wl-modal-typeface-title;
+  }
+
+  // TODO: Typeface: Body
+  &-body {
+    padding-top: $wl-modal-body-padding-16;
+    @include wl-modal-typeface-body;
+  }
+
+  // TODO: Shadow: Mixin
+  &-shadow-none {
+    @include wl-modal-shadow-none;
+  }
+
+  // Default Type - width 320px
+  &.wl-modal-default {
+    min-width: $wl-modal-size-default-width;
+    width: $wl-modal-size-default-width;
+
+    .wl-modal-body {
+      padding-top: 0;
+    }
+  }
+
+  // Hero Icon Type - width 320px, icon inside, content centered
+  &.wl-modal-hero-icon {
+    width: $wl-modal-size-hero-icon-width;
+    min-width: $wl-modal-size-hero-icon-width;
+    @include wl-flex-column;
+    @include wl-flex-center;
+
+    .wl-modal-header {
+      width: 100%;
+      @include wl-flex-column;
+      @include wl-flex-center;
+      gap: rem(16);
+    }
+
+    .wl-modal-icon {
+      width: $wl-modal-icon-size;
+      height: $wl-modal-icon-size;
+      @include wl-flex-center;
+
+      &::before {
+        @include wl-modal-background-image-base;
+        background-image: $wl-modal-default-icon-bg-url;
+      }
+    }
+
+    .wl-modal-body {
+      padding-top: 0;
+      text-align: center;
+      @include wl-flex-center;
+    }
+
+    .wl-modal-footer {
+      width: 100%;
+      @include wl-flex-end;
+    }
+  }
+
+  // Loading Type - width 400px, min-width 400px
+  &.wl-modal-loading {
+    width: $wl-modal-size-loading-width;
+    min-width: $wl-modal-size-loading-width;
+
+    .wl-modal-header {
+      width: 100%;
+      @include wl-flex-column;
+      @include wl-flex-center;
+      gap: rem(16);
+    }
+
+    .wl-modal-icon {
+      width: $wl-modal-icon-size;
+      height: $wl-modal-icon-size;
+      @include wl-flex-center;
+
+      &::before {
+        @include wl-modal-background-image-base;
+        background-image: $wl-modal-default-icon-bg-url;
+      }
+    }
+
+    .wl-modal-body {
+      padding-top: 0;
+      text-align: center;
+      @include wl-flex-center;
+    }
+
+    .wl-modal-footer {
+      display: flex;
+      justify-content: flex-end;
+      width: 100%;
+    }
+  }
+
+  // TODO: System Setting Type - width 1024px, min-width 1024px
+  &.wl-modal-settings {
+    width: $wl-modal-size-settings-width;
+    min-width: $wl-modal-size-settings-width;
+    height: $wl-modal-size-settings-height;
+
+    .wl-modal-body {
+      height: 100%;
+      @include wl-flex-center;
+    }
+
+    .wl-modal-footer {
+      width: 100%;
+      margin-top: auto;
+      @include wl-flex-end;
+    }
+  }
+
+  // Form Type - width 480px, min-width 480px
+  &.wl-modal-form {
+    width: $wl-modal-size-form-width;
+    min-width: $wl-modal-size-form-width;
+
+    .wl-modal-body {
+      padding-top: 0;
+    }
+  }
+
+  // For all types, apply modal-specific content padding and button styles
+  .wl-modal-header,
+  .wl-modal-body,
+  .wl-modal-footer {
+    padding: rem(16);
+  }
+
+  .wl-modal-footer {
+    width: 100%;
+    @include wl-flex-end;
+    gap: rem(8);
+  }
+
+  // TODO: Component: Modal Overlay
+  &-overlay {
+    @include wl-modal-overlay-base;
+  }
+
+  .wl-hidden {
+    display: none;
+  }
+}

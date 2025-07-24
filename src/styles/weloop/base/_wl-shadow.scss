@@ -1,0 +1,292 @@
+@use "sass:map";
+@use "sass:color";
+@use "sass:math";
+
+// ------------------------------------------------
+// LOCAL VARIABLES
+// ------------------------------------------------
+
+// TODO: Base shadow colors
+$shadow-color-neutral: rgba(0, 0, 0, 0.1) !default;
+$shadow-color-dense: rgba(0, 0, 0, 0.15) !default;
+$shadow-color-intense: rgba(0, 0, 0, 0.25) !default;
+$shadow-color-outline: #d4d4d4 !default;
+$shadow-color-primary: #0021fe !default;
+$shadow-color-primary-light: #83b7ff !default;
+$shadow-color-primary-medium: #b2d4ff !default;
+$shadow-color-primary-transparent: rgba(22, 51, 255, 0.16) !default;
+$shadow-color-neutral-transparent: rgba(105, 114, 129, 0.16) !default;
+
+// TODO: Shadow elevation levels
+$shadow-elevations: (
+  "none": none,
+  
+  // Subtle elevation (cards, panels)
+  "xs": (
+    0 0 0 1px $shadow-color-outline
+  ),
+  
+  // Low elevation (cards, buttons)
+  "sm": (
+    0 1px 1px 0 $shadow-color-neutral,
+    0 0 1px 0 $shadow-color-neutral
+  ),
+  
+  // Medium elevation (dropdowns, popovers)
+  "md": (
+    0 1px 1px 0 $shadow-color-neutral,
+    0 0 2px 0 $shadow-color-neutral,
+    0 4px 8px 0 $shadow-color-neutral
+  ),
+  
+  // High elevation (modals, dialogs)
+  "lg": (
+    0 1px 1px 0 $shadow-color-neutral,
+    0 0 2px 0 $shadow-color-neutral,
+    0 6px 20px 0 $shadow-color-neutral
+  ),
+  
+  // Extreme elevation (tooltips, fullscreen modals)
+  "xl": (
+    0 2px 2px 0 $shadow-color-neutral,
+    0 1px 5px 0 $shadow-color-dense,
+    0 8px 30px 0 $shadow-color-neutral
+  )
+) !default;
+
+// TODO: Component specific shadows
+$shadow-components: (
+  // Card shadows
+  "card": (
+    "normal": 0 0 0 1px $shadow-color-outline,
+    "hover": (
+      0 0 0 1px $shadow-color-intense,
+      0 1px 1px 0 $shadow-color-dense,
+      0 2px 4px 0 $shadow-color-neutral
+    ),
+    "active": (
+      0 0 1px 1px $shadow-color-neutral-transparent,
+      0 0 0 4px #d0d5dc
+    )
+  ),
+  
+  // Button shadows
+  "button": (
+    "outline": (
+      "normal": 0 0 0 1px $shadow-color-outline,
+      "hover": (
+        0 0 0 1px $shadow-color-intense,
+        0 1px 1px 0 $shadow-color-dense,
+        0 2px 4px 0 $shadow-color-neutral
+      ),
+      "active": (
+        0 0 1px 1px $shadow-color-neutral-transparent,
+        0 0 0 4px #d0d5dc
+      ),
+      "disabled": 0 0 0 1px $shadow-color-outline
+    ),
+    "primary": (
+      "normal": none,
+      "hover": (
+        0 0 0 1px #0920f4,
+        0 1px 1px 0 rgba(9, 32, 244, 0.5),
+        0 2px 3px 0 rgba(13, 33, 201, 0.1)
+      ),
+      "active": (
+        0 0 1px 1px $shadow-color-primary-transparent,
+        0 0 0 4px $shadow-color-primary-medium
+      ),
+      "disabled": 0 0 0 1px $shadow-color-outline
+    ),
+    "text": (
+      "normal": none,
+      "hover": none,
+      "active": 0 0 0 4px $shadow-color-primary-light,
+      "disabled": none
+    )
+  ),
+  
+  // Dropdown & Menu shadows
+  "menu": (
+    0 1px 1px 0 $shadow-color-neutral,
+    0 0 2px 0 $shadow-color-neutral,
+    0 6px 20px 0 $shadow-color-neutral
+  ),
+  
+  // Form element shadows
+  "input": (
+    "focus": (
+      0 0 0 1px $shadow-color-primary,
+      0 0 0 4px rgba(0, 33, 254, 0.16)
+    ),
+    "error": (
+      0 0 0 1px #dc3545,
+      0 0 0 4px rgba(220, 53, 69, 0.16)
+    )
+  ),
+  
+  // File upload
+  "upload": (
+    "active": (
+      0 0 1px 1px $shadow-color-primary-transparent,
+      0 0 0 4px $shadow-color-primary-medium
+    )
+  )
+) !default;
+
+// ------------------------------------------------
+// MIXINS & FUNCTIONS
+// ------------------------------------------------
+
+// TODO: Get shadow by elevation level
+@function get-elevation-shadow($level) {
+  @if map.has-key($shadow-elevations, $level) {
+    @return map.get($shadow-elevations, $level);
+  } @else {
+    @warn "Elevation level `#{$level}` not found in $shadow-elevations map.";
+    @return none;
+  }
+}
+
+// TODO: Get component shadow
+@function get-component-shadow($component, $variant: null, $state: null) {
+  @if not map.has-key($shadow-components, $component) {
+    @warn "Component `#{$component}` not found in $shadow-components map.";
+    @return none;
+  }
+  
+  $component-shadows: map.get($shadow-components, $component);
+  
+  @if $variant != null {
+    @if not map.has-key($component-shadows, $variant) {
+      @warn "Variant `#{$variant}` not found in component `#{$component}` shadows.";
+      @return none;
+    }
+    
+    $variant-shadows: map.get($component-shadows, $variant);
+    
+    @if $state != null {
+      @if not map.has-key($variant-shadows, $state) {
+        @warn "State `#{$state}` not found in component `#{$component}` variant `#{$variant}` shadows.";
+        @return none;
+      }
+      
+      @return map.get($variant-shadows, $state);
+    } @else {
+      @return $variant-shadows;
+    }
+  } @else {
+    @return $component-shadows;
+  }
+}
+
+// TODO: Apply shadow by elevation
+@mixin shadow-elevation($level) {
+  box-shadow: get-elevation-shadow($level);
+}
+
+// TODO: Apply component shadow
+@mixin shadow-component($component, $variant: null, $state: null) {
+  box-shadow: get-component-shadow($component, $variant, $state);
+}
+
+// Custom shadow mixin
+@mixin shadow-custom($x, $y, $blur, $spread, $color, $type: null) {
+  @if $type == "inset" {
+    box-shadow: inset $x $y $blur $spread $color;
+  } @else {
+    box-shadow: $x $y $blur $spread $color;
+  }
+}
+
+// TODO: Multiple shadows mixin
+@mixin shadow-multiple($shadows...) {
+  box-shadow: $shadows;
+}
+
+// ------------------------------------------------
+// UTILITY CLASSES
+// ------------------------------------------------
+
+// Elevation shadow classes
+.wl-shadow {
+  @each $level, $shadow in $shadow-elevations {
+    &-#{$level} {
+      box-shadow: $shadow;
+    }
+  }
+  
+  // Card shadows
+  &-card {
+    box-shadow: get-component-shadow("card", "normal");
+    
+    &-hover {
+      box-shadow: get-component-shadow("card", "hover");
+    }
+    
+    &-active {
+      box-shadow: get-component-shadow("card", "active");
+    }
+  }
+  
+  // Dropdown/Menu shadows
+  &-menu {
+    box-shadow: get-component-shadow("menu");
+  }
+  
+  // File upload
+  &-upload {
+    &-active {
+      box-shadow: get-component-shadow("upload", "active");
+    }
+  }
+  
+  // Special: No shadow
+  &-none {
+    box-shadow: none;
+  }
+}
+
+// TODO:Usage examples:
+// 
+// 1. Using the mixins in SCSS:
+// .my-card {
+//   @include shadow-elevation("sm");
+//   
+//   &:hover {
+//     @include shadow-elevation("md");
+//   }
+// }
+// 
+// 2. Using component-specific shadows:
+// .my-button {
+//   @include shadow-component("button", "primary", "normal");
+//   
+//   &:hover {
+//     @include shadow-component("button", "primary", "hover");
+//   }
+// }
+// 
+// 3. Using utility classes in HTML:
+// <div class="wl-shadow-sm">Low elevation card</div>
+// <div class="wl-shadow-card">Card with normal shadow</div>
+// <div class="wl-shadow-menu">Menu with dropdown shadow</div>
+// 
+// 4. For components with built-in shadows (buttons, inputs), use component mixins:
+// .wl-btn-primary {
+//   // This is better handled inside the button component itself
+//   @include shadow-component("button", "primary", "normal");
+// }
+//
+// 5. Custom shadow:
+// .custom-element {
+//   @include shadow-custom(0, 4px, 8px, 0, rgba(0, 0, 0, 0.2));
+// }
+//
+// 6. Multiple custom shadows:
+// .advanced-element {
+//   @include shadow-multiple(
+//     0 0 0 1px rgba(0, 0, 0, 0.1),
+//     0 4px 8px 0 rgba(0, 0, 0, 0.2)
+//   );
+// }

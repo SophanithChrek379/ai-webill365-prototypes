@@ -1,0 +1,240 @@
+@use "sass:color";
+@use "sass:math";
+@use "../abstracts/functions" as *;
+@use "../abstracts/mixins" as *;
+
+// Variables
+$color-bg-white: var(--Backgrounds-BG-NTL-00, #fff);
+$color-bg-light-gray: var(--Backgrounds-BG-NTL-04, #d4d4d4);
+$color-black: var(--Pablo-Solid-Black, #000);
+$color-tag-draft: var(--Tags-Neutral-Draft-TAG-DRAFT-TXT, #737373);
+$color-gray-text: var(--We-Grey-Text, #666);
+$color-border: var(--wl-border-color);
+
+$spacing-12: var(--Spacing-WLDS-Space-12, 12px);
+$spacing-24: var(--Spacing-WLDS-Space-24, 24px);
+
+$font-size-button-medium: var(--Typeface-Size-Button-Medium, 14px);
+$font-size-body-small: var(--Typeface-Size-Body-Small, 14px);
+$font-size-title-medium: var(--Typeface-Size-Title-Medium, 20px);
+
+$font-weight-button-medium: var(--Typeface-Weight-Button-Medium, 500);
+$font-weight-body-small: var(--Typeface-Weight-Body-Small, 500);
+$font-weight-title-medium: var(--Typeface-Weight-Title-Medium, 500);
+
+$line-height-button-medium: var(--Typeface-Line-height-Button-Medium, 16px);
+$line-height-body-small: var(--Typeface-Line-height-Body-Small, 20px);
+$line-height-title-medium: var(--Typeface-Line-height-Title-Medium, 28px);
+
+$letter-spacing-button-medium: var(
+  --Typeface-Letter-Spacing-Button-Medium,
+  0px
+);
+$letter-spacing-body-small: var(--Typeface-Letter-Spacing-Body-Small, -0.2px);
+$letter-spacing-title-medium: var(
+  --Typeface-Letter-Spacing-Title-Medium,
+  -0.1px
+);
+
+@mixin wl-title-text {
+  font-size: $font-size-title-medium;
+  font-weight: $font-weight-title-medium;
+  line-height: $line-height-title-medium;
+  letter-spacing: $letter-spacing-title-medium;
+}
+
+// First Layer: Layout Components
+.wl-page {
+  // Second Layer: Header Components
+  &-header {
+    min-height: 48px;
+    padding: $spacing-12;
+    background-color: $color-bg-white;
+    border-bottom: 1px solid $color-bg-light-gray;
+    @include wl-flex-center;
+    align-self: stretch;
+    position: relative;
+
+    // Third Layer: Header Elements
+    .wl-header {
+      &-navigation {
+        max-height: 18px;
+        margin-right: 0.5rem;
+        display: inline-flex;
+        align-items: center;
+        gap: 0.125rem;
+
+        .wl-chevron-left-icon {
+          background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='18' height='19' viewBox='0 0 18 19' fill='%23737373'%3E%3Cpath d='M4.81641 10.3135C4.82275 10.0532 4.91162 9.8374 5.12109 9.63428L10.0088 4.85449C10.1675 4.68945 10.3643 4.61328 10.6055 4.61328C11.0815 4.61328 11.4624 4.98779 11.4624 5.46387C11.4624 5.69873 11.3672 5.91455 11.1958 6.08594L6.854 10.3071L11.1958 14.541C11.3672 14.7124 11.4624 14.9219 11.4624 15.1631C11.4624 15.6392 11.0815 16.02 10.6055 16.02C10.3706 16.02 10.1675 15.9375 10.0088 15.7725L5.12109 10.9927C4.91162 10.7896 4.81641 10.5737 4.81641 10.3135Z'/%3E%3C/svg%3E");
+          &:hover {
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='18' height='19' viewBox='0 0 18 19' fill='%23171717'%3E%3Cpath d='M4.81641 10.3135C4.82275 10.0532 4.91162 9.8374 5.12109 9.63428L10.0088 4.85449C10.1675 4.68945 10.3643 4.61328 10.6055 4.61328C11.0815 4.61328 11.4624 4.98779 11.4624 5.46387C11.4624 5.69873 11.3672 5.91455 11.1958 6.08594L6.854 10.3071L11.1958 14.541C11.3672 14.7124 11.4624 14.9219 11.4624 15.1631C11.4624 15.6392 11.0815 16.02 10.6055 16.02C10.3706 16.02 10.1675 15.9375 10.0088 15.7725L5.12109 10.9927C4.91162 10.7896 4.81641 10.5737 4.81641 10.3135Z'/%3E%3C/svg%3E");
+          }
+        }
+        .wl-chevron-right-icon {
+          background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='18' height='19' viewBox='0 0 18 19' fill='%23737373'%3E%3Cpath d='M13.1763 10.3135C13.1763 10.5737 13.0874 10.7896 12.8779 10.9927L7.99023 15.7725C7.8252 15.9375 7.62842 16.02 7.39355 16.02C6.91748 16.02 6.53027 15.6392 6.53027 15.1631C6.53027 14.9219 6.63184 14.7124 6.80322 14.541L11.145 10.3071L6.80322 6.08594C6.63184 5.91455 6.53027 5.69873 6.53027 5.46387C6.53027 4.98779 6.91748 4.61328 7.39355 4.61328C7.62842 4.61328 7.8252 4.68945 7.99023 4.85449L12.8779 9.63428C13.0811 9.8374 13.1763 10.0532 13.1763 10.3135Z'/%3E%3C/svg%3E");
+          &:hover {
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='18' height='19' viewBox='0 0 18 19' fill='%23171717'%3E%3Cpath d='M13.1763 10.3135C13.1763 10.5737 13.0874 10.7896 12.8779 10.9927L7.99023 15.7725C7.8252 15.9375 7.62842 16.02 7.39355 16.02C6.91748 16.02 6.53027 15.6392 6.53027 15.1631C6.53027 14.9219 6.63184 14.7124 6.80322 14.541L11.145 10.3071L6.80322 6.08594C6.63184 5.91455 6.53027 5.69873 6.53027 5.46387C6.53027 4.98779 6.91748 4.61328 7.39355 4.61328C7.62842 4.61328 7.8252 4.68945 7.99023 4.85449L12.8779 9.63428C13.0811 9.8374 13.1763 10.0532 13.1763 10.3135Z'/%3E%3C/svg%3E");
+          }
+        }
+      }
+
+      &-content {
+        flex: 1;
+        min-width: 0;
+      }
+
+      &-title-container {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+      }
+
+      &-title {
+        color: $color-black;
+        font-size: $font-size-body-small;
+        font-weight: $font-weight-body-small;
+        line-height: $line-height-body-small;
+        letter-spacing: $letter-spacing-body-small;
+        @include wl-text-ellipsis;
+      }
+
+      &-subtitle {
+        color: $color-tag-draft;
+        font-size: $font-size-button-medium;
+        font-weight: $font-weight-button-medium;
+        line-height: $line-height-button-medium;
+        letter-spacing: $letter-spacing-button-medium;
+      }
+
+      &-actions {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        margin-left: auto;
+
+        &:has(.wl-btn-icon) {
+          max-height: 18px;
+        }
+
+        &:hover {
+          cursor: pointer;
+        }
+      }
+    }
+
+    // Breadcrumb Styles inside Header
+    &:has(.wl-breadcrumb) {
+      padding: $spacing-24 0;
+      min-height: auto;
+      background-color: transparent;
+      border-bottom: none;
+    }
+
+    &:has(.wl-header-title-container + .wl-breadcrumb) {
+      .wl-header-title-container {
+        display: none;
+      }
+    }
+
+    // TODO: Button Icon Component: Mixins and Classname
+    @mixin wl-btn-icon-size($size) {
+      width: $size;
+      min-width: $size;
+      max-width: $size;
+      height: $size;
+      min-height: $size;
+      max-height: $size;
+    }
+    button.wl-btn-icon {
+      @include wl-btn-icon-size(18px);
+    }
+  }
+
+  // Modal Header
+  &-modal-header {
+    padding: 1rem;
+    border-bottom: 1px solid $color-border;
+    @include wl-flex-center;
+    align-self: stretch;
+    position: relative;
+    gap: 1rem;
+  }
+}
+
+// Second Layer: Breadcrumb Component
+.wl-breadcrumb {
+  padding: 0px;
+  background-color: transparent;
+  border-radius: 0px;
+  display: flex;
+  flex-wrap: wrap;
+  list-style: none;
+
+  // Third Layer: Breadcrumb Items
+  .wl-breadcrumb-item {
+    position: relative;
+
+    & + .wl-breadcrumb-item {
+      padding-left: 32px;
+
+      &::before {
+        content: "";
+        margin: 0 0.5rem;
+        width: 18px;
+        height: 18px;
+        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='18' height='19' viewBox='0 0 18 19' fill='currentColor'%3E%3Cpath d='M13.1763 10.3135C13.1763 10.5737 13.0874 10.7896 12.8779 10.9927L7.99023 15.7725C7.8252 15.9375 7.62842 16.02 7.39355 16.02C6.91748 16.02 6.53027 15.6392 6.53027 15.1631C6.53027 14.9219 6.63184 14.7124 6.80322 14.541L11.145 10.3071L6.80322 6.08594C6.63184 5.91455 6.53027 5.69873 6.53027 5.46387C6.53027 4.98779 6.91748 4.61328 7.39355 4.61328C7.62842 4.61328 7.8252 4.68945 7.99023 4.85449L12.8779 9.63428C13.0811 9.8374 13.1763 10.0532 13.1763 10.3135Z' fill='%23171717'/%3E%3C/svg%3E");
+        background-size: contain;
+        background-repeat: no-repeat;
+        position: absolute;
+        top: 50%;
+        left: 0%;
+        transform: translateY(-50%);
+      }
+    }
+
+    a {
+      color: $color-gray-text;
+      @include wl-title-text;
+      transition: color 0.15s ease-in-out;
+      text-decoration: none;
+
+      &:hover {
+        color: $color-black;
+      }
+    }
+
+    &.wl-active {
+      color: $color-black;
+      @include wl-title-text;
+    }
+  }
+}
+
+// Media Queries
+@media (max-width: 768px) {
+  .wl-header {
+    &-title h1 {
+      font-size: 1.125rem;
+    }
+
+    &-navigation {
+      display: none;
+    }
+  }
+}
+
+.wl-badge-position-top-right {
+  position: absolute;
+  top: -10px;
+  right: -16px;
+}
+
+.wl-button-wrap {
+  display: inline-flex;
+  align-items: center;
+  gap: rem(8);
+
+  &.wl-gap-24 {
+    gap: rem(24);
+  }
+}

@@ -1,0 +1,241 @@
+@use "sass:color";
+@use "sass:meta";
+@use "sass:map";
+@use "sass:math";
+@use "../abstracts/breakpoints" as *;
+
+// TODO: Local configuration
+// ------------------------------------------------
+
+// TODO: Base font size (for rem calculations)
+$base-font-size: 16px !default;
+
+// Font size scale (in rem)
+$font-sizes: (
+  "xs": 0.75rem,
+  // 12px
+  "sm": 0.875rem,
+  // 14px
+  "base": 1rem,
+  // 16px
+  "md": 1.125rem,
+  // 18px
+  "lg": 1.25rem,
+  // 20px
+  "xl": 1.5rem,
+  // 24px
+  "2xl": 1.875rem,
+  // 30px
+  "3xl": 2.25rem,
+  // 36px
+  "4xl": 3rem,
+  // 48px
+  "5xl": 3.75rem,
+  // 60px
+  "6xl": 4.5rem // 72px,,,,,,,,,,,,
+) !default;
+
+// TODO: Functions
+// ------------------------------------------------
+
+// TODO: Convert px to rem
+@function rem($px, $base: $base-font-size) {
+  @return ($px / $base) * 1rem;
+}
+
+// TODO: Convert rem to px
+@function px($rem, $base: $base-font-size) {
+  @return ($rem * $base) / 1px;
+}
+
+// TODO: Get font size from map
+@function font-size($key) {
+  @if map.has-key($font-sizes, $key) {
+    @return map.get($font-sizes, $key);
+  } @else {
+    @error "Font size '#{$key}' not found in $font-sizes map.";
+    @return null;
+  }
+}
+
+// TODO: Mixins
+// ------------------------------------------------
+
+// TODO: Set font size
+@mixin font-size($size, $important: false) {
+  @if map.has-key($font-sizes, $size) {
+    font-size: map.get($font-sizes, $size) if($important, !important, null);
+  } @else if meta.type-of($size) == "number" {
+    font-size: $size if($important, !important, null);
+  } @else {
+    @error "Invalid font size value: #{$size}";
+  }
+}
+
+// TODO: Set responsive font size (fluid typography)
+@mixin responsive-font-size(
+  $min-size,
+  $max-size,
+  $min-width: "sm",
+  $max-width: "xl"
+) {
+  $min-size-value: if(
+    meta.type-of($min-size) == "string",
+    font-size($min-size),
+    $min-size
+  );
+  $max-size-value: if(
+    meta.type-of($max-size) == "string",
+    font-size($max-size),
+    $max-size
+  );
+
+  $min-width-value: get-breakpoint-size($min-width);
+  $max-width-value: get-breakpoint-size($max-width);
+
+  font-size: $min-size-value;
+
+  @media (min-width: $min-width-value) {
+    font-size: calc(
+      #{$min-size-value} + #{strip-unit($max-size-value - $min-size-value)} *
+        (
+          (100vw - #{$min-width-value}) / #{strip-unit(
+              $max-width-value - $min-width-value
+            )}
+        )
+    );
+  }
+
+  @media (min-width: $max-width-value) {
+    font-size: $max-size-value;
+  }
+}
+
+// TODO: Helper function to strip units
+@function strip-unit($number) {
+  @if meta.type-of($number) == "number" and not math.is-unitless($number) {
+    @return math.div($number, ($number * 0 + 1));
+  }
+  @return $number;
+}
+
+// TODO: Class Generation
+// ------------------------------------------------
+
+// TODO: Font size utility classes
+.wl-fs {
+  @each $size, $value in $font-sizes {
+    &-#{$size} {
+      @include font-size($size);
+    }
+  }
+}
+
+// TODO: Responsive font size utilities
+@each $breakpoint in (sm, md, lg, xl, xxl) {
+  @include breakpoint-up($breakpoint) {
+    @each $size, $value in $font-sizes {
+      .wl-#{$breakpoint}\:fs-#{$size} {
+        @include font-size($size);
+      }
+    }
+  }
+}
+
+// TODO: Fluid typography helper classes
+.wl-fs-fluid {
+  &-sm {
+    @include responsive-font-size("sm", "base");
+  }
+
+  &-base {
+    @include responsive-font-size("base", "lg");
+  }
+
+  &-md {
+    @include responsive-font-size("md", "xl");
+  }
+
+  &-lg {
+    @include responsive-font-size("lg", "2xl");
+  }
+
+  &-xl {
+    @include responsive-font-size("xl", "3xl");
+  }
+
+  &-2xl {
+    @include responsive-font-size("2xl", "4xl");
+  }
+
+  &-3xl {
+    @include responsive-font-size("3xl", "5xl");
+  }
+
+  &-display {
+    @include responsive-font-size("4xl", "6xl");
+  }
+}
+
+// Helper classes for common text combinations
+.wl-text-xs {
+  @include font-size("xs");
+}
+
+.wl-text-sm {
+  @include font-size("sm");
+}
+
+.wl-text-base {
+  @include font-size("base");
+}
+
+.wl-text-md {
+  @include font-size("md");
+}
+
+.wl-text-lg {
+  @include font-size("lg");
+}
+
+.wl-text-xl {
+  @include font-size("xl");
+}
+
+.wl-text-2xl {
+  @include font-size("2xl");
+}
+
+.wl-text-3xl {
+  @include font-size("3xl");
+}
+
+.wl-text-4xl {
+  @include font-size("4xl");
+}
+
+// TODO: Usage examples:
+//
+// 1. Basic font sizes:
+// <p class="wl-fs-base">Default paragraph text</p>
+// <h1 class="wl-fs-3xl">Large heading</h1>
+//
+// 2. Responsive font sizes:
+// <h2 class="wl-fs-lg wl-md:fs-xl wl-lg:fs-2xl">Responsive heading</h2>
+//
+// 3. Fluid typography:
+// <h1 class="wl-fs-fluid-display">Fluid display heading</h1>
+// <p class="wl-fs-fluid-base">Fluid body text</p>
+//
+// 4. Using the helper classes:
+// <small class="wl-text-sm">Smaller text</small>
+//
+// 5. Using in SCSS:
+// .my-custom-element {
+//   @include font-size('xl');
+// }
+//
+// 6. Using the functions:
+// .custom-size {
+//   font-size: rem(22px);
+// }

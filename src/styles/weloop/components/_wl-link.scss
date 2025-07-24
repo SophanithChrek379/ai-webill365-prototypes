@@ -1,0 +1,10 @@
+@use "../abstracts/functions" as *;
+@use "../abstracts/mixins" as *;
+
+a:has(button) {
+  text-decoration: none;
+}
+a.wl-text-dedoration-none,
+a:has(.wl-text-dedoration-none) {
+  text-decoration: none;
+}

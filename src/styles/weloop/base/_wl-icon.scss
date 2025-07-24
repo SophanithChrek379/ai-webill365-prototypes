@@ -1,0 +1,124 @@
+@use "./wl-colors-samples" as *;
+@use "sass:map";
+@use "../abstracts/breakpoints" as *;
+@use "../abstracts/functions" as *;
+@use "../abstracts/mixins" as *;
+
+// Configuration: Icon sizes (supports named and custom sizes)
+$icon-sizes: (
+  "sm": 0.75rem,
+  "md": 0.875rem,
+  "default": 1rem,
+  "lg": 1.5rem,
+  "xl": 2rem,
+) !default;
+
+// Configuration: Valid icon names (for reference and validation)
+$icon-names: (docs, eye, eye-hide, wifi, clear-circle) !default;
+
+// Mixin: Base icon styles for <wl-icon> custom element
+@mixin icon-base {
+  // display: inline-block;
+  // vertical-align: middle;
+  @include wl-flex-center;
+  width: map.get($icon-sizes, default);
+  height: map.get($icon-sizes, default);
+  fill: currentColor; // Drives SVG fill via Shadow DOM
+  vector-effect: non-scaling-stroke; // Prevent stroke scaling issues
+  transform-origin: center; // Ensure scaling/rotation is centered
+  transition: transform 0.25s ease;
+  overflow: hidden;
+
+  // Accessibility: Respect Web Component attributes
+  &[aria-hidden="true"] {
+    pointer-events: none;
+  }
+  &[role="img"] {
+    outline: none;
+  }
+}
+
+// Mixin: Size-specific styles
+@mixin icon-size($size) {
+  @if map.has-key($icon-sizes, $size) {
+    width: map.get($icon-sizes, $size);
+    height: map.get($icon-sizes, $size);
+  } @else {
+    @warn "Invalid icon size: #{$size}. Available: #{map.keys($icon-sizes)}";
+  }
+}
+
+// Mixin: Utility styles (e.g., color, transform)
+@mixin icon-utility($property, $value) {
+  #{$property}: $value;
+}
+
+// Mixin: Color utilities using wl-colors
+@mixin icon-color($color-key) {
+  @if map.has-key($wl-foreground-colors, $color-key) {
+    @include icon-utility(fill, map.get($wl-foreground-colors, $color-key));
+  } @else {
+    @warn "Invalid color key: #{$color-key}. Available: #{map.keys($wl-foreground-colors)}";
+  }
+}
+
+// Base icon styles
+.wl-icon {
+  @include icon-base;
+
+  // Size modifiers (e.g., .wl-icon-sm, .wl-icon-default, .wl-icon-lg, .wl-icon-small, .wl-icon-large)
+  @each $size in map.keys($icon-sizes) {
+    &.wl-icon-#{$size} {
+      @include icon-size($size);
+      svg {
+        width: 100%;
+        height: 100%;
+      }
+    }
+  }
+
+  // Custom sizes via size attribute (e.g., size="20")
+  &[size] {
+    width: var(--icon-size, map.get($icon-sizes, default));
+    height: var(--icon-size, map.get($icon-sizes, default));
+  }
+}
+
+// Color utility classes
+.wl-icon-color-primary {
+  @include icon-color("primary");
+}
+
+.wl-icon-color-fail {
+  @include icon-color("fail");
+}
+
+.wl-icon-color-disabled {
+  @include icon-color("disabled");
+}
+
+// Rotation utility classes
+.wl-icon-rotate-90 {
+  @include icon-utility(transform, rotate(90deg));
+}
+
+.wl-icon-rotate-180 {
+  @include icon-utility(transform, rotate(180deg));
+}
+
+// Icon-specific styles (customize as needed)
+@each $icon in $icon-names {
+  .wl-icon-#{$icon} {
+    @if $icon == "clear-circle" {
+      color: var(--Forgrounds-FG-DISABLED-VALUE, #737373);
+      cursor: pointer !important;
+      pointer-events: auto !important;
+      &:hover {
+        color: var(--Forgrounds-FG-TITLE, #171717);
+      }
+    } @else if $icon == "eye" or $icon == "eye-hide" {
+      cursor: pointer !important;
+      pointer-events: auto !important;
+    }
+  }
+}

@@ -1,0 +1,80 @@
+.wl-cursor {
+    &-pointer {
+        cursor: pointer;
+    }
+    &-default {
+        cursor: default;
+    }
+    &-not-allowed {
+        cursor: not-allowed;
+    } 
+    &-wait {
+        cursor: wait;
+    }
+    &-text {
+        cursor: text;
+    }
+    &-move {
+        cursor: move;
+    }
+    &-help {
+        cursor: help;
+    }
+    &-crosshair {
+        cursor: crosshair;
+    }
+    &-zoom-in {
+        cursor: zoom-in;
+    }
+    &-zoom-out {
+        cursor: zoom-out;
+    }
+    &-grab {
+        cursor: grab;
+    }
+    &-grabbing {
+        cursor: grabbing;
+    }
+    &-progress {
+        cursor: progress;
+    }
+    &-alias {
+        cursor: alias;
+    }
+    &-no-drop {
+        cursor: no-drop;
+    }
+    &-col-resize {
+        cursor: col-resize;
+    }
+    &-row-resize {
+        cursor: row-resize;
+    }
+    &-vertical-text {
+        cursor: vertical-text;
+    }
+    &-all-scroll {
+        cursor: all-scroll;
+    }
+    &-ew-resize {
+        cursor: ew-resize;
+    }
+    &-ns-resize {
+        cursor: ns-resize;
+    }
+    &-nesw-resize {
+        cursor: nesw-resize;
+    }
+    &-nwse-resize {
+        cursor: nwse-resize;
+    }
+    &-zoom {
+        cursor: zoom;
+    }
+    &-context-menu {
+        cursor: context-menu;
+    }
+    &-cell {
+        cursor: cell;
+    }
+}

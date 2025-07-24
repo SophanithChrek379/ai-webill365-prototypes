@@ -1,0 +1,401 @@
+// _wl-position.scss
+// Modern 3-layer architecture for position utilities
+@use "sass:map";
+@use "sass:meta";
+@use "sass:list";
+@use "../abstracts/functions" as *;
+
+// -----------------------------------------------
+// Layer 1: Settings - Variables and configuration
+// -----------------------------------------------
+/// @group settings
+$wl-position: (
+  // Position types
+  "types": (static, relative, absolute, fixed, sticky),
+  // Coordinate values (percentage, keywords)
+  "coord-values":
+    (
+      "0": 0,
+      "50": 50%,
+      "100": 100%,
+      "auto": auto,
+    ),
+
+  // REM-based coordinate values
+  "coord-rem-values":
+    (
+      "2": rem(2),
+      "4": rem(4),
+      "8": rem(8),
+      "12": rem(12),
+      "16": rem(16),
+      "24": rem(24),
+      "32": rem(32),
+      "48": rem(48),
+      "64": rem(64),
+    ),
+
+  // Z-index values
+  "z-index":
+    (
+      "0": 0,
+      "10": 10,
+      "20": 20,
+      "30": 30,
+      "40": 40,
+      "50": 50,
+      "auto": auto,
+    ),
+
+  // Semantic z-index values for components
+  "z-index-semantic":
+    (
+      "dropdown": 1000,
+      "sticky": 1020,
+      "fixed": 1030,
+      "modal-backdrop": 1040,
+      "modal": 1050,
+      "popover": 1060,
+      "tooltip": 1070,
+    ),
+
+  // Float values
+  "float-values":
+    (
+      "left": left,
+      "right": right,
+      "none": none,
+    ),
+
+  // Clear values
+  "clear-values":
+    (
+      "both": both,
+      "left": left,
+      "right": right,
+      "none": none,
+    ),
+
+  // Visibility values
+  "visibility-values":
+    (
+      "visible": visible,
+      "invisible": hidden,
+    ),
+
+  // Overflow values
+  "overflow-values":
+    (
+      "auto": auto,
+      "hidden": hidden,
+      "visible": visible,
+      "scroll": scroll,
+    ),
+
+  // Configuration options
+  "config":
+    (
+      "class-prefix": "wl-",
+      "enable-position-types": true,
+      "enable-coordinates": true,
+      "enable-inset": true,
+      "enable-z-index": true,
+      "enable-float": true,
+      "enable-center": true,
+      "enable-visibility": true,
+      "enable-overflow": true,
+    )
+);
+
+// ---------------------------------------------
+// Layer 2: Tools - Functions and mixins
+// ---------------------------------------------
+/// @group tools
+
+/// Get configuration value
+/// @param {String} $key - The configuration key
+/// @return {*} The configuration value
+@function get-config($key) {
+  $config: map.get($wl-position, "config");
+
+  @if map.has-key($config, $key) {
+    @return map.get($config, $key);
+  }
+
+  @error "Configuration key '#{$key}' not found.";
+  @return null;
+}
+
+/// Create class name with proper prefix
+/// @param {String} $name - The base class name
+/// @return {String} The prefixed class name
+@function class-name($name) {
+  $prefix: get-config("class-prefix");
+  @return "#{$prefix}#{$name}";
+}
+
+/// Get coordinate value from map
+/// @param {String} $key - The coordinate key
+/// @return {*} The coordinate value
+@function get-coordinate-value($key) {
+  $coord-values: map.get($wl-position, "coord-values");
+  $coord-rem-values: map.get($wl-position, "coord-rem-values");
+
+  @if map.has-key($coord-values, $key) {
+    @return map.get($coord-values, $key);
+  } @else if map.has-key($coord-rem-values, $key) {
+    @return map.get($coord-rem-values, $key);
+  }
+
+  @error "Coordinate value '#{$key}' not found.";
+  @return null;
+}
+
+/// Get z-index value from map
+/// @param {String} $key - The z-index key
+/// @return {Number} The z-index value
+@function get-z-index($key) {
+  $z-index: map.get($wl-position, "z-index");
+  $z-index-semantic: map.get($wl-position, "z-index-semantic");
+
+  @if map.has-key($z-index, $key) {
+    @return map.get($z-index, $key);
+  } @else if map.has-key($z-index-semantic, $key) {
+    @return map.get($z-index-semantic, $key);
+  }
+
+  @error "Z-index '#{$key}' not found.";
+  @return null;
+}
+
+/// Apply coordinate value
+/// @param {String} $property - The CSS property (top, right, bottom, left)
+/// @param {String} $key - The coordinate key
+@mixin position-coordinate($property, $key) {
+  #{$property}: get-coordinate-value($key);
+}
+
+/// Apply inset values to all sides
+/// @param {String} $key - The coordinate key
+@mixin inset($key) {
+  $value: get-coordinate-value($key);
+  top: $value;
+  right: $value;
+  bottom: $value;
+  left: $value;
+}
+
+/// Apply inset values to x-axis (left/right)
+/// @param {String} $key - The coordinate key
+@mixin inset-x($key) {
+  $value: get-coordinate-value($key);
+  left: $value;
+  right: $value;
+}
+
+/// Apply inset values to y-axis (top/bottom)
+/// @param {String} $key - The coordinate key
+@mixin inset-y($key) {
+  $value: get-coordinate-value($key);
+  top: $value;
+  bottom: $value;
+}
+
+// -----------------------------------------------
+// Layer 3: Utilities - Output utility classes
+// -----------------------------------------------
+/// @group utilities
+
+/// Generate position type classes
+@mixin generate-position-type-classes() {
+  @if get-config("enable-position-types") {
+    $types: map.get($wl-position, "types");
+
+    @each $type in $types {
+      .#{class-name("position-#{$type}")} {
+        position: $type;
+      }
+    }
+  }
+}
+
+/// Generate coordinate classes for a specific direction
+/// @param {String} $direction - The CSS property (top, right, bottom, left)
+@mixin generate-coordinate-classes($direction) {
+  @if get-config("enable-coordinates") {
+    $coord-values: map.get($wl-position, "coord-values");
+    $coord-rem-values: map.get($wl-position, "coord-rem-values");
+
+    @each $key, $value in $coord-values {
+      .#{class-name("#{$direction}-#{$key}")} {
+        #{$direction}: $value;
+      }
+    }
+
+    @each $key, $value in $coord-rem-values {
+      .#{class-name("#{$direction}-#{$key}")} {
+        #{$direction}: $value;
+      }
+    }
+  }
+}
+
+/// Generate inset utility classes
+@mixin generate-inset-classes() {
+  @if get-config("enable-inset") {
+    // Basic inset classes
+    .#{class-name("inset-0")} {
+      @include inset("0");
+    }
+
+    .#{class-name("inset-auto")} {
+      @include inset("auto");
+    }
+
+    .#{class-name("inset-x-0")} {
+      @include inset-x("0");
+    }
+
+    .#{class-name("inset-x-auto")} {
+      @include inset-x("auto");
+    }
+
+    .#{class-name("inset-y-0")} {
+      @include inset-y("0");
+    }
+
+    .#{class-name("inset-y-auto")} {
+      @include inset-y("auto");
+    }
+
+    // Custom rem-based inset classes
+    $custom-inset-values: ("4", "8", "16", "24");
+
+    @each $key in $custom-inset-values {
+      .#{class-name("inset-#{$key}")} {
+        @include inset($key);
+      }
+
+      .#{class-name("inset-x-#{$key}")} {
+        @include inset-x($key);
+      }
+
+      .#{class-name("inset-y-#{$key}")} {
+        @include inset-y($key);
+      }
+    }
+  }
+}
+
+/// Generate z-index utility classes
+@mixin generate-z-index-classes() {
+  @if get-config("enable-z-index") {
+    $z-index: map.get($wl-position, "z-index");
+    $z-index-semantic: map.get($wl-position, "z-index-semantic");
+
+    @each $key, $value in $z-index {
+      .#{class-name("z-#{$key}")} {
+        z-index: $value;
+      }
+    }
+
+    @each $key, $value in $z-index-semantic {
+      .#{class-name("z-#{$key}")} {
+        z-index: $value;
+      }
+    }
+  }
+}
+
+/// Generate float and clear utility classes
+@mixin generate-float-classes() {
+  @if get-config("enable-float") {
+    $float-values: map.get($wl-position, "float-values");
+    $clear-values: map.get($wl-position, "clear-values");
+
+    @each $key, $value in $float-values {
+      .#{class-name("float-#{$key}")} {
+        float: $value;
+      }
+    }
+
+    @each $key, $value in $clear-values {
+      .#{class-name("clear-#{$key}")} {
+        clear: $value;
+      }
+    }
+  }
+}
+
+/// Generate center position utility classes
+@mixin generate-center-classes() {
+  @if get-config("enable-center") {
+    .#{class-name("center-x")} {
+      left: 50%;
+      transform: translateX(-50%);
+    }
+
+    .#{class-name("center-y")} {
+      top: 50%;
+      transform: translateY(-50%);
+    }
+
+    .#{class-name("center-xy")} {
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
+  }
+}
+
+/// Generate visibility utility classes
+@mixin generate-visibility-classes() {
+  @if get-config("enable-visibility") {
+    $visibility-values: map.get($wl-position, "visibility-values");
+
+    @each $key, $value in $visibility-values {
+      .#{class-name("#{$key}")} {
+        visibility: $value;
+      }
+    }
+  }
+}
+
+/// Generate overflow utility classes
+@mixin generate-overflow-classes() {
+  @if get-config("enable-overflow") {
+    $overflow-values: map.get($wl-position, "overflow-values");
+
+    @each $key, $value in $overflow-values {
+      .#{class-name("overflow-#{$key}")} {
+        overflow: $value;
+      }
+
+      .#{class-name("overflow-x-#{$key}")} {
+        overflow-x: $value;
+      }
+
+      .#{class-name("overflow-y-#{$key}")} {
+        overflow-y: $value;
+      }
+    }
+  }
+}
+
+/// Generate all position-related utility classes
+@mixin generate-all-position-utilities() {
+  @include generate-position-type-classes();
+  @include generate-coordinate-classes("top");
+  @include generate-coordinate-classes("right");
+  @include generate-coordinate-classes("bottom");
+  @include generate-coordinate-classes("left");
+  @include generate-inset-classes();
+  @include generate-z-index-classes();
+  @include generate-float-classes();
+  @include generate-center-classes();
+  @include generate-visibility-classes();
+  @include generate-overflow-classes();
+}
+
+// Output all utility classes
+@include generate-all-position-utilities();

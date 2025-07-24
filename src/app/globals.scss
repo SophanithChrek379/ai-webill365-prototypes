@@ -1,3 +1,5 @@
+@import "../styles/weloop/main.scss";
+
 :root {
   --background: #ffffff;
   --foreground: #171717;
@@ -234,6 +236,10 @@ input.form-control:-webkit-autofill:active {
 
 .form-control:disabled {
   background-color: #fff !important;
+}
+
+table {
+  border-spacing: 0;
 }
 
 /* Custom Input Groups */

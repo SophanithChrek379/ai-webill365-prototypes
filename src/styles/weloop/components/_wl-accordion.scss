@@ -1,0 +1,93 @@
+@use "sass:color";
+@use "sass:math";
+@use "../abstracts/breakpoints" as *;
+@use "../abstracts/functions" as *;
+@use "../abstracts/mixins" as *;
+
+// TODO: Variables
+$wl-toggle-cursor: pointer;
+$wl-chevron-down-url: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 16 16' fill='currentColor' %3E%3Cpath d='M8 12.6406C7.73438 12.6406 7.5 12.5391 7.29688 12.3281L1.34375 6.24219C1.17188 6.07031 1.07812 5.85156 1.07812 5.60156C1.07812 5.09375 1.47656 4.69531 1.98438 4.69531C2.23438 4.69531 2.46094 4.79688 2.64062 4.96875L8 10.4609L13.3594 4.96875C13.5312 4.79688 13.7656 4.69531 14.0156 4.69531C14.5156 4.69531 14.9141 5.09375 14.9141 5.60156C14.9141 5.85938 14.8281 6.07031 14.6562 6.24219L8.70312 12.3281C8.50781 12.5391 8.26562 12.6406 8 12.6406Z' fill='%23171717'/%3E%3C/svg%3E");
+$wl-plus-url: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 16 16' fill='none'%3E%3Cpath d='M1.46094 8.35938C1.46094 7.88281 1.85938 7.48438 2.33594 7.48438H7.125V2.69531C7.125 2.21875 7.52344 1.82031 8 1.82031C8.47656 1.82031 8.875 2.21875 8.875 2.69531V7.48438H13.6641C14.1406 7.48438 14.5391 7.88281 14.5391 8.35938C14.5391 8.84375 14.1406 9.23438 13.6641 9.23438H8.875V14.0234C8.875 14.5 8.47656 14.8984 8 14.8984C7.52344 14.8984 7.125 14.5 7.125 14.0234V9.23438H2.33594C1.85938 9.23438 1.46094 8.84375 1.46094 8.35938Z' fill='%23171717'/%3E%3C/svg%3E");
+$wl-minus-url: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 16 16' fill='none'%3E%3Cpath d='M2.33594 9.24219C1.88281 9.24219 1.46875 8.84375 1.46875 8.36719C1.46875 7.89062 1.88281 7.5 2.33594 7.5H13.6641C14.1328 7.5 14.5312 7.89062 14.5312 8.36719C14.5312 8.84375 14.1328 9.24219 13.6641 9.24219H2.33594Z' fill='%23171717'/%3E%3C/svg%3E");
+
+// TODO: Mixins: Background-Image
+@mixin wl-background-image {
+  content: "";
+  width: rem(16);
+  height: rem(16);
+  display: block;
+  background-image: none;
+  background-size: contain;
+  background-position: center;
+  background-repeat: no-repeat;
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+// TODO: Mixin: Accordion Base
+@mixin wl-accordion-base {
+  @include wl-flex-column;
+  gap: rem(2);
+  align-self: stretch;
+
+  // TODO: Icon - Using single chevron with rotation
+  .wl-chevron-icon {
+    &::before {
+      @include wl-background-image;
+      background-image: $wl-chevron-down-url;
+      transform: rotate(0deg);
+    }
+
+    &.wl-rotate {
+      &::before {
+        transform: rotate(180deg);
+      }
+    }
+  }
+
+  .wl-plus-icon {
+    &::before {
+      @include wl-background-image;
+      background-image: $wl-plus-url;
+    }
+  }
+
+  .wl-minus-icon {
+    &::before {
+      @include wl-background-image;
+      background-image: $wl-minus-url;
+    }
+  }
+}
+
+// TODO: Component: Accordion
+.wl-accordion {
+  @include wl-accordion-base;
+
+  &-toggle {
+    cursor: $wl-toggle-cursor;
+  }
+
+  // TODO: Accordion list styling
+  &-list {
+    width: 100%;
+    max-height: 0;
+    @include wl-flex-column;
+    gap: rem(2);
+    overflow: hidden;
+    scroll-behavior: smooth;
+    opacity: 0;
+    visibility: hidden;
+    transition: max-height 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+      opacity 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+      visibility 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+      padding 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+
+    // Display when showing
+    &.wl-show {
+      max-height: rem(220);
+      opacity: 1;
+      visibility: visible;
+      overflow-y: auto;
+    }
+  }
+}

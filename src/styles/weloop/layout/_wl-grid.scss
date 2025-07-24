@@ -1,0 +1,451 @@
+@use "sass:map";
+@use "sass:math";
+@use "sass:list";
+@use "sass:meta";
+@use "../abstracts/breakpoints" as *;
+
+// Grid configuration variables
+$wl-enable-grid-classes: true !default;
+
+// Use the existing breakpoints
+$wl-grid-breakpoints: $breakpoints !default;
+
+// Grid containers (based on Bootstrap defaults, adjust as needed)
+$wl-container-max-widths: (
+  "sm": 540px,
+  "md": 720px,
+  "lg": 960px,
+  "xl": 1140px,
+  "xxl": 1320px,
+) !default;
+
+// Grid columns
+$wl-grid-columns: 12 !default;
+$wl-grid-gutter-width: 1.5rem !default; // 24px
+
+// Prefix for WeLoop classes
+$prefix: wl- !default;
+
+// Grid system generation
+@mixin make-row($gutter: $wl-grid-gutter-width) {
+  --#{$prefix}gutter-x: #{$gutter};
+  --#{$prefix}gutter-y: 0;
+  display: flex;
+  flex-wrap: wrap;
+  margin-top: calc(-1 * var(--#{$prefix}gutter-y));
+  margin-right: calc(-0.5 * var(--#{$prefix}gutter-x));
+  margin-left: calc(-0.5 * var(--#{$prefix}gutter-x));
+}
+
+@mixin make-col-ready($gutter: $wl-grid-gutter-width) {
+  // Add box sizing if only the grid is loaded
+  box-sizing: border-box;
+  // Prevent columns from becoming too narrow when at smaller grid tiers
+  flex-shrink: 0;
+  width: 100%;
+  max-width: 100%;
+  // Space columns
+  padding-right: calc(var(--#{$prefix}gutter-x) * 0.5);
+  padding-left: calc(var(--#{$prefix}gutter-x) * 0.5);
+  margin-top: var(--#{$prefix}gutter-y);
+}
+
+@mixin make-col($size, $columns: $wl-grid-columns) {
+  flex: 0 0 auto;
+  width: math.div($size, $columns) * 100%;
+}
+
+@mixin make-col-offset($size, $columns: $wl-grid-columns) {
+  margin-left: math.div($size, $columns) * 100%;
+}
+
+// Container mixins
+@mixin make-container($gutter: $wl-grid-gutter-width) {
+  --#{$prefix}gutter-x: #{$gutter};
+  --#{$prefix}gutter-y: 0;
+  width: 100%;
+  padding-right: calc(var(--#{$prefix}gutter-x) * 0.5);
+  padding-left: calc(var(--#{$prefix}gutter-x) * 0.5);
+  margin-right: auto;
+  margin-left: auto;
+}
+
+@mixin make-container-max-widths(
+  $max-widths: $wl-container-max-widths,
+  $breakpoints: $wl-grid-breakpoints
+) {
+  @each $breakpoint, $container-max-width in $max-widths {
+    @if map.has-key($breakpoints, $breakpoint) {
+      @include breakpoint-up($breakpoint) {
+        max-width: $container-max-width;
+      }
+    }
+  }
+}
+
+// Framework grid generation
+@mixin make-grid-columns(
+  $columns: $wl-grid-columns,
+  $gutter: $wl-grid-gutter-width,
+  $breakpoints: $wl-grid-breakpoints
+) {
+  // Base classes
+  .#{$prefix}row {
+    @include make-row();
+  }
+
+  // Columns base class
+  %grid-column {
+    @include make-col-ready();
+  }
+
+  .#{$prefix}col {
+    @extend %grid-column;
+    flex: 1 0 0%; // Flexbug #4: https://github.com/philipwalton/flexbugs#flexbug-4
+  }
+
+  .#{$prefix}col-auto {
+    @extend %grid-column;
+    flex: 0 0 auto;
+    width: auto;
+  }
+
+  @for $i from 1 through $columns {
+    .#{$prefix}col-#{$i} {
+      @extend %grid-column;
+      @include make-col($i, $columns);
+    }
+  }
+
+  // Generate .col-{bp}-* classes for each breakpoint
+  @each $breakpoint in map.keys($breakpoints) {
+    $infix: if($breakpoint == "", "", "-#{$breakpoint}");
+
+    @include breakpoint-up($breakpoint) {
+      // Provide basic .col-{bp} classes for equal-width flexbox columns
+      .#{$prefix}col#{$infix} {
+        flex: 1 0 0%;
+      }
+
+      .#{$prefix}col#{$infix}-auto {
+        flex: 0 0 auto;
+        width: auto;
+      }
+
+      @for $i from 1 through $columns {
+        .#{$prefix}col#{$infix}-#{$i} {
+          @include make-col($i, $columns);
+        }
+      }
+
+      // Offset columns
+      @for $i from 0 through ($columns - 1) {
+        @if $i > 0 {
+          .#{$prefix}offset#{$infix}-#{$i} {
+            @include make-col-offset($i, $columns);
+          }
+        }
+      }
+
+      // Row columns
+      @for $i from 1 through 6 {
+        .#{$prefix}row-cols#{$infix}-#{$i} > * {
+          flex: 0 0 auto;
+          width: math.div(100%, $i);
+        }
+      }
+
+      // Order classes
+      .#{$prefix}order#{$infix}-first {
+        order: -1;
+      }
+      .#{$prefix}order#{$infix}-last {
+        order: $columns + 1;
+      }
+
+      @for $i from 0 through $columns {
+        .#{$prefix}order#{$infix}-#{$i} {
+          order: $i;
+        }
+      }
+    }
+  }
+}
+
+// Generate gutter classes
+@mixin make-gutters($breakpoints: $wl-grid-breakpoints) {
+  $gutter-values: (
+    0: 0,
+    1: 0.25rem,
+    2: 0.5rem,
+    3: 1rem,
+    4: 1.5rem,
+    5: 3rem,
+  );
+
+  @each $breakpoint in map.keys($breakpoints) {
+    $infix: if($breakpoint == "", "", "-#{$breakpoint}");
+
+    @include breakpoint-up($breakpoint) {
+      @each $key, $value in $gutter-values {
+        .#{$prefix}g#{$infix}-#{$key},
+        .#{$prefix}gx#{$infix}-#{$key} {
+          --#{$prefix}gutter-x: #{$value};
+        }
+
+        .#{$prefix}g#{$infix}-#{$key},
+        .#{$prefix}gy#{$infix}-#{$key} {
+          --#{$prefix}gutter-y: #{$value};
+        }
+      }
+    }
+  }
+}
+
+// Create the containers
+@mixin make-containers(
+  $breakpoints: $wl-grid-breakpoints,
+  $container-max-widths: $wl-container-max-widths
+) {
+  // Container classes
+  .#{$prefix}container,
+  .#{$prefix}container-fluid {
+    @include make-container();
+  }
+
+  // Responsive containers
+  @each $breakpoint, $container-max-width in $container-max-widths {
+    // Check if the breakpoint exists in our breakpoints map
+    @if map.has-key($breakpoints, $breakpoint) {
+      .#{$prefix}container-#{$breakpoint} {
+        @extend .#{$prefix}container-fluid;
+      }
+
+      @include breakpoint-up($breakpoint) {
+        .#{$prefix}container-#{$breakpoint},
+        .#{$prefix}container {
+          max-width: $container-max-width;
+        }
+      }
+    }
+  }
+}
+
+// Apply margin mixins to a specific side
+@mixin apply-to-sides($property, $value, $sides) {
+  @if meta.type-of($sides) == "list" {
+    @each $side in $sides {
+      #{$property}-#{$side}: $value;
+    }
+  } @else {
+    #{$property}-#{$sides}: $value;
+  }
+}
+
+// Generate spacing utilities
+@mixin make-spacing-utilities($breakpoints: $wl-grid-breakpoints) {
+  $spacers: (
+    0: 0,
+    1: 0.25rem,
+    2: 0.5rem,
+    3: 1rem,
+    4: 1.5rem,
+    5: 3rem,
+  );
+
+  $sides: (
+    "top": top,
+    "bottom": bottom,
+    "left": left,
+    "right": right,
+    "x": (
+      left,
+      right,
+    ),
+    "y": (
+      top,
+      bottom,
+    ),
+    "": (
+      top,
+      right,
+      bottom,
+      left,
+    ),
+  );
+
+  @each $breakpoint in map.keys($breakpoints) {
+    $infix: if($breakpoint == "", "", "-#{$breakpoint}");
+
+    @include breakpoint-up($breakpoint) {
+      // Margins
+      @each $size, $value in $spacers {
+        @each $side-key, $side-value in $sides {
+          .#{$prefix}m#{$side-key}#{$infix}-#{$size} {
+            @include apply-to-sides(margin, $value, $side-value);
+          }
+        }
+
+        // Negative margins
+        @if $size != 0 {
+          @each $side-key, $side-value in $sides {
+            @if $side-key != "" {
+              .#{$prefix}m#{$side-key}#{$infix}-n#{$size} {
+                @include apply-to-sides(margin, -$value, $side-value);
+              }
+            }
+          }
+        }
+      }
+
+      // Auto margins
+      @each $side-key, $side-value in $sides {
+        @if $side-key != "" {
+          .#{$prefix}m#{$side-key}#{$infix}-auto {
+            @include apply-to-sides(margin, auto, $side-value);
+          }
+        }
+      }
+
+      // Paddings (no negative paddings)
+      @each $size, $value in $spacers {
+        @each $side-key, $side-value in $sides {
+          .#{$prefix}p#{$side-key}#{$infix}-#{$size} {
+            @include apply-to-sides(padding, $value, $side-value);
+          }
+        }
+      }
+    }
+  }
+}
+
+// Column direction utilities
+@mixin make-col-direction-utilities($breakpoints: $wl-grid-breakpoints) {
+  @each $breakpoint in map.keys($breakpoints) {
+    $infix: if($breakpoint == "", "", "-#{$breakpoint}");
+
+    @include breakpoint-up($breakpoint) {
+      .#{$prefix}flex#{$infix}-column {
+        flex-direction: column;
+      }
+
+      .#{$prefix}flex#{$infix}-column-reverse {
+        flex-direction: column-reverse;
+      }
+
+      .#{$prefix}flex#{$infix}-row {
+        flex-direction: row;
+      }
+
+      .#{$prefix}flex#{$infix}-row-reverse {
+        flex-direction: row-reverse;
+      }
+    }
+  }
+}
+
+// Emit the grid classes if enabled
+@if $wl-enable-grid-classes {
+  // Create the containers
+  @include make-containers($wl-grid-breakpoints, $wl-container-max-widths);
+
+  // Generate the grid
+  @include make-grid-columns(
+    $wl-grid-columns,
+    $wl-grid-gutter-width,
+    $wl-grid-breakpoints
+  );
+
+  // Column direction utilities
+  @include make-col-direction-utilities($wl-grid-breakpoints);
+
+  // Additional row and column customization
+  .#{$prefix}row-no-gutters {
+    --#{$prefix}gutter-x: 0;
+    --#{$prefix}gutter-y: 0;
+  }
+
+  .#{$prefix}row-tight {
+    --#{$prefix}gutter-x: 0.5rem;
+    --#{$prefix}gutter-y: 0.5rem;
+  }
+
+  .#{$prefix}row-wide {
+    --#{$prefix}gutter-x: 2rem;
+    --#{$prefix}gutter-y: 2rem;
+  }
+
+  .#{$prefix}equal-height-cols {
+    display: flex;
+    flex-wrap: wrap;
+
+    > [class*="#{$prefix}col"] {
+      display: flex;
+      flex-direction: column;
+    }
+  }
+
+  // Vertical alignment within a row
+  .#{$prefix}row-align-top,
+  .#{$prefix}row-items-start {
+    align-items: flex-start;
+  }
+
+  .#{$prefix}row-align-center,
+  .#{$prefix}row-items-center {
+    align-items: center;
+  }
+
+  .#{$prefix}row-align-bottom,
+  .#{$prefix}row-items-end {
+    align-items: flex-end;
+  }
+
+  // Horizontal alignment for row
+  .#{$prefix}row-justify-start {
+    justify-content: flex-start;
+  }
+
+  .#{$prefix}row-justify-center {
+    justify-content: center;
+  }
+
+  .#{$prefix}row-justify-end {
+    justify-content: flex-end;
+  }
+
+  .#{$prefix}row-justify-between {
+    justify-content: space-between;
+  }
+
+  .#{$prefix}row-justify-around {
+    justify-content: space-around;
+  }
+
+  .#{$prefix}row-justify-evenly {
+    justify-content: space-evenly;
+  }
+
+  // Column alignment self
+  .#{$prefix}col-self-start {
+    align-self: flex-start;
+  }
+
+  .#{$prefix}col-self-center {
+    align-self: center;
+  }
+
+  .#{$prefix}col-self-end {
+    align-self: flex-end;
+  }
+
+  .#{$prefix}col-self-stretch {
+    align-self: stretch;
+  }
+
+  // Generate spacing utilities
+  @include make-spacing-utilities($wl-grid-breakpoints);
+
+  // Generate gutters (at the end, like Bootstrap)
+  @include make-gutters($wl-grid-breakpoints);
+}

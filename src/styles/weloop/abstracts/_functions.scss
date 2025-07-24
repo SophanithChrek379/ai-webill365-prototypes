@@ -1,0 +1,38 @@
+@use "sass:math";
+@use "sass:string";
+
+// Function to convert px to rem using math.div
+@function rem($pixels) {
+  @return math.div($pixels, 16) + rem;
+}
+
+// Alternative using calc()
+@function rem-calc($pixels) {
+  @return calc($pixels / 16) + rem;
+}
+
+// Function to calculate percentage using math.div
+@function percent($target, $container) {
+  @return math.div($target, $container) * 100%;
+}
+
+// Alternative using calc()
+@function percent-calc($target, $container) {
+  @return calc($target / $container * 100%);
+}
+
+// Helper function to replace strings (for color encoding)
+@function str-replace($string, $search, $replace) {
+  $index: string.index($string, $search);
+
+  @if $index {
+    @return string.slice($string, 1, $index - 1) + $replace +
+      str-replace(
+        string.slice($string, $index + string.length($search)),
+        $search,
+        $replace
+      );
+  }
+
+  @return $string;
+}

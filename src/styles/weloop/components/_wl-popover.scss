@@ -1,0 +1,201 @@
+@use "../abstracts/breakpoints" as *;
+@use "../abstracts/functions" as *;
+@use "../abstracts/mixins" as *;
+
+// TODO: Variables
+$wl-popover-width: rem(240);
+$wl-popover-bg-color: var(--Backgrounds-BG-NORMAL, #fff);
+$wl-popover-box-shadow: 0px 6px 24px 0px rgba(0, 0, 0, 0.08),
+  0px 1px 6px 0px rgba(0, 0, 0, 0.08), 0px 0px 0px 1px rgba(0, 0, 0, 0.04);
+$wl-popover-arrow-color: var(--Backgrounds-BG-NORMAL, #fff);
+$wl-popover-arrow-notch-bg-img-url: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='19' height='7' viewBox='0 0 19 7' fill='none'%3E%3Cpath fill-rule='evenodd' clip-rule='evenodd' d='M0 0C2.10085 0 5.41005 3.11103 7.49968 5.32576C8.23521 6.10531 8.60297 6.49509 8.95665 6.61485C9.29432 6.72919 9.5775 6.72953 9.91544 6.61599C10.2694 6.49707 10.6387 6.10756 11.3772 5.32853C13.477 3.11363 16.817 0 19 0L0 0Z' fill='white'/%3E%3C/svg%3E");
+
+// TODO: Base Style
+
+.wl-popover {
+  // TODO: Wrapper
+  &-wrapper {
+    position: relative;
+    overflow: visible;
+  }
+
+  // TODO: Item
+  &-item {
+    @include wl-aligns-inline-center;
+    gap: rem(4);
+    position: relative;
+
+    // TODO: When hover, show popover content
+    &:hover {
+      cursor: pointer;
+      .wl-popover-content {
+        display: flex;
+      }
+    }
+  }
+
+  // TODO: Content
+  &-content {
+    width: $wl-popover-width;
+    min-width: $wl-popover-width;
+    padding: var(--Spacing-WLDS-Space-16, 16px);
+    background-color: $wl-popover-bg-color;
+    box-shadow: $wl-popover-box-shadow;
+
+    border-radius: var(--WLDS-Radius-8, 8px);
+    @include wl-flex-column;
+    @include wl-aligns-start;
+    gap: var(--Spacing-WLDS-Space-16, 16px);
+
+    position: absolute;
+    z-index: 1099;
+    // display: none;
+
+    // TODO: Notch[Arrow]
+    &::after {
+      content: "";
+      width: rem(19);
+      height: rem(7);
+      display: block;
+      background-image: $wl-popover-arrow-notch-bg-img-url;
+      background-position: center;
+      background-repeat: no-repeat;
+      position: absolute;
+    }
+
+    // TODO: Display for Demo in component page
+    &.wl-show {
+      display: flex;
+    }
+  }
+
+  // TODO: Information
+  &-info {
+    @include wl-flex-column;
+    gap: var(--Spacing-WLDS-Space-4, 4px);
+
+    // TODO: Props: Title
+    .wl-title {
+      color: var(--Forgrounds-FG-TITLE, #171717);
+      font-size: var(--Typeface-Size-Body-Medium, 16px);
+      font-weight: var(--Typeface-Weight-Body-Medium, 500);
+      line-height: var(--Typeface-Line-height-Body-Medium, 24px);
+      letter-spacing: var(--Typeface-Letter-Spacing-Body-Medium, -0.2px);
+    }
+
+    // TODO: Props: Sub-Title
+    .wl-sub-title {
+      color: var(--Forgrounds-FG-SUBTITLE, #404040);
+      font-size: var(--Typeface-Size-Body-Small, 14px);
+      font-weight: var(--Typeface-Weight-Body-Small, 500);
+      line-height: var(--Typeface-Line-height-Body-Small, 20px);
+      letter-spacing: var(--Typeface-Letter-Spacing-Body-Small, -0.2px);
+    }
+  }
+
+  // TODO: Footer
+  &-footer {
+    width: 100%;
+    @include wl-flex-end;
+    gap: var(--Spacing-WLDS-Space-8, 8px);
+  }
+
+  // TODO: **Combined with className="wl-popover-content wl-popover-top-center, ..."
+  // TODO: Position: Top-Center
+  &-top-center {
+    bottom: 110%;
+    left: 50%;
+    transform: translateX(-50%);
+
+    &::after {
+      top: 100%;
+      left: 50%;
+      transform: translateX(-50%);
+    }
+  }
+
+  // TODO: Position: Top Left
+  &-top-left {
+    bottom: 125%;
+    left: -10px;
+
+    &::after {
+      top: 100%;
+      left: 10px;
+    }
+  }
+
+  // TODO: Position: Top Right
+  &-top-right {
+    bottom: 110%;
+    right: -10px;
+
+    &::after {
+      top: 100%;
+      right: 10px;
+    }
+  }
+
+  // TODO: Position: Bottom Left
+  &-bottom-left {
+    top: 110%;
+    left: 0%;
+
+    &::after {
+      bottom: 100%;
+      left: 10%;
+      transform: rotate(180deg);
+    }
+  }
+
+  // TODO: Position: Bottom Center
+  &-bottom-center {
+    top: 110%;
+    left: 50%;
+    transform: translateX(-50%);
+
+    &::after {
+      bottom: 100%;
+      left: 50%;
+      transform: translateX(-50%) rotate(180deg);
+    }
+  }
+
+  // TODO: Position: Bottom Right
+  &-bottom-right {
+    top: 110%;
+    right: -10px;
+
+    &::after {
+      bottom: 100%;
+      right: 10px;
+      transform: rotate(180deg);
+    }
+  }
+
+  // TODO: Position: Center Left
+  &-center-left {
+    right: 102.5%;
+    top: 50%;
+    transform: translateY(-50%);
+
+    &::after {
+      left: 97.5%;
+      top: 50%;
+      transform: translateY(-50%) rotate(-90deg);
+    }
+  }
+
+  // TODO: Position: Center Right
+  &-center-right {
+    left: 102.5%;
+    top: 50%;
+    transform: translateY(-50%);
+
+    &::after {
+      right: 97.5%;
+      top: 50%;
+      transform: translateY(-50%) rotate(90deg);
+    }
+  }
+}

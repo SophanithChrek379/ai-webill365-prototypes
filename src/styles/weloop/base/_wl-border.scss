@@ -1,0 +1,146 @@
+@use "sass:color";
+@use "sass:map";
+@use "sass:string";
+
+// TODO: SCSS variables mapped to border design tokens
+$wl-border-disabled: var(--Borders-BORDER-OUT-DISABLED);
+$wl-border-base-thin: var(--Borders-BORDER-BASE-THIN);
+$wl-border-base-middle: var(--Borders-BORDER-BASE-MIDDLE);
+$wl-border-base-heavy: var(--Borders-BORDER-BASE-HEAVY);
+$wl-border-highlight-thin: var(--Borders-BORDER-HIGHT-THIN);
+$wl-border-highlight-middle: var(--Borders-BORDER-HIGHT-MIDDLE);
+$wl-border-highlight-heavy: var(--Borders-BORDER-HIGHT-HEAVY);
+$wl-border-fail: var(--Borders-BORDER-FAIL);
+$wl-border-interactive: var(--Borders-BORDER-INTERATIVE);
+$wl-border-highlight-divider: var(--Borders-BORDER-HIGHT-DIVIDER);
+$wl-border-divider: var(--Borders-BORDER-DIVIDER);
+$wl-border-white: var(--Borders-BORDER-WHITE);
+
+// TODO: Border widths
+$wl-border-width-thin: 1px;
+$wl-border-width-middle: 2px;
+$wl-border-width-heavy: 3px;
+
+// TODO: Maps for border properties
+$wl-border-colors: (
+  "disabled": $wl-border-disabled,
+  "base-thin": $wl-border-base-thin,
+  "base-middle": $wl-border-base-middle,
+  "base-heavy": $wl-border-base-heavy,
+  "highlight-thin": $wl-border-highlight-thin,
+  "highlight-middle": $wl-border-highlight-middle,
+  "highlight-heavy": $wl-border-highlight-heavy,
+  "fail": $wl-border-fail,
+  "interactive": $wl-border-interactive,
+  "highlight-divider": $wl-border-highlight-divider,
+  "divider": $wl-border-divider,
+  "white": $wl-border-white,
+);
+
+$wl-border-widths: (
+  "thin": $wl-border-width-thin,
+  "middle": $wl-border-width-middle,
+  "heavy": $wl-border-width-heavy,
+);
+
+// TODO: Mixins
+@mixin border-style($color, $width: $wl-border-width-thin, $style: solid) {
+  border: $width $style $color;
+}
+
+@mixin border-top($color, $width: $wl-border-width-thin, $style: solid) {
+  border-top: $width $style $color;
+}
+
+@mixin border-right($color, $width: $wl-border-width-thin, $style: solid) {
+  border-right: $width $style $color;
+}
+
+@mixin border-bottom($color, $width: $wl-border-width-thin, $style: solid) {
+  border-bottom: $width $style $color;
+}
+
+@mixin border-left($color, $width: $wl-border-width-thin, $style: solid) {
+  border-left: $width $style $color;
+}
+
+// TODO: Generate all border styles
+@mixin generate-border-classes {
+  @each $name, $color in $wl-border-colors {
+    &-#{$name} {
+      border-color: $color;
+      border-style: solid;
+      border-width: $wl-border-width-thin;
+    }
+
+    // Safe Sass conditionals
+    $has-base: string.index($name, "base-");
+    $has-highlight: string.index($name, "highlight-");
+    $has-thin: string.index($name, "-thin");
+    $has-middle: string.index($name, "-middle");
+    $has-heavy: string.index($name, "-heavy");
+
+    // Generate size variants for base and highlight borders
+    @if $has-base or $has-highlight {
+      @if $has-thin {
+        &-#{$name} {
+          border-width: $wl-border-width-thin;
+        }
+      } @else if $has-middle {
+        &-#{$name} {
+          border-width: $wl-border-width-middle;
+        }
+      } @else if $has-heavy {
+        &-#{$name} {
+          border-width: $wl-border-width-heavy;
+        }
+      }
+    }
+
+    // Directional borders
+    &-#{$name}-top {
+      border-top-color: $color;
+      border-top-style: solid;
+      border-top-width: $wl-border-width-thin;
+    }
+
+    &-#{$name}-right {
+      border-right-color: $color;
+      border-right-style: solid;
+      border-right-width: $wl-border-width-thin;
+    }
+
+    &-#{$name}-bottom {
+      border-bottom-color: $color;
+      border-bottom-style: solid;
+      border-bottom-width: $wl-border-width-thin;
+    }
+
+    &-#{$name}-left {
+      border-left-color: $color;
+      border-left-style: solid;
+      border-left-width: $wl-border-width-thin;
+    }
+  }
+}
+
+// TODO: Apply all border styles
+.wl-border {
+  @include generate-border-classes;
+}
+
+// TODO: Usage examples:
+//
+// 1. Apply directly to HTML elements:
+// <div class="wl-border-base-middle">Element with base-middle border</div>
+// <div class="wl-border-highlight-thin-top">Element with highlight-thin top border</div>
+//
+// 2. Extend in another SCSS file:
+// .my-custom-element {
+//   @extend .wl-border-interactive;
+// }
+//
+// 3. Mix into custom components:
+// .my-component {
+//   @include border-style(map.get($wl-border-colors, "highlight-middle"), map.get($wl-border-widths, "middle"));
+// }

@@ -1,0 +1,56 @@
+@use "../../abstracts/breakpoints" as *;
+@use "../../abstracts/functions" as *;
+@use "../../abstracts/mixins" as *;
+
+.wl-btn-link {
+  min-height: rem(16);
+  height: rem(16);
+  padding: var(--Spacing-WLDS-Space-0, 0px) 0px;
+  color: var(--Forgrounds-FG-INTERACTIVE, #0021fe);
+  text-align: center;
+  @include wl-font-style(
+    var(--Typeface-Size-Button-Medium, 14px),
+    var(--Typeface-Weight-Button-Medium, 500),
+    var(--Typeface-Line-height-Button-Medium, 16px),
+    var(--Typeface-Letter-Spacing-Button-Medium, 0px)
+  );
+
+  @include wl-flex-center;
+  gap: var(--Button-Spacing-Button-24-Between, rem(2));
+
+  &::after {
+    content: "";
+    width: rem(12);
+    height: rem(12);
+    display: block;
+    background-image: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12' fill='none'%3E%3Cpath d='M9.75 6.26953C9.75 6.46875 9.67969 6.63867 9.52148 6.79102L4.95117 11.2617C4.82227 11.3906 4.66406 11.4551 4.47656 11.4551C4.0957 11.4551 3.79102 11.1621 3.79102 10.7754C3.79102 10.5879 3.87305 10.418 3.99609 10.2891L8.12109 6.26953L3.99609 2.25C3.86719 2.11523 3.79102 1.94531 3.79102 1.75781C3.79102 1.37695 4.0957 1.08398 4.47656 1.08398C4.66406 1.08398 4.82227 1.14844 4.95117 1.27734L9.52148 5.74805C9.67383 5.90039 9.75 6.07031 9.75 6.26953Z' fill='%230F1FEA'/%3E%3C/svg%3E");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: contain;
+  }
+
+  &:hover {
+    background-color: var(--Button-Primary-Text-BTN-TXT-HOVER, #cfebff);
+  }
+
+  &:focus,
+  &:active {
+    background-color: var(--Button-Primary-Text-BTN-TXT-PRESSED, #e5f3ff);
+    box-shadow: 0px 0px 0px 2px #fff,
+      var(--Text-Button-Primary-Pressed-X-0, 0px)
+        var(--Text-Button-Primary-Pressed-Y-0, 0px)
+        var(--Text-Button-Primary-Pressed-B-0, 0px)
+        var(--Text-Button-Primary-Pressed-S-0, 4px)
+        var(--Text-Button-Primary-Pressed-Color, #83b7ff);
+  }
+
+  &:disabled {
+    background-color: transparent;
+    box-shadow: none;
+    color: var(--Forgrounds-FG-DISABLED-VALUE, #737373);
+    &::after {
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12' fill='none'%3E%3Cpath d='M9.75 6.26953C9.75 6.46875 9.67969 6.63867 9.52148 6.79102L4.95117 11.2617C4.82227 11.3906 4.66406 11.4551 4.47656 11.4551C4.0957 11.4551 3.79102 11.1621 3.79102 10.7754C3.79102 10.5879 3.87305 10.418 3.99609 10.2891L8.12109 6.26953L3.99609 2.25C3.86719 2.11523 3.79102 1.94531 3.79102 1.75781C3.79102 1.37695 4.0957 1.08398 4.47656 1.08398C4.66406 1.08398 4.82227 1.14844 4.95117 1.27734L9.52148 5.74805C9.67383 5.90039 9.75 6.07031 9.75 6.26953Z' fill='%23878FF4'/%3E%3C/svg%3E");
+    }
+  }
+}
