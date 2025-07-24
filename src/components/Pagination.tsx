@@ -1,8 +1,8 @@
-'use client';
+"use client";
 
-import React, { useState } from 'react';
-import { Dropdown, Button } from 'react-bootstrap';
-import Image from 'next/image';
+import React, { useState } from "react";
+import { Dropdown, Button } from "react-bootstrap";
+import Image from "next/image";
 
 interface PaginationProps {
   currentPage: number;
@@ -21,7 +21,7 @@ const Pagination: React.FC<PaginationProps> = ({
   totalItems,
   onPageChange,
   onPageSizeChange,
-  pageSizeOptions = [10, 20, 50, 100]
+  pageSizeOptions = [10, 20, 50, 100],
 }) => {
   const [showDropdown, setShowDropdown] = useState(false);
 
@@ -59,18 +59,13 @@ const Pagination: React.FC<PaginationProps> = ({
         {/* Page rows section */}
         <div className="page-rows-section">
           <span className="page-rows-label">Page rows</span>
-          <Dropdown 
+          <Dropdown
             show={showDropdown}
             onToggle={(isOpen) => setShowDropdown(isOpen)}
             className="page-size-dropdown"
           >
             <Dropdown.Toggle variant="light" className="page-size-toggle">
               <span>{pageSize}</span>
-              <div className="dropdown-arrow">
-                <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <path d="M3.5 5.25L7 8.75L10.5 5.25" stroke="#171717" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
-                </svg>
-              </div>
             </Dropdown.Toggle>
             <Dropdown.Menu className="page-size-menu">
               {pageSizeOptions.map((option) => (
@@ -80,7 +75,7 @@ const Pagination: React.FC<PaginationProps> = ({
                     onPageSizeChange(option);
                     setShowDropdown(false);
                   }}
-                  className={pageSize === option ? 'active' : ''}
+                  className={pageSize === option ? "active" : ""}
                 >
                   {option}
                 </Dropdown.Item>
@@ -98,51 +93,115 @@ const Pagination: React.FC<PaginationProps> = ({
         <div className="navigation-buttons">
           {/* First page button */}
           <button
-            className={`nav-button ${currentPage === 1 ? 'disabled' : ''}`}
+            className={`nav-button ${currentPage === 1 ? "disabled" : ""}`}
             onClick={handleFirstPage}
             disabled={currentPage === 1}
             title="First page"
           >
-            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path d="M10 12L6 8L10 4" stroke="#171717" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
-              <path d="M6 12L2 8L6 4" stroke="#171717" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+            <svg
+              width="16"
+              height="16"
+              viewBox="0 0 16 16"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M10 12L6 8L10 4"
+                stroke="#171717"
+                strokeWidth="1.5"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              />
+              <path
+                d="M6 12L2 8L6 4"
+                stroke="#171717"
+                strokeWidth="1.5"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              />
             </svg>
           </button>
 
           {/* Previous page button */}
           <button
-            className={`nav-button ${currentPage === 1 ? 'disabled' : ''}`}
+            className={`nav-button ${currentPage === 1 ? "disabled" : ""}`}
             onClick={handlePreviousPage}
             disabled={currentPage === 1}
             title="Previous page"
           >
-            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path d="M10 12L6 8L10 4" stroke="#171717" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+            <svg
+              width="16"
+              height="16"
+              viewBox="0 0 16 16"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M10 12L6 8L10 4"
+                stroke="#171717"
+                strokeWidth="1.5"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              />
             </svg>
           </button>
 
           {/* Next page button */}
           <button
-            className={`nav-button ${currentPage === totalPages ? 'disabled' : ''}`}
+            className={`nav-button ${
+              currentPage === totalPages ? "disabled" : ""
+            }`}
             onClick={handleNextPage}
             disabled={currentPage === totalPages}
             title="Next page"
           >
-            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path d="M6 4L10 8L6 12" stroke="#171717" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+            <svg
+              width="16"
+              height="16"
+              viewBox="0 0 16 16"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M6 4L10 8L6 12"
+                stroke="#171717"
+                strokeWidth="1.5"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              />
             </svg>
           </button>
 
           {/* Last page button */}
           <button
-            className={`nav-button ${currentPage === totalPages ? 'disabled' : ''}`}
+            className={`nav-button ${
+              currentPage === totalPages ? "disabled" : ""
+            }`}
             onClick={handleLastPage}
             disabled={currentPage === totalPages}
             title="Last page"
           >
-            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path d="M6 4L10 8L6 12" stroke="#171717" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
-              <path d="M2 4L6 8L2 12" stroke="#171717" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+            <svg
+              width="16"
+              height="16"
+              viewBox="0 0 16 16"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M6 4L10 8L6 12"
+                stroke="#171717"
+                strokeWidth="1.5"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              />
+              <path
+                d="M2 4L6 8L2 12"
+                stroke="#171717"
+                strokeWidth="1.5"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              />
             </svg>
           </button>
         </div>
@@ -151,4 +210,4 @@ const Pagination: React.FC<PaginationProps> = ({
   );
 };
 
-export default Pagination; 
+export default Pagination;

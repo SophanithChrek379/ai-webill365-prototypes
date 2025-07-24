@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
-import { Row, Col, Card, Badge, Table, Form } from "react-bootstrap";
+import { Row, Col, Card, Badge, Table, Form, Modal } from "react-bootstrap";
 import Sidebar from "../../components/Sidebar";
 import AppBar from "../../components/AppBar";
 import Pagination from "../../components/Pagination";
@@ -9,6 +9,7 @@ import Input from "../../components/Input";
 import Button from "../../components/Button";
 import WLDateRangePicker from "@/components/WLDateRangePicker";
 import StatusDropdown, { StatusOption } from "../../components/StatusDropdown";
+import CustomerDetailModal from "../../components/CustomerDetailModal";
 import ViewSettingsModal, {
   ColumnOption,
 } from "../../components/ViewSettingsModal";
@@ -139,11 +140,21 @@ const getStatusBadge = (status: string) => {
   }
 };
 
-const getActionButtons = (status: string) => {
+const getActionButtons = (
+  status: string,
+  subscriber: any,
+  onView: () => void
+) => {
   if (status === "Requested") {
     return (
       <div className="d-flex gap-1">
-        <Button size="sm" variant="primary" outline className="action-btn">
+        <Button
+          size="sm"
+          variant="primary"
+          outline
+          className="action-btn"
+          onClick={onView}
+        >
           <i className="bi bi-eye"></i>
         </Button>
         <Button size="sm" variant="primary" outline className="action-btn">
@@ -156,7 +167,13 @@ const getActionButtons = (status: string) => {
     );
   }
   return (
-    <Button size="sm" variant="primary" outline className="action-btn">
+    <Button
+      size="sm"
+      variant="primary"
+      outline
+      className="action-btn"
+      onClick={onView}
+    >
       <i className="bi bi-eye"></i>
     </Button>
   );
@@ -167,6 +184,10 @@ export default function DashboardPage() {
   const [currentPage, setCurrentPage] = useState(1);
   const [itemsPerPage, setItemsPerPage] = useState(10);
   const [showDatePicker, setShowDatePicker] = useState(false);
+  const [previewModal, setPreviewModal] = useState<{
+    show: boolean;
+    subscriber: any | null;
+  }>({ show: false, subscriber: null });
 
   // Status filter state with localStorage persistence
   const [selectedStatuses, setSelectedStatuses] = useLocalStorage<
@@ -282,6 +303,19 @@ export default function DashboardPage() {
       newSelectedRows.add(subscriberId);
     }
     setSelectedRows(newSelectedRows);
+  };
+
+  // Customer detail modal handlers
+  const handleApprove = (subscriber: any) => {
+    console.log("Approving subscriber:", subscriber);
+    // Here you would typically make an API call to approve the subscriber
+    // For now, we'll just log the action
+  };
+
+  const handleReject = (subscriber: any) => {
+    console.log("Rejecting subscriber:", subscriber);
+    // Here you would typically make an API call to reject the subscriber
+    // For now, we'll just log the action
   };
 
   const handleSelectAll = () => {
@@ -459,7 +493,7 @@ export default function DashboardPage() {
           </Row>
 
           {/* Recent Activities Section */}
-          <div className="activities-section">
+          <div className="d-flex flex-column mt-5">
             <div className="activities-header">
               <h2 className="activities-title">Recent Activities</h2>
               <p className="activities-subtitle">
@@ -603,7 +637,15 @@ export default function DashboardPage() {
                             case "actions":
                               return (
                                 <td key={column.id}>
-                                  {getActionButtons(subscriber.status)}
+                                  {getActionButtons(
+                                    subscriber.status,
+                                    subscriber,
+                                    () =>
+                                      setPreviewModal({
+                                        show: true,
+                                        subscriber,
+                                      })
+                                  )}
                                 </td>
                               );
                             default:
@@ -641,6 +683,15 @@ export default function DashboardPage() {
         onReset={handleViewSettingsReset}
         onSave={handleViewSettingsSave}
         onCancel={handleViewSettingsCancel}
+      />
+
+      {/* Customer Detail Modal */}
+      <CustomerDetailModal
+        show={previewModal.show}
+        onHide={() => setPreviewModal({ show: false, subscriber: null })}
+        subscriber={previewModal.subscriber}
+        onApprove={handleApprove}
+        onReject={handleReject}
       />
     </div>
   );
