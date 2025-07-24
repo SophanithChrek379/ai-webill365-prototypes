@@ -2043,6 +2043,11 @@ table {
   letter-spacing: -0.1px;
 }
 
+.wl-card {
+  height: auto;
+  max-height: 100%;
+}
+
 /* Activities Section */
 .activities-section {
   background-color: #fff;
@@ -2510,8 +2515,8 @@ table {
 }
 
 .page-size-menu .dropdown-item.active {
-  background: rgba(0, 0, 0, 0.1);
-  color: #171717;
+  background: var(--Backgrounds-BG-SELECTED, #cfebff);
+  color: var(--Forgrounds-FG-INTERACTIVE, #0021fe);
 }
 
 .pagination-info {
