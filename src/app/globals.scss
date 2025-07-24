@@ -24,81 +24,6 @@ body {
   line-height: 1.5;
 }
 
-/* Custom Button Component Styles - Based on Figma Design System */
-.btn {
-  font-weight: 500;
-  border: none;
-  transition: all 0.2s ease;
-  text-decoration: none;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 0.5rem;
-  cursor: pointer;
-}
-
-/* Primary Button Variants */
-.btn-primary {
-  background-color: #0f1fea;
-  color: #fff;
-  box-shadow: 0px 0px 0px 1px #1221c1, 0px 1px 1px 0px rgba(18, 33, 193, 0.5),
-    0px 2px 3px 0px rgba(18, 33, 193, 0.1);
-}
-
-.btn-primary:hover {
-  background-color: #3e60ff;
-  box-shadow: 0px 0px 0px 1px #0f1fea, 0px 1px 1px 0px rgba(15, 31, 234, 0.5),
-    0px 2px 3px 0px rgba(18, 33, 193, 0.1);
-}
-
-.btn-primary:active {
-  background-color: #1221c1;
-  box-shadow: 0px 0px 1px 1px rgba(29, 50, 255, 0.16), 0px 0px 0px 4px #b9d3ff;
-}
-
-/* Primary Outline Button */
-.btn-primary.btn-outline {
-  background-color: #fff;
-  color: #171717;
-  border: 1px solid rgba(0, 0, 0, 0.17);
-  box-shadow: 0px 0px 0px 1px rgba(0, 0, 0, 0.17),
-    0px 1px 1px 0px rgba(0, 0, 0, 0.15), 0px 2px 3px 0px rgba(0, 0, 0, 0.08);
-}
-
-.btn-primary.btn-outline:hover {
-  background-color: #f5f5f5;
-  box-shadow: 0px 0px 0px 1px rgba(0, 0, 0, 0.25),
-    0px 1px 1px 0px rgba(0, 0, 0, 0.15), 0px 2px 4px 0px rgba(0, 0, 0, 0.16);
-}
-
-.btn-primary.btn-outline:active {
-  background-color: #fafafa;
-  box-shadow: 0px 0px 1px 1px rgba(107, 114, 128, 0.16), 0px 0px 0px 4px #d1d5db;
-}
-
-/* Primary Text Button */
-.btn-primary.btn-text {
-  background-color: transparent;
-  color: #0f1fea;
-}
-
-.btn-primary.btn-text:hover {
-  background-color: #d8e9ff;
-}
-
-.btn-primary.btn-text:active {
-  background-color: #eaf3ff;
-  box-shadow: 0px 0px 0px 4px #8eb6ff;
-}
-
-/* Danger Button Variants */
-.btn-danger {
-  background-color: #e1232e;
-  color: #fff;
-  box-shadow: 0px 0px 0px 1px #bf310f, 0px 1px 1px 0px rgba(189, 24, 34, 0.15),
-    0px 2px 3px 0px rgba(189, 24, 34, 0.08);
-}
-
 /* Customer Detail Modal Styles */
 .customer-detail-modal-dialog {
   max-width: 420px !important;
@@ -473,6 +398,10 @@ table {
 }
 .form-check-input {
   margin-top: 0px;
+
+  &:checked {
+    background-size: 10px 10px;
+  }
 }
 .wl-checkbox-md input[type="checkbox"] {
   width: 24px;
@@ -917,11 +846,11 @@ table {
   justify-content: center;
   width: 18px;
   height: 18px;
-  opacity: 0.2;
+  opacity: 1;
 }
 
 .sidebar-item.active .sidebar-icon {
-  opacity: 0.2;
+  opacity: 1;
 }
 
 .icon-image {
@@ -2817,21 +2746,73 @@ table {
   display: inline-block;
 
   .status-dropdown-toggle {
-    font-weight: 500;
-    font-size: 0.875rem;
-    line-height: 1rem;
-    color: #171717;
-    border: 1px solid rgba(0, 0, 0, 0.17);
-    box-shadow: 0px 0px 0px 1px rgba(0, 0, 0, 0.17),
-      0px 1px 1px 0px rgba(0, 0, 0, 0.15), 0px 2px 3px 0px rgba(0, 0, 0, 0.08);
+    padding: 8px;
+    font-size: var(--Typeface-Size-Button-Medium, 14px);
+    font-weight: var(--Typeface-Weight-Button-Medium, 500);
+    line-height: var(--Typeface-Line-height-Button-Medium, 16px);
+    letter-spacing: var(--Typeface-Letter-Spacing-Button-Medium, 0px);
+    color: var(--Forgrounds-FG-TITLE, #171717) #171717;
+    border: none;
+    background-color: var(--Button-Primary-Outlined-BTN-OUTL-NORMAL, #fff);
+    border-radius: 6px;
+    box-shadow: var(--Outline-Button-Default-First-X-0, 0px)
+        var(--Outline-Button-Default-First-Y-0, 0px)
+        var(--Outline-Button-Default-First-B-0, 0px)
+        var(--Outline-Button-Default-First-S-0, 1px)
+        var(--Outline-Button-Default-First-Color, rgba(0, 0, 0, 0.17)),
+      var(--Outline-Button-Default-Second-X-0, 0px)
+        var(--Outline-Button-Default-Second-Y-0, 1px)
+        var(--Outline-Button-Default-Second-B-0, 1px)
+        var(--Outline-Button-Default-Second-S-0, 0px)
+        var(--Outline-Button-Default-Second-Color, rgba(0, 0, 0, 0.15)),
+      var(--Outline-Button-Default-Third-X-0, 0px)
+        var(--Outline-Button-Default-Third-Y-0, 2px)
+        var(--Outline-Button-Default-Third-B-0, 3px)
+        var(--Outline-Button-Default-Third-S-0, 0px)
+        var(--Outline-Button-Default-Third-Color, rgba(0, 0, 0, 0.08));
     transition: all 0.2s ease;
+
+    &:focus,
+    &:active {
+      background-color: var(
+        --Button-Primary-Outlined-BTN-OUTL-PRESSED,
+        #fafafa
+      );
+      box-shadow: var(--Outline-Button-Pressed-First-X-0, 0px)
+          var(--Outline-Button-Pressed-First-Y-0, 0px)
+          var(--Outline-Button-Pressed-First-B-0, 1px)
+          var(--Outline-Button-Pressed-First-S-0, 1px)
+          var(--Outline-Button-Pressed-First-Color, rgba(105, 114, 129, 0.16)),
+        var(--Outline-Button-Pressed-Secord-X-0, 0px)
+          var(--Outline-Button-Pressed-Secord-Y-0, 0px)
+          var(--Outline-Button-Pressed-Secord-B-0, 0px)
+          var(--Outline-Button-Pressed-Secord-S-0, 4px)
+          var(--Outline-Button-Pressed-Secord-Colors, #d0d5dc);
+      color: var(--Forgrounds-FG-TITLE, #171717) #171717;
+    }
+
+    &::after {
+      display: none;
+    }
   }
 
   .status-dropdown-toggle:hover {
-    background-color: #f8f9fa;
-    border-color: rgba(0, 0, 0, 0.17);
-    box-shadow: 0px 0px 0px 1px rgba(0, 0, 0, 0.17),
-      0px 2px 4px 0px rgba(0, 0, 0, 0.2), 0px 4px 6px 0px rgba(0, 0, 0, 0.12);
+    background-color: var(--Button-Primary-Outlined-BTN-OUTL-HOVER, #f5f5f5);
+    box-shadow: var(--Outline-Button-Hover-First-X-0, 0px)
+        var(--Outline-Button-Hover-First-Y-0, 0px)
+        var(--Outline-Button-Hover-First-B-0, 0px)
+        var(--Outline-Button-Hover-First-S-0, 1px)
+        var(--Outline-Button-Hover-First-Color, rgba(0, 0, 0, 0.25)),
+      var(--Outline-Button-Hover-Secord-X-0, 0px)
+        var(--Outline-Button-Hover-Secord-Y-0, 1px)
+        var(--Outline-Button-Hover-Secord-B-0, 1px)
+        var(--Outline-Button-Hover-Secord-S-0, 0px)
+        var(--Outline-Button-Hover-Secord-Color, rgba(0, 0, 0, 0.15)),
+      var(--Outline-Button-Hover-Third-X-0, 0px)
+        var(--Outline-Button-Hover-Third-Y-0, 2px)
+        var(--Outline-Button-Hover-Third-B-0, 4px)
+        var(--Outline-Button-Hover-Third-S-0, 0px)
+        var(--Outline-Button-Hover-Third-Color, rgba(0, 0, 0, 0.16));
   }
 }
 

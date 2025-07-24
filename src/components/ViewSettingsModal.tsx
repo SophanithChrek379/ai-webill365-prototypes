@@ -178,10 +178,7 @@ const ViewSettingsModal: React.FC<ViewSettingsModalProps> = ({
       <Modal.Body className="view-settings-modal-body">
         {/* Header */}
         <div className="view-settings-header">
-          <div className="view-settings-title">
-            <i className="bi bi-grid me-2"></i>
-            View Settings
-          </div>
+          <div className="view-settings-title">View Settings</div>
           <div className="view-settings-actions">
             <Button
               variant="primary"

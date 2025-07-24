@@ -97,12 +97,9 @@ const StatusDropdown: React.FC<StatusDropdownProps> = ({
       <Dropdown show={show} onToggle={(isOpen) => setShow(isOpen)}>
         <Dropdown.Toggle
           as={Button}
-          variant="primary"
-          outline
-          size="sm"
-          className="status-dropdown-toggle"
+          className="status-dropdown-toggle d-flex align-items-center gap-2"
         >
-          <i className="bi bi-check2-square me-1"></i>
+          <Form.Check id="status-dropdown-toggle-id" />
           Status {selectedCount > 0 && `(${selectedCount})`}
         </Dropdown.Toggle>
 

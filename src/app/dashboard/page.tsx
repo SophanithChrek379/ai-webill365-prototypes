@@ -147,35 +147,69 @@ const getActionButtons = (
 ) => {
   if (status === "Requested") {
     return (
-      <div className="d-flex gap-1">
-        <Button
-          size="sm"
-          variant="primary"
-          outline
-          className="action-btn"
-          onClick={onView}
-        >
-          <i className="bi bi-eye"></i>
-        </Button>
-        <Button size="sm" variant="primary" outline className="action-btn">
-          <i className="bi bi-check"></i>
-        </Button>
-        <Button size="sm" variant="danger" outline className="action-btn">
-          <i className="bi bi-x"></i>
-        </Button>
+      <div className="d-flex align-items-center gap-1">
+        <button className="wl-btn-sm wl-btn-primary-text" onClick={onView}>
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="12"
+            height="12"
+            viewBox="0 0 12 12"
+            fill="none"
+          >
+            <path
+              d="M6 9.53918C2.77734 9.53918 0.521484 6.90466 0.521484 6.09094C0.521484 5.27319 2.77734 2.63867 6 2.63867C9.26294 2.63867 11.4785 5.27319 11.4785 6.09094C11.4785 6.90466 9.26697 9.53918 6 9.53918ZM6 8.30249C7.22058 8.30249 8.21155 7.31152 8.21155 6.09094C8.21155 4.87036 7.22058 3.87939 6 3.87939C4.77942 3.87939 3.78845 4.87036 3.78845 6.09094C3.78845 7.31152 4.77942 8.30249 6 8.30249ZM6 6.92078C5.54077 6.92078 5.17017 6.55017 5.17017 6.09094C5.17017 5.63171 5.54077 5.26111 6 5.26111C6.45923 5.26111 6.82983 5.63171 6.82983 6.09094C6.82983 6.55017 6.45923 6.92078 6 6.92078Z"
+              fill="currentColor"
+            />
+          </svg>
+          <span>View</span>
+        </button>
+        <button className="wl-btn-sm wl-btn-icon wl-btn-primary-outline">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="12"
+            height="12"
+            viewBox="0 0 12 12"
+            fill="none"
+          >
+            <path
+              d="M4.78125 11.4961C4.48828 11.4961 4.27148 11.373 4.06641 11.1211L1.03125 7.32422C0.884766 7.14258 0.820312 6.97266 0.820312 6.79688C0.820312 6.39258 1.11914 6.09961 1.5293 6.09961C1.78711 6.09961 1.96289 6.19336 2.13281 6.42188L4.75781 9.79102L9.84961 1.70508C10.0254 1.42969 10.1953 1.33008 10.4824 1.33008C10.8926 1.33008 11.1738 1.61133 11.1738 2.01562C11.1738 2.17383 11.127 2.33789 11.0039 2.52539L5.49609 11.1152C5.32617 11.3672 5.0918 11.4961 4.78125 11.4961Z"
+              fill="currentColor"
+            />
+          </svg>
+        </button>
+        <button className="wl-btn-sm wl-btn-icon wl-btn-danger-outline">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="12"
+            height="12"
+            viewBox="0 0 12 12"
+            fill="none"
+          >
+            <path
+              d="M1.46412 10.804C1.21216 10.5579 1.21802 10.1243 1.46412 9.88404L5.06763 6.27466L1.46412 2.67115C1.21802 2.43091 1.21216 2.00318 1.46412 1.74537C1.71607 1.49341 2.14381 1.49927 2.3899 1.74537L5.99341 5.34888L9.59693 1.74537C9.84888 1.49927 10.2649 1.49927 10.5227 1.75123C10.7805 1.99732 10.7747 2.42506 10.5286 2.67115L6.92506 6.27466L10.5286 9.88404C10.7747 10.1301 10.7747 10.552 10.5227 10.804C10.2708 11.0618 9.84888 11.0559 9.59693 10.8098L5.99341 7.20631L2.3899 10.8098C2.14381 11.0559 1.72193 11.0559 1.46412 10.804Z"
+              fill="currentColor"
+            />
+          </svg>
+        </button>
       </div>
     );
   }
   return (
-    <Button
-      size="sm"
-      variant="primary"
-      outline
-      className="action-btn"
-      onClick={onView}
-    >
-      <i className="bi bi-eye"></i>
-    </Button>
+    <button className="wl-btn-sm wl-btn-primary-text" onClick={onView}>
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        width="12"
+        height="12"
+        viewBox="0 0 12 12"
+        fill="none"
+      >
+        <path
+          d="M6 9.53918C2.77734 9.53918 0.521484 6.90466 0.521484 6.09094C0.521484 5.27319 2.77734 2.63867 6 2.63867C9.26294 2.63867 11.4785 5.27319 11.4785 6.09094C11.4785 6.90466 9.26697 9.53918 6 9.53918ZM6 8.30249C7.22058 8.30249 8.21155 7.31152 8.21155 6.09094C8.21155 4.87036 7.22058 3.87939 6 3.87939C4.77942 3.87939 3.78845 4.87036 3.78845 6.09094C3.78845 7.31152 4.77942 8.30249 6 8.30249ZM6 6.92078C5.54077 6.92078 5.17017 6.55017 5.17017 6.09094C5.17017 5.63171 5.54077 5.26111 6 5.26111C6.45923 5.26111 6.82983 5.63171 6.82983 6.09094C6.82983 6.55017 6.45923 6.92078 6 6.92078Z"
+          fill="currentColor"
+        />
+      </svg>
+      <span>View</span>
+    </button>
   );
 };
 
