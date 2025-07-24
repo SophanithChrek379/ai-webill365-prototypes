@@ -439,7 +439,7 @@ export default function SubscribersPage() {
 
           {/* Statistics Cards */}
           <Row className="stats-container g-3 mb-4">
-            <Col md={4}>
+            <Col md={6}>
               <Card>
                 <Card.Body>
                   <div className="d-flex justify-content-between align-items-start">
@@ -452,7 +452,7 @@ export default function SubscribersPage() {
                 </Card.Body>
               </Card>
             </Col>
-            <Col md={4}>
+            <Col md={6}>
               <Card>
                 <Card.Body>
                   <div className="d-flex justify-content-between align-items-start">

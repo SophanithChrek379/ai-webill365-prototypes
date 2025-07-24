@@ -1,7 +1,8 @@
 'use client';
 
 import React, { useState } from 'react';
-import { Navbar, Nav, Badge, Dropdown, Image } from 'react-bootstrap';
+import { Navbar, Nav, Badge, Image } from 'react-bootstrap';
+import UserProfileDropdown from './UserProfileDropdown';
 
 interface AppBarProps {
   className?: string;
@@ -32,6 +33,28 @@ const AppBar: React.FC<AppBarProps> = ({ className = '' }) => {
     }
   };
 
+  // Custom menu items for the user profile dropdown
+  const userProfileItems = [
+    {
+      id: "profile",
+      label: "Profile",
+      icon: "/assets/images/user-icon.svg",
+      onClick: () => handleUserMenuClick('profile'),
+    },
+    {
+      id: "settings",
+      label: "Settings",
+      icon: "/assets/images/user-icon.svg",
+      onClick: () => handleUserMenuClick('settings'),
+    },
+    {
+      id: "logout",
+      label: "Logout",
+      icon: "/assets/images/user-icon.svg",
+      onClick: () => handleUserMenuClick('logout'),
+    },
+  ];
+
   return (
     <Navbar className={`app-bar ${className}`} expand="lg">
       <div className="app-bar-container">
@@ -57,28 +80,15 @@ const AppBar: React.FC<AppBarProps> = ({ className = '' }) => {
             </div>
             
             <div className="user-avatar">
-              <Dropdown align="end">
-                <Dropdown.Toggle
-                  variant="link"
-                  id="dropdown-user-avatar"
-                  className="p-0 border-0 bg-transparent shadow-none"
-                  style={{ boxShadow: 'none' }}
-                >
-                  <Image
-                    src="/assets/images/avatar/avatar-01.svg"
-                    alt="User Avatar"
-                    width={24}
-                    height={24}
-                    className="avatar-image"
-                  />
-                </Dropdown.Toggle>
-                <Dropdown.Menu>
-                  <Dropdown.Item onClick={() => handleUserMenuClick('profile')}>Profile</Dropdown.Item>
-                  <Dropdown.Item onClick={() => handleUserMenuClick('settings')}>Settings</Dropdown.Item>
-                  <Dropdown.Divider />
-                  <Dropdown.Item onClick={() => handleUserMenuClick('logout')}>Logout</Dropdown.Item>
-                </Dropdown.Menu>
-              </Dropdown>
+              <UserProfileDropdown items={userProfileItems}>
+                <Image
+                  src="/assets/images/avatar/avatar-01.svg"
+                  alt="User Avatar"
+                  width={24}
+                  height={24}
+                  className="avatar-image"
+                />
+              </UserProfileDropdown>
             </div>
           </div>
         </div>
