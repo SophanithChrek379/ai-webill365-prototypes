@@ -58,12 +58,12 @@
 @use "components/wl-guide";
 @use "components/wl-hint-text";
 @use "components/wl-inline-tip";
-// @use "components/input/wl-input";
+@use "components/input/wl-input";
 @use "components/input/wl-input-checkbox";
 @use "components/input/wl-input-date";
-// @use "components/input/wl-input-radio";
-// @use "components/input/wl-input-switch";
-// @use "components/input/wl-input-tag-input";
+@use "components/input/wl-input-radio";
+@use "components/input/wl-input-switch";
+@use "components/input/wl-input-tag-input";
 @use "components/input/wl-input-textarea";
 @use "components/wl-label-title";
 @use "components/wl-link";

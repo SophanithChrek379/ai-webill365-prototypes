@@ -31,133 +31,26 @@ body {
   margin: 1.75rem auto;
 }
 
-.customer-detail-modal {
-  .modal-content {
-    border-radius: 12px;
-    box-shadow: 0px 6px 24px 0px rgba(0, 0, 0, 0.08),
-      0px 1px 6px 0px rgba(0, 0, 0, 0.08), 0px 0px 0px 1px rgba(0, 0, 0, 0.04);
-    border: none;
-  }
+// TODO: Modal: Footer
+.modal-footer {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 0.5rem;
 
-  .modal-header {
-    padding: 16px 16px 0 16px;
-    border-bottom: none;
+  button {
+    margin: 0px;
   }
+}
 
-  .modal-title {
-    font-size: 20px;
-    font-weight: 600;
-    line-height: 28px;
-    color: #171717;
-    letter-spacing: -0.1px;
-  }
+// TODO: Input: Form-Control
+.form-control {
+}
 
-  .modal-body {
-    padding: 0 16px 16px 16px;
-  }
-
-  .modal-footer {
-    padding: 0 16px 16px 16px;
-    border-top: none;
-    gap: 8px;
-  }
-
-  .form-label {
-    font-size: 14px;
-    font-weight: 500;
-    line-height: 16px;
-    color: #171717;
-    margin-bottom: 8px;
-  }
-
-  .customer-detail-input,
-  .customer-detail-select {
-    font-size: 14px;
-    font-weight: 500;
-    line-height: 16px;
-    color: rgba(0, 0, 0, 0.5);
-    background-color: #f5f5f5;
-    border: 1px solid #d4d4d4;
-    border-radius: 6px;
-    padding: 8px;
-    height: 32px;
-    box-shadow: 0px 0px 0px 1px #d4d4d4;
-  }
-
-  .customer-detail-input:disabled,
-  .customer-detail-select:disabled {
-    background-color: #f5f5f5;
-    color: rgba(0, 0, 0, 0.5);
-    opacity: 1;
-  }
-
-  .customer-detail-select.country-code {
-    width: 72px;
-    min-width: 72px;
-  }
-
-  .customer-detail-btn-close {
-    font-size: 14px;
-    font-weight: 500;
-    line-height: 16px;
-    color: #0f1fea;
-    text-decoration: none;
-    padding: 8px;
-    min-width: 32px;
-    min-height: 32px;
-    border: none;
-    background: transparent;
-    box-shadow: none;
-  }
-
-  .customer-detail-btn-close:hover {
-    background-color: transparent;
-    color: #0f1fea;
-    text-decoration: none;
-  }
-
-  .customer-detail-btn-reject {
-    font-size: 14px;
-    font-weight: 500;
-    line-height: 16px;
-    color: #bd1822;
-    background-color: #fff;
-    border: 1px solid #fea3a8;
-    padding: 8px;
-    min-width: 32px;
-    min-height: 32px;
-    border-radius: 6px;
-    box-shadow: 0px 1px 1px 0px rgba(236, 0, 42, 0.15),
-      0px 2px 3px 0px rgba(236, 0, 42, 0.1), 0px 0px 0px 1px #fea3a8;
-  }
-
-  .customer-detail-btn-reject:hover {
-    background-color: #bd1822;
-    border-color: #bd1822;
-    color: #fff;
-  }
-
-  .customer-detail-btn-approve {
-    font-size: 14px;
-    font-weight: 500;
-    line-height: 16px;
-    color: #fff;
-    background-color: #0f1fea;
-    border: 1px solid #1221c1;
-    padding: 8px;
-    min-width: 32px;
-    min-height: 32px;
-    border-radius: 6px;
-    box-shadow: 0px 0px 0px 1px #1221c1, 0px 1px 1px 0px rgba(18, 33, 193, 0.5),
-      0px 2px 3px 0px rgba(18, 33, 193, 0.1);
-  }
-
-  .customer-detail-btn-approve:hover {
-    background-color: #3e60ff;
-    border-color: #0f1fea;
-    box-shadow: 0px 0px 0px 1px #0f1fea, 0px 1px 1px 0px rgba(15, 31, 234, 0.5),
-      0px 2px 3px 0px rgba(18, 33, 193, 0.1);
-  }
+// TODO: Select: Form-Select
+.form-select {
+  border: none;
+  padding: 0px 2.25rem 0px 0.75rem;
 }
 
 .btn-danger:hover {
@@ -308,13 +201,23 @@ table {
   position: relative;
   display: flex;
   align-items: center;
-  background-color: #fff;
-  border: 1px solid #d4d4d4;
+  background-color: var(--Backgrounds-BG-NORMAL, #fff);
+  box-shadow: var(--Ouline-Normal-First-X-0, 0px)
+    var(--Ouline-Normal-First-Y-0, 0px) var(--Ouline-Normal-First-B-0, 0px)
+    var(--Ouline-Normal-First-S-0, 1px) var(--Borders-BORDER-BASE-THIN, #d4d4d4);
   border-radius: var(--WLDS-Radius-8, 8px);
   padding: 0.5rem 0.75rem;
   min-height: 48px;
   height: 48px;
   transition: border-color 0.2s ease, box-shadow 0.2s ease;
+
+  input[type="text"],
+  input[type="password"] {
+    padding: 0px;
+    border: none;
+    box-shadow: none;
+    border-radius: 0px;
+  }
 }
 
 .input-group-custom:focus-within {
@@ -2140,6 +2043,7 @@ table {
   background-color: transparent;
   border: none;
   outline: none;
+  box-shadow: none;
   border-radius: inherit;
   font-weight: 500;
   font-size: 0.875rem;
