@@ -30,7 +30,7 @@ const Sidebar: React.FC<SidebarProps> = ({ className = '' }) => {
       id: 'logs',
       label: 'Logs',
       icon: '/assets/images/log-icon.svg',
-      path: '/logs'
+      path: '#'
     }
   ];
 

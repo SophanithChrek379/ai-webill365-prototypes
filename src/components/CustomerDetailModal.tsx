@@ -105,7 +105,7 @@ const CustomerDetailModal: React.FC<CustomerDetailModalProps> = ({
               <Form.Label className="fw-medium mb-2">Email</Form.Label>
               <Form.Control
                 type="email"
-                value={subscriber.email}
+                value={String(subscriber.email || '')}
                 readOnly
                 className="customer-detail-input"
               />
@@ -116,7 +116,7 @@ const CustomerDetailModal: React.FC<CustomerDetailModalProps> = ({
               <Form.Label className="fw-medium mb-2">User ID</Form.Label>
               <Form.Control
                 type="text"
-                value={subscriber.userId}
+                value={String(subscriber.userId || '')}
                 readOnly
                 className="customer-detail-input"
               />
