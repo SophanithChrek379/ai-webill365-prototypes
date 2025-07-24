@@ -8,6 +8,7 @@ import Pagination from "../../components/Pagination";
 import Input from "../../components/Input";
 import Button from "../../components/Button";
 import WLDateRangePicker from "@/components/WLDateRangePicker";
+import StatusDropdown, { StatusOption } from "../../components/StatusDropdown";
 
 // Mock data for the dashboard
 const mockSubscribers = [
@@ -161,18 +162,61 @@ export default function DashboardPage() {
   const [itemsPerPage, setItemsPerPage] = useState(10);
   const [showDatePicker, setShowDatePicker] = useState(false);
 
-  const filteredSubscribers = mockSubscribers.filter(
-    (subscriber) =>
+  // Status filter state
+  const [selectedStatuses, setSelectedStatuses] = useState<StatusOption[]>([
+    { id: "requested", label: "Requested", checked: false },
+    { id: "approved", label: "Approved", checked: false },
+    { id: "rejected", label: "Rejected", checked: false },
+    { id: "inactive", label: "Inactive", checked: false },
+  ]);
+
+  // Filter subscribers based on search term and selected statuses
+  const filteredSubscribers = mockSubscribers.filter((subscriber) => {
+    const matchesSearch =
       subscriber.fullName.toLowerCase().includes(searchTerm.toLowerCase()) ||
       subscriber.taxId.toLowerCase().includes(searchTerm.toLowerCase()) ||
       subscriber.email.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      subscriber.userId.toLowerCase().includes(searchTerm.toLowerCase())
-  );
+      subscriber.userId.toLowerCase().includes(searchTerm.toLowerCase());
+
+    const selectedStatusIds = selectedStatuses
+      .filter((status) => status.checked)
+      .map((status) => status.id);
+
+    const matchesStatus =
+      selectedStatusIds.length === 0 ||
+      selectedStatusIds.includes(subscriber.status.toLowerCase());
+
+    return matchesSearch && matchesStatus;
+  });
 
   const totalPages = Math.ceil(filteredSubscribers.length / itemsPerPage);
   const startIndex = (currentPage - 1) * itemsPerPage;
   const endIndex = startIndex + itemsPerPage;
   const currentSubscribers = filteredSubscribers.slice(startIndex, endIndex);
+
+  // Status dropdown handlers
+  const handleStatusChange = (statuses: StatusOption[]) => {
+    setSelectedStatuses(statuses);
+    setCurrentPage(1); // Reset to first page when filter changes
+  };
+
+  const handleStatusReset = () => {
+    const resetStatuses = selectedStatuses.map((status) => ({
+      ...status,
+      checked: false,
+    }));
+    setSelectedStatuses(resetStatuses);
+  };
+
+  const handleStatusSave = () => {
+    // Status changes are already applied in handleStatusChange
+    console.log("Status filter saved:", selectedStatuses);
+  };
+
+  const handleStatusCancel = () => {
+    // Reset to previous state (this would be handled by the component internally)
+    console.log("Status filter cancelled");
+  };
 
   return (
     <div className="admin-layout">
@@ -247,10 +291,13 @@ export default function DashboardPage() {
             <div className="activities-filters">
               <div className="d-flex gap-3 align-items-center">
                 <WLDateRangePicker />
-                <Button variant="primary" outline size="sm">
-                  <i className="bi bi-check2-square me-1"></i>
-                  Status
-                </Button>
+                <StatusDropdown
+                  selectedStatuses={selectedStatuses}
+                  onStatusChange={handleStatusChange}
+                  onReset={handleStatusReset}
+                  onSave={handleStatusSave}
+                  onCancel={handleStatusCancel}
+                />
               </div>
 
               <div className="d-flex gap-3 align-items-center">
