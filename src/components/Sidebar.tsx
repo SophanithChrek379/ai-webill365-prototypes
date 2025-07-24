@@ -2,6 +2,7 @@
 
 import React, { useState } from 'react';
 import { Nav } from 'react-bootstrap';
+import { useRouter, usePathname } from 'next/navigation';
 import Image from 'next/image';
 
 interface SidebarProps {
@@ -9,31 +10,36 @@ interface SidebarProps {
 }
 
 const Sidebar: React.FC<SidebarProps> = ({ className = '' }) => {
-  const [activeItem, setActiveItem] = useState('dashboard');
+  const router = useRouter();
+  const pathname = usePathname();
 
   const menuItems = [
     {
       id: 'dashboard',
       label: 'Dashboard',
       icon: '/assets/images/dashboard-icon.svg',
-      isActive: true
+      path: '/dashboard'
     },
     {
       id: 'subscribers',
       label: 'Subscribers',
-      icon: '/assets/images/user-icon.svg'
+      icon: '/assets/images/user-icon.svg',
+      path: '/subscribers'
     },
     {
       id: 'logs',
       label: 'Logs',
-      icon: '/assets/images/log-icon.svg'
+      icon: '/assets/images/log-icon.svg',
+      path: '/logs'
     }
   ];
 
-  const handleItemClick = (itemId: string) => {
-    setActiveItem(itemId);
-    // Here you would typically navigate to the corresponding page
-    console.log(`Navigating to ${itemId}`);
+  const handleItemClick = (path: string) => {
+    router.push(path);
+  };
+
+  const isActive = (path: string) => {
+    return pathname === path;
   };
 
   return (
@@ -60,8 +66,8 @@ const Sidebar: React.FC<SidebarProps> = ({ className = '' }) => {
           {menuItems.map((item) => (
             <Nav.Item key={item.id}>
               <Nav.Link
-                className={`sidebar-item ${item.isActive ? 'active' : ''}`}
-                onClick={() => handleItemClick(item.id)}
+                className={`sidebar-item ${isActive(item.path) ? 'active' : ''}`}
+                onClick={() => handleItemClick(item.path)}
               >
                 <div className="sidebar-item-content">
                   <div className="sidebar-icon">
