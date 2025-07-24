@@ -1,9 +1,9 @@
-'use client';
+"use client";
 
-import { useState } from 'react';
-import Link from 'next/link';
-import Image from 'next/image';
-import { Form, Button } from 'react-bootstrap';
+import { useState } from "react";
+import Link from "next/link";
+import Image from "next/image";
+import { Form, Button } from "react-bootstrap";
 
 interface LoginFormProps {
   onSubmit?: (formData: { username: string; password: string }) => void;
@@ -11,19 +11,23 @@ interface LoginFormProps {
   isAdmin?: boolean;
 }
 
-export default function LoginForm({ onSubmit, isLoading = false, isAdmin = false }: LoginFormProps) {
+export default function LoginForm({
+  onSubmit,
+  isLoading = false,
+  isAdmin = false,
+}: LoginFormProps) {
   const [showPassword, setShowPassword] = useState(false);
   const [formData, setFormData] = useState({
-    username: '',
-    password: '',
-    rememberMe: false
+    username: "",
+    password: "",
+    rememberMe: false,
   });
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value, type, checked } = e.target;
-    setFormData(prev => ({
+    setFormData((prev) => ({
       ...prev,
-      [name]: type === 'checkbox' ? checked : value
+      [name]: type === "checkbox" ? checked : value,
     }));
   };
 
@@ -32,13 +36,12 @@ export default function LoginForm({ onSubmit, isLoading = false, isAdmin = false
     if (onSubmit) {
       onSubmit(formData);
     } else {
-      console.log('Login attempt:', formData);
+      console.log("Login attempt:", formData);
     }
   };
 
   return (
     <Form onSubmit={handleSubmit} className="login-form">
-      
       {/* Username/ID Field */}
       <Form.Group className="mb-3">
         <div className="input-group-custom">
@@ -94,7 +97,11 @@ export default function LoginForm({ onSubmit, isLoading = false, isAdmin = false
             disabled={isLoading}
           >
             <Image
-              src={showPassword ? "/assets/images/eye-off-icon.svg" : "/assets/images/eye-icon.svg"}
+              src={
+                showPassword
+                  ? "/assets/images/eye-off-icon.svg"
+                  : "/assets/images/eye-icon.svg"
+              }
               alt={showPassword ? "Hide Password" : "Show Password"}
               width={24}
               height={24}
@@ -123,7 +130,7 @@ export default function LoginForm({ onSubmit, isLoading = false, isAdmin = false
         size="lg"
         disabled={isLoading}
       >
-        {isLoading ? 'Logging in...' : 'Log in'}
+        {isLoading ? "Logging in..." : "Log in"}
       </Button>
 
       {/* Only show these sections for non-admin login */}
@@ -132,7 +139,9 @@ export default function LoginForm({ onSubmit, isLoading = false, isAdmin = false
           {/* Divider */}
           <div className="divider-container mb-4">
             <div className="divider-line"></div>
-            <span className="divider-text px-3">Don't have an account?</span>
+            <span className="divider-text px-3">
+              Don&apos;t have an account?
+            </span>
             <div className="divider-line"></div>
           </div>
 
@@ -158,4 +167,4 @@ export default function LoginForm({ onSubmit, isLoading = false, isAdmin = false
       )}
     </Form>
   );
-} 
+}
