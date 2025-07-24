@@ -130,7 +130,7 @@ const getStatusBadge = (status: string) => {
 
 const getActionButtons = (
   status: string,
-  subscriber: any,
+  subscriber: Record<string, unknown>,
   onView: () => void
 ) => {
   if (status === "Requested") {
@@ -174,7 +174,7 @@ export default function SubscribersPage() {
   const [showDatePicker, setShowDatePicker] = useState(false);
   const [previewModal, setPreviewModal] = useState<{
     show: boolean;
-    subscriber: any | null;
+    subscriber: Record<string, unknown> | null;
   }>({ show: false, subscriber: null });
 
   // Status filter state with localStorage persistence
@@ -294,13 +294,13 @@ export default function SubscribersPage() {
   };
 
   // Customer detail modal handlers
-  const handleApprove = (subscriber: any) => {
+  const handleApprove = (subscriber: Record<string, unknown>) => {
     console.log("Approving subscriber:", subscriber);
     // Here you would typically make an API call to approve the subscriber
     // For now, we'll just log the action
   };
 
-  const handleReject = (subscriber: any) => {
+  const handleReject = (subscriber: Record<string, unknown>) => {
     console.log("Rejecting subscriber:", subscriber);
     // Here you would typically make an API call to reject the subscriber
     // For now, we'll just log the action

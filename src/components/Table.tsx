@@ -10,16 +10,16 @@ interface TableColumn {
   width?: string;
   sortable?: boolean;
   align?: 'left' | 'center' | 'right';
-  render?: (value: any, row: any) => React.ReactNode;
+  render?: (value: unknown, row: Record<string, unknown>) => React.ReactNode;
 }
 
 interface TableProps {
   columns: TableColumn[];
-  data: any[];
+  data: Record<string, unknown>[];
   className?: string;
   onSort?: (key: string, direction: 'asc' | 'desc') => void;
-  onRowClick?: (row: any) => void;
-  onActionClick?: (action: string, row: any) => void;
+  onRowClick?: (row: Record<string, unknown>) => void;
+  onActionClick?: (action: string, row: Record<string, unknown>) => void;
   sortable?: boolean;
   selectable?: boolean;
   selectedRows?: string[];
@@ -89,13 +89,13 @@ export default function Table({
     }
   };
 
-  const handleRowClick = (row: any) => {
+  const handleRowClick = (row: Record<string, unknown>) => {
     if (onRowClick) {
       onRowClick(row);
     }
   };
 
-  const handleActionClick = (action: string, row: any, event: React.MouseEvent) => {
+  const handleActionClick = (action: string, row: Record<string, unknown>, event: React.MouseEvent) => {
     event.stopPropagation();
     if (onActionClick) {
       onActionClick(action, row);
@@ -215,8 +215,8 @@ export function ActionCell({
   row 
 }: { 
   actions: string[]; 
-  onActionClick: (action: string, row: any) => void;
-  row: any;
+  onActionClick: (action: string, row: Record<string, unknown>) => void;
+  row: Record<string, unknown>;
 }) {
   const getActionIcon = (action: string) => {
     switch (action) {

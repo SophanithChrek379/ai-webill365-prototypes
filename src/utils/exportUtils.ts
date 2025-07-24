@@ -1,5 +1,5 @@
 export interface ExportableData {
-  [key: string]: any;
+  [key: string]: unknown;
 }
 
 export const exportToCSV = (

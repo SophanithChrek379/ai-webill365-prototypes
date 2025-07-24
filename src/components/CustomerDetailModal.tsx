@@ -4,9 +4,9 @@ import { Modal, Button, Form } from "react-bootstrap";
 interface CustomerDetailModalProps {
   show: boolean;
   onHide: () => void;
-  subscriber: any | null;
-  onApprove?: (subscriber: any) => void;
-  onReject?: (subscriber: any) => void;
+  subscriber: Record<string, unknown> | null;
+  onApprove?: (subscriber: Record<string, unknown>) => void;
+  onReject?: (subscriber: Record<string, unknown>) => void;
 }
 
 const CustomerDetailModal: React.FC<CustomerDetailModalProps> = ({
@@ -51,7 +51,7 @@ const CustomerDetailModal: React.FC<CustomerDetailModalProps> = ({
               <Form.Label className="fw-medium mb-2">Full Name</Form.Label>
               <Form.Control
                 type="text"
-                value={subscriber.fullName}
+                value={String(subscriber.fullName || '')}
                 readOnly
                 className="customer-detail-input"
               />
@@ -62,7 +62,7 @@ const CustomerDetailModal: React.FC<CustomerDetailModalProps> = ({
               <Form.Label className="fw-medium mb-2">Tax ID</Form.Label>
               <Form.Control
                 type="text"
-                value={subscriber.taxId}
+                value={String(subscriber.taxId || '')}
                 readOnly
                 className="customer-detail-input"
               />
@@ -72,11 +72,11 @@ const CustomerDetailModal: React.FC<CustomerDetailModalProps> = ({
             <div>
               <Form.Label className="fw-medium mb-2">Plan</Form.Label>
               <Form.Select
-                value={subscriber.plan}
+                value={String(subscriber.plan || '')}
                 disabled
                 className="customer-detail-select"
               >
-                <option value={subscriber.plan}>{subscriber.plan}</option>
+                <option value={String(subscriber.plan || '')}>{String(subscriber.plan || '')}</option>
               </Form.Select>
             </div>
 
@@ -93,7 +93,7 @@ const CustomerDetailModal: React.FC<CustomerDetailModalProps> = ({
                 </Form.Select>
                 <Form.Control
                   type="text"
-                  value={subscriber.mobileNo}
+                  value={String(subscriber.mobileNo || '')}
                   readOnly
                   className="customer-detail-input flex-grow-1"
                 />
