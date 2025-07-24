@@ -2845,3 +2845,496 @@ table {
     transform: translateY(0);
   }
 }
+
+/* View Settings Modal Component Styles */
+.view-settings-modal {
+  .modal-content {
+    background-color: #ffffff;
+    border: none;
+    border-radius: 10px;
+    box-shadow: 0px 0px 1px 0px rgba(0, 0, 0, 0.22),
+      0px 1px 2px 0px rgba(0, 0, 0, 0.06), 0px 4px 20px 0px rgba(0, 0, 0, 0.15);
+    overflow: hidden;
+  }
+
+  .modal-body {
+    padding: 0;
+  }
+}
+
+.view-settings-modal-body {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  width: 100%;
+}
+
+/* Header Section */
+.view-settings-header {
+  background: rgba(255, 255, 255, 0.4);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid #d3d3d3;
+  padding: 12px 16px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  min-height: 48px;
+}
+
+.view-settings-title {
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 28px;
+  color: #000000;
+  font-family: "Inter", sans-serif;
+  letter-spacing: -0.14px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.view-settings-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.view-action-btn {
+  padding: 8px;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 16px;
+  border-radius: 6px;
+  min-height: 32px;
+  min-width: 62px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+}
+
+.view-cancel-btn {
+  background: transparent;
+  color: #0f1fea;
+  border: none;
+  box-shadow: none;
+}
+
+.view-cancel-btn:hover {
+  background-color: #f8f9fa;
+  color: #0f1fea;
+}
+
+.view-reset-btn {
+  background-color: #ffffff;
+  color: #171717;
+  border: 1px solid rgba(0, 0, 0, 0.17);
+  box-shadow: 0px 0px 0px 1px rgba(0, 0, 0, 0.17),
+    0px 1px 1px 0px rgba(0, 0, 0, 0.15), 0px 2px 3px 0px rgba(0, 0, 0, 0.08);
+}
+
+.view-reset-btn:hover {
+  background-color: #f8f9fa;
+  box-shadow: 0px 0px 0px 1px rgba(0, 0, 0, 0.17),
+    0px 2px 4px 0px rgba(0, 0, 0, 0.2), 0px 4px 6px 0px rgba(0, 0, 0, 0.12);
+}
+
+.view-save-btn {
+  background-color: #0f1fea;
+  color: #ffffff;
+  border: 1px solid #1221c1;
+  box-shadow: 0px 0px 0px 1px #1221c1, 0px 1px 1px 0px rgba(18, 33, 193, 0.5),
+    0px 2px 3px 0px rgba(18, 33, 193, 0.1);
+}
+
+.view-save-btn:hover {
+  background-color: #0e1bd8;
+  box-shadow: 0px 0px 0px 1px #1221c1, 0px 2px 4px 0px rgba(18, 33, 193, 0.6),
+    0px 4px 6px 0px rgba(18, 33, 193, 0.15);
+}
+
+/* Show All Section */
+.view-show-all {
+  padding: 4px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 12px;
+  transition: background-color 0.2s ease;
+  border-radius: 5px;
+  margin: 4px;
+}
+
+.view-show-all:hover {
+  background-color: #f8f9fa;
+}
+
+/* Column Options Section */
+.view-columns-list {
+  padding: 4px 4px 16px 4px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.view-column-option {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  padding: 7px 12px;
+  border-radius: 5px;
+  transition: background-color 0.2s ease;
+  background-color: #ffffff;
+}
+
+.view-column-option:hover {
+  background-color: #f8f9fa;
+}
+
+.view-column-content {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex: 1;
+}
+
+.view-column-drag-handle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 18px;
+  height: 18px;
+  opacity: 0.5;
+  cursor: grab;
+  transition: opacity 0.2s ease;
+}
+
+.view-column-drag-handle:hover {
+  opacity: 1;
+}
+
+.view-column-drag-handle i {
+  font-size: 14px;
+  color: #737373;
+}
+
+/* Checkbox Styles for View Settings */
+.view-checkbox {
+  margin: 0;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+}
+
+.view-checkbox .form-check-input {
+  width: 18px;
+  height: 18px;
+  margin: 0;
+  border: 1px solid #d4d4d4;
+  border-radius: 4px;
+  background-color: #ffffff;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  position: relative;
+}
+
+.view-checkbox .form-check-input:checked {
+  background-color: #0f1fea;
+  border-color: #0f1fea;
+  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'%3e%3cpath fill='none' stroke='%23fff' stroke-linecap='round' stroke-linejoin='round' stroke-width='3' d='m6 10 3 3 6-6'/%3e%3c/svg%3e");
+  background-size: 12px;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.view-checkbox .form-check-input:focus {
+  border-color: #0f1fea;
+  box-shadow: 0 0 0 2px rgba(15, 31, 234, 0.1);
+}
+
+.view-checkbox-label {
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 18px;
+  color: #040404;
+  font-family: "Inter", sans-serif;
+  cursor: pointer;
+  margin: 0;
+  user-select: none;
+}
+
+/* Modal Size Customization */
+.view-settings-modal .modal-dialog {
+  max-width: 400px;
+  margin: 1.75rem auto;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .view-settings-modal .modal-dialog {
+    max-width: 350px;
+    margin: 1rem auto;
+  }
+
+  .view-settings-header {
+    padding: 10px 12px;
+  }
+
+  .view-settings-actions {
+    gap: 4px;
+  }
+
+  .view-action-btn {
+    padding: 6px;
+    font-size: 12px;
+    min-width: 50px;
+    min-height: 28px;
+  }
+
+  .view-column-option {
+    padding: 6px 8px;
+  }
+
+  .view-checkbox-label {
+    font-size: 13px;
+  }
+}
+
+/* Animation for modal */
+.view-settings-modal .modal-content {
+  animation: modalSlideIn 0.3s ease-out;
+}
+
+@keyframes modalSlideIn {
+  from {
+    opacity: 0;
+    transform: translateY(-20px) scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+/* Drag and Drop Styles for View Settings */
+.view-column-option.dragging {
+  opacity: 0.8;
+  transform: rotate(2deg);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  z-index: 1000;
+}
+
+.view-column-drag-handle {
+  cursor: grab;
+  transition: all 0.2s ease;
+}
+
+.view-column-drag-handle:active {
+  cursor: grabbing;
+}
+
+.view-column-drag-handle:hover {
+  opacity: 1;
+  transform: scale(1.1);
+}
+
+/* Bulk Actions Component Styles */
+.bulk-actions {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 16px;
+  background-color: #f8f9fa;
+  border: 1px solid #e9ecef;
+  border-radius: 8px;
+  margin-bottom: 16px;
+  gap: 16px;
+}
+
+.bulk-actions-info {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.bulk-selection-text {
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 16px;
+  color: #171717;
+}
+
+.bulk-clear-btn {
+  padding: 4px 8px;
+  font-size: 12px;
+  min-height: 24px;
+  background: transparent;
+  color: #0f1fea;
+  border: none;
+  box-shadow: none;
+}
+
+.bulk-clear-btn:hover {
+  background-color: #f8f9fa;
+  color: #0f1fea;
+}
+
+.bulk-actions-buttons {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.bulk-actions-dropdown {
+  padding: 6px 12px;
+  font-size: 13px;
+  min-height: 32px;
+  background-color: #0f1fea;
+  border: 1px solid #1221c1;
+  box-shadow: 0px 0px 0px 1px #1221c1, 0px 1px 1px 0px rgba(18, 33, 193, 0.5),
+    0px 2px 3px 0px rgba(18, 33, 193, 0.1);
+}
+
+.bulk-actions-dropdown:hover {
+  background-color: #0e1bd8;
+  box-shadow: 0px 0px 0px 1px #1221c1, 0px 2px 4px 0px rgba(18, 33, 193, 0.6),
+    0px 4px 6px 0px rgba(18, 33, 193, 0.15);
+}
+
+.bulk-actions-menu {
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1),
+    0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  padding: 4px 0;
+  min-width: 160px;
+}
+
+.bulk-action-item {
+  display: flex;
+  align-items: center;
+  padding: 8px 12px;
+  font-weight: 500;
+  font-size: 14px;
+  color: #171717;
+  transition: background-color 0.2s ease;
+  cursor: pointer;
+}
+
+.bulk-action-item:hover {
+  background-color: #f3f4f6;
+  color: #171717;
+}
+
+.bulk-action-item.bulk-action-danger {
+  color: #dc2626;
+}
+
+.bulk-action-item.bulk-action-danger:hover {
+  background-color: #fef2f2;
+  color: #dc2626;
+}
+
+.bulk-action-item.bulk-action-warning {
+  color: #f59e0b;
+}
+
+.bulk-action-item.bulk-action-warning:hover {
+  background-color: #fffbeb;
+  color: #f59e0b;
+}
+
+.bulk-action-item.bulk-action-success {
+  color: #10b981;
+}
+
+.bulk-action-item.bulk-action-success:hover {
+  background-color: #ecfdf5;
+  color: #10b981;
+}
+
+.bulk-select-all-btn {
+  padding: 6px 12px;
+  font-size: 13px;
+  min-height: 32px;
+  border: 1px solid rgba(0, 0, 0, 0.17);
+  box-shadow: 0px 0px 0px 1px rgba(0, 0, 0, 0.17),
+    0px 1px 1px 0px rgba(0, 0, 0, 0.15), 0px 2px 3px 0px rgba(0, 0, 0, 0.08);
+}
+
+.bulk-select-all-btn:hover {
+  background-color: #f8f9fa;
+  box-shadow: 0px 0px 0px 1px rgba(0, 0, 0, 0.17),
+    0px 2px 4px 0px rgba(0, 0, 0, 0.2), 0px 4px 6px 0px rgba(0, 0, 0, 0.12);
+}
+
+/* Table Row Selection Styles */
+.table-row-selectable {
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.table-row-selectable:hover {
+  background-color: #f8f9fa;
+}
+
+.table-row-selected {
+  background-color: #e3f2fd !important;
+}
+
+.table-row-selected:hover {
+  background-color: #bbdefb !important;
+}
+
+.table-checkbox-cell {
+  width: 40px;
+  text-align: center;
+}
+
+.table-checkbox-cell .form-check-input {
+  margin: 0;
+  cursor: pointer;
+}
+
+/* Responsive Design for Bulk Actions */
+@media (max-width: 768px) {
+  .bulk-actions {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 12px;
+    padding: 10px 12px;
+  }
+
+  .bulk-actions-info {
+    justify-content: space-between;
+  }
+
+  .bulk-actions-buttons {
+    justify-content: center;
+  }
+
+  .bulk-actions-dropdown,
+  .bulk-select-all-btn {
+    width: 100%;
+    justify-content: center;
+  }
+}
+
+/* Animation for drag and drop */
+@keyframes dragStart {
+  from {
+    transform: scale(1);
+    opacity: 1;
+  }
+  to {
+    transform: scale(1.02);
+    opacity: 0.8;
+  }
+}
+
+.view-column-option.dragging {
+  animation: dragStart 0.2s ease-out;
+}

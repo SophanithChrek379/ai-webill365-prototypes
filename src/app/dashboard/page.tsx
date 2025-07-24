@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
-import { Row, Col, Card, Badge, Table } from "react-bootstrap";
+import { Row, Col, Card, Badge, Table, Form } from "react-bootstrap";
 import Sidebar from "../../components/Sidebar";
 import AppBar from "../../components/AppBar";
 import Pagination from "../../components/Pagination";
@@ -9,6 +9,12 @@ import Input from "../../components/Input";
 import Button from "../../components/Button";
 import WLDateRangePicker from "@/components/WLDateRangePicker";
 import StatusDropdown, { StatusOption } from "../../components/StatusDropdown";
+import ViewSettingsModal, {
+  ColumnOption,
+} from "../../components/ViewSettingsModal";
+import BulkActions, { BulkAction } from "../../components/BulkActions";
+import { useLocalStorage } from "../../hooks/useLocalStorage";
+import { exportToCSV, formatDateForExport } from "../../utils/exportUtils";
 
 // Mock data for the dashboard
 const mockSubscribers = [
@@ -162,13 +168,41 @@ export default function DashboardPage() {
   const [itemsPerPage, setItemsPerPage] = useState(10);
   const [showDatePicker, setShowDatePicker] = useState(false);
 
-  // Status filter state
-  const [selectedStatuses, setSelectedStatuses] = useState<StatusOption[]>([
+  // Status filter state with localStorage persistence
+  const [selectedStatuses, setSelectedStatuses] = useLocalStorage<
+    StatusOption[]
+  >("dashboard-status-filters", [
     { id: "requested", label: "Requested", checked: false },
     { id: "approved", label: "Approved", checked: false },
     { id: "rejected", label: "Rejected", checked: false },
     { id: "inactive", label: "Inactive", checked: false },
   ]);
+
+  // View settings state with localStorage persistence
+  const [showViewSettings, setShowViewSettings] = useState(false);
+  const [tableColumns, setTableColumns] = useLocalStorage<ColumnOption[]>(
+    "dashboard-table-columns",
+    [
+      { id: "fullName", label: "Full Name", visible: true, order: 1 },
+      { id: "taxId", label: "Tax ID", visible: true, order: 2 },
+      { id: "mobileNo", label: "Mobile Number", visible: true, order: 3 },
+      { id: "email", label: "Email", visible: true, order: 4 },
+      { id: "userId", label: "User ID", visible: true, order: 5 },
+      { id: "plan", label: "Plan", visible: true, order: 6 },
+      {
+        id: "subscriptionDate",
+        label: "Subscription Date",
+        visible: true,
+        order: 7,
+      },
+      { id: "lastLogin", label: "Last login", visible: true, order: 8 },
+      { id: "status", label: "Status", visible: true, order: 9 },
+      { id: "actions", label: "Actions", visible: true, order: 10 },
+    ]
+  );
+
+  // Bulk selection state
+  const [selectedRows, setSelectedRows] = useState<Set<number>>(new Set());
 
   // Filter subscribers based on search term and selected statuses
   const filteredSubscribers = mockSubscribers.filter((subscriber) => {
@@ -217,6 +251,152 @@ export default function DashboardPage() {
     // Reset to previous state (this would be handled by the component internally)
     console.log("Status filter cancelled");
   };
+
+  // View settings handlers
+  const handleColumnsChange = (columns: ColumnOption[]) => {
+    setTableColumns(columns);
+  };
+
+  const handleViewSettingsReset = () => {
+    const resetColumns = tableColumns.map((column) => ({
+      ...column,
+      visible: true,
+    }));
+    setTableColumns(resetColumns);
+  };
+
+  const handleViewSettingsSave = () => {
+    console.log("View settings saved:", tableColumns);
+  };
+
+  const handleViewSettingsCancel = () => {
+    console.log("View settings cancelled");
+  };
+
+  // Bulk actions handlers
+  const handleRowSelection = (subscriberId: number) => {
+    const newSelectedRows = new Set(selectedRows);
+    if (newSelectedRows.has(subscriberId)) {
+      newSelectedRows.delete(subscriberId);
+    } else {
+      newSelectedRows.add(subscriberId);
+    }
+    setSelectedRows(newSelectedRows);
+  };
+
+  const handleSelectAll = () => {
+    const allIds = new Set(
+      currentSubscribers.map((subscriber) => subscriber.id)
+    );
+    setSelectedRows(allIds);
+  };
+
+  const handleClearSelection = () => {
+    setSelectedRows(new Set());
+  };
+
+  const handleBulkAction = (action: BulkAction) => {
+    const selectedSubscribers = currentSubscribers.filter((subscriber) =>
+      selectedRows.has(subscriber.id)
+    );
+
+    switch (action.id) {
+      case "approve":
+        console.log("Bulk approve:", selectedSubscribers);
+        // Here you would typically make an API call
+        break;
+      case "reject":
+        console.log("Bulk reject:", selectedSubscribers);
+        break;
+      case "export":
+        console.log("Bulk export:", selectedSubscribers);
+        // Prepare data for export
+        const exportData = selectedSubscribers.map((subscriber) => ({
+          "Full Name": subscriber.fullName,
+          "Tax ID": subscriber.taxId,
+          "Mobile Number": subscriber.mobileNo,
+          Email: subscriber.email,
+          "User ID": subscriber.userId,
+          Plan: subscriber.plan,
+          "Subscription Date": formatDateForExport(subscriber.subscriptionDate),
+          "Last Login": subscriber.lastLogin,
+          Status: subscriber.status,
+        }));
+        exportToCSV(
+          exportData,
+          `subscribers-export-${new Date().toISOString().split("T")[0]}.csv`
+        );
+        break;
+      case "delete":
+        console.log("Bulk delete:", selectedSubscribers);
+        break;
+      default:
+        console.log("Unknown bulk action:", action.id);
+    }
+
+    // Clear selection after action
+    setSelectedRows(new Set());
+  };
+
+  // Bulk actions configuration
+  const bulkActions: BulkAction[] = [
+    {
+      id: "approve",
+      label: "Approve Selected",
+      icon: "bi-check-circle",
+      variant: "success",
+      onClick: () =>
+        handleBulkAction({
+          id: "approve",
+          label: "",
+          icon: "",
+          variant: "success",
+          onClick: () => {},
+        }),
+    },
+    {
+      id: "reject",
+      label: "Reject Selected",
+      icon: "bi-x-circle",
+      variant: "danger",
+      onClick: () =>
+        handleBulkAction({
+          id: "reject",
+          label: "",
+          icon: "",
+          variant: "danger",
+          onClick: () => {},
+        }),
+    },
+    {
+      id: "export",
+      label: "Export Selected",
+      icon: "bi-download",
+      variant: "primary",
+      onClick: () =>
+        handleBulkAction({
+          id: "export",
+          label: "",
+          icon: "",
+          variant: "primary",
+          onClick: () => {},
+        }),
+    },
+    {
+      id: "delete",
+      label: "Delete Selected",
+      icon: "bi-trash",
+      variant: "danger",
+      onClick: () =>
+        handleBulkAction({
+          id: "delete",
+          label: "",
+          icon: "",
+          variant: "danger",
+          onClick: () => {},
+        }),
+    },
+  ];
 
   return (
     <div className="admin-layout">
@@ -306,6 +486,7 @@ export default function DashboardPage() {
                   outline
                   size="sm"
                   className="view-btn"
+                  onClick={() => setShowViewSettings(true)}
                 >
                   <i className="bi bi-grid me-1"></i>
                   View
@@ -323,36 +504,112 @@ export default function DashboardPage() {
               </div>
             </div>
 
+            {/* Bulk Actions */}
+            {selectedRows.size > 0 && (
+              <BulkActions
+                selectedCount={selectedRows.size}
+                totalCount={currentSubscribers.length}
+                actions={bulkActions}
+                onSelectAll={handleSelectAll}
+                onClearSelection={handleClearSelection}
+              />
+            )}
+
             {/* Activities Table */}
             <div className="activities-table">
               <Table responsive className="table-hover">
                 <thead>
                   <tr>
-                    <th>FULL NAME</th>
-                    <th>TAX ID</th>
-                    <th>MOBILE NO.</th>
-                    <th>EMAIL</th>
-                    <th>USER ID</th>
-                    <th>PLAN</th>
-                    <th>SUBSCRIPTION DATE</th>
-                    <th>LAST LOGIN</th>
-                    <th>STATUS</th>
-                    <th>ACTIONS</th>
+                    <th className="table-checkbox-cell">
+                      <Form.Check
+                        type="checkbox"
+                        checked={
+                          selectedRows.size === currentSubscribers.length &&
+                          currentSubscribers.length > 0
+                        }
+                        onChange={handleSelectAll}
+                        className="table-checkbox"
+                      />
+                    </th>
+                    {tableColumns
+                      .filter((column) => column.visible)
+                      .sort((a, b) => a.order - b.order)
+                      .map((column) => (
+                        <th key={column.id}>{column.label.toUpperCase()}</th>
+                      ))}
                   </tr>
                 </thead>
                 <tbody>
                   {currentSubscribers.map((subscriber) => (
-                    <tr key={subscriber.id}>
-                      <td>{subscriber.fullName}</td>
-                      <td>{subscriber.taxId}</td>
-                      <td>{subscriber.mobileNo}</td>
-                      <td>{subscriber.email}</td>
-                      <td>{subscriber.userId}</td>
-                      <td>{subscriber.plan}</td>
-                      <td>{subscriber.subscriptionDate}</td>
-                      <td>{subscriber.lastLogin}</td>
-                      <td>{getStatusBadge(subscriber.status)}</td>
-                      <td>{getActionButtons(subscriber.status)}</td>
+                    <tr
+                      key={subscriber.id}
+                      className={`table-row-selectable ${
+                        selectedRows.has(subscriber.id)
+                          ? "table-row-selected"
+                          : ""
+                      }`}
+                    >
+                      <td className="table-checkbox-cell">
+                        <Form.Check
+                          type="checkbox"
+                          checked={selectedRows.has(subscriber.id)}
+                          onChange={() => handleRowSelection(subscriber.id)}
+                          className="table-checkbox"
+                        />
+                      </td>
+                      {tableColumns
+                        .filter((column) => column.visible)
+                        .sort((a, b) => a.order - b.order)
+                        .map((column) => {
+                          switch (column.id) {
+                            case "fullName":
+                              return (
+                                <td key={column.id}>{subscriber.fullName}</td>
+                              );
+                            case "taxId":
+                              return (
+                                <td key={column.id}>{subscriber.taxId}</td>
+                              );
+                            case "mobileNo":
+                              return (
+                                <td key={column.id}>{subscriber.mobileNo}</td>
+                              );
+                            case "email":
+                              return (
+                                <td key={column.id}>{subscriber.email}</td>
+                              );
+                            case "userId":
+                              return (
+                                <td key={column.id}>{subscriber.userId}</td>
+                              );
+                            case "plan":
+                              return <td key={column.id}>{subscriber.plan}</td>;
+                            case "subscriptionDate":
+                              return (
+                                <td key={column.id}>
+                                  {subscriber.subscriptionDate}
+                                </td>
+                              );
+                            case "lastLogin":
+                              return (
+                                <td key={column.id}>{subscriber.lastLogin}</td>
+                              );
+                            case "status":
+                              return (
+                                <td key={column.id}>
+                                  {getStatusBadge(subscriber.status)}
+                                </td>
+                              );
+                            case "actions":
+                              return (
+                                <td key={column.id}>
+                                  {getActionButtons(subscriber.status)}
+                                </td>
+                              );
+                            default:
+                              return <td key={column.id}></td>;
+                          }
+                        })}
                     </tr>
                   ))}
                 </tbody>
@@ -374,6 +631,17 @@ export default function DashboardPage() {
           </div>
         </div>
       </div>
+
+      {/* View Settings Modal */}
+      <ViewSettingsModal
+        show={showViewSettings}
+        onHide={() => setShowViewSettings(false)}
+        columns={tableColumns}
+        onColumnsChange={handleColumnsChange}
+        onReset={handleViewSettingsReset}
+        onSave={handleViewSettingsSave}
+        onCancel={handleViewSettingsCancel}
+      />
     </div>
   );
 }
