@@ -502,7 +502,7 @@ export default function DashboardPage() {
                   </div>
                 </div>
               ) : (
-                <Table responsive className="dashboard-table">
+                <Table responsive >
                   <thead>
                     <tr>
                       {tableColumns
@@ -515,34 +515,34 @@ export default function DashboardPage() {
                           // Example: Add your custom width classes here
                           switch (column.id) {
                             case 'fullName':
-                              customWidthClass = 'w-200'; // 200px width
+                              customWidthClass = 'wl-width-300';
                               break;
                             case 'taxId':
-                              customWidthClass = 'w-150'; // 150px width
+                              customWidthClass = 'wl-width-250'; 
                               break;
                             case 'mobileNo':
-                              customWidthClass = 'w-140'; // 140px width
+                              customWidthClass = 'wl-width-140';
                               break;
                             case 'email':
-                              customWidthClass = 'w-250'; // 250px width
+                              customWidthClass = 'wl-width-250';
                               break;
                             case 'userId':
-                              customWidthClass = 'w-120'; // 120px width
+                              customWidthClass = 'wl-width-180';
                               break;
                             case 'plan':
-                              customWidthClass = 'w-100'; // 100px width
+                              customWidthClass = 'wl-width-100';
                               break;
                             case 'subscriptionDate':
-                              customWidthClass = 'w-160'; // 160px width
+                              customWidthClass = 'wl-width-160';
                               break;
                             case 'lastLogin':
-                              customWidthClass = 'w-120'; // 120px width
+                              customWidthClass = 'wl-width-300';
                               break;
                             case 'status':
-                              customWidthClass = 'w-100'; // 100px width
+                              customWidthClass = 'wl-width-100';
                               break;
                             case 'actions':
-                              customWidthClass = 'w-150'; // 150px width
+                              customWidthClass = 'wl-width-150'; 
                               break;
                             default:
                               customWidthClass = '';
@@ -575,34 +575,34 @@ export default function DashboardPage() {
                             
                             switch (column.id) {
                               case 'fullName':
-                                customWidthClass = 'w-200';
+                                customWidthClass = 'wl-width-300';
                                 break;
                               case 'taxId':
-                                customWidthClass = 'w-150';
+                                customWidthClass = 'wl-width-200';
                                 break;
                               case 'mobileNo':
-                                customWidthClass = 'w-140';
+                                customWidthClass = 'wl-width-140';
                                 break;
                               case 'email':
-                                customWidthClass = 'w-250';
+                                customWidthClass = 'wl-width-250';
                                 break;
                               case 'userId':
-                                customWidthClass = 'w-120';
+                                customWidthClass = 'wl-width-auto';
                                 break;
                               case 'plan':
-                                customWidthClass = 'w-100';
+                                customWidthClass = 'wl-width-100';
                                 break;
                               case 'subscriptionDate':
-                                customWidthClass = 'w-160';
+                                customWidthClass = 'wl-width-200';
                                 break;
                               case 'lastLogin':
-                                customWidthClass = 'w-120';
+                                customWidthClass = 'wl-width-160';
                                 break;
                               case 'status':
-                                customWidthClass = 'w-100';
+                                customWidthClass = 'wl-width-100';
                                 break;
                               case 'actions':
-                                customWidthClass = 'w-150';
+                                customWidthClass = 'wl-width-150';
                                 break;
                               default:
                                 customWidthClass = '';

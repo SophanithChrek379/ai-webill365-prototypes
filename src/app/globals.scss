@@ -101,88 +101,56 @@ tbody tr:has(input[type="checkbox"]:checked) td {
 }
 
 /* Custom Width Classes for Table Columns */
-.w-100 {
+.wl-width-auto {
+  width: auto !important;
+  @media screen and (min-width: 1200px) {
+    width: 220px !important;
+  }
+}
+.wl-width-44 {
+  width: 44px !important;
+}
+.wl-width-64 {
+  width: 64px !important;
+}
+.wl-width-80 {
+  width: 80px !important;
+}
+.wl-width-100 {
   width: 100px !important;
 }
-.w-120 {
+.wl-width-120 {
   width: 120px !important;
 }
-.w-140 {
+.wl-width-140 {
   width: 140px !important;
 }
-.w-150 {
+.wl-width-150 {
   width: 150px !important;
 }
-.w-160 {
+.wl-width-160 {
   width: 160px !important;
 }
-.w-200 {
+.wl-width-180 {
+  width: 180px !important;
+}
+.wl-width-200 {
   width: 200px !important;
 }
-.w-250 {
+.wl-width-220 {
+  width: 220px !important;
+}
+.wl-width-250 {
   width: 250px !important;
 }
-.w-300 {
+.wl-width-300 {
   width: 300px !important;
 }
-.w-350 {
+.wl-width-350 {
   width: 350px !important;
 }
-.w-400 {
+.wl-width-400 {
   width: 400px !important;
-}
-
-/* Dashboard Table Column Widths */
-.dashboard-table {
-  .col-full-name {
-    width: 15%;
-    min-width: 150px;
-  }
-
-  .col-tax-id {
-    width: 12%;
-    min-width: 140px;
-  }
-
-  .col-mobile-no {
-    width: 12%;
-    min-width: 130px;
-  }
-
-  .col-email {
-    width: 20%;
-    min-width: 200px;
-  }
-
-  .col-user-id {
-    width: 12%;
-    min-width: 120px;
-  }
-
-  .col-plan {
-    width: 8%;
-    min-width: 80px;
-  }
-
-  .col-subscription-date {
-    width: 12%;
-    min-width: 140px;
-  }
-
-  .col-last-login {
-    width: 10%;
-    min-width: 100px;
-  }
-
-  .col-status {
-    width: 8%;
-    min-width: 100px;
-  }
-
-  .col-actions {
-    width: 11%;
-    min-width: 120px;
-  }
 }
 
 .btn-danger.btn-text:active {
@@ -2171,10 +2139,6 @@ table {
 /* Activities Table */
 .activities-table {
   margin-bottom: 1.5rem;
-}
-
-.activities-table .table {
-  margin-bottom: 0;
 }
 
 .activities-table .table thead th {
