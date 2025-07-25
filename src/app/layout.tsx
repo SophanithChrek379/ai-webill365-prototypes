@@ -3,6 +3,7 @@ import { Inter, Kantumruy_Pro, Noto_Sans_KR } from "next/font/google";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap-icons/font/bootstrap-icons.css";
 import "./globals.scss";
+import Script from "next/script";
 
 const inter = Inter({
   variable: "--font-inter",
@@ -39,10 +40,22 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" wlds-color-mode="webill365" wlds-theme-mode="light">
+      <head>
+        <meta charSet="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <link rel="icon" href="/favicon.ico" />
+      </head>
       <body
         className={`${inter.variable} ${kantumruyPro.variable} ${notoSansKR.variable}`}
       >
         {children}
+        {/* Bootstrap JavaScript */}
+        <Script
+          src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+          integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+          crossOrigin="anonymous"
+          strategy="afterInteractive"
+        />
       </body>
     </html>
   );

@@ -2,9 +2,9 @@ name: Deploy to GitHub Pages
 
 on:
   push:
-    branches: [ main ]
+    branches: [main]
   pull_request:
-    branches: [ main ]
+    branches: [main]
 
 permissions:
   contents: read
@@ -21,34 +21,35 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-        
+
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '20'
-          cache: 'npm'
-          
+          node-version: "20"
+          cache: "npm"
+
       - name: Install dependencies
         run: |
           npm ci --legacy-peer-deps
           npm cache clean --force
-          
+
       - name: Verify dependencies
         run: |
           echo "Node version: $(node --version)"
           echo "NPM version: $(npm --version)"
           echo "Next.js version: $(npm list next)"
-          
+
       - name: Build with Next.js
         run: |
           # Set CI environment variable to handle warnings as errors
           export CI=true
+          export NODE_ENV=production
           # Run build with more verbose output
           npm run build 2>&1
         env:
           CI: true
           NODE_ENV: production
-          
+
       - name: Verify build output
         run: |
           echo "Build output directory contents:"
@@ -57,10 +58,12 @@ jobs:
           test -f out/index.html && echo "✅ index.html exists" || echo "❌ index.html missing"
           echo "Checking for dashboard page:"
           test -f out/dashboard/index.html && echo "✅ dashboard page exists" || echo "❌ dashboard page missing"
-          
+          echo "Checking for CSS files:"
+          find out/_next/static/css -name "*.css" | head -5
+
       - name: Setup Pages
         uses: actions/configure-pages@v4
-        
+
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
@@ -76,4 +79,4 @@ jobs:
     steps:
       - name: Deploy to GitHub Pages
         id: deployment
-        uses: actions/deploy-pages@v4 
+        uses: actions/deploy-pages@v4
