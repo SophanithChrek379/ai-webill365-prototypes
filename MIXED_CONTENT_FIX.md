@@ -1,4 +1,4 @@
-# 🔒 Mixed Content Fix for GitHub Pages
+# 🔒 Mixed Content Fix for GitHub Pages - UPDATED
 
 ## 🚨 **CURRENT ISSUE: Mixed Content Errors**
 
@@ -23,31 +23,41 @@ The issue is that the **deployed version is using an old build** that contains:
 
 ## 🔧 **SOLUTION APPLIED**
 
-### **Step 1: Fresh Deployment Triggered**
+### **Step 1: Configuration Updates**
 
-- ✅ **New commit**: `77a0c3e` - Force fresh deployment to fix mixed content issues
-- ✅ **GitHub Actions**: Should trigger new build and deployment
-- ✅ **Clean build**: Will generate correct HTTPS URLs
+✅ **Updated `next.config.ts`**:
 
-### **Step 2: Verify GitHub Pages Source Setting**
+- Added explicit HTTPS `assetPrefix` for production
+- Added `upgrade-insecure-requests` header
+- Ensured proper base path handling
 
-**CRITICAL**: Ensure GitHub Pages is set to "GitHub Actions" (not "Deploy from a branch")
+✅ **Updated `src/app/layout.tsx`**:
 
-1. **Go to**: `https://github.com/SophanithChrek379/ai-webill365-prototypes/settings/pages`
-2. **Source**: Should be "GitHub Actions"
-3. **If not**: Change from "Deploy from a branch" to "GitHub Actions"
+- Added `upgrade-insecure-requests` meta tag
+- Added security headers in metadata
+- Ensured all CDN links are HTTPS
 
-### **Step 3: Monitor GitHub Actions**
+### **Step 2: Force Fresh Deployment**
 
-1. **Go to**: `https://github.com/SophanithChrek379/ai-webill365-prototypes/actions`
-2. **Look for**: Latest "Deploy to GitHub Pages" workflow (commit `77a0c3e`)
-3. **Wait for**: Green checkmarks ✅ on both jobs
+✅ **Created deployment script**: `force-deploy.sh`
 
-### **Step 4: Clear Browser Cache**
+- Automatically creates timestamped commit
+- Triggers GitHub Actions deployment
+- Provides monitoring instructions
 
-1. **Hard refresh**: `Ctrl+F5` (Windows) or `Cmd+Shift+R` (Mac)
-2. **Clear cache**: Clear browser cache and cookies
-3. **Incognito mode**: Test in incognito/private browsing
+### **Step 3: Run Fresh Deployment**
+
+```bash
+# Execute the deployment script
+./force-deploy.sh
+```
+
+This will:
+
+1. Create a new commit with timestamp
+2. Push to GitHub
+3. Trigger GitHub Actions deployment
+4. Generate fresh build with correct HTTPS URLs
 
 ## 🎯 **EXPECTED RESULT**
 
@@ -59,11 +69,11 @@ After the fresh deployment, all URLs should be:
 <!-- CSS Files -->
 <link
   rel="stylesheet"
-  href="/ai-webill365-prototypes/_next/static/css/fe74e60a2b001b5a.css"
+  href="https://sophanithchrek379.github.io/ai-webill365-prototypes/_next/static/css/fe74e60a2b001b5a.css"
 />
 <link
   rel="stylesheet"
-  href="/ai-webill365-prototypes/_next/static/css/d500ed581b4d6cb7.css"
+  href="https://sophanithchrek379.github.io/ai-webill365-prototypes/_next/static/css/d500ed581b4d6cb7.css"
 />
 
 <!-- Bootstrap CDN (Already HTTPS) -->
@@ -76,7 +86,7 @@ After the fresh deployment, all URLs should be:
 />
 
 <!-- JavaScript Files -->
-<script src="/ai-webill365-prototypes/_next/static/chunks/4bd1b696-cf72ae8a39fa05aa.js" />
+<script src="https://sophanithchrek379.github.io/ai-webill365-prototypes/_next/static/chunks/4bd1b696-cf72ae8a39fa05aa.js" />
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" />
 ```
 
@@ -145,6 +155,22 @@ When fixed, you should see:
 2. ✅ **All assets loading** over HTTPS
 3. ✅ **WeBill365 login page** displaying correctly
 4. ✅ **All styles and JavaScript** working properly
+
+## 🔄 **AUTOMATIC DEPLOYMENT**
+
+To trigger a fresh deployment automatically:
+
+```bash
+# Run the deployment script
+./force-deploy.sh
+```
+
+This will:
+
+- Create a new commit with timestamp
+- Push to GitHub
+- Trigger GitHub Actions
+- Deploy with correct HTTPS URLs
 
 ---
 

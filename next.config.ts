@@ -7,7 +7,7 @@ const nextConfig: NextConfig = {
   output: "export",
   trailingSlash: true,
   basePath: basePath,
-  assetPrefix: basePath,
+  assetPrefix: isProduction ? "https://sophanithchrek379.github.io" + basePath : "",
   images: {
     unoptimized: true,
   },
@@ -26,6 +26,20 @@ const nextConfig: NextConfig = {
   // Ensure static assets are properly handled
   experimental: {
     optimizePackageImports: ['bootstrap', 'bootstrap-icons'],
+  },
+  // Force HTTPS for all external resources
+  async headers() {
+    return [
+      {
+        source: '/(.*)',
+        headers: [
+          {
+            key: 'Content-Security-Policy',
+            value: "upgrade-insecure-requests"
+          },
+        ],
+      },
+    ];
   },
 };
 

@@ -24,6 +24,10 @@ export const metadata: Metadata = {
     "Next.js application with Bootstrap 5.3.3 and React Bootstrap components",
   keywords: ["Next.js", "React", "Bootstrap", "TypeScript"],
   authors: [{ name: "AI WeBill365 Team" }],
+  // Force HTTPS for all resources
+  other: {
+    "upgrade-insecure-requests": "1",
+  },
 };
 
 export const viewport: Viewport = {
@@ -41,15 +45,16 @@ export default function RootLayout({
       <head>
         <meta charSet="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <meta httpEquiv="upgrade-insecure-requests" content="1" />
         <link rel="icon" href="/favicon.ico" />
-        {/* Bootstrap CSS from CDN */}
+        {/* Bootstrap CSS from CDN - HTTPS only */}
         <link
           href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
           rel="stylesheet"
           integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
           crossOrigin="anonymous"
         />
-        {/* Bootstrap Icons from CDN */}
+        {/* Bootstrap Icons from CDN - HTTPS only */}
         <link
           rel="stylesheet"
           href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.css"
@@ -59,7 +64,7 @@ export default function RootLayout({
         className={`${inter.variable} ${kantumruyPro.variable} ${notoSansKR.variable}`}
       >
         {children}
-        {/* Bootstrap JavaScript */}
+        {/* Bootstrap JavaScript - HTTPS only */}
         <Script
           src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
           integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
