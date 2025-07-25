@@ -2,6 +2,7 @@ import React from "react";
 import { Dropdown } from "react-bootstrap";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
+import { getIconAssetPath } from "@/utils/assetUtils";
 
 interface UserProfileMenuItem {
   id: string;
@@ -33,7 +34,7 @@ const UserProfileDropdown: React.FC<UserProfileDropdownProps> = ({
     {
       id: "profile",
       label: "Profile",
-      icon: "/assets/images/user-icon.svg",
+      icon: getIconAssetPath("/assets/images/user-icon.svg"),
       path: "/profile",
       onClick: () => {
         console.log("Profile clicked");
@@ -44,7 +45,7 @@ const UserProfileDropdown: React.FC<UserProfileDropdownProps> = ({
     {
       id: "settings",
       label: "Settings",
-      icon: "/assets/images/user-icon.svg",
+      icon: getIconAssetPath("/assets/images/user-icon.svg"),
       path: "/settings",
       onClick: () => {
         console.log("Settings clicked");
@@ -55,7 +56,7 @@ const UserProfileDropdown: React.FC<UserProfileDropdownProps> = ({
     {
       id: "logout",
       label: "Logout",
-      icon: "/assets/images/user-icon.svg",
+      icon: getIconAssetPath("/assets/images/user-icon.svg"),
       path: "/login",
       onClick: () => {
         console.log("Logout clicked");

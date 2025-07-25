@@ -1,8 +1,8 @@
-'use client';
+"use client";
 
-import React, { useState, forwardRef } from 'react';
-import { Form, InputGroup } from 'react-bootstrap';
-import Image from 'next/image';
+import React, { forwardRef, useState, useEffect } from "react";
+import { Form, InputGroup, Image } from "react-bootstrap";
+import { getImagePath } from "@/utils/assetUtils";
 
 interface InputProps {
   // Basic props
@@ -11,162 +11,174 @@ interface InputProps {
   onChange?: (value: string) => void;
   onFocus?: () => void;
   onBlur?: () => void;
-  
+
   // Label and validation
   label?: string;
   required?: boolean;
   error?: string;
   hint?: string;
-  
+
   // Icons
   leadIcon?: string;
   trailIcon?: string;
   clearButton?: boolean;
-  
+
   // Configuration
-  type?: 'text' | 'password' | 'email' | 'number' | 'search';
-  size?: 'sm' | 'md' | 'lg';
+  type?: "text" | "password" | "email" | "number" | "search";
+  size?: "sm" | "md" | "lg";
   disabled?: boolean;
   readOnly?: boolean;
-  
+
   // Character count
   showCharacterCount?: boolean;
   maxLength?: number;
-  
+
   // Styling
   className?: string;
   inputClassName?: string;
 }
 
-const Input = forwardRef<HTMLInputElement, InputProps>(({
-  value = '',
-  placeholder = 'Placeholder',
-  onChange,
-  onFocus,
-  onBlur,
-  label,
-  required = false,
-  error,
-  hint,
-  leadIcon,
-  trailIcon,
-  clearButton = false,
-  type = 'text',
-  size = 'md',
-  disabled = false,
-  readOnly = false,
-  showCharacterCount = false,
-  maxLength,
-  className = '',
-  inputClassName = ''
-}, ref) => {
-  const [inputValue, setInputValue] = useState(value);
+const Input = forwardRef<HTMLInputElement, InputProps>(
+  (
+    {
+      value = "",
+      placeholder,
+      onChange,
+      onFocus,
+      onBlur,
+      label,
+      required = false,
+      error,
+      hint,
+      leadIcon,
+      trailIcon,
+      clearButton = false,
+      type = "text",
+      size = "md",
+      disabled = false,
+      readOnly = false,
+      showCharacterCount = false,
+      maxLength,
+      className = "",
+      inputClassName = "",
+    },
+    ref
+  ) => {
+    const [inputValue, setInputValue] = useState(value);
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const newValue = e.target.value;
-    setInputValue(newValue);
-    onChange?.(newValue);
-  };
+    useEffect(() => {
+      setInputValue(value);
+    }, [value]);
 
-  const handleFocus = () => {
-    onFocus?.();
-  };
+    const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+      const newValue = e.target.value;
+      setInputValue(newValue);
+      onChange?.(newValue);
+    };
 
-  const handleBlur = () => {
-    onBlur?.();
-  };
+    const handleFocus = () => {
+      onFocus?.();
+    };
 
-  const handleClear = () => {
-    setInputValue('');
-    onChange?.('');
-  };
+    const handleBlur = () => {
+      onBlur?.();
+    };
 
-  return (
-    <div className={className}>
-      {/* Label */}
-      {label && (
-        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 8 }}>
-          <label>
-            {label}
-            {required && <span style={{ color: '#bd1822', marginLeft: 2 }}>*</span>}
-          </label>
-          {showCharacterCount && maxLength && (
-            <span>
-              {inputValue.length}/{maxLength}
-            </span>
+    const handleClear = () => {
+      setInputValue("");
+      onChange?.("");
+    };
+
+    return (
+      <div className={className}>
+        {/* Label */}
+        {label && (
+          <div
+            style={{
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "space-between",
+              gap: 8,
+            }}
+          >
+            <label>
+              {label}
+              {required && (
+                <span style={{ color: "#bd1822", marginLeft: 2 }}>*</span>
+              )}
+            </label>
+            {showCharacterCount && maxLength && (
+              <span>
+                {inputValue.length}/{maxLength}
+              </span>
+            )}
+          </div>
+        )}
+
+        {/* Input Field */}
+        <InputGroup size={size === "md" ? undefined : size}>
+          {/* Lead Icon */}
+          {leadIcon && (
+            <InputGroup.Text>
+              <Image src={leadIcon} alt="" width={16} height={16} />
+            </InputGroup.Text>
           )}
-        </div>
-      )}
 
-      {/* Input Field */}
-      <InputGroup size={size === 'md' ? undefined : size}>
-        {/* Lead Icon */}
-        {leadIcon && (
-          <InputGroup.Text>
-            <Image
-              src={leadIcon}
-              alt=""
-              width={16}
-              height={16}
-            />
-          </InputGroup.Text>
-        )}
+          {/* Input */}
+          <Form.Control
+            ref={ref}
+            type={type}
+            value={inputValue}
+            placeholder={placeholder}
+            onChange={handleChange}
+            onFocus={handleFocus}
+            onBlur={handleBlur}
+            disabled={disabled}
+            readOnly={readOnly}
+            maxLength={maxLength}
+            isInvalid={!!error}
+            className={inputClassName}
+          />
 
-        {/* Input */}
-        <Form.Control
-          ref={ref}
-          type={type}
-          value={inputValue}
-          placeholder={placeholder}
-          onChange={handleChange}
-          onFocus={handleFocus}
-          onBlur={handleBlur}
-          disabled={disabled}
-          readOnly={readOnly}
-          maxLength={maxLength}
-          isInvalid={!!error}
-          className={inputClassName}
-        />
+          {/* Trail Icon or Clear Button */}
+          {(trailIcon || (clearButton && inputValue)) && (
+            <InputGroup.Text>
+              {clearButton && inputValue ? (
+                <button
+                  type="button"
+                  onClick={handleClear}
+                  aria-label="Clear input"
+                  style={{
+                    background: "none",
+                    border: "none",
+                    padding: 0,
+                    cursor: "pointer",
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                  }}
+                >
+                  <Image
+                    src={getImagePath("close-icon.svg")}
+                    alt="Clear"
+                    width={14}
+                    height={14}
+                  />
+                </button>
+              ) : trailIcon ? (
+                <Image src={trailIcon} alt="" width={16} height={16} />
+              ) : null}
+            </InputGroup.Text>
+          )}
+        </InputGroup>
 
-        {/* Trail Icon or Clear Button */}
-        {(trailIcon || (clearButton && inputValue)) && (
-          <InputGroup.Text>
-            {clearButton && inputValue ? (
-              <button
-                type="button"
-                onClick={handleClear}
-                aria-label="Clear input"
-                style={{ background: 'none', border: 'none', padding: 0, cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center' }}
-              >
-                <Image
-                  src="/assets/images/close-icon.svg"
-                  alt="Clear"
-                  width={14}
-                  height={14}
-                />
-              </button>
-            ) : trailIcon ? (
-              <Image
-                src={trailIcon}
-                alt=""
-                width={16}
-                height={16}
-              />
-            ) : null}
-          </InputGroup.Text>
-        )}
-      </InputGroup>
+        {/* Error or Hint Text */}
+        {(error || hint) && <div>{error || hint}</div>}
+      </div>
+    );
+  }
+);
 
-      {/* Error or Hint Text */}
-      {(error || hint) && (
-        <div>
-          {error || hint}
-        </div>
-      )}
-    </div>
-  );
-});
+Input.displayName = "Input";
 
-Input.displayName = 'Input';
-
-export default Input; 
+export default Input;

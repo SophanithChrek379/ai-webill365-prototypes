@@ -24,4 +24,13 @@ export function getFlagPath(flagName: string): string {
 
 export function getIconPath(iconName: string): string {
   return getAssetPath(`assets/images/${iconName}`);
+}
+
+export function getAvatarPath(avatarName: string): string {
+  return getAssetPath(`assets/images/avatar/${avatarName}`);
+}
+
+// Helper function for icon properties in component data
+export function getIconAssetPath(iconPath: string): string {
+  return getAssetPath(iconPath.replace('/assets/', 'assets/'));
 } 

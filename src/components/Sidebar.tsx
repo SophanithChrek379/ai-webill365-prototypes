@@ -4,6 +4,7 @@ import React from "react";
 import { Nav } from "react-bootstrap";
 import { useRouter, usePathname } from "next/navigation";
 import Image from "next/image";
+import { getImagePath, getIconAssetPath } from "@/utils/assetUtils";
 
 interface SidebarProps {
   className?: string;
@@ -17,19 +18,19 @@ const Sidebar: React.FC<SidebarProps> = ({ className = "" }) => {
     {
       id: "dashboard",
       label: "Dashboard",
-      icon: "/assets/images/dashboard-icon.svg",
+      icon: getIconAssetPath("/assets/images/dashboard-icon.svg"),
       path: "/dashboard",
     },
     {
       id: "subscribers",
       label: "Subscribers",
-      icon: "/assets/images/subscriber-icon.svg",
+      icon: getIconAssetPath("/assets/images/subscriber-icon.svg"),
       path: "/subscribers",
     },
     {
       id: "logs",
       label: "Logs",
-      icon: "/assets/images/log-icon.svg",
+      icon: getIconAssetPath("/assets/images/log-icon.svg"),
       path: "/logs",
     },
   ];
@@ -42,7 +43,10 @@ const Sidebar: React.FC<SidebarProps> = ({ className = "" }) => {
 
   const isActive = (path: string) => {
     // Handle root path for dashboard
-    if (path === "/dashboard" && (pathname === "/" || pathname === "/dashboard")) {
+    if (
+      path === "/dashboard" &&
+      (pathname === "/" || pathname === "/dashboard")
+    ) {
       return true;
     }
     // Check if current pathname starts with the menu path (for nested routes)
@@ -70,7 +74,7 @@ const Sidebar: React.FC<SidebarProps> = ({ className = "" }) => {
             </button>
             <div className="brand-logo">
               <Image
-                src="/assets/images/project-logo.svg"
+                src={getImagePath("project-logo.svg")}
                 alt="WeBill365"
                 width={93}
                 height={16}
@@ -78,7 +82,9 @@ const Sidebar: React.FC<SidebarProps> = ({ className = "" }) => {
               />
             </div>
           </div>
-          <span className="wl-badge-guide wl-badge-guide-valid wl-badge-guide-sm wl-badge-guide-rounded">Admin</span>
+          <span className="wl-badge-guide wl-badge-guide-valid wl-badge-guide-sm wl-badge-guide-rounded">
+            Admin
+          </span>
         </div>
       </div>
 
@@ -114,7 +120,7 @@ const Sidebar: React.FC<SidebarProps> = ({ className = "" }) => {
         <div className="footer-item">
           <div className="footer-icon">
             <Image
-              src="/assets/images/layer-icon.svg"
+              src={getImagePath("layer-icon.svg")}
               alt="Version"
               width={18}
               height={18}

@@ -2,7 +2,7 @@
 
 import React, { useState } from "react";
 import Image from "next/image";
-import Badge from "./Badge";
+import { getImagePath } from "@/utils/assetUtils";
 
 interface TableColumn {
   key: string;
@@ -40,7 +40,7 @@ function TableHeader({
   sortable,
 }: TableHeaderProps) {
   const handleSort = () => {
-    if (sortable && column.sortable !== false && onSort) {
+    if (onSort && column.sortable !== false && sortable) {
       onSort(column.key);
     }
   };
@@ -50,7 +50,7 @@ function TableHeader({
       className={`table-header-cell ${
         column.sortable !== false && sortable ? "sortable" : ""
       }`}
-      style={{ width: column.width }}
+      style={{ width: column.width, textAlign: column.align || "left" }}
       onClick={handleSort}
     >
       <div className="table-header-content">
@@ -58,7 +58,7 @@ function TableHeader({
         {column.sortable !== false && sortable && (
           <div className="table-sort-icon">
             <Image
-              src="/assets/images/arrow-down.svg"
+              src={getImagePath("arrow-down.svg")}
               alt="Sort"
               width={16}
               height={16}
@@ -172,17 +172,17 @@ export default function Table({
                       )
                     }
                     className="table-checkbox"
-                    onClick={(e) => e.stopPropagation()}
                   />
                 </div>
               )}
               {columns.map((column) => (
                 <div
                   key={column.key}
-                  className={`table-cell ${
-                    column.align ? `align-${column.align}` : ""
-                  }`}
-                  style={{ width: column.width }}
+                  className="table-cell"
+                  style={{
+                    width: column.width,
+                    textAlign: column.align || "left",
+                  }}
                 >
                   {column.render ? (
                     column.render(row[column.key], row)
@@ -201,29 +201,42 @@ export default function Table({
   );
 }
 
-// Pre-built cell renderers
 export function StatusCell({ status }: { status: string }) {
   const getStatusConfig = (status: string) => {
     switch (status.toLowerCase()) {
+      case "active":
       case "approved":
-        return { variant: "success" as const, text: "Approved" };
-      case "rejected":
-        return { variant: "danger" as const, text: "Rejected" };
-      case "requested":
-        return { variant: "primary" as const, text: "Requested" };
+      case "success":
+        return {
+          className: "status-active",
+          text: status,
+        };
       case "inactive":
-        return { variant: "danger" as const, text: "Inactive" };
+      case "pending":
+      case "warning":
+        return {
+          className: "status-pending",
+          text: status,
+        };
+      case "rejected":
+      case "error":
+      case "failed":
+        return {
+          className: "status-rejected",
+          text: status,
+        };
       default:
-        return { variant: "secondary" as const, text: status };
+        return {
+          className: "status-default",
+          text: status,
+        };
     }
   };
 
   const config = getStatusConfig(status);
 
   return (
-    <Badge variant={config.variant} size="sm" showBorder={true}>
-      {config.text}
-    </Badge>
+    <span className={`status-badge ${config.className}`}>{config.text}</span>
   );
 }
 
@@ -239,17 +252,17 @@ export function ActionCell({
   const getActionIcon = (action: string) => {
     switch (action) {
       case "view":
-        return "/assets/images/eye-icon.svg";
+        return getImagePath("eye-icon.svg");
       case "edit":
-        return "/assets/images/filter-icon.svg";
+        return getImagePath("filter-icon.svg");
       case "delete":
-        return "/assets/images/arrow-left-icon.svg";
+        return getImagePath("arrow-left-icon.svg");
       case "approve":
-        return "/assets/images/check-icon.svg";
+        return getImagePath("check-icon.svg");
       case "reject":
-        return "/assets/images/arrow-left-icon.svg";
+        return getImagePath("arrow-left-icon.svg");
       default:
-        return "/assets/images/eye-icon.svg";
+        return getImagePath("eye-icon.svg");
     }
   };
 

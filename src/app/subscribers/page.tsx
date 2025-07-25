@@ -15,6 +15,7 @@ import ViewSettingsModal, {
 import BulkActions, { BulkAction } from "../../components/BulkActions";
 import { useLocalStorage } from "../../hooks/useLocalStorage";
 import { exportToCSV, formatDateForExport } from "../../utils/exportUtils";
+import { getImagePath } from "@/utils/assetUtils";
 
 // Mock data for the subscribers
 const mockSubscribers = [
@@ -566,7 +567,7 @@ export default function SubscribersPage() {
                 placeholder="Search name, tax id, email, user id"
                 value={searchTerm}
                 onChange={setSearchTerm}
-                leadIcon="/assets/images/search-icon.svg"
+                leadIcon={getImagePath("search-icon.svg")}
                 clearButton={true}
                 size="sm"
                 className="search-input"

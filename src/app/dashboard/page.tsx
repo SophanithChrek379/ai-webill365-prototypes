@@ -13,6 +13,7 @@ import ViewSettingsModal, {
   ColumnOption,
 } from "../../components/ViewSettingsModal";
 import { useLocalStorage } from "../../hooks/useLocalStorage";
+import { getImagePath } from "@/utils/assetUtils";
 
 // Mock data for the dashboard
 const mockSubscribers = [
@@ -479,7 +480,7 @@ export default function DashboardPage() {
                 placeholder="Search name, tax id, email, user id"
                 value={searchTerm}
                 onChange={setSearchTerm}
-                leadIcon="/assets/images/search-icon.svg"
+                leadIcon={getImagePath("search-icon.svg")}
                 clearButton={true}
                 size="sm"
                 className="search-input"

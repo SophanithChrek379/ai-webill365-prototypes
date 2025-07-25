@@ -3,6 +3,11 @@
 import React, { useState } from "react";
 import { Navbar, Badge, Image } from "react-bootstrap";
 import UserProfileDropdown from "./UserProfileDropdown";
+import {
+  getImagePath,
+  getAvatarPath,
+  getIconAssetPath,
+} from "@/utils/assetUtils";
 
 interface AppBarProps {
   className?: string;
@@ -21,19 +26,19 @@ const AppBar: React.FC<AppBarProps> = ({ className = "" }) => {
     {
       id: "profile",
       label: "Krong Kampuchea",
-      icon: "/assets/images/user-icon.svg",
+      icon: getIconAssetPath("/assets/images/user-icon.svg"),
       path: "#",
     },
     {
       id: "settings",
       label: "Settings",
-      icon: "/assets/images/setting-icon.svg",
+      icon: getIconAssetPath("/assets/images/setting-icon.svg"),
       path: "#",
     },
     {
       id: "logout",
       label: "Logout",
-      icon: "/assets/images/logout-icon.svg",
+      icon: getIconAssetPath("/assets/images/logout-icon.svg"),
       path: "/",
     },
   ];
@@ -51,7 +56,7 @@ const AppBar: React.FC<AppBarProps> = ({ className = "" }) => {
                 onClick={handleNotificationClick}
               >
                 <Image
-                  src="/assets/images/bell-icon.svg"
+                  src={getImagePath("bell-icon.svg")}
                   alt="Notifications"
                   width={24}
                   height={24}
@@ -68,7 +73,7 @@ const AppBar: React.FC<AppBarProps> = ({ className = "" }) => {
             <div className="user-avatar">
               <UserProfileDropdown items={userProfileItems}>
                 <Image
-                  src="/assets/images/avatar/avatar-01.svg"
+                  src={getAvatarPath("avatar-01.svg")}
                   alt="User Avatar"
                   width={24}
                   height={24}
