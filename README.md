@@ -250,3 +250,4 @@ This project is licensed under the MIT License - see the LICENSE file for detail
 ---
 
 Built with ❤️ using Next.js, Bootstrap, and modern web technologies.
+# Force GitHub Actions deployment
