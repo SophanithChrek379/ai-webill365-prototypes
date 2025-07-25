@@ -1,7 +1,5 @@
 import type { Metadata, Viewport } from "next";
 import { Inter, Kantumruy_Pro, Noto_Sans_KR } from "next/font/google";
-import "bootstrap/dist/css/bootstrap.min.css";
-import "bootstrap-icons/font/bootstrap-icons.css";
 import "./globals.scss";
 import Script from "next/script";
 
@@ -44,6 +42,18 @@ export default function RootLayout({
         <meta charSet="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
+        {/* Bootstrap CSS from CDN */}
+        <link
+          href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+          rel="stylesheet"
+          integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
+          crossOrigin="anonymous"
+        />
+        {/* Bootstrap Icons from CDN */}
+        <link
+          rel="stylesheet"
+          href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.css"
+        />
       </head>
       <body
         className={`${inter.variable} ${kantumruyPro.variable} ${notoSansKR.variable}`}
