@@ -219,38 +219,51 @@ export default function DashboardPage() {
     subscriber: Record<string, unknown> | null;
   }>({ show: false, subscriber: null });
 
-  // Status filter state with localStorage persistence
-  const [selectedStatuses, setSelectedStatuses] = useLocalStorage<
-    StatusOption[]
-  >("dashboard-status-filters", [
+  // Add client-side only state to prevent hydration issues
+  const [isClient, setIsClient] = useState(false);
+
+  // Default column configuration
+  const defaultTableColumns: ColumnOption[] = [
+    { id: "fullName", label: "Full Name", visible: true, order: 1 },
+    { id: "taxId", label: "Tax ID", visible: true, order: 2 },
+    { id: "mobileNo", label: "Mobile Number", visible: true, order: 3 },
+    { id: "email", label: "Email", visible: true, order: 4 },
+    { id: "userId", label: "User ID", visible: true, order: 5 },
+    { id: "plan", label: "Plan", visible: true, order: 6 },
+    {
+      id: "subscriptionDate",
+      label: "Subscription Date",
+      visible: true,
+      order: 7,
+    },
+    { id: "lastLogin", label: "Last login", visible: true, order: 8 },
+    { id: "status", label: "Status", visible: true, order: 9 },
+    { id: "actions", label: "Actions", visible: true, order: 10 },
+  ];
+
+  const defaultStatuses: StatusOption[] = [
     { id: "requested", label: "Requested", checked: false },
     { id: "approved", label: "Approved", checked: false },
     { id: "rejected", label: "Rejected", checked: false },
     { id: "inactive", label: "Inactive", checked: false },
-  ]);
+  ];
+
+  // Status filter state with localStorage persistence
+  const [selectedStatuses, setSelectedStatuses] = useLocalStorage<
+    StatusOption[]
+  >("dashboard-status-filters", defaultStatuses);
 
   // View settings state with localStorage persistence
   const [showViewSettings, setShowViewSettings] = useState(false);
   const [tableColumns, setTableColumns] = useLocalStorage<ColumnOption[]>(
     "dashboard-table-columns",
-    [
-      { id: "fullName", label: "Full Name", visible: true, order: 1 },
-      { id: "taxId", label: "Tax ID", visible: true, order: 2 },
-      { id: "mobileNo", label: "Mobile Number", visible: true, order: 3 },
-      { id: "email", label: "Email", visible: true, order: 4 },
-      { id: "userId", label: "User ID", visible: true, order: 5 },
-      { id: "plan", label: "Plan", visible: true, order: 6 },
-      {
-        id: "subscriptionDate",
-        label: "Subscription Date",
-        visible: true,
-        order: 7,
-      },
-      { id: "lastLogin", label: "Last login", visible: true, order: 8 },
-      { id: "status", label: "Status", visible: true, order: 9 },
-      { id: "actions", label: "Actions", visible: true, order: 10 },
-    ]
+    defaultTableColumns
   );
+
+  // Set client-side flag on mount
+  React.useEffect(() => {
+    setIsClient(true);
+  }, []);
 
   // Bulk selection state
   const [selectedRows] = useState<Set<number>>(new Set());
@@ -481,92 +494,182 @@ export default function DashboardPage() {
 
             {/* Activities Table */}
             <div className="activities-table">
-              <Table responsive>
-                <thead>
-                  <tr>
-                    {tableColumns
-                      .filter((column) => column.visible)
-                      .sort((a, b) => a.order - b.order)
-                      .map((column) => (
-                        <th key={column.id}>{column.label.toUpperCase()}</th>
-                      ))}
-                  </tr>
-                </thead>
-                <tbody>
-                  {currentSubscribers.map((subscriber) => (
-                    <tr
-                      key={subscriber.id}
-                      className={`table-row-selectable ${
-                        selectedRows.has(subscriber.id)
-                          ? "table-row-selected"
-                          : ""
-                      }`}
-                    >
+              {!isClient ? (
+                // Show loading state during SSR to prevent hydration mismatch
+                <div className="d-flex justify-content-center align-items-center" style={{ height: '200px' }}>
+                  <div className="spinner-border" role="status">
+                    <span className="visually-hidden">Loading...</span>
+                  </div>
+                </div>
+              ) : (
+                <Table responsive className="dashboard-table">
+                  <thead>
+                    <tr>
                       {tableColumns
                         .filter((column) => column.visible)
                         .sort((a, b) => a.order - b.order)
                         .map((column) => {
+                          // You can manually add custom width classes here for each column
+                          let customWidthClass = '';
+                          
+                          // Example: Add your custom width classes here
                           switch (column.id) {
-                            case "fullName":
-                              return (
-                                <td key={column.id}>{subscriber.fullName}</td>
-                              );
-                            case "taxId":
-                              return (
-                                <td key={column.id}>{subscriber.taxId}</td>
-                              );
-                            case "mobileNo":
-                              return (
-                                <td key={column.id}>{subscriber.mobileNo}</td>
-                              );
-                            case "email":
-                              return (
-                                <td key={column.id}>{subscriber.email}</td>
-                              );
-                            case "userId":
-                              return (
-                                <td key={column.id}>{subscriber.userId}</td>
-                              );
-                            case "plan":
-                              return <td key={column.id}>{subscriber.plan}</td>;
-                            case "subscriptionDate":
-                              return (
-                                <td key={column.id}>
-                                  {subscriber.subscriptionDate}
-                                </td>
-                              );
-                            case "lastLogin":
-                              return (
-                                <td key={column.id}>{subscriber.lastLogin}</td>
-                              );
-                            case "status":
-                              return (
-                                <td key={column.id}>
-                                  {getStatusBadge(subscriber.status)}
-                                </td>
-                              );
-                            case "actions":
-                              return (
-                                <td key={column.id}>
-                                  {getActionButtons(
-                                    subscriber.status,
-                                    subscriber,
-                                    () =>
-                                      setPreviewModal({
-                                        show: true,
-                                        subscriber,
-                                      })
-                                  )}
-                                </td>
-                              );
+                            case 'fullName':
+                              customWidthClass = 'w-200'; // 200px width
+                              break;
+                            case 'taxId':
+                              customWidthClass = 'w-150'; // 150px width
+                              break;
+                            case 'mobileNo':
+                              customWidthClass = 'w-140'; // 140px width
+                              break;
+                            case 'email':
+                              customWidthClass = 'w-250'; // 250px width
+                              break;
+                            case 'userId':
+                              customWidthClass = 'w-120'; // 120px width
+                              break;
+                            case 'plan':
+                              customWidthClass = 'w-100'; // 100px width
+                              break;
+                            case 'subscriptionDate':
+                              customWidthClass = 'w-160'; // 160px width
+                              break;
+                            case 'lastLogin':
+                              customWidthClass = 'w-120'; // 120px width
+                              break;
+                            case 'status':
+                              customWidthClass = 'w-100'; // 100px width
+                              break;
+                            case 'actions':
+                              customWidthClass = 'w-150'; // 150px width
+                              break;
                             default:
-                              return <td key={column.id}></td>;
+                              customWidthClass = '';
                           }
+                          
+                          return (
+                            <th key={column.id} className={customWidthClass}>
+                              {column.label.toUpperCase()}
+                            </th>
+                          );
                         })}
                     </tr>
-                  ))}
-                </tbody>
-              </Table>
+                  </thead>
+                  <tbody>
+                    {currentSubscribers.map((subscriber) => (
+                      <tr
+                        key={subscriber.id}
+                        className={`table-row-selectable ${
+                          selectedRows.has(subscriber.id)
+                            ? "table-row-selected"
+                            : ""
+                        }`}
+                      >
+                        {tableColumns
+                          .filter((column) => column.visible)
+                          .sort((a, b) => a.order - b.order)
+                          .map((column) => {
+                            // Apply the same custom width classes to table cells
+                            let customWidthClass = '';
+                            
+                            switch (column.id) {
+                              case 'fullName':
+                                customWidthClass = 'w-200';
+                                break;
+                              case 'taxId':
+                                customWidthClass = 'w-150';
+                                break;
+                              case 'mobileNo':
+                                customWidthClass = 'w-140';
+                                break;
+                              case 'email':
+                                customWidthClass = 'w-250';
+                                break;
+                              case 'userId':
+                                customWidthClass = 'w-120';
+                                break;
+                              case 'plan':
+                                customWidthClass = 'w-100';
+                                break;
+                              case 'subscriptionDate':
+                                customWidthClass = 'w-160';
+                                break;
+                              case 'lastLogin':
+                                customWidthClass = 'w-120';
+                                break;
+                              case 'status':
+                                customWidthClass = 'w-100';
+                                break;
+                              case 'actions':
+                                customWidthClass = 'w-150';
+                                break;
+                              default:
+                                customWidthClass = '';
+                            }
+                            
+                            switch (column.id) {
+                              case "fullName":
+                                return (
+                                  <td key={column.id} className={customWidthClass}>{subscriber.fullName}</td>
+                                );
+                              case "taxId":
+                                return (
+                                  <td key={column.id} className={customWidthClass}>{subscriber.taxId}</td>
+                                );
+                              case "mobileNo":
+                                return (
+                                  <td key={column.id} className={customWidthClass}>{subscriber.mobileNo}</td>
+                                );
+                              case "email":
+                                return (
+                                  <td key={column.id} className={customWidthClass}>{subscriber.email}</td>
+                                );
+                              case "userId":
+                                return (
+                                  <td key={column.id} className={customWidthClass}>{subscriber.userId}</td>
+                                );
+                              case "plan":
+                                return <td key={column.id} className={customWidthClass}>{subscriber.plan}</td>;
+                              case "subscriptionDate":
+                                return (
+                                  <td key={column.id} className={customWidthClass}>
+                                    {subscriber.subscriptionDate}
+                                  </td>
+                                );
+                              case "lastLogin":
+                                return (
+                                  <td key={column.id} className={customWidthClass}>{subscriber.lastLogin}</td>
+                                );
+                              case "status":
+                                return (
+                                  <td key={column.id} className={customWidthClass}>
+                                    {getStatusBadge(subscriber.status)}
+                                  </td>
+                                );
+                              case "actions":
+                                return (
+                                  <td key={column.id} className={customWidthClass}>
+                                    {getActionButtons(
+                                      subscriber.status,
+                                      subscriber,
+                                      () =>
+                                        setPreviewModal({
+                                          show: true,
+                                          subscriber,
+                                        })
+                                    )}
+                                  </td>
+                                );
+                              default:
+                                return <td key={column.id} className={customWidthClass}></td>;
+                            }
+                          })}
+                      </tr>
+                    ))}
+                  </tbody>
+                </Table>
+              )}
             </div>
 
             {/* Pagination */}

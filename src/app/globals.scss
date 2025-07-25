@@ -100,6 +100,91 @@ tbody tr:has(input[type="checkbox"]:checked) td {
   background-color: #ffe1e3;
 }
 
+/* Custom Width Classes for Table Columns */
+.w-100 {
+  width: 100px !important;
+}
+.w-120 {
+  width: 120px !important;
+}
+.w-140 {
+  width: 140px !important;
+}
+.w-150 {
+  width: 150px !important;
+}
+.w-160 {
+  width: 160px !important;
+}
+.w-200 {
+  width: 200px !important;
+}
+.w-250 {
+  width: 250px !important;
+}
+.w-300 {
+  width: 300px !important;
+}
+.w-350 {
+  width: 350px !important;
+}
+.w-400 {
+  width: 400px !important;
+}
+
+/* Dashboard Table Column Widths */
+.dashboard-table {
+  .col-full-name {
+    width: 15%;
+    min-width: 150px;
+  }
+
+  .col-tax-id {
+    width: 12%;
+    min-width: 140px;
+  }
+
+  .col-mobile-no {
+    width: 12%;
+    min-width: 130px;
+  }
+
+  .col-email {
+    width: 20%;
+    min-width: 200px;
+  }
+
+  .col-user-id {
+    width: 12%;
+    min-width: 120px;
+  }
+
+  .col-plan {
+    width: 8%;
+    min-width: 80px;
+  }
+
+  .col-subscription-date {
+    width: 12%;
+    min-width: 140px;
+  }
+
+  .col-last-login {
+    width: 10%;
+    min-width: 100px;
+  }
+
+  .col-status {
+    width: 8%;
+    min-width: 100px;
+  }
+
+  .col-actions {
+    width: 11%;
+    min-width: 120px;
+  }
+}
+
 .btn-danger.btn-text:active {
   background-color: #fef2f3;
   box-shadow: 0px 0px 0px 4px #fea3a8;
@@ -558,7 +643,7 @@ table {
   flex-direction: column;
   height: 100vh;
   width: 228px;
-  padding: 1.5rem 0.3125rem;
+  padding: 1.5rem 0.3125rem 0.625rem 0.3125rem;
   gap: 1.25rem;
   position: fixed;
   left: 0;
@@ -814,7 +899,6 @@ table {
 
 /* Sidebar Footer */
 .sidebar-footer {
-  padding: 0.625rem;
   margin-top: auto;
 }
 
@@ -2998,7 +3082,7 @@ table {
 
 .view-column-drag-handle:hover {
   opacity: 1;
-  transform: scale(1.1);
+  // transform: scale(1.1);
 }
 
 /* Bulk Actions Component Styles */
