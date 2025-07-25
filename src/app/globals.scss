@@ -621,19 +621,17 @@ table {
 }
 
 .sidebar-item {
+  min-height: 32px;
+  height: 32px;
+  padding: var(--Spacing-WLDS-Space-4, 4px) var(--Spacing-WLDS-Space-8, 8px);
+  border-radius: var(--WLDS-Radius-4, 4px);
   display: flex;
+  justify-content: space-between;
   align-items: center;
-  padding: 0.5rem 0.625rem;
-  border-radius: 0.5rem;
-  min-height: 2rem;
-  height: 2rem;
-  cursor: pointer;
+  gap: var(--Spacing-WLDS-Space-8, 8px);
   transition: background-color 0.2s ease;
-  margin: 0px;
-  text-decoration: none;
-  color: #171717;
-  border: none;
-  background: none;
+  position: relative;
+  cursor: pointer;
 }
 
 .sidebar-item:hover {
@@ -756,11 +754,6 @@ table {
   justify-content: center;
   width: 18px;
   height: 18px;
-  opacity: 1;
-}
-
-.sidebar-item.active .sidebar-icon {
-  opacity: 1;
 }
 
 .icon-image {
@@ -769,10 +762,15 @@ table {
 }
 
 .sidebar-label {
-  font-weight: 600;
-  font-size: 0.875rem;
-  line-height: normal;
-  color: inherit;
+  max-width: 140px;
+  color: var(--Forgrounds-FG-TITLE, #171717);
+  font-size: var(--Typeface-Size-Body-Small, 14px);
+  font-weight: var(--Typeface-Weight-Body-Small, 500);
+  line-height: var(--Typeface-Line-height-Body-Small, 20px);
+  letter-spacing: var(--Typeface-Letter-Spacing-Body-Small, -0.2px);
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
 }
 
 .sidebar-item.active .sidebar-label {
@@ -2121,6 +2119,35 @@ table {
 
 .activities-table .table tbody tr:hover {
   background-color: #f8f9fa;
+}
+
+.table-responsive {
+  width: 100%;
+  overflow: auto;
+}
+
+.wl-width-auto {
+  width: 220px;
+
+  @media screen and (min-width: 1200px) {
+    width: auto;
+  }
+}
+
+.wl-width-60 {
+  width: 60px;
+}
+
+.wl-width-200 {
+  width: 200px;
+}
+
+.wl-width-177 {
+  width: 177px;
+}
+
+.wl-width-147 {
+  width: 147px;
 }
 
 /* Status Badges */

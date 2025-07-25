@@ -23,23 +23,30 @@ const Sidebar: React.FC<SidebarProps> = ({ className = "" }) => {
     {
       id: "subscribers",
       label: "Subscribers",
-      icon: "/assets/images/user-icon.svg",
+      icon: "/assets/images/subscriber-icon.svg",
       path: "/subscribers",
     },
     {
       id: "logs",
       label: "Logs",
       icon: "/assets/images/log-icon.svg",
-      path: "#",
+      path: "/logs",
     },
   ];
 
   const handleItemClick = (path: string) => {
-    router.push(path);
+    if (path !== "#") {
+      router.push(path);
+    }
   };
 
   const isActive = (path: string) => {
-    return pathname === path;
+    // Handle root path for dashboard
+    if (path === "/dashboard" && (pathname === "/" || pathname === "/dashboard")) {
+      return true;
+    }
+    // Check if current pathname starts with the menu path (for nested routes)
+    return pathname === path || pathname.startsWith(path + "/");
   };
 
   return (
@@ -71,9 +78,7 @@ const Sidebar: React.FC<SidebarProps> = ({ className = "" }) => {
               />
             </div>
           </div>
-          <div className="admin-badge">
-            <span className="admin-text">Admin</span>
-          </div>
+          <span className="wl-badge-guide wl-badge-guide-valid wl-badge-guide-sm wl-badge-guide-rounded">Admin</span>
         </div>
       </div>
 
