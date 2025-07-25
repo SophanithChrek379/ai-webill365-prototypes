@@ -253,3 +253,4 @@ Built with ❤️ using Next.js, Bootstrap, and modern web technologies.
 # Force GitHub Actions deployment
 # Force deployment Fri Jul 25 15:12:19 +07 2025
 # Force deployment Fri Jul 25 15:17:51 +07 2025
+# Fresh deployment Fri Jul 25 15:21:31 +07 2025 - Fixing mixed content issues
