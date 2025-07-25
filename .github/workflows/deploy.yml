@@ -25,15 +25,39 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '18'
+          node-version: '20'
           cache: 'npm'
           
       - name: Install dependencies
-        run: npm ci
-        
+        run: |
+          npm ci --legacy-peer-deps
+          npm cache clean --force
+          
+      - name: Verify dependencies
+        run: |
+          echo "Node version: $(node --version)"
+          echo "NPM version: $(npm --version)"
+          echo "Next.js version: $(npm list next)"
+          
       - name: Build with Next.js
-        run: npm run build
-        
+        run: |
+          # Set CI environment variable to handle warnings as errors
+          export CI=true
+          # Run build with more verbose output
+          npm run build 2>&1
+        env:
+          CI: true
+          NODE_ENV: production
+          
+      - name: Verify build output
+        run: |
+          echo "Build output directory contents:"
+          ls -la out/
+          echo "Checking for index.html:"
+          test -f out/index.html && echo "✅ index.html exists" || echo "❌ index.html missing"
+          echo "Checking for dashboard page:"
+          test -f out/dashboard/index.html && echo "✅ dashboard page exists" || echo "❌ dashboard page missing"
+          
       - name: Setup Pages
         uses: actions/configure-pages@v4
         

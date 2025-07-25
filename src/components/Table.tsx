@@ -79,7 +79,6 @@ export default function Table({
   className = "",
   onSort,
   onRowClick,
-  onActionClick,
   sortable = true,
   selectable = false,
   selectedRows = [],
@@ -104,8 +103,6 @@ export default function Table({
       onRowClick(row);
     }
   };
-
-
 
   const handleSelectionChange = (rowId: string, checked: boolean) => {
     if (onSelectionChange) {
