@@ -4,6 +4,7 @@ import { useState } from "react";
 import Image from "next/image";
 import { Container, Row, Col, Dropdown, Button } from "react-bootstrap";
 import LoginForm from "@/components/LoginForm";
+import { getFlagPath, getImagePath } from "@/utils/assetUtils";
 
 interface LanguageOption {
   code: string;
@@ -17,7 +18,7 @@ export default function Home() {
   const [selectedLanguage, setSelectedLanguage] = useState<LanguageOption>({
     code: "en",
     name: "English",
-    flag: "/assets/flag/united-kingdom-flag-icon.svg",
+    flag: getFlagPath("united-kingdom-flag-icon.svg"),
     nativeName: "English",
   });
 
@@ -25,19 +26,19 @@ export default function Home() {
     {
       code: "en",
       name: "English",
-      flag: "/assets/flag/united-kingdom-flag-icon.svg",
+      flag: getFlagPath("united-kingdom-flag-icon.svg"),
       nativeName: "English",
     },
     {
       code: "km",
       name: "Khmer",
-      flag: "/assets/flag/cambodia-flag-icon.svg",
+      flag: getFlagPath("cambodia-flag-icon.svg"),
       nativeName: "ភាសាខ្មែរ",
     },
     {
       code: "ko",
       name: "Korean",
-      flag: "/assets/flag/south-korean-flag-icon.svg",
+      flag: getFlagPath("south-korean-flag-icon.svg"),
       nativeName: "한국어",
     },
   ];
@@ -85,7 +86,7 @@ export default function Home() {
                   </span>
                 </div>
                 <Image
-                  src="/assets/images/arrow-down.svg"
+                  src={getImagePath("arrow-down.svg")}
                   alt=""
                   width={14}
                   height={14}
@@ -122,7 +123,7 @@ export default function Home() {
               <div className="text-center mb-5">
                 <div className="logo-container mb-3">
                   <Image
-                    src="/assets/images/project-logo.svg"
+                    src={getImagePath("project-logo.svg")}
                     alt="WeBill365 Logo"
                     width={260}
                     height={45}
@@ -149,7 +150,7 @@ export default function Home() {
             <div className="admin-footer-links">
               <Button variant="link" className="footer-link">
                 <Image
-                  src="/assets/images/lock-icon-blue.svg"
+                  src={getImagePath("lock-icon-blue.svg")}
                   alt=""
                   width={16}
                   height={16}
@@ -159,7 +160,7 @@ export default function Home() {
               </Button>
               <Button variant="link" className="footer-link">
                 <Image
-                  src="/assets/images/help-icon.svg"
+                  src={getImagePath("help-icon.svg")}
                   alt=""
                   width={16}
                   height={16}
@@ -169,7 +170,7 @@ export default function Home() {
               </Button>
               <Button variant="link" className="footer-link">
                 <Image
-                  src="/assets/images/privacy-icon.svg"
+                  src={getImagePath("privacy-icon.svg")}
                   alt=""
                   width={16}
                   height={16}

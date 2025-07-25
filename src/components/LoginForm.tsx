@@ -4,6 +4,7 @@ import { useState } from "react";
 import Image from "next/image";
 import { Form, Button } from "react-bootstrap";
 import { useRouter } from "next/navigation";
+import { getImagePath } from "@/utils/assetUtils";
 
 interface LoginFormProps {
   onSubmit?: (formData: { username: string; password: string }) => void;
@@ -47,7 +48,7 @@ export default function LoginForm({
         <div className="input-group-custom">
           <div className="input-icon-wrapper">
             <Image
-              src="/assets/images/user-icon.svg"
+              src={getImagePath("user-icon.svg")}
               alt="User Icon"
               width={24}
               height={24}
@@ -71,7 +72,7 @@ export default function LoginForm({
         <div className="input-group-custom">
           <div className="input-icon-wrapper">
             <Image
-              src="/assets/images/lock-icon.svg"
+              src={getImagePath("lock-icon.svg")}
               alt="Lock Icon"
               width={24}
               height={24}
@@ -98,8 +99,8 @@ export default function LoginForm({
             <Image
               src={
                 showPassword
-                  ? "/assets/images/eye-off-icon.svg"
-                  : "/assets/images/eye-icon.svg"
+                  ? getImagePath("eye-off-icon.svg")
+                  : getImagePath("eye-icon.svg")
               }
               alt={showPassword ? "Hide Password" : "Show Password"}
               width={24}
