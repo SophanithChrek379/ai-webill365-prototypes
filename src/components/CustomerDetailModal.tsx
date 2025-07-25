@@ -56,7 +56,7 @@ const CustomerDetailModal: React.FC<CustomerDetailModalProps> = ({
               <Form.Control
                 type="text"
                 value={String(subscriber.fullName || "")}
-                readOnly
+                disabled
                 className="customer-detail-input"
               />
             </div>
@@ -69,7 +69,7 @@ const CustomerDetailModal: React.FC<CustomerDetailModalProps> = ({
               <Form.Control
                 type="text"
                 value={String(subscriber.taxId || "")}
-                readOnly
+                disabled
                 className="customer-detail-input"
               />
             </div>
@@ -101,7 +101,7 @@ const CustomerDetailModal: React.FC<CustomerDetailModalProps> = ({
                   <Form.Control
                     type="text"
                     value={String(subscriber.mobileNo || "")}
-                    readOnly
+                    disabled
                     className="customer-detail-input flex-grow-1"
                   />
                 </Col>
@@ -116,7 +116,7 @@ const CustomerDetailModal: React.FC<CustomerDetailModalProps> = ({
               <Form.Control
                 type="email"
                 value={String(subscriber.email || "")}
-                readOnly
+                disabled
                 className="customer-detail-input"
               />
             </div>
@@ -129,7 +129,7 @@ const CustomerDetailModal: React.FC<CustomerDetailModalProps> = ({
               <Form.Control
                 type="text"
                 value={String(subscriber.userId || "")}
-                readOnly
+                disabled
                 className="customer-detail-input"
               />
             </div>

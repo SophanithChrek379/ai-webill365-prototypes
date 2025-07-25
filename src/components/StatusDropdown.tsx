@@ -28,7 +28,13 @@ const StatusDropdown: React.FC<StatusDropdownProps> = ({
   const [show, setShow] = useState(false);
   const [localStatuses, setLocalStatuses] =
     useState<StatusOption[]>(selectedStatuses);
+  const [isClient, setIsClient] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
+
+  // Set client-side flag on mount to prevent hydration issues
+  useEffect(() => {
+    setIsClient(true);
+  }, []);
 
   // Update local state when props change
   useEffect(() => {
@@ -37,6 +43,8 @@ const StatusDropdown: React.FC<StatusDropdownProps> = ({
 
   // Close dropdown when clicking outside
   useEffect(() => {
+    if (!isClient) return;
+
     const handleClickOutside = (event: MouseEvent) => {
       if (
         dropdownRef.current &&
@@ -50,7 +58,7 @@ const StatusDropdown: React.FC<StatusDropdownProps> = ({
     return () => {
       document.removeEventListener("mousedown", handleClickOutside);
     };
-  }, []);
+  }, [isClient]);
 
   const handleStatusToggle = (statusId: string) => {
     const updatedStatuses = localStatuses.map((status) =>
@@ -92,6 +100,29 @@ const StatusDropdown: React.FC<StatusDropdownProps> = ({
   const selectedCount = localStatuses.filter((status) => status.checked).length;
   const allChecked = localStatuses.every((status) => status.checked);
 
+  // Don't render dropdown until client-side to prevent hydration issues
+  if (!isClient) {
+    return (
+      <div ref={dropdownRef} className={`status-dropdown ${className}`}>
+        <Button className="status-dropdown-toggle d-flex align-items-center gap-2">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="16"
+            height="16"
+            viewBox="0 0 16 16"
+            fill="none"
+          >
+            <path
+              d="M2.09033 5.80176C1.72217 5.80176 1.43018 5.49072 1.43018 5.12891C1.43018 4.76074 1.72217 4.45605 2.09033 4.45605H13.9097C14.2778 4.45605 14.5698 4.76074 14.5698 5.12891C14.5698 5.49707 14.2778 5.80176 13.9097 5.80176H2.09033ZM3.38525 9.08984C3.02344 9.08984 2.7251 8.77881 2.7251 8.41699C2.7251 8.04883 3.01709 7.74414 3.38525 7.74414H12.6338C13.002 7.74414 13.2939 8.04248 13.2939 8.41699C13.2939 8.77881 13.002 9.08984 12.6338 9.08984H3.38525ZM4.66113 12.3716C4.29932 12.3716 4.00098 12.0605 4.00098 11.7051C4.00098 11.3369 4.29297 11.0322 4.66113 11.0322H11.3579C11.7261 11.0322 12.0181 11.3306 12.0181 11.7051C12.0181 12.0669 11.7261 12.3716 11.3579 12.3716H4.66113Z"
+              fill="currentColor"
+            />
+          </svg>
+          Status {selectedCount > 0 && `(${selectedCount})`}
+        </Button>
+      </div>
+    );
+  }
+
   return (
     <div ref={dropdownRef} className={`status-dropdown ${className}`}>
       <Dropdown show={show} onToggle={(isOpen) => setShow(isOpen)}>
@@ -99,7 +130,18 @@ const StatusDropdown: React.FC<StatusDropdownProps> = ({
           as={Button}
           className="status-dropdown-toggle d-flex align-items-center gap-2"
         >
-          <Form.Check id="status-dropdown-toggle-id" />
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="16"
+            height="16"
+            viewBox="0 0 16 16"
+            fill="none"
+          >
+            <path
+              d="M2.09033 5.80176C1.72217 5.80176 1.43018 5.49072 1.43018 5.12891C1.43018 4.76074 1.72217 4.45605 2.09033 4.45605H13.9097C14.2778 4.45605 14.5698 4.76074 14.5698 5.12891C14.5698 5.49707 14.2778 5.80176 13.9097 5.80176H2.09033ZM3.38525 9.08984C3.02344 9.08984 2.7251 8.77881 2.7251 8.41699C2.7251 8.04883 3.01709 7.74414 3.38525 7.74414H12.6338C13.002 7.74414 13.2939 8.04248 13.2939 8.41699C13.2939 8.77881 13.002 9.08984 12.6338 9.08984H3.38525ZM4.66113 12.3716C4.29932 12.3716 4.00098 12.0605 4.00098 11.7051C4.00098 11.3369 4.29297 11.0322 4.66113 11.0322H11.3579C11.7261 11.0322 12.0181 11.3306 12.0181 11.7051C12.0181 12.0669 11.7261 12.3716 11.3579 12.3716H4.66113Z"
+              fill="currentColor"
+            />
+          </svg>
           Status {selectedCount > 0 && `(${selectedCount})`}
         </Dropdown.Toggle>
 

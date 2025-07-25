@@ -16,8 +16,6 @@ const AppBar: React.FC<AppBarProps> = ({ className = "" }) => {
     // Here you would typically show a notification panel
   };
 
-
-
   // Custom menu items for the user profile dropdown
   const userProfileItems = [
     {
@@ -41,7 +39,7 @@ const AppBar: React.FC<AppBarProps> = ({ className = "" }) => {
   ];
 
   return (
-    <Navbar className={`app-bar ${className}`} expand="lg">
+    <Navbar className={`wl-page-header ${className}`} expand="lg">
       <div className="app-bar-container">
         <div className="app-bar-content">
           <div className="app-bar-spacer"></div>

@@ -175,6 +175,30 @@ $wl-table-row-transition: background-color 0.25s ease-in-out,
   @include wl-table-data-text-base;
 }
 
+// TODO: Table: Default
+table {
+  width: 100%;
+  table-layout: fixed;
+  border-collapse: separate;
+  border-spacing: 0px;
+}
+table thead tr th {
+  background-color: #fff;
+  border-bottom: 1px solid var(--Borders-BDR-NTL-04, #d4d4d4);
+  position: sticky;
+  top: 0px;
+  z-index: 1;
+}
+
+table tbody tr td,
+table tbody tr:only-child td {
+  border-bottom: 1px solid var(--Borders-BDR-NTL-04, #d4d4d4);
+}
+
+table tbody tr:last-child td {
+  border-bottom: none;
+}
+
 // TODO: Table Types
 table {
   @include wl-table-base;

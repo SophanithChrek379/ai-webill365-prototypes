@@ -353,23 +353,21 @@ export default function DashboardPage() {
 
   return (
     <div className="admin-layout">
-      {/* Sidebar */}
       <Sidebar />
 
-      {/* Main Content Area */}
       <div className="admin-main">
-        {/* App Bar */}
         <AppBar />
 
-        {/* Dashboard Content */}
         <div className="admin-content">
-          {/* Header */}
-          <div className="dashboard-header">
-            <h1 className="dashboard-title">Dashboard</h1>
+          <div className="wl-page-header">
+            <div className="wl-header-content">
+              <ol className="wl-breadcrumb">
+                <li className="wl-breadcrumb-item wl-active">Dashboard</li>
+              </ol>
+            </div>
           </div>
 
-          {/* Statistics Cards */}
-          <Row className="stats-container g-3 mb-4">
+          <Row className="g-3">
             <Col md={4}>
               <Card className="wl-card">
                 <Card.Body className="w-100 p-0">
@@ -438,71 +436,69 @@ export default function DashboardPage() {
             </Col>
           </Row>
 
-          {/* Recent Activities Section */}
-          <div className="d-flex flex-column mt-5">
-            <div className="activities-header">
-              <h2 className="activities-title">Recent Activities</h2>
-              <p className="activities-subtitle">
-                Latest subscriber applications requiring review
-              </p>
+          <div className="activities-header mt-5">
+            <h2 className="activities-title">Recent Activities</h2>
+            <p className="activities-subtitle">
+              Latest subscriber applications requiring review
+            </p>
+          </div>
+
+          <div className="d-flex justify-content-between align-items-center mb-3">
+            <div className="d-flex gap-2 align-items-center">
+              <WLDateRangePicker />
+              <StatusDropdown
+                selectedStatuses={selectedStatuses}
+                onStatusChange={handleStatusChange}
+                onReset={handleStatusReset}
+                onSave={handleStatusSave}
+                onCancel={handleStatusCancel}
+              />
             </div>
 
-            {/* Filters */}
-            <div className="activities-filters">
-              <div className="d-flex gap-2 align-items-center">
-                <WLDateRangePicker />
-                <StatusDropdown
-                  selectedStatuses={selectedStatuses}
-                  onStatusChange={handleStatusChange}
-                  onReset={handleStatusReset}
-                  onSave={handleStatusSave}
-                  onCancel={handleStatusCancel}
-                />
-              </div>
-
-              <div className="d-flex gap-2 align-items-center">
-                <button
-                  className="wl-btn-primary-outline"
-                  onClick={() => setShowViewSettings(true)}
+            <div className="d-flex gap-2 align-items-center">
+              <button
+                className="wl-btn-primary-outline"
+                onClick={() => setShowViewSettings(true)}
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="16"
+                  height="16"
+                  viewBox="0 0 16 16"
+                  fill="none"
                 >
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="16"
-                    height="16"
-                    viewBox="0 0 16 16"
-                    fill="none"
-                  >
-                    <path
-                      d="M2.56055 14.3447C1.18945 14.3447 0.478516 13.6401 0.478516 12.2881V4.55664C0.478516 3.19824 1.18945 2.5 2.56055 2.5H13.4341C14.8052 2.5 15.5161 3.20459 15.5161 4.55664V12.2881C15.5161 13.6401 14.8052 14.3447 13.4341 14.3447H2.56055ZM2.63672 13.1006H5.09326V3.73779H2.63672C2.04639 3.73779 1.72266 4.04883 1.72266 4.66455V12.1802C1.72266 12.7959 2.04639 13.1006 2.63672 13.1006ZM6.31201 13.1006H9.68262V3.73779H6.31201V13.1006ZM13.3579 3.73779H10.9014V13.1006H13.3579C13.9419 13.1006 14.272 12.7959 14.272 12.1802V4.66455C14.272 4.04883 13.9419 3.73779 13.3579 3.73779Z"
-                      fill="currentColor"
-                    />
-                  </svg>
-                  View
-                </button>
-                <Input
-                  type="search"
-                  placeholder="Search name, tax id, email, user id"
-                  value={searchTerm}
-                  onChange={setSearchTerm}
-                  leadIcon="/assets/images/search-icon.svg"
-                  clearButton={true}
-                  size="sm"
-                  className="search-input"
-                />
-              </div>
+                  <path
+                    d="M2.56055 14.3447C1.18945 14.3447 0.478516 13.6401 0.478516 12.2881V4.55664C0.478516 3.19824 1.18945 2.5 2.56055 2.5H13.4341C14.8052 2.5 15.5161 3.20459 15.5161 4.55664V12.2881C15.5161 13.6401 14.8052 14.3447 13.4341 14.3447H2.56055ZM2.63672 13.1006H5.09326V3.73779H2.63672C2.04639 3.73779 1.72266 4.04883 1.72266 4.66455V12.1802C1.72266 12.7959 2.04639 13.1006 2.63672 13.1006ZM6.31201 13.1006H9.68262V3.73779H6.31201V13.1006ZM13.3579 3.73779H10.9014V13.1006H13.3579C13.9419 13.1006 14.272 12.7959 14.272 12.1802V4.66455C14.272 4.04883 13.9419 3.73779 13.3579 3.73779Z"
+                    fill="currentColor"
+                  />
+                </svg>
+                View
+              </button>
+              <Input
+                type="search"
+                placeholder="Search name, tax id, email, user id"
+                value={searchTerm}
+                onChange={setSearchTerm}
+                leadIcon="/assets/images/search-icon.svg"
+                clearButton={true}
+                size="sm"
+                className="search-input"
+              />
             </div>
+          </div>
 
-            {/* Activities Table */}
-            <div className="activities-table">
+          <div className="w-100 h-100 d-flex flex-column overflow-hidden">
+            <>
               {!isClient ? (
                 // Show loading state during SSR to prevent hydration mismatch
-                <div className="d-flex justify-content-center align-items-center" style={{ height: '200px' }}>
+                // style={{ height: "200px" }}
+                <div className="d-flex justify-content-center align-items-center">
                   <div className="spinner-border" role="status">
                     <span className="visually-hidden">Loading...</span>
                   </div>
                 </div>
               ) : (
-                <Table responsive >
+                <Table responsive>
                   <thead>
                     <tr>
                       {tableColumns
@@ -510,44 +506,44 @@ export default function DashboardPage() {
                         .sort((a, b) => a.order - b.order)
                         .map((column) => {
                           // You can manually add custom width classes here for each column
-                          let customWidthClass = '';
-                          
+                          let customWidthClass = "";
+
                           // Example: Add your custom width classes here
                           switch (column.id) {
-                            case 'fullName':
-                              customWidthClass = 'wl-width-300';
+                            case "fullName":
+                              customWidthClass = "wl-width-auto";
                               break;
-                            case 'taxId':
-                              customWidthClass = 'wl-width-250'; 
+                            case "taxId":
+                              customWidthClass = "wl-width-250";
                               break;
-                            case 'mobileNo':
-                              customWidthClass = 'wl-width-140';
+                            case "mobileNo":
+                              customWidthClass = "wl-width-140";
                               break;
-                            case 'email':
-                              customWidthClass = 'wl-width-250';
+                            case "email":
+                              customWidthClass = "wl-width-250";
                               break;
-                            case 'userId':
-                              customWidthClass = 'wl-width-180';
+                            case "userId":
+                              customWidthClass = "wl-width-180";
                               break;
-                            case 'plan':
-                              customWidthClass = 'wl-width-100';
+                            case "plan":
+                              customWidthClass = "wl-width-100";
                               break;
-                            case 'subscriptionDate':
-                              customWidthClass = 'wl-width-160';
+                            case "subscriptionDate":
+                              customWidthClass = "wl-width-180";
                               break;
-                            case 'lastLogin':
-                              customWidthClass = 'wl-width-300';
+                            case "lastLogin":
+                              customWidthClass = "wl-width-300";
                               break;
-                            case 'status':
-                              customWidthClass = 'wl-width-100';
+                            case "status":
+                              customWidthClass = "wl-width-100";
                               break;
-                            case 'actions':
-                              customWidthClass = 'wl-width-150'; 
+                            case "actions":
+                              customWidthClass = "wl-width-150";
                               break;
                             default:
-                              customWidthClass = '';
+                              customWidthClass = "";
                           }
-                          
+
                           return (
                             <th key={column.id} className={customWidthClass}>
                               {column.label.toUpperCase()}
@@ -571,85 +567,131 @@ export default function DashboardPage() {
                           .sort((a, b) => a.order - b.order)
                           .map((column) => {
                             // Apply the same custom width classes to table cells
-                            let customWidthClass = '';
-                            
+                            let customWidthClass = "";
+
                             switch (column.id) {
-                              case 'fullName':
-                                customWidthClass = 'wl-width-300';
+                              case "fullName":
+                                customWidthClass = "wl-width-300";
                                 break;
-                              case 'taxId':
-                                customWidthClass = 'wl-width-200';
+                              case "taxId":
+                                customWidthClass = "wl-width-200";
                                 break;
-                              case 'mobileNo':
-                                customWidthClass = 'wl-width-140';
+                              case "mobileNo":
+                                customWidthClass = "wl-width-140";
                                 break;
-                              case 'email':
-                                customWidthClass = 'wl-width-250';
+                              case "email":
+                                customWidthClass = "wl-width-250";
                                 break;
-                              case 'userId':
-                                customWidthClass = 'wl-width-auto';
+                              case "userId":
+                                customWidthClass = "wl-width-auto";
                                 break;
-                              case 'plan':
-                                customWidthClass = 'wl-width-100';
+                              case "plan":
+                                customWidthClass = "wl-width-100";
                                 break;
-                              case 'subscriptionDate':
-                                customWidthClass = 'wl-width-200';
+                              case "subscriptionDate":
+                                customWidthClass = "wl-width-200";
                                 break;
-                              case 'lastLogin':
-                                customWidthClass = 'wl-width-160';
+                              case "lastLogin":
+                                customWidthClass = "wl-width-160";
                                 break;
-                              case 'status':
-                                customWidthClass = 'wl-width-100';
+                              case "status":
+                                customWidthClass = "wl-width-100";
                                 break;
-                              case 'actions':
-                                customWidthClass = 'wl-width-150';
+                              case "actions":
+                                customWidthClass = "wl-width-150";
                                 break;
                               default:
-                                customWidthClass = '';
+                                customWidthClass = "";
                             }
-                            
+
                             switch (column.id) {
                               case "fullName":
                                 return (
-                                  <td key={column.id} className={customWidthClass}>{subscriber.fullName}</td>
+                                  <td
+                                    key={column.id}
+                                    className={customWidthClass}
+                                  >
+                                    {subscriber.fullName}
+                                  </td>
                                 );
                               case "taxId":
                                 return (
-                                  <td key={column.id} className={customWidthClass}>{subscriber.taxId}</td>
+                                  <td
+                                    key={column.id}
+                                    className={customWidthClass}
+                                  >
+                                    {subscriber.taxId}
+                                  </td>
                                 );
                               case "mobileNo":
                                 return (
-                                  <td key={column.id} className={customWidthClass}>{subscriber.mobileNo}</td>
+                                  <td
+                                    key={column.id}
+                                    className={customWidthClass}
+                                  >
+                                    {subscriber.mobileNo}
+                                  </td>
                                 );
                               case "email":
                                 return (
-                                  <td key={column.id} className={customWidthClass}>{subscriber.email}</td>
+                                  <td
+                                    key={column.id}
+                                    className={customWidthClass}
+                                  >
+                                    {subscriber.email}
+                                  </td>
                                 );
                               case "userId":
                                 return (
-                                  <td key={column.id} className={customWidthClass}>{subscriber.userId}</td>
+                                  <td
+                                    key={column.id}
+                                    className={customWidthClass}
+                                  >
+                                    {subscriber.userId}
+                                  </td>
                                 );
                               case "plan":
-                                return <td key={column.id} className={customWidthClass}>{subscriber.plan}</td>;
+                                return (
+                                  <td
+                                    key={column.id}
+                                    className={customWidthClass}
+                                  >
+                                    {subscriber.plan}
+                                  </td>
+                                );
                               case "subscriptionDate":
                                 return (
-                                  <td key={column.id} className={customWidthClass}>
+                                  <td
+                                    key={column.id}
+                                    className={customWidthClass}
+                                  >
                                     {subscriber.subscriptionDate}
                                   </td>
                                 );
                               case "lastLogin":
                                 return (
-                                  <td key={column.id} className={customWidthClass}>{subscriber.lastLogin}</td>
+                                  <td
+                                    key={column.id}
+                                    className={customWidthClass}
+                                  >
+                                    {subscriber.lastLogin}
+                                  </td>
                                 );
                               case "status":
                                 return (
-                                  <td key={column.id} className={customWidthClass}>
+                                  <td
+                                    key={column.id}
+                                    className={customWidthClass}
+                                  >
                                     {getStatusBadge(subscriber.status)}
                                   </td>
                                 );
                               case "actions":
                                 return (
-                                  <td key={column.id} className={customWidthClass}>
+                                  <td
+                                    key={column.id}
+                                    className={customWidthClass}
+                                  >
                                     {getActionButtons(
                                       subscriber.status,
                                       subscriber,
@@ -662,7 +704,12 @@ export default function DashboardPage() {
                                   </td>
                                 );
                               default:
-                                return <td key={column.id} className={customWidthClass}></td>;
+                                return (
+                                  <td
+                                    key={column.id}
+                                    className={customWidthClass}
+                                  ></td>
+                                );
                             }
                           })}
                       </tr>
@@ -670,20 +717,17 @@ export default function DashboardPage() {
                   </tbody>
                 </Table>
               )}
-            </div>
+            </>
 
-            {/* Pagination */}
-            <div className="pagination-container">
-              <Pagination
-                currentPage={currentPage}
-                totalPages={totalPages}
-                pageSize={itemsPerPage}
-                totalItems={filteredSubscribers.length}
-                onPageChange={setCurrentPage}
-                onPageSizeChange={setItemsPerPage}
-                pageSizeOptions={[5, 10, 20, 50]}
-              />
-            </div>
+            <Pagination
+              currentPage={currentPage}
+              totalPages={totalPages}
+              pageSize={itemsPerPage}
+              totalItems={filteredSubscribers.length}
+              onPageChange={setCurrentPage}
+              onPageSizeChange={setItemsPerPage}
+              pageSizeOptions={[5, 10, 20, 50]}
+            />
           </div>
         </div>
       </div>

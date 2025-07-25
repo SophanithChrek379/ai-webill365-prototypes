@@ -53,9 +53,8 @@ const Pagination: React.FC<PaginationProps> = ({
   };
 
   return (
-    <div className="pagination-container">
-      <div className="pagination-content">
-        {/* Page rows section */}
+    <div className="w-100 d-flex justify-content-between align-items-center py-4">
+      <div className="wl-pagination">
         <div className="page-rows-section">
           <span className="page-rows-label">Page rows</span>
           <Dropdown

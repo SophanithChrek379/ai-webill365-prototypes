@@ -6,6 +6,8 @@
   --font-inter: "Inter", sans-serif;
   --font-kantumruy-pro: "Kantumruy Pro", sans-serif;
   --font-noto-sans-kr: "Noto Sans KR", sans-serif;
+
+  scroll-behavior: smooth;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -15,13 +17,19 @@
   }
 }
 
+html,
 body {
-  // background: var(--background);
-  // color: var(--foreground);
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  display: flex;
+}
+
+body {
   font-family: var(--font-inter), var(--font-kantumruy-pro),
     var(--font-noto-sans-kr), sans-serif;
   font-size: 16px;
-  line-height: 1.5;
 }
 
 /* Customer Detail Modal Styles */
@@ -45,12 +53,23 @@ body {
 
 // TODO: Input: Form-Control
 .form-control {
+  input[type="text"]:disabled {
+    background-color: var(--Backgrounds-BG-BASE-MIDDLE, #f5f5f5) !important;
+  }
+  &:disabled {
+    background-color: var(--Backgrounds-BG-BASE-MIDDLE, #f5f5f5) !important;
+  }
 }
 
 // TODO: Select: Form-Select
 .form-select {
   border: none;
-  padding: 0px 2.25rem 0px 0.75rem;
+  padding: 0px 2.25rem 0px 0.5rem;
+  font-size: 0.875rem;
+
+  &:disabled {
+    background-color: var(--Backgrounds-BG-BASE-MIDDLE, #f5f5f5);
+  }
 }
 
 // TODO: Table
@@ -100,12 +119,65 @@ tbody tr:has(input[type="checkbox"]:checked) td {
   background-color: #ffe1e3;
 }
 
-/* Custom Width Classes for Table Columns */
+// TODO: Table: Override Bootstrap
+.table > :not(caption) > tr > th {
+  padding: var(--Spacing-WLDS-Space-12, 12px) var(--Spacing-WLDS-Space-16, 16px);
+  color: var(--Forgrounds-FG-DISABLED-VALUE, #737373);
+  font-size: var(--Typeface-Size-Button-Small, 12px);
+  font-weight: var(--Typeface-Weight-Title-Medium, 600);
+  line-height: var(--Typeface-Line-height-Body-Small, 20px);
+  letter-spacing: var(--Typeface-Letter-Spacing-Body-Small, -0.2px);
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+.table > :not(caption) > tr > td {
+  padding: var(--Spacing-WLDS-Space-12, 12px) var(--Spacing-WLDS-Space-16, 16px);
+  color: var(--Forgrounds-FG-TITLE, #171717);
+  font-size: var(--Typeface-Size-Body-Small, 14px);
+  font-weight: var(--Typeface-Weight-Body-Small, 500);
+  line-height: var(--Typeface-Line-height-Body-Small, 20px);
+  letter-spacing: var(--Typeface-Letter-Spacing-Body-Small, -0.2px);
+}
+
+.table-responsive {
+  height: 100%;
+
+  &::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+    transition: background-color 0.25s ease-in-out;
+  }
+
+  &::-webkit-scrollbar-track {
+    background-color: var(--Colors-SEMANTIC-NEUTRAL-WLDS-NTL-03, #e5e5e5);
+    border-radius: inherit;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background-color: var(--Colors-SEMANTIC-NEUTRAL-WLDS-NTL-04, #d4d4d4);
+    background-clip: padding-box;
+    border-radius: inherit;
+  }
+  &::-webkit-scrollbar-thumb:hover {
+    background-color: var(--Colors-SEMANTIC-NEUTRAL-WLDS-NTL-05, #a3a3a3);
+    cursor: pointer;
+  }
+}
+
+// TODO: Table
+table {
+  margin-bottom: 0px !important;
+}
+
+// TODO: Table: Custom Width Classes
 .wl-width-auto {
   width: auto !important;
   @media screen and (min-width: 1200px) {
     width: 220px !important;
   }
+}
+.wl-width-32 {
+  width: 32px !important;
 }
 .wl-width-44 {
   width: 44px !important;
@@ -246,10 +318,6 @@ input.form-control:-webkit-autofill:active {
   transition: background-color 5000s ease-in-out 0s;
 }
 
-.form-control:disabled {
-  background-color: #fff !important;
-}
-
 table {
   border-spacing: 0;
 }
@@ -276,6 +344,10 @@ table {
     box-shadow: none;
     border-radius: 0px;
     font-size: 18px;
+  }
+
+  .form-control:disabled {
+    background-color: #fff !important;
   }
 }
 
@@ -1261,10 +1333,16 @@ table {
   }
 }
 
-/* AppBar with Sidebar Integration */
+// TODO: AppBar with Sidebar Integration
 .admin-layout .app-bar {
-  margin-left: 0;
   width: 100%;
+  // position: sticky;
+  // top: 0;
+  // z-index: 1;
+}
+
+.wl-breadcrumb {
+  margin-bottom: 0px !important;
 }
 
 .avatar-button {
@@ -1956,11 +2034,6 @@ table {
   margin: 0;
 }
 
-/* Statistics Cards */
-.stats-container {
-  margin-bottom: 2rem;
-}
-
 .stat-card {
   border: 1px solid #d1d5db;
   border-radius: 0.75rem;
@@ -2034,15 +2107,6 @@ table {
   margin: 0;
 }
 
-/* Activities Filters */
-.activities-filters {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 1.5rem;
-  gap: 1rem;
-}
-
 .date-filter {
   min-width: 200px;
 }
@@ -2100,6 +2164,7 @@ table {
   border: none;
   outline: none;
   box-shadow: none;
+  background-color: transparent !important;
   border-radius: inherit;
   font-weight: 500;
   font-size: 0.875rem;
@@ -2134,44 +2199,6 @@ table {
   &:last-child {
     padding-left: 0px;
   }
-}
-
-/* Activities Table */
-.activities-table {
-  margin-bottom: 1.5rem;
-}
-
-.activities-table .table thead th {
-  font-weight: 600;
-  font-size: 0.75rem;
-  line-height: 1.25rem;
-  color: #737373;
-  text-transform: uppercase;
-  letter-spacing: -0.2px;
-  border-bottom: 1px solid #d1d5db;
-  padding: 0.75rem 1rem;
-  background-color: #fff;
-  vertical-align: middle;
-}
-
-.activities-table .table tbody td {
-  font-weight: 500;
-  font-size: 0.875rem;
-  line-height: 1.25rem;
-  color: #171717;
-  border-bottom: 1px solid #d1d5db;
-  padding: 0.75rem 1rem;
-  vertical-align: middle;
-  letter-spacing: -0.2px;
-}
-
-.activities-table .table tbody tr:hover {
-  background-color: #f8f9fa;
-}
-
-.table-responsive {
-  width: 100%;
-  overflow: auto;
 }
 
 .wl-width-auto {
@@ -2292,10 +2319,6 @@ table {
     padding: 1rem;
   }
 
-  .stats-container {
-    margin-bottom: 1.5rem;
-  }
-
   .activities-section {
     padding: 1rem;
   }
@@ -2309,15 +2332,6 @@ table {
     min-width: auto;
   }
 
-  .activities-table {
-    font-size: 0.8125rem;
-  }
-
-  .activities-table .table thead th,
-  .activities-table .table tbody td {
-    padding: 0.5rem 0.75rem;
-  }
-
   .pagination-container {
     padding: 0.75rem 0;
   }
@@ -2325,25 +2339,29 @@ table {
 
 /* Admin Layout Styles */
 .admin-layout {
-  display: flex;
-  min-height: 100vh;
   width: 100%;
-  background-color: #f8f9fa;
+  height: 100%;
+  display: flex;
+  position: relative;
 }
 
 .admin-main {
-  flex: 1;
+  width: 100%;
+  height: 100%;
+  padding-left: 228px;
   display: flex;
   flex-direction: column;
-  margin-left: 228px; /* Sidebar width */
-  min-height: 100vh;
+  flex: 1;
 }
 
 .admin-content {
+  width: 100%;
+  height: 100%;
+  padding: 0 1.5rem;
+  display: flex;
+  flex-direction: column;
   flex: 1;
-  padding: 1.5rem;
-  background-color: #fff;
-  min-height: calc(100vh - 64px); /* Subtract app bar height */
+  overflow: hidden;
 }
 
 /* Responsive Admin Layout */

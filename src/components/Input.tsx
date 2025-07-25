@@ -141,8 +141,8 @@ const Input = forwardRef<HTMLInputElement, InputProps>(({
                 <Image
                   src="/assets/images/close-icon.svg"
                   alt="Clear"
-                  width={16}
-                  height={16}
+                  width={14}
+                  height={14}
                 />
               </button>
             ) : trailIcon ? (

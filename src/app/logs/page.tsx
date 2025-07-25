@@ -5,26 +5,23 @@ import Sidebar from "../../components/Sidebar";
 import AppBar from "../../components/AppBar";
 
 export default function LogsPage() {
-
   return (
     <div className="admin-layout">
-      {/* Sidebar */}
       <Sidebar />
 
-      {/* Main Content Area */}
       <div className="admin-main">
-        {/* App Bar */}
         <AppBar />
 
-        {/* Dashboard Content */}
         <div className="admin-content">
-          {/* Header */}
-          <div className="dashboard-header">
-            <h1 className="dashboard-title">Logs</h1>
+          <div className="wl-page-header">
+            <div className="wl-header-content">
+              <ol className="wl-breadcrumb">
+                <li className="wl-breadcrumb-item wl-active">Logs</li>
+              </ol>
+            </div>
           </div>
 
-          {/* Statistics Cards */}
-          <Row className="stats-container g-3 mb-4">
+          <Row className="g-3">
             <Col md={4}>
               <Card className="wl-card">
                 <Card.Body className="w-100 p-0">
@@ -92,10 +89,8 @@ export default function LogsPage() {
               </Card>
             </Col>
           </Row>
-
         </div>
       </div>
-
     </div>
   );
 }
