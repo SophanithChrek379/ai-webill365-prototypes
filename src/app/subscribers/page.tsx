@@ -13,6 +13,7 @@ import ViewSettingsModal, {
   ColumnOption,
 } from "../../components/ViewSettingsModal";
 import BulkActions, { BulkAction } from "../../components/BulkActions";
+import TableSkeleton from "../../components/TableSkeleton";
 import { useLocalStorage } from "../../hooks/useLocalStorage";
 import { exportToCSV, formatDateForExport } from "../../utils/exportUtils";
 import { getImagePath } from "@/utils/assetUtils";
@@ -588,13 +589,8 @@ export default function SubscribersPage() {
 
             <>
               {!isClient ? (
-                // Show loading state during SSR to prevent hydration mismatch
-                // style={{ minHeight: "200px" }}
-                <div className="d-flex justify-content-center align-items-center">
-                  <div className="spinner-border" role="status">
-                    <span className="visually-hidden">Loading...</span>
-                  </div>
-                </div>
+                // Show skeleton loading state during SSR to prevent hydration mismatch
+                <TableSkeleton rows={5} columns={9} showCheckbox={true} />
               ) : (
                 <Table responsive>
                   <thead>

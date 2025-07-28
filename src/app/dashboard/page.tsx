@@ -12,6 +12,7 @@ import CustomerDetailModal from "../../components/CustomerDetailModal";
 import ViewSettingsModal, {
   ColumnOption,
 } from "../../components/ViewSettingsModal";
+import TableSkeleton from "../../components/TableSkeleton";
 import { useLocalStorage } from "../../hooks/useLocalStorage";
 import { getImagePath } from "@/utils/assetUtils";
 
@@ -250,21 +251,25 @@ export default function DashboardPage() {
   ];
 
   // Status filter state with localStorage persistence
-  const [selectedStatuses, setSelectedStatuses] = useLocalStorage<
-    StatusOption[]
-  >("dashboard-status-filters", defaultStatuses);
+  const [selectedStatuses, setSelectedStatuses, isStatusMounted] =
+    useLocalStorage<StatusOption[]>(
+      "dashboard-status-filters",
+      defaultStatuses
+    );
 
   // View settings state with localStorage persistence
   const [showViewSettings, setShowViewSettings] = useState(false);
-  const [tableColumns, setTableColumns] = useLocalStorage<ColumnOption[]>(
-    "dashboard-table-columns",
-    defaultTableColumns
-  );
+  const [tableColumns, setTableColumns, isColumnsMounted] = useLocalStorage<
+    ColumnOption[]
+  >("dashboard-table-columns", defaultTableColumns);
 
   // Set client-side flag on mount
   React.useEffect(() => {
     setIsClient(true);
   }, []);
+
+  // Check if all localStorage states are mounted
+  const isAllMounted = isClient && isStatusMounted && isColumnsMounted;
 
   // Bulk selection state
   const [selectedRows] = useState<Set<number>>(new Set());
@@ -490,14 +495,9 @@ export default function DashboardPage() {
 
           <div className="w-100 h-100 d-flex flex-column overflow-hidden">
             <>
-              {!isClient ? (
-                // Show loading state during SSR to prevent hydration mismatch
-                // style={{ height: "200px" }}
-                <div className="d-flex justify-content-center align-items-center">
-                  <div className="spinner-border" role="status">
-                    <span className="visually-hidden">Loading...</span>
-                  </div>
-                </div>
+              {!isAllMounted ? (
+                // Show skeleton loading state during SSR to prevent hydration mismatch
+                <TableSkeleton rows={5} columns={9} />
               ) : (
                 <Table responsive>
                   <thead>
